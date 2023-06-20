@@ -1,11 +1,8 @@
+package com.increff.employee.controller;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import com.increff.employee.model.BrandData;
-//import com.increff.Brand.model.BrandForm;
-//import com.increff.Brand.pojo.BrandPojo;
-import com.increff.employee.model.BrandForm;
-import com.increff.employee.pojo.BrandPojo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-//import com.increff.Brand.model.BrandData;
-//import com.increff.Brand.model.BrandForm;
-//import com.increff.Brand.pojo.BrandPojo;
-//import com.increff.Brand.service.ApiException;
-//import com.increff.Brand.service.BrandService;
+import com.increff.employee.model.BrandData;
+import com.increff.employee.model.BrandForm;
+import com.increff.employee.pojo.BrandPojo;
+import com.increff.employee.service.ApiException;
+import com.increff.employee.service.BrandService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,12 +26,14 @@ public class BrandApiController {
     @Autowired
     private BrandService service;
 
-    @ApiOperation(value = "Adds a Brand")
+    @ApiOperation(value = "Adds an Brand")
     @RequestMapping(path = "/api/brand", method = RequestMethod.POST)
     public void add(@RequestBody BrandForm form) throws ApiException {
         BrandPojo p = convert(form);
         service.add(p);
     }
+
+
     @ApiOperation(value = "Deletes and Brand")
     @RequestMapping(path = "/api/brand/{id}", method = RequestMethod.DELETE)
     // /api/1
@@ -64,7 +63,7 @@ public class BrandApiController {
     @RequestMapping(path = "/api/brand/{id}", method = RequestMethod.PUT)
     public void update(@PathVariable int id, @RequestBody BrandForm f) throws ApiException {
         BrandPojo p = convert(f);
-        service.update(id,p);
+        service.update(id, p);
     }
 
 

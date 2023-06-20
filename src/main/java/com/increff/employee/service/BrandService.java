@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.increff.employee.dao.EmployeeDao;
+import com.increff.employee.dao.BrandDao;
 import com.increff.employee.pojo.BrandPojo;
 import com.increff.employee.util.StringUtil;
 
