@@ -45,13 +45,21 @@ public class BrandService {
 
     @Transactional(rollbackOn  = ApiException.class)
     public void update(int id, BrandPojo p) throws ApiException {
+        if(StringUtil.isEmpty(p.getBrand())) {
+            throw new ApiException("brand cannot be empty");
+        }
+        if(StringUtil.isEmpty(p.getCategory())) {
+            throw new ApiException("category cannot be empty");
+        }
         normalize(p);
         BrandPojo tempPojo = getCheck(id);
+        if(dao.select(id).getBrand().equals(p.getBrand()) && dao.select(id).getCategory().equals(p.getCategory())){
+            return;
+        }
         if(dao.checkerForDuplicate(p.getBrand(), p.getCategory())==null){
         tempPojo.setBrand(p.getBrand());
         tempPojo.setCategory(p.getCategory());}
         else throw new ApiException("category already exists");
-
     }
 
     @Transactional
