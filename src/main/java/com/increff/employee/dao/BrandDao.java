@@ -25,12 +25,11 @@ public class BrandDao extends AbstractDao {
 
     @Transactional
     public void insert(BrandPojo p) {
-        em.persist(p);
+            em.persist(p);
     }
 
     public BrandPojo select(int id) {
         TypedQuery<BrandPojo> query = getQuery(select_id, BrandPojo.class);
-
         query.setParameter("id", id);
         return getSingle(query);
     }
@@ -40,7 +39,7 @@ public class BrandDao extends AbstractDao {
         return query.getResultList();
     }
 
-    public BrandPojo checker(String brand, String category){
+    public BrandPojo checkerForDuplicate(String brand, String category){
         TypedQuery<BrandPojo> query = getQuery(nocommon_case, BrandPojo.class);
 
         query.setParameter("brand", brand);

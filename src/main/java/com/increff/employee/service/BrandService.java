@@ -26,7 +26,9 @@ public class BrandService {
         if(StringUtil.isEmpty(p.getCategory())) {
             throw new ApiException("category cannot be empty");
         }
+        if(dao.checkerForDuplicate(p.getBrand(), p.getCategory())==null)
         dao.insert(p);
+        else throw new ApiException("category already exists");
 
     }
 
