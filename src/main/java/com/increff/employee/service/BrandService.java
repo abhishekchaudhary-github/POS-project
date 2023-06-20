@@ -58,7 +58,7 @@ public class BrandService {
         BrandPojo ex = getCheck(id);
         ex.setBrand(p.getBrand());
         ex.setCategory(p.getCategory());
-        dao.update(ex);
+
     }
 
     @Transactional

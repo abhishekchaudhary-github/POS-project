@@ -141,6 +141,7 @@ function displayBrandList(data){
 	for(var i in data){
 		var e = data[i];
 		var buttonHtml = '<button onclick="deletebrand(' + e.id + ')">delete</button>'
+		//var buttonHtml = ''
 		buttonHtml += ' <button onclick="displayEditbrand(' + e.id + ')">edit</button>'
 		var row = '<tr>'
 		+ '<td>' + e.id + '</td>'

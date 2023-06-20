@@ -26,7 +26,7 @@ public class BrandApiController {
     @Autowired
     private BrandService service;
 
-    @ApiOperation(value = "Adds an Brand")
+    @ApiOperation(value = "Adds a Brand")
     @RequestMapping(path = "/api/brand", method = RequestMethod.POST)
     public void add(@RequestBody BrandForm form) throws ApiException {
         BrandPojo p = convert(form);
@@ -34,14 +34,14 @@ public class BrandApiController {
     }
 
 
-    @ApiOperation(value = "Deletes and Brand")
+    @ApiOperation(value = "Deletes a Brand")
     @RequestMapping(path = "/api/brand/{id}", method = RequestMethod.DELETE)
     // /api/1
     public void delete(@PathVariable int id) {
         service.delete(id);
     }
 
-    @ApiOperation(value = "Gets an Brand by ID")
+    @ApiOperation(value = "Gets a Brand by ID")
     @RequestMapping(path = "/api/brand/{id}", method = RequestMethod.GET)
     public BrandData get(@PathVariable int id) throws ApiException {
         BrandPojo p = service.get(id);
@@ -59,7 +59,7 @@ public class BrandApiController {
         return list2;
     }
 
-    @ApiOperation(value = "Updates an Brand")
+    @ApiOperation(value = "Updates a Brand")
     @RequestMapping(path = "/api/brand/{id}", method = RequestMethod.PUT)
     public void update(@PathVariable int id, @RequestBody BrandForm f) throws ApiException {
         BrandPojo p = convert(f);
