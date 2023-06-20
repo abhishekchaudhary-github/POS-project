@@ -47,8 +47,10 @@ public class BrandService {
     public void update(int id, BrandPojo p) throws ApiException {
         normalize(p);
         BrandPojo tempPojo = getCheck(id);
+        if(dao.checkerForDuplicate(p.getBrand(), p.getCategory())==null){
         tempPojo.setBrand(p.getBrand());
-        tempPojo.setCategory(p.getCategory());
+        tempPojo.setCategory(p.getCategory());}
+        else throw new ApiException("category already exists");
 
     }
 

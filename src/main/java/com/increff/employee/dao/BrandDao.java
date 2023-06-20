@@ -15,7 +15,6 @@ import com.increff.employee.pojo.BrandPojo;
 @Repository
 public class BrandDao extends AbstractDao {
 
-    //private static String delete_id = "delete from BrandPojo p where id=:id";
     private static String select_id = "select p from BrandPojo p where id=:id";
     private static String select_all = "select p from BrandPojo p";
     private static String nocommon_case = "select p from BrandPojo p where brand=:brand and category=:category";
