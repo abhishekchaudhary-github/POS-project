@@ -34,12 +34,12 @@ public class BrandApiController {
     }
 
 
-    @ApiOperation(value = "Deletes a Brand")
-    @RequestMapping(path = "/api/brand/{id}", method = RequestMethod.DELETE)
-    // /api/1
-    public void delete(@PathVariable int id) {
-        service.delete(id);
-    }
+//    @ApiOperation(value = "Deletes a Brand")
+//    @RequestMapping(path = "/api/brand/{id}", method = RequestMethod.DELETE)
+//    // /api/1
+//    public void delete(@PathVariable int id) {
+//        service.delete(id);
+//    }
 
     @ApiOperation(value = "Gets a Brand by ID")
     @RequestMapping(path = "/api/brand/{id}", method = RequestMethod.GET)

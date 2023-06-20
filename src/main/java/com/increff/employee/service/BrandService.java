@@ -26,21 +26,15 @@ public class BrandService {
         if(StringUtil.isEmpty(p.getCategory())) {
             throw new ApiException("category cannot be empty");
         }
-
-        //code below checks for unique brand and category combination
-        List<BrandPojo> temporarylist = dao.selectAll();
-        for(BrandPojo temp : temporarylist) {
-            if(temp.getBrand().equals(p.getBrand()) && temp.getCategory().equals(p.getCategory())){
-                throw new ApiException("already in the database");
-            }
-        }
+        duplicateCheck(p);
         dao.insert(p);
+
     }
 
-    @Transactional
-    public void delete(int id) {
-        dao.delete(id);
-    }
+//    @Transactional
+//    public void delete(int id) {
+//        dao.delete(id);
+//    }
 
     @Transactional(rollbackOn = ApiException.class)
     public BrandPojo get(int id) throws ApiException {
@@ -55,9 +49,10 @@ public class BrandService {
     @Transactional(rollbackOn  = ApiException.class)
     public void update(int id, BrandPojo p) throws ApiException {
         normalize(p);
-        BrandPojo ex = getCheck(id);
-        ex.setBrand(p.getBrand());
-        ex.setCategory(p.getCategory());
+        BrandPojo tempPojo = getCheck(id);
+        duplicateCheck(tempPojo);
+        tempPojo.setBrand(p.getBrand());
+        tempPojo.setCategory(p.getCategory());
 
     }
 
@@ -73,6 +68,15 @@ public class BrandService {
     protected static void normalize(BrandPojo p) {
         p.setBrand(StringUtil.toLowerCase(p.getBrand()));
         p.setCategory(StringUtil.toLowerCase(p.getCategory()));
+    }
+
+    protected void duplicateCheck(BrandPojo p) throws ApiException {
+        List<BrandPojo> temporarylist = dao.selectAll();
+        for(BrandPojo temp : temporarylist) {
+            if(temp.getBrand().equals(p.getBrand()) && temp.getCategory().equals(p.getCategory())){
+                throw new ApiException("already in the database");
+            }
+        }
     }
 
 }

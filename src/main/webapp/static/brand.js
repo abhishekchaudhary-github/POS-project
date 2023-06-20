@@ -1,3 +1,7 @@
+/**
+remove delete function
+**/
+
 function getBrandUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
 	return baseUrl + "/api/brand";
@@ -85,6 +89,7 @@ var processCount = 0;
 
 
 function processData(){
+
 	var file = $('#brandFile')[0].files[0];
 	readFileData(file, readFileDataCallback);
 }
@@ -140,9 +145,9 @@ function displayBrandList(data){
 	$tbody.empty();
 	for(var i in data){
 		var e = data[i];
-		var buttonHtml = '<button onclick="deletebrand(' + e.id + ')">delete</button>'
-		//var buttonHtml = ''
-		buttonHtml += ' <button onclick="displayEditbrand(' + e.id + ')">edit</button>'
+		//var buttonHtml = '<button onclick="deletebrand(' + e.id + ')">delete</button>'
+		var buttonHtml = ''
+		buttonHtml += ' <button onclick="displayEditBrand(' + e.id + ')">edit</button>'
 		var row = '<tr>'
 		+ '<td>' + e.id + '</td>'
 		+ '<td>' + e.brand+ '</td>'
