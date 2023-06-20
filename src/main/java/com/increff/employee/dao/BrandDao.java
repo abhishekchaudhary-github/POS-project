@@ -18,6 +18,7 @@ public class BrandDao extends AbstractDao {
     //private static String delete_id = "delete from BrandPojo p where id=:id";
     private static String select_id = "select p from BrandPojo p where id=:id";
     private static String select_all = "select p from BrandPojo p";
+    private static String nocommon_case = "select p from BrandPojo p where brand=:brand and category=:category";
 
     @PersistenceContext
     private EntityManager em;
@@ -27,14 +28,9 @@ public class BrandDao extends AbstractDao {
         em.persist(p);
     }
 
-//    public int delete(int id) {
-//        Query query = em.createQuery(delete_id);
-//        query.setParameter("id", id);
-//        return query.executeUpdate();
-//    }
-
     public BrandPojo select(int id) {
         TypedQuery<BrandPojo> query = getQuery(select_id, BrandPojo.class);
+
         query.setParameter("id", id);
         return getSingle(query);
     }
@@ -44,6 +40,13 @@ public class BrandDao extends AbstractDao {
         return query.getResultList();
     }
 
+    public BrandPojo checker(String brand, String category){
+        TypedQuery<BrandPojo> query = getQuery(nocommon_case, BrandPojo.class);
+
+        query.setParameter("brand", brand);
+        query.setParameter("category", category);
+        return getSingle(query);
+    }
     public void update(BrandPojo p) {
     }
 

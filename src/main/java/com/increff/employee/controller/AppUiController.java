@@ -27,4 +27,9 @@ public class AppUiController extends AbstractUiController {
 		return mav("brand.html");
 	}
 
+//	@RequestMapping(value = "/ui/product")
+//	public ModelAndView product() {
+//		return mav("product.html");
+//	}
+
 }
