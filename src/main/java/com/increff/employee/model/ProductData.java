@@ -8,7 +8,7 @@ public class ProductData extends ProductForm {
         return id;
     }
 
-    public void setId(int productId) {
+    public void setId(int id) {
         this.id = id;
     }
 

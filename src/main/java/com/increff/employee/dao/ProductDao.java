@@ -35,8 +35,8 @@ public class ProductDao extends AbstractDao{
         return getSingle(query);
     }
 
-    public BrandPojo checkerForDuplicate(Integer brand_category, String name){
-        TypedQuery<BrandPojo> query = getQuery(nocommon_case, BrandPojo.class);
+    public ProductPojo checkerForDuplicate(Integer brand_category, String name){
+        TypedQuery<ProductPojo> query = getQuery(nocommon_case, ProductPojo.class);
 
         query.setParameter("brand_category", brand_category);
         query.setParameter("name", name);
