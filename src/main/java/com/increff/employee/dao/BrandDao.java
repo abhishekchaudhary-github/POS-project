@@ -8,6 +8,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
+import com.increff.employee.pojo.ProductPojo;
 import org.springframework.stereotype.Repository;
 
 import com.increff.employee.pojo.BrandPojo;
@@ -45,6 +46,12 @@ public class BrandDao extends AbstractDao {
         query.setParameter("category", category);
         return getSingle(query);
     }
+    public BrandPojo brandMustExist(int productId){
+        TypedQuery<BrandPojo> query = getQuery(select_id, BrandPojo.class);
+        query.setParameter("id", productId);
+        return getSingle(query);
+    }
+
     public void update(BrandPojo p) {
     }
 
