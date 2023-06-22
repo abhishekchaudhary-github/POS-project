@@ -27,13 +27,13 @@ public class EmployeeDao extends AbstractDao {
 		em.persist(p);
 	}
 
-	public int delete(int id) {
+	public Integer delete(Integer id) {
 		Query query = em.createQuery(delete_id);
 		query.setParameter("id", id);
 		return query.executeUpdate();
 	}
 
-	public EmployeePojo select(int id) {
+	public EmployeePojo select(Integer id) {
 		TypedQuery<EmployeePojo> query = getQuery(select_id, EmployeePojo.class);
 		query.setParameter("id", id);
 		return getSingle(query);

@@ -5,17 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd59bcda-ea0a-45cb-bbdf-b0788f0265bb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/html/inventory.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/html/product.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/inventory.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/product.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/AppUiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/AppUiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/BrandApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/BrandApiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/EmployeeApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/EmployeeApiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/InventoryApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/InventoryApiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/ProductApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/ProductApiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/BrandDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/BrandDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/BrandInMemDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/BrandInMemDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/EmployeeDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/EmployeeDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/EmployeeInMemDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/EmployeeInMemDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/InventoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/InventoryDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/ProductDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/UserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/BrandData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/BrandData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/InventoryData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/InventoryData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/InventoryForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/InventoryForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/ProductData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/ProductData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/UserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/UserData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/pojo/BrandPojo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/pojo/BrandPojo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/pojo/EmployeePojo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/pojo/EmployeePojo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/pojo/InventoryPojo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/pojo/InventoryPojo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/pojo/ProductPojo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/pojo/ProductPojo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/pojo/UserPojo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/pojo/UserPojo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/BrandService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/BrandService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/EmployeeService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/InventoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/InventoryService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/pricing.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/pricing22.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/employee.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/employee.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/product.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/product.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/product.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/product.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,6 +108,31 @@
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration name="employee-spring-full [jetty:run]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="jetty:run" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
     </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

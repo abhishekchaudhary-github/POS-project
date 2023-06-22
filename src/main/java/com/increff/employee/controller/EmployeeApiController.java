@@ -37,13 +37,13 @@ public class EmployeeApiController {
 	@ApiOperation(value = "Deletes an employee")
 	@RequestMapping(path = "/api/employee/{id}", method = RequestMethod.DELETE)
 	// /api/1
-	public void delete(@PathVariable int id) {
+	public void delete(@PathVariable Integer id) {
 		service.delete(id);
 	}
 
 	@ApiOperation(value = "Gets an employee by ID")
 	@RequestMapping(path = "/api/employee/{id}", method = RequestMethod.GET)
-	public EmployeeData get(@PathVariable int id) throws ApiException {
+	public EmployeeData get(@PathVariable Integer id) throws ApiException {
 		EmployeePojo p = service.get(id);
 		return convert(p);
 	}
@@ -61,7 +61,7 @@ public class EmployeeApiController {
 
 	@ApiOperation(value = "Updates an employee")
 	@RequestMapping(path = "/api/employee/{id}", method = RequestMethod.PUT)
-	public void update(@PathVariable int id, @RequestBody EmployeeForm f) throws ApiException {
+	public void update(@PathVariable Integer id, @RequestBody EmployeeForm f) throws ApiException {
 		EmployeePojo p = convert(f);
 		service.update(id, p);
 	}

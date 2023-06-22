@@ -17,17 +17,16 @@ public class InventoryService {
 
 
     @Transactional(rollbackOn = ApiException.class)
-    public void add(Integer brand_category) throws ApiException {
-        //
+    public void add(Integer productId) throws ApiException {
         InventoryPojo p = new InventoryPojo();
-        p.setId(brand_category);
+        p.setId(productId);
         p.setQuantity(0);
         dao.insert(p);
     }
 
 
     @Transactional(rollbackOn = ApiException.class)
-    public InventoryPojo get(int id) throws ApiException {
+    public InventoryPojo get(Integer id) throws ApiException {
         return dao.select(id);
     }
 
@@ -37,7 +36,7 @@ public class InventoryService {
     }
 
     @Transactional(rollbackOn  = ApiException.class)
-    public void update(int id, InventoryPojo p) throws ApiException {
+    public void update(Integer id, InventoryPojo p) throws ApiException {
         if(p.getQuantity()==null) {
             throw new ApiException("field cannot be empty");
         }
@@ -48,7 +47,7 @@ public class InventoryService {
     }
 
 //    @Transactional
-//    public InventoryPojo getCheck(int id) throws ApiException {
+//    public InventoryPojo getCheck(Integer id) throws ApiException {
 //        InventoryPojo p = dao.select(id);
 //        if (p == null) {
 //            throw new ApiException("Employee with given ID does not exit, id: " + id);

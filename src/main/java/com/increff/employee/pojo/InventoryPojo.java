@@ -8,15 +8,15 @@ import javax.persistence.Id;
 @Entity
 public class InventoryPojo {
     @Id
-    private int id;
+    private Integer id;
 
     private Integer quantity;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

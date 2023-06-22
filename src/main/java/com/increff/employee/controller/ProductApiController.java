@@ -35,7 +35,7 @@ public class ProductApiController {
 
     @ApiOperation(value = "Gets a Product by ID")
     @RequestMapping(path = "/api/product/{id}", method = RequestMethod.GET)
-    public ProductData get(@PathVariable int id) throws ApiException {
+    public ProductData get(@PathVariable Integer id) throws ApiException {
         ProductPojo p = service.get(id);
         return convert(p);
     }
@@ -54,7 +54,7 @@ public class ProductApiController {
 
     @ApiOperation(value = "Updates a Product")
     @RequestMapping(path = "/api/product/{id}", method = RequestMethod.PUT)
-    public void update(@PathVariable int id, @RequestBody ProductForm f) throws ApiException {
+    public void update(@PathVariable Integer id, @RequestBody ProductForm f) throws ApiException {
         ProductPojo p = convert(f);
         service.update(id, p);
     }

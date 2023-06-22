@@ -54,12 +54,13 @@ public class ProductService {
             dao.insert(p);
             else throw new ApiException("this entry already exists");
 
-        inventoryService.add(p.getBrand_category());
+
+        inventoryService.add(p.getId());
 
     }
 
     @Transactional(rollbackOn = ApiException.class)
-    public ProductPojo get(int id) throws ApiException {
+    public ProductPojo get(Integer id) throws ApiException {
         return getCheck(id);
     }
 
@@ -69,10 +70,9 @@ public class ProductService {
     }
 
     @Transactional(rollbackOn  = ApiException.class)
-    public void update(int id, ProductPojo p) throws ApiException {
+    public void update(Integer id, ProductPojo p) throws ApiException {
         normalize(p);
         ProductPojo tempPojo = getCheck(id);
-
         if(StringUtil.isEmpty(p.getBarcode())) {
             throw new ApiException("brand cannot be empty");
         }
@@ -88,24 +88,24 @@ public class ProductService {
         if(p.getMrp()<0) {
             throw new ApiException("MRP can't be a negative value");
         }
+        //
 
         //NOTHING INSERTED
-        if(dao.select(id).getBarcode().equals(p.getBarcode()) && dao.select(id).getName().equals(p.getName()) && dao.select(id).getMrp()==p.getMrp() && dao.select(id).getBrand_category()==p.getBrand_category()){
+        if(tempPojo.getBarcode().equals(p.getBarcode()) && tempPojo.getName().equals(p.getName()) && tempPojo.getMrp()==p.getMrp() && tempPojo.getBrand_category()==p.getBrand_category()){
             return;
         }
+        tempPojo.setBarcode(p.getBarcode());
+        tempPojo.setBrand_category(p.getBrand_category());
+        tempPojo.setName(p.getName());
+        tempPojo.setMrp(p.getMrp());
 
         if(dao.checkerForDuplicate(p.getBrand_category(), p.getName())==null) {
-            tempPojo.setBarcode(p.getBarcode());
-            tempPojo.setBrand_category(p.getBrand_category());
-            tempPojo.setName(p.getName());
-            tempPojo.setMrp(p.getMrp());
-            inventoryService.add(tempPojo.getBrand_category());
+            inventoryService.add(tempPojo.getId());
         }
-        else throw new ApiException("entry already exists");
     }
 
     @Transactional
-    public ProductPojo getCheck(int id) throws ApiException {
+    public ProductPojo getCheck(Integer id) throws ApiException {
         ProductPojo p = dao.select(id);
         if (p == null) {
             throw new ApiException("Employee with given ID does not exit, id: " + id);

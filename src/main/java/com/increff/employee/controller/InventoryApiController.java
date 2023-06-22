@@ -29,7 +29,7 @@ public class InventoryApiController {
 
     @ApiOperation(value = "Gets an Inventory by ID")
     @RequestMapping(path = "/api/inventory/{id}", method = RequestMethod.GET)
-    public InventoryData get(@PathVariable int id) throws ApiException {
+    public InventoryData get(@PathVariable Integer id) throws ApiException {
         InventoryPojo p = service.get(id);
         return convert(p);
     }
@@ -47,7 +47,7 @@ public class InventoryApiController {
 
     @ApiOperation(value = "Updates an Inventory")
     @RequestMapping(path = "/api/inventory/{id}", method = RequestMethod.PUT)
-    public void update(@PathVariable int id, @RequestBody InventoryForm f) throws ApiException {
+    public void update(@PathVariable Integer id, @RequestBody InventoryForm f) throws ApiException {
         InventoryPojo p = convert(f);
         service.update(id, p);
     }

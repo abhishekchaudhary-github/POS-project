@@ -34,7 +34,7 @@ public class BrandService {
 
 
     @Transactional(rollbackOn = ApiException.class)
-    public BrandPojo get(int id) throws ApiException {
+    public BrandPojo get(Integer id) throws ApiException {
         return getCheck(id);
     }
 
@@ -44,7 +44,7 @@ public class BrandService {
     }
 
     @Transactional(rollbackOn  = ApiException.class)
-    public void update(int id, BrandPojo p) throws ApiException {
+    public void update(Integer id, BrandPojo p) throws ApiException {
         if(StringUtil.isEmpty(p.getBrand())) {
             throw new ApiException("brand cannot be empty");
         }
@@ -63,7 +63,7 @@ public class BrandService {
     }
 
     @Transactional
-    public BrandPojo getCheck(int id) throws ApiException {
+    public BrandPojo getCheck(Integer id) throws ApiException {
         BrandPojo p = dao.select(id);
         if (p == null) {
             throw new ApiException("Employee with given ID does not exit, id: " + id);

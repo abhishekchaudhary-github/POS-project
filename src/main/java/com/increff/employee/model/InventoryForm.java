@@ -3,7 +3,7 @@ package com.increff.employee.model;
 public class InventoryForm {
     private Integer quantity;
 
-    private int id;
+    private Integer id;
 
     public Integer getQuantity() {
         return quantity;
@@ -13,11 +13,11 @@ public class InventoryForm {
         this.quantity = quantity;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }
