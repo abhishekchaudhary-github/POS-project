@@ -21,8 +21,8 @@ public class ProductService {
     @Autowired
     private BrandDao brandDao;
 
-//    @Autowired
-//    private InventoryService inventoryService;
+    @Autowired
+    private InventoryService inventoryService;
 
     @Transactional(rollbackOn = ApiException.class)
     public void add(ProductPojo p) throws ApiException {
@@ -54,7 +54,7 @@ public class ProductService {
             dao.insert(p);
             else throw new ApiException("this entry already exists");
 
-        //inventoryService.add(p.getBrand_category());
+        inventoryService.add(p.getBrand_category());
 
     }
 
@@ -99,7 +99,7 @@ public class ProductService {
             tempPojo.setBrand_category(p.getBrand_category());
             tempPojo.setName(p.getName());
             tempPojo.setMrp(p.getMrp());
-            //inventoryService.add(tempPojo.getBrand_category());
+            inventoryService.add(tempPojo.getBrand_category());
         }
         else throw new ApiException("entry already exists");
     }

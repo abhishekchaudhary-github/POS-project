@@ -1,14 +1,18 @@
-function getEmployeeUrl(){
+/**
+remove delete function
+**/
+
+function getInventoryUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
-	return baseUrl + "/api/employee";
+	return baseUrl + "/api/inventory";
 }
 
 //BUTTON ACTIONS
-function addEmployee(event){
+function addInventory(event){
 	//Set the values to update
-	var $form = $("#employee-form");
+	var $form = $("#inventory-form");
 	var json = toJson($form);
-	var url = getEmployeeUrl();
+	var url = getInventoryUrl();
 
 	$.ajax({
 	   url: url,
@@ -18,7 +22,7 @@ function addEmployee(event){
        	'Content-Type': 'application/json'
        },
 	   success: function(response) {
-	   		getEmployeeList();
+	   		getInventoryList();
 	   },
 	   error: handleAjaxError
 	});
@@ -26,14 +30,14 @@ function addEmployee(event){
 	return false;
 }
 
-function updateEmployee(event){
-	$('#edit-employee-modal').modal('toggle');
+function updateInventory(event){
+	$('#edit-inventory-modal').modal('toggle');
 	//Get the ID
-	var id = $("#employee-edit-form input[name=id]").val();
-	var url = getEmployeeUrl() + "/" + id;
+	var id = $("#inventory-edit-form input[name=id]").val();
+	var url = getInventoryUrl() + "/" + id;
 
 	//Set the values to update
-	var $form = $("#employee-edit-form");
+	var $form = $("#inventory-edit-form");
 	var json = toJson($form);
 
 	$.ajax({
@@ -44,7 +48,7 @@ function updateEmployee(event){
        	'Content-Type': 'application/json'
        },
 	   success: function(response) {
-	   		getEmployeeList();
+	   		getInventoryList();
 	   },
 	   error: handleAjaxError
 	});
@@ -53,26 +57,26 @@ function updateEmployee(event){
 }
 
 
-function getEmployeeList(){
-	var url = getEmployeeUrl();
+function getInventoryList(){
+	var url = getInventoryUrl();
 	$.ajax({
 	   url: url,
 	   type: 'GET',
 	   success: function(data) {
-	   		displayEmployeeList(data);
+	   		displayInventoryList(data);
 	   },
 	   error: handleAjaxError
 	});
 }
 
-function deleteEmployee(id){
-	var url = getEmployeeUrl() + "/" + id;
+function deleteInventory(id){
+	var url = getInventoryUrl() + "/" + id;
 
 	$.ajax({
 	   url: url,
 	   type: 'DELETE',
 	   success: function(data) {
-	   		getEmployeeList();
+	   		getInventoryList();
 	   },
 	   error: handleAjaxError
 	});
@@ -85,7 +89,8 @@ var processCount = 0;
 
 
 function processData(){
-	var file = $('#employeeFile')[0].files[0];
+
+	var file = $('#inventoryFile')[0].files[0];
 	readFileData(file, readFileDataCallback);
 }
 
@@ -105,14 +110,14 @@ function uploadRows(){
 	//Process next row
 	var row = fileData[processCount];
 	processCount++;
-
+    var id = row.id;
 	var json = JSON.stringify(row);
-	var url = getEmployeeUrl();
+	var url = getInventoryUrl() + "/" + id;
 
 	//Make ajax call
 	$.ajax({
 	   url: url,
-	   type: 'POST',
+	   type: 'PUT',
 	   data: json,
 	   headers: {
        	'Content-Type': 'application/json'
@@ -135,30 +140,30 @@ function downloadErrors(){
 
 //UI DISPLAY METHODS
 
-function displayEmployeeList(data){
-	var $tbody = $('#employee-table').find('tbody');
+function displayInventoryList(data){
+	var $tbody = $('#inventory-table').find('tbody');
 	$tbody.empty();
 	for(var i in data){
 		var e = data[i];
-		var buttonHtml = '<button onclick="deleteEmployee(' + e.id + ')">delete</button>'
-		buttonHtml += ' <button onclick="displayEditEmployee(' + e.id + ')">edit</button>'
+		//var buttonHtml = '<button onclick="deleteinventory(' + e.id + ')">delete</button>'
+		var buttonHtml = ''
+		buttonHtml += ' <button onclick="displayEditInventory(' + e.id + ')">edit</button>'
 		var row = '<tr>'
 		+ '<td>' + e.id + '</td>'
-		+ '<td>' + e.name + '</td>'
-		+ '<td>'  + e.age + '</td>'
+		+ '<td>'  + e.quantity + '</td>'
 		+ '<td>' + buttonHtml + '</td>'
 		+ '</tr>';
         $tbody.append(row);
 	}
 }
 
-function displayEditEmployee(id){
-	var url = getEmployeeUrl() + "/" + id;
+function displayEditInventory(id){
+	var url = getInventoryUrl() + "/" + id;
 	$.ajax({
 	   url: url,
 	   type: 'GET',
 	   success: function(data) {
-	   		displayEmployee(data);
+	   		displayInventory(data);
 	   },
 	   error: handleAjaxError
 	});
@@ -166,9 +171,9 @@ function displayEditEmployee(id){
 
 function resetUploadDialog(){
 	//Reset file name
-	var $file = $('#employeeFile');
+	var $file = $('#inventoryFile');
 	$file.val('');
-	$('#employeeFileName').html("Choose File");
+	$('#inventoryFileName').html("Choose File");
 	//Reset various counts
 	processCount = 0;
 	fileData = [];
@@ -184,35 +189,34 @@ function updateUploadDialog(){
 }
 
 function updateFileName(){
-	var $file = $('#employeeFile');
+	var $file = $('#inventoryFile');
 	var fileName = $file.val();
-	$('#employeeFileName').html(fileName);
+	$('#inventoryFileName').html(fileName);
 }
 
 function displayUploadData(){
  	resetUploadDialog();
-	$('#upload-employee-modal').modal('toggle');
+	$('#upload-inventory-modal').modal('toggle');
 }
 
-function displayEmployee(data){
-	$("#employee-edit-form input[name=name]").val(data.name);
-	$("#employee-edit-form input[name=age]").val(data.age);
-	$("#employee-edit-form input[name=id]").val(data.id);
-	$('#edit-employee-modal').modal('toggle');
+function displayInventory(data){
+	$("#inventory-edit-form input[name=quantity]").val(data.quantity);
+	$("#inventory-edit-form input[name=id]").val(data.id);
+	$('#edit-inventory-modal').modal('toggle');
 }
 
 
 //INITIALIZATION CODE
 function init(){
-	$('#add-employee').click(addEmployee);
-	$('#update-employee').click(updateEmployee);
-	$('#refresh-data').click(getEmployeeList);
+	$('#add-inventory').click(addInventory);
+	$('#update-inventory').click(updateInventory);
+	$('#refresh-data').click(getInventoryList);
 	$('#upload-data').click(displayUploadData);
 	$('#process-data').click(processData);
 	$('#download-errors').click(downloadErrors);
-    $('#employeeFile').on('change', updateFileName)
+    $('#inventoryFile').on('change', updateFileName)
 }
 
 $(document).ready(init);
-$(document).ready(getEmployeeList);
+$(document).ready(getInventoryList);
 

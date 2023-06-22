@@ -43,10 +43,8 @@ public class InventoryService {
         }
 
         //InventoryPojo tempPojo = getCheck(id);
-        if(dao.select(id).getQuantity().equals(p.getQuantity())){
-            return;
-        }
-            p.setQuantity(p.getQuantity());
+            InventoryPojo temp = get(id);
+            temp.setQuantity(p.getQuantity());
     }
 
 //    @Transactional
