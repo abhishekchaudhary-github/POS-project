@@ -59,6 +59,17 @@ public class ProductService {
 
     }
 
+
+
+
+    ///////
+    @Transactional(rollbackOn = ApiException.class)
+    public ProductPojo barcodeMustExist(String barcode) {
+        return dao.barcodeMustExist(barcode);
+    }
+
+    //////
+
     @Transactional(rollbackOn = ApiException.class)
     public ProductPojo get(Integer id) throws ApiException {
         return getCheck(id);
