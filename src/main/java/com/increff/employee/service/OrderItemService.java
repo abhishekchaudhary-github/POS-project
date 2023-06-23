@@ -16,13 +16,7 @@ public class OrderItemService {
 
     //dto
     @Autowired
-    private ProductService productService;
-
-    @Autowired
     private InventoryService inventoryService;
-
-    @Autowired
-    private OrderService orderService;
 
     //
 
@@ -31,6 +25,10 @@ public class OrderItemService {
 
     @Transactional(rollbackOn = ApiException.class)
     public void add(List<OrderItemPojo> p) throws ApiException {
+        for(OrderItemPojo orderItemPojoItem : p){
+            //HERE!!!
+            inventoryService.deductQuantity(orderItemPojoItem.getProductId(),orderItemPojoItem.getQuantity());
+        }
         for(OrderItemPojo orderItemPojoItem : p){
       dao.insert(orderItemPojoItem);
         }

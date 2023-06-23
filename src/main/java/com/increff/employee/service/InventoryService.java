@@ -26,6 +26,13 @@ public class InventoryService {
 
 
     @Transactional(rollbackOn = ApiException.class)
+    public void deductQuantity(Integer productId, Integer quantity){
+        InventoryPojo productToBeChanged = dao.select(productId);
+        Integer previousQuantity = productToBeChanged.getQuantity();
+        productToBeChanged.setQuantity(previousQuantity - quantity);
+    }
+
+    @Transactional(rollbackOn = ApiException.class)
     public InventoryPojo get(Integer id) throws ApiException {
         return dao.select(id);
     }
