@@ -43,8 +43,9 @@ public class OrderItemApiController {
     @RequestMapping(path = "/api/orderitem", method = RequestMethod.POST)
     public void add(@RequestBody List<CategoryDetailForm> form) throws ApiException {
         List<OrderItemPojo> p = new ArrayList<OrderItemPojo>();
+        Integer orderPojoId = orderService.add();
         for(CategoryDetailForm categoryDetailItem : form)
-            p.add(convert(categoryDetailItem));
+            p.add(convert(categoryDetailItem,orderPojoId));
         service.add(p);
     }
 
@@ -85,14 +86,14 @@ public class OrderItemApiController {
         return d;
     }
 
-    private OrderItemPojo convert(CategoryDetailForm f) throws ApiException {
+    private OrderItemPojo convert(CategoryDetailForm f ,Integer orderPojoId) throws ApiException {
         OrderItemPojo p = new OrderItemPojo();
         ProductPojo productPojo = productService.barcodeMustExist(f.getBarcode());
         if(productPojo!=null) {
             if(productPojo.getMrp()<f.getMrp())
                 throw new ApiException("Selling price cannot be greater than mrp");
             InventoryPojo inventoryPojo = inventoryService.get(productPojo.getId());
-            Integer orderPojoId = orderService.add();
+//            Integer orderPojoId = orderService.add();
             p.setOrderId(orderPojoId);
             p.setProductId(productPojo.getId());
             p.setQuantity(f.getQuantity());
