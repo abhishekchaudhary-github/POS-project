@@ -14,13 +14,27 @@ import com.increff.employee.util.StringUtil;
 @Service
 public class OrderItemService {
 
+    //dto
+    @Autowired
+    private ProductService productService;
+
+    @Autowired
+    private InventoryService inventoryService;
+
+    @Autowired
+    private OrderService orderService;
+
+    //
+
     @Autowired
     private OrderItemDao dao;
 
     @Transactional(rollbackOn = ApiException.class)
     public void add(List<OrderItemPojo> p) throws ApiException {
+        for(OrderItemPojo orderItemPojoItem : p){
+      dao.insert(orderItemPojoItem);
+        }
 
-      dao.insert(p);
 
     }
 
