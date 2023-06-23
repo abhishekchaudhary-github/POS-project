@@ -29,32 +29,32 @@ public class OrderItemDao extends AbstractDao {
         em.persist(orderItemPojoItem);
     }
 
-    public OrderItemPojo select(Integer id) {
-        TypedQuery<OrderItemPojo> query = getQuery(select_id, OrderItemPojo.class);
-        query.setParameter("id", id);
-        return getSingle(query);
-    }
-
-    public List<OrderItemPojo> selectAll() {
-        TypedQuery<OrderItemPojo> query = getQuery(select_all, OrderItemPojo.class);
-        return query.getResultList();
-    }
-
-    public OrderItemPojo checkerForDuplicate(String orderItem, String category){
-        TypedQuery<OrderItemPojo> query = getQuery(nocommon_case, OrderItemPojo.class);
-
-        query.setParameter("orderItem", orderItem);
-        query.setParameter("category", category);
-        return getSingle(query);
-    }
-    public OrderItemPojo orderItemMustExist(Integer productId){
-        TypedQuery<OrderItemPojo> query = getQuery(select_id, OrderItemPojo.class);
-        query.setParameter("id", productId);
-        return getSingle(query);
-    }
-
-    public void update(OrderItemPojo p) {
-    }
+//    public OrderItemPojo select(Integer id) {
+//        TypedQuery<OrderItemPojo> query = getQuery(select_id, OrderItemPojo.class);
+//        query.setParameter("id", id);
+//        return getSingle(query);
+//    }
+//
+//    public List<OrderItemPojo> selectAll() {
+//        TypedQuery<OrderItemPojo> query = getQuery(select_all, OrderItemPojo.class);
+//        return query.getResultList();
+//    }
+//
+//    public OrderItemPojo checkerForDuplicate(String orderItem, String category){
+//        TypedQuery<OrderItemPojo> query = getQuery(nocommon_case, OrderItemPojo.class);
+//
+//        query.setParameter("orderItem", orderItem);
+//        query.setParameter("category", category);
+//        return getSingle(query);
+//    }
+//    public OrderItemPojo orderItemMustExist(Integer productId){
+//        TypedQuery<OrderItemPojo> query = getQuery(select_id, OrderItemPojo.class);
+//        query.setParameter("id", productId);
+//        return getSingle(query);
+//    }
+//
+//    public void update(OrderItemPojo p) {
+//    }
 
 
 
