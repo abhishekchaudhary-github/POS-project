@@ -5,6 +5,7 @@ import com.increff.employee.model.InventoryForm;
 import com.increff.employee.pojo.InventoryPojo;
 import com.increff.employee.service.ApiException;
 import com.increff.employee.service.InventoryService;
+import com.increff.employee.service.ProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ import java.util.List;
 public class InventoryApiController {
     @Autowired
     private InventoryService service;
+
+    @Autowired
+    private ProductService productService;
 
 //    @ApiOperation(value = "Adds an Inventory")
 //    @RequestMapping(path = "/api/inventory", method = RequestMethod.POST)
@@ -36,7 +40,7 @@ public class InventoryApiController {
 
     @ApiOperation(value = "Gets list of all Inventories")
     @RequestMapping(path = "/api/inventory", method = RequestMethod.GET)
-    public List<InventoryData> getAll() {
+    public List<InventoryData> getAll() throws ApiException {
         List<InventoryPojo> list = service.getAll();
         List<InventoryData> list2 = new ArrayList<InventoryData>();
         for (InventoryPojo p : list) {
@@ -53,9 +57,10 @@ public class InventoryApiController {
     }
 
 
-    private static InventoryData convert(InventoryPojo p) {
+    private InventoryData convert(InventoryPojo p) throws ApiException {
         InventoryData d = new InventoryData();
         d.setQuantity(p.getQuantity());
+        d.setBarcode(productService.get(p.getId()).getBarcode());
         d.setId(p.getId());
         return d;
     }

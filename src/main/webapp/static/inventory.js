@@ -149,7 +149,7 @@ function displayInventoryList(data){
 		var buttonHtml = ''
 		buttonHtml += ' <button onclick="displayEditInventory(' + e.id + ')">edit</button>'
 		var row = '<tr>'
-		+ '<td>' + e.id + '</td>'
+		+ '<td>' + e.barcode + '</td>'
 		+ '<td>'  + e.quantity + '</td>'
 		+ '<td>' + buttonHtml + '</td>'
 		+ '</tr>';
@@ -219,4 +219,3 @@ function init(){
 
 $(document).ready(init);
 $(document).ready(getInventoryList);
-
