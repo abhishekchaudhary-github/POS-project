@@ -7,10 +7,11 @@
     <list default="true" id="dd59bcda-ea0a-45cb-bbdf-b0788f0265bb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/InventoryApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/InventoryApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/InventoryForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/InventoryForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/inventory.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/inventory.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/inventory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/inventory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/ProductApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/ProductApiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/ProductForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/ProductForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/BrandService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/BrandService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/product.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/product.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/product.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/product.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

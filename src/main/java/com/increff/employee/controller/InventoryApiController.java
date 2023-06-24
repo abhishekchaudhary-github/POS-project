@@ -68,7 +68,7 @@ public class InventoryApiController {
     private static InventoryPojo convert(InventoryForm f) {
         InventoryPojo p = new InventoryPojo();
         p.setQuantity(f.getQuantity());
-        p.setId(f.getId());
+        //p.setId(f.getId());
         return p;
     }
 

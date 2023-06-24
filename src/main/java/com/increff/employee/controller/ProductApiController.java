@@ -3,6 +3,8 @@ package com.increff.employee.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.increff.employee.pojo.BrandPojo;
+import com.increff.employee.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +25,13 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 public class ProductApiController {
 
+
+    //dto
+    @Autowired
+    private BrandService brandService;
+
+
+    //
     @Autowired
     private ProductService service;
 
@@ -42,13 +51,12 @@ public class ProductApiController {
 
     @ApiOperation(value = "Gets list of all Products")
     @RequestMapping(path = "/api/product", method = RequestMethod.GET)
-    public List<ProductData> getAll() {
+    public List<ProductData> getAll() throws ApiException {
         List<ProductPojo> list = service.getAll();
         List<ProductData> list2 = new ArrayList<ProductData>();
         for (ProductPojo p : list) {
             list2.add(convert(p));
         }
-
         return list2;
     }
 
@@ -60,21 +68,33 @@ public class ProductApiController {
     }
 
 
-    private static ProductData convert(ProductPojo p) {
+    private ProductData convert(ProductPojo p) throws ApiException {
         ProductData d = new ProductData();
         d.setName(p.getName());
         d.setBarcode(p.getBarcode());
-        d.setBrand_category(p.getBrand_category());
+        BrandPojo brandPojo = brandService.get(p.getId());
+//        System.out.println(brandPojo.getId());
+//        System.out.println(brandPojo.getBrand());
+//        System.out.println(brandPojo.getCategory());
+        d.setBrand(brandPojo.getBrand());
+        d.setCategory(brandPojo.getCategory());
         d.setMrp(p.getMrp());
         d.setId(p.getId());
+
         return d;
     }
 
-    private static ProductPojo convert(ProductForm f) {
+    private ProductPojo convert(ProductForm f) {
         ProductPojo p = new ProductPojo();
         p.setName(f.getName());
         p.setBarcode(f.getBarcode());
-        p.setBrand_category(f.getBrand_category());
+        p.setBrand_category(brandService.getId(f.getBrand(),f.getCategory()));
+//      p.setBrand_category(f.getBrand_category());
+//        List<BrandPojo> brandPojo = brandService.getAll();
+//        for(BrandPojo brandPojoObject : brandPojo ){
+//            if(brandPojoObject.getBrand()==f.getBrand()&&brandPojoObject.getCategory()==f.getCategory()&&brandPojoObject.getName()==f.getName())
+//            p.setBrand_category(brandPojoObject.getId());
+//        }
         p.setMrp(f.getMrp());
         return p;
     }

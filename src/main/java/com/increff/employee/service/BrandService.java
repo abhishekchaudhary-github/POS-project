@@ -63,6 +63,10 @@ public class BrandService {
     }
 
     @Transactional
+    public Integer getId(String productBrand,String productCategory){
+        return dao.checkerForDuplicate(productBrand,productCategory).getId();
+    }
+    @Transactional
     public BrandPojo getCheck(Integer id) throws ApiException {
         BrandPojo p = dao.select(id);
         if (p == null) {
