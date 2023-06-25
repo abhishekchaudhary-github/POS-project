@@ -65,18 +65,18 @@ function getProductList(){
 	});
 }
 
-function deleteProduct(id){
-	var url = getProductUrl() + "/" + id;
-
-	$.ajax({
-	   url: url,
-	   type: 'DELETE',
-	   success: function(data) {
-	   		getProductList();
-	   },
-	   error: handleAjaxError
-	});
-}
+//function deleteProduct(id){
+//	var url = getProductUrl() + "/" + id;
+//
+//	$.ajax({
+//	   url: url,
+//	   type: 'DELETE',
+//	   success: function(data) {
+//	   		getProductList();
+//	   },
+//	   error: handleAjaxError
+//	});
+//}
 
 // FILE UPLOAD METHODS
 var fileData = [];
@@ -140,8 +140,8 @@ function displayProductList(data){
 	$tbody.empty();
 	for(var i in data){
 		var e = data[i];
-		var buttonHtml = '<button onclick="deleteProduct(' + e.id + ')">delete</button>'
-		buttonHtml += ' <button onclick="displayEditProduct(' + e.id + ')">edit</button>'
+//		var buttonHtml = '<button onclick="deleteProduct(' + e.id + ')">delete</button>'
+		var buttonHtml = ' <button onclick="displayEditProduct(' + e.id + ')">edit</button>'
 		var row = '<tr>'
 		+ '<td>'  + e.barcode + '</td>'
 		+ '<td>'  + e.brand + '</td>'
