@@ -13,6 +13,21 @@ function addCustomerDetail(event){
 	fileData[0].value = fileData[0].value.toLowerCase();
 	//checks
 	var error = false;
+	if(fileData[0].value.localeCompare("")==0||fileData[1].value.localeCompare("")==0||fileData[2].value.localeCompare("")==0) {
+	    alert("fields can not be empty")
+	    error = true;
+	}
+
+    if(isNaN(fileData[1].value)){
+        alert("Quantity must be an integer")
+        error = true;
+    }
+
+    if(isNaN(fileData[2].value)){
+        alert("MRP can not be in this format")
+        error=true;
+    }
+
 	for(var i in addedData){
 	    var e = addedData[i];
 	    if(e.barcode.localeCompare(fileData[0].value)==0){
