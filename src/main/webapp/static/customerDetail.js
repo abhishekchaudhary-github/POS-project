@@ -45,7 +45,6 @@ function addCustomerDetail(event){
         jsonData.push(
                 jsonObject
         )
-        console.log(jsonData)
 	}
 	for(var i in addedData){
     		var e = addedData[i];
@@ -91,26 +90,67 @@ function updateCustomerDetail(event){
 	//Get the ID
 //	var id = $("#customerDetail-edit-form input[name=id]").val();
 //	var url = getCustomerDetailUrl() + "/" + id;
-//
 //	//Set the values to update
 	var $form = $("#customerDetail-edit-form");
 	var json = toJson($form);
 	var fileData = $form.serializeArray();
-	console.log(fileData);
-//
-//	$.ajax({
-//	   url: url,
-//	   type: 'PUT',
-//	   data: json,
-//	   headers: {
-//       	'Content-Type': 'application/json'
-//       },
-//	   success: function(response) {
-//	   		getCustomerDetailList();
-//	   },
-//	   error: handleAjaxError
-//	});
 
+	var $tbody = $('#customerDetail-table').find('tbody');
+
+$tbody.empty();
+	fileData[0].value = fileData[0].value.toLowerCase();
+	//checks
+	var error = false;
+	if(fileData[0].value.localeCompare("")==0||fileData[1].value.localeCompare("")==0||fileData[2].value.localeCompare("")==0) {
+	    alert("fields can not be empty")
+	    error = true;
+	}
+
+    if(isNaN(fileData[1].value)){
+        alert("Quantity must be an integer")
+        error = true;
+    }
+
+    if(isNaN(fileData[2].value)){
+        alert("MRP can not be in this format")
+        error=true;
+    }
+
+	for(var i in addedData){
+	    var e = addedData[i];
+	    if(e.barcode.localeCompare(fileData[0].value)==0){
+	        alert("same barcode has been entered already")
+	        error = true;
+	        break;
+	    }
+	}
+	if(error==false){
+        var iterationNumber = 0 ;
+       	var tempData = addedData.map(item => {
+           if(iterationNumber ++ == fileData[3].value) {
+           return { barcode: fileData[0].value,mrp: fileData[1].value,quantity: fileData[2].value }
+            }
+            else
+            return item
+           })
+           addedData = tempData
+	}
+	for(var i in addedData){
+    		var e = addedData[i];
+    		buttonHtml = ' <button onclick="displayEditCustomerDetail(' + i + ')">edit</button>'
+    		var row = '<tr>'
+    		+ '<td>' + e.barcode + '</td>' //barcode
+    		+ '<td>'  + e.mrp + '</td>' //mrp
+    		+ '<td>'  + e.quantity + '</td>' //quantity
+    		+ '<td>' + buttonHtml + '</td>'
+    		+ '</tr>';
+            $tbody.append(row)
+    	}
+    	var confirmButton;
+    if(addedData.length>0){
+            confirmButton = '<td>' + ' <button onclick="submitCustomerDetail(' + e.id + ')">confirm</button>' + '</td>'
+    	    $tbody.append(confirmButton)
+    	}
 	return false;
 }
 
@@ -222,7 +262,7 @@ function displayEditCustomerDetail(id){
 	 $("#customerDetail-edit-form input[name=barcode]").val(data.barcode);
      $("#customerDetail-edit-form input[name=mrp]").val(data.mrp);
      $("#customerDetail-edit-form input[name=quantity]").val(data.quantity);
-     $("#customerDetail-edit-form input[name=id]").val(data.id);
+     $("#customerDetail-edit-form input[name=id]").val(id);
      $('#edit-customerDetail-modal').modal('toggle');
 }
 
