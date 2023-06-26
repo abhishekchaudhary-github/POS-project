@@ -19,15 +19,29 @@ function addCustomerDetail(event){
 	    error = true;
 	}
 
-    if(isNaN(fileData[1].value)){
-        alert("Quantity must be an integer")
-        error = true;
-    }
 
-    if(isNaN(fileData[2].value)){
+
+    if(isNaN(fileData[1].value)){
         alert("MRP can not be in this format")
         error=true;
     }
+    else if(parseFloat(fileData[1].value)<0){
+    alert("MRP can't be negative")
+            error=true;
+    }
+
+       if(isNaN(fileData[2].value)){
+            alert("Quantity must be an integer")
+            error = true;
+        }
+        else if(!Number.isInteger(parseFloat(fileData[2].value))){
+            alert("Quantity must be a whole number")
+            error = true;
+        }
+        else if(parseInt(fileData[2].value)<0){
+                alert("Quantity must be positive")
+                error = true;
+            }
 
 	for(var i in addedData){
 	    var e = addedData[i];
