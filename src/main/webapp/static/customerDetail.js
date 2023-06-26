@@ -96,8 +96,15 @@ function updateCustomerDetail(event){
 	var fileData = $form.serializeArray();
 
 	var $tbody = $('#customerDetail-table').find('tbody');
+	var barcodeChange = false;
 
-$tbody.empty();
+	if(fileData[0].value.localeCompare(addedData[fileData[3].value].barcode)!=0){
+	console.log(fileData[0].value)
+	console.log(addedData[fileData[3].value].barcode)
+	    barcodeChange=true;
+	}
+
+    $tbody.empty();
 	fileData[0].value = fileData[0].value.toLowerCase();
 	//checks
 	var error = false;
@@ -116,14 +123,17 @@ $tbody.empty();
         error=true;
     }
 
-	for(var i in addedData){
-	    var e = addedData[i];
-	    if(e.barcode.localeCompare(fileData[0].value)==0){
-	        alert("same barcode has been entered already")
-	        error = true;
-	        break;
-	    }
+if(barcodeChange==true){
+        for(var i in addedData){
+            var e = addedData[i];
+            if(e.barcode.localeCompare(fileData[0].value)==0){
+                alert("same barcode has been entered already")
+                error = true;
+                break;
+            }
+        }
 	}
+
 	if(error==false){
         var iterationNumber = 0 ;
        	var tempData = addedData.map(item => {
