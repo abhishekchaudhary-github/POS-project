@@ -21,12 +21,21 @@ public class ProductDao extends AbstractDao{
 
     private static String select_barcode = "select p from ProductPojo p where barcode=:barcode";
     private static String nocommon_case = "select p from ProductPojo p where brand_category=:brand_category and name=:name";
+
+    private static  String barcode_and_mrp = "select p from ProductPojo p where brand_category=:brand_category and mrp=:mrp";
     @PersistenceContext
     private EntityManager em;
 
     @Transactional
     public void insert(ProductPojo p) {
         em.persist(p);
+    }
+
+    public ProductPojo barcodeAndMrp(String barcode, Double mrp) {
+        TypedQuery<ProductPojo> query = getQuery(barcode_and_mrp, ProductPojo.class);
+        query.setParameter("barcode", barcode);
+        query.setParameter("mrp", mrp);
+        return getSingle(query);
     }
 
     public ProductPojo barcodeMustExist(String barcode) {

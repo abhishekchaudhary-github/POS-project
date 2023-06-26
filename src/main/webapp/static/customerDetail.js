@@ -1,9 +1,45 @@
 var addedData = [];
 var jsonData = [];
+var checker = true
+var prodId = -1;
 function getCustomerDetailUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
 	return baseUrl + "/api/orderitem";
 }
+
+
+function checkProduct(data, fileData) {
+var k =0;
+    for( i in data ) {
+        var e = data[i];
+        if(data[i].barcode.localeCompare(fileData[0].value)==0){
+        if(data[i].mrp < fileData[1].value){
+        alert('Selling price cannot be greater than MRP')
+            checker = false
+            }
+            prodId = data[i].id;
+            k=1;
+            break;
+        }
+    }
+   if(k==0){
+    alert('barcode does not exist')
+    checker = false}
+}
+
+
+function checkInventory(data, fileData){
+    if(data.quantity - fileData<0){
+        alert('value accessed the inventory')
+        checker = false
+    }
+}
+
+
+
+
+
+
 
 //BUTTON ACTIONS
 function addCustomerDetail(event){
@@ -13,7 +49,42 @@ function addCustomerDetail(event){
 	$tbody.empty();
 	fileData[0].value = fileData[0].value.toLowerCase();
 	//checks
+
+
+var url = $("meta[name=baseUrl]").attr("content") + "/api/product";
+
+	$.ajax({
+	   url: url,
+	   type: 'GET',
+	   async: false,
+	   success: function(data) {
+	   		checkProduct(data,fileData);
+	   },
+	   error: handleAjaxError
+	});
+
+
+
+
+var iurl = $("meta[name=baseUrl]").attr("content") + "/api/inventory" + "/" + prodId;
+	$.ajax({
+	   url: iurl,
+	   type: 'GET',
+	   success: function(data) {
+	   console.log("hi")
+	   		checkInventory(data,fileData[2].value);
+	   },
+	   error: handleAjaxError
+	});
+
 	var error = false;
+if(!checker) error = true
+
+
+
+
+
+
 	if(fileData[0].value.localeCompare("")==0||fileData[1].value.localeCompare("")==0||fileData[2].value.localeCompare("")==0) {
 	    alert("fields can not be empty")
 	    error = true;
@@ -113,8 +184,8 @@ function updateCustomerDetail(event){
 	var barcodeChange = false;
 
 	if(fileData[0].value.localeCompare(addedData[fileData[3].value].barcode)!=0){
-	console.log(fileData[0].value)
-	console.log(addedData[fileData[3].value].barcode)
+	//console.log(fileData[0].value)
+	//console.log(addedData[fileData[3].value].barcode)
 	    barcodeChange=true;
 	}
 

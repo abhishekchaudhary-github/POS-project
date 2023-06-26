@@ -57,15 +57,10 @@ public class OrderItemApiController {
 //        return convert(p);
 //    }
 //
-//    @ApiOperation(value = "Gets list of all OrderItems")
-//    @RequestMapping(path = "/api/orderitem", method = RequestMethod.GET)
-//    public List<OrderItemData> getAll() {
-//        List<OrderItemPojo> list = service.getAll();
-//        List<OrderItemData> list2 = new ArrayList<OrderItemData>();
-//        for (OrderItemPojo p : list) {
-//            list2.add(convert(p));
-//        }
-//        return list2;
+//    @ApiOperation(value = "Check for items")
+//    @RequestMapping(path = "/api/orderitem/{id}", method = RequestMethod.POST)
+//    public void get(@RequestBody CategoryDetailForm form) throws ApiException {
+//        service.check(form);
 //    }
 //
 //    @ApiOperation(value = "Updates a OrderItem")

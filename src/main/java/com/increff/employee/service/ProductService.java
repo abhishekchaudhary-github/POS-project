@@ -45,14 +45,14 @@ public class ProductService {
 
         //barcode originality
         if(brandDao.brandMustExist(p.getBrand_category())==null)
-        throw new ApiException(" brand of such brand category does not exist ");
+            throw new ApiException(" brand of such brand category does not exist ");
 
         if(dao.barcodeMustExist(p.getBarcode())!=null)
             throw new ApiException(" put another barcode ");
 
-            if(dao.checkerForDuplicate(p.getBrand_category(), p.getName())==null)
+        if(dao.checkerForDuplicate(p.getBrand_category(), p.getName())==null)
             dao.insert(p);
-            else throw new ApiException("this entry already exists");
+        else throw new ApiException("this entry already exists");
 
 
         inventoryService.add(p.getId());
@@ -135,4 +135,3 @@ public class ProductService {
 
 
 }
-

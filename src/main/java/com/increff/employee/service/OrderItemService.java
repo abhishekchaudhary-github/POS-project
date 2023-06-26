@@ -30,7 +30,7 @@ public class OrderItemService {
             inventoryService.deductQuantity(orderItemPojoItem.getProductId(),orderItemPojoItem.getQuantity());
         }
         for(OrderItemPojo orderItemPojoItem : p){
-      dao.insert(orderItemPojoItem);
+            dao.insert(orderItemPojoItem);
         }
 
 
