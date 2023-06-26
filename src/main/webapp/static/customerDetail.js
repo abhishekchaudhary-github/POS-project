@@ -49,7 +49,7 @@ function addCustomerDetail(event){
 	}
 	for(var i in addedData){
     		var e = addedData[i];
-    		buttonHtml = ' <button onclick="displayEditCustomerDetail(' + e.id + ')">edit</button>'
+    		buttonHtml = ' <button onclick="displayEditCustomerDetail(' + i + ')">edit</button>'
     		var row = '<tr>'
     		+ '<td>' + e.barcode + '</td>' //barcode
     		+ '<td>'  + e.mrp + '</td>' //mrp
@@ -89,25 +89,27 @@ function submitCustomerDetail(){
 function updateCustomerDetail(event){
 	$('#edit-customerDetail-modal').modal('toggle');
 	//Get the ID
-	var id = $("#customerDetail-edit-form input[name=id]").val();
-	var url = getCustomerDetailUrl() + "/" + id;
-
-	//Set the values to update
+//	var id = $("#customerDetail-edit-form input[name=id]").val();
+//	var url = getCustomerDetailUrl() + "/" + id;
+//
+//	//Set the values to update
 	var $form = $("#customerDetail-edit-form");
 	var json = toJson($form);
-
-	$.ajax({
-	   url: url,
-	   type: 'PUT',
-	   data: json,
-	   headers: {
-       	'Content-Type': 'application/json'
-       },
-	   success: function(response) {
-	   		getCustomerDetailList();
-	   },
-	   error: handleAjaxError
-	});
+	var fileData = $form.serializeArray();
+	console.log(fileData);
+//
+//	$.ajax({
+//	   url: url,
+//	   type: 'PUT',
+//	   data: json,
+//	   headers: {
+//       	'Content-Type': 'application/json'
+//       },
+//	   success: function(response) {
+//	   		getCustomerDetailList();
+//	   },
+//	   error: handleAjaxError
+//	});
 
 	return false;
 }
@@ -196,28 +198,32 @@ function downloadErrors(){
 
 //UI DISPLAY METHODS
 
-function displayCustomerDetailList(data){
-	var $tbody = $('#customerDetail-table').find('tbody');
-	$tbody.empty();
-	for(var i in data){
-		var e = data[i];
-		//var buttonHtml = '<button onclick="deletecustomerDetail(' + e.id + ')">delete</button>'
-		var buttonHtml = ''
-		buttonHtml += ' <button onclick="displayEditCustomerDetail(' + e.id + ')">edit</button>'
-		var row = '<tr>'
-		+ '<td>' + e.barcode + '</td>'
-		+ '<td>'  + e.mrp + '</td>'
-		+ '<td>'  + e.quantity + '</td>'
-		+ '<td>' + buttonHtml + '</td>'
-		+ '</tr>';
-        $tbody.append(row);
-	}
-}
+//function displayCustomerDetailList(data){
+//	var $tbody = $('#customerDetail-table').find('tbody');
+//	$tbody.empty();
+//	for(var i in data){
+//		var e = data[i];
+//		//var buttonHtml = '<button onclick="deletecustomerDetail(' + e.id + ')">delete</button>'
+//		var buttonHtml = ''
+//		buttonHtml += ' <button onclick="displayEditCustomerDetail(' + e.id + ')">edit</button>'
+//		var row = '<tr>'
+//		+ '<td>' + e.barcode + '</td>'
+//		+ '<td>'  + e.mrp + '</td>'
+//		+ '<td>'  + e.quantity + '</td>'
+//		+ '<td>' + buttonHtml + '</td>'
+//		+ '</tr>';
+//        $tbody.append(row);
+//	}
+//}
 
 function displayEditCustomerDetail(id){
 	//var url = getCustomerDetailUrl() + "/" + id;
-	 displayCustomerDetail(id);
-
+	 var data = addedData[id]
+	 $("#customerDetail-edit-form input[name=barcode]").val(data.barcode);
+     $("#customerDetail-edit-form input[name=mrp]").val(data.mrp);
+     $("#customerDetail-edit-form input[name=quantity]").val(data.quantity);
+     $("#customerDetail-edit-form input[name=id]").val(data.id);
+     $('#edit-customerDetail-modal').modal('toggle');
 }
 
 function resetUploadDialog(){
