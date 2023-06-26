@@ -1,7 +1,8 @@
 var addedData = [];
+var jsonData = [];
 function getCustomerDetailUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
-	return baseUrl + "/api/customerDetail";
+	return baseUrl + "/api/orderitem";
 }
 
 //BUTTON ACTIONS
@@ -36,11 +37,18 @@ function addCustomerDetail(event){
 	        break;
 	    }
 	}
-	if(error==false)
-	addedData.push({barcode: fileData[0].value,mrp: fileData[1].value,quantity: fileData[2].value})
+	if(error==false){
+        addedData.push({barcode: fileData[0].value,quantity: fileData[1].value ,mrp: fileData[2].value })
+        var jsonObject ={barcode: fileData[0].value,quantity: parseInt(fileData[1].value), mrp: parseFloat(fileData[2].value)}
+        //jsonObject = JSON.stringify(jsonObject,["barcode","mrp","quantity"])
+
+        jsonData.push(
+                jsonObject
+        )
+        console.log(jsonData)
+	}
 	for(var i in addedData){
     		var e = addedData[i];
-    		console.log(e);
     		buttonHtml = ' <button onclick="displayEditCustomerDetail(' + e.id + ')">edit</button>'
     		var row = '<tr>'
     		+ '<td>' + e.barcode + '</td>' //barcode
@@ -48,8 +56,34 @@ function addCustomerDetail(event){
     		+ '<td>'  + e.quantity + '</td>' //quantity
     		+ '<td>' + buttonHtml + '</td>'
     		+ '</tr>';
-            $tbody.append(row);
+            $tbody.append(row)
     	}
+    	var confirmButton;
+    if(addedData.length>0){
+            confirmButton = '<td>' + ' <button onclick="submitCustomerDetail(' + e.id + ')">confirm</button>' + '</td>'
+    	    $tbody.append(confirmButton)
+    	}
+}
+
+
+
+function submitCustomerDetail(){
+//FUNCTION IS HERE
+    var stringifyJsonData =  JSON.stringify(jsonData)
+
+	var url = getCustomerDetailUrl();
+	$.ajax({
+    	   url: url,
+    	   type: 'POST',
+    	   data: JSON.stringify(jsonData),
+    	   headers: {
+           	'Content-Type': 'application/json'
+           },
+    	   success: console.log("posted")
+    	  ,
+    	   error: handleAjaxError
+    	});
+
 }
 
 function updateCustomerDetail(event){
@@ -79,17 +113,17 @@ function updateCustomerDetail(event){
 }
 
 
-function getCustomerDetailList(){
-	var url = getCustomerDetailUrl();
-	$.ajax({
-	   url: url,
-	   type: 'GET',
-	   success: function(data) {
-	   		displayCustomerDetailList(data);
-	   },
-	   error: handleAjaxError
-	});
-}
+//function getCustomerDetailList(){
+//	var url = getCustomerDetailUrl();
+//	$.ajax({
+//	   url: url,
+//	   type: 'GET',
+//	   success: function(data) {
+//	   		displayCustomerDetailList(data);
+//	   },
+//	   error: handleAjaxError
+//	});
+//}
 
 function deleteCustomerDetail(id){
 	var url = getCustomerDetailUrl() + "/" + id;
@@ -172,8 +206,8 @@ function displayCustomerDetailList(data){
 		buttonHtml += ' <button onclick="displayEditCustomerDetail(' + e.id + ')">edit</button>'
 		var row = '<tr>'
 		+ '<td>' + e.barcode + '</td>'
-		+ '<td>'  + e.quantity + '</td>'
 		+ '<td>'  + e.mrp + '</td>'
+		+ '<td>'  + e.quantity + '</td>'
 		+ '<td>' + buttonHtml + '</td>'
 		+ '</tr>';
         $tbody.append(row);
@@ -181,15 +215,9 @@ function displayCustomerDetailList(data){
 }
 
 function displayEditCustomerDetail(id){
-	var url = getCustomerDetailUrl() + "/" + id;
-	$.ajax({
-	   url: url,
-	   type: 'GET',
-	   success: function(data) {
-	   		displayCustomerDetail(data);
-	   },
-	   error: handleAjaxError
-	});
+	//var url = getCustomerDetailUrl() + "/" + id;
+	 displayCustomerDetail(id);
+
 }
 
 function resetUploadDialog(){
@@ -222,10 +250,10 @@ function displayUploadData(){
 	$('#upload-customerDetail-modal').modal('toggle');
 }
 
-function displayCustomerDetail(data){
+function displayCustomerDetail(id){
 	$("#customerDetail-edit-form input[name=barcode]").val(data.barcode);
-	$("#customerDetail-edit-form input[name=quantity]").val(data.quantity);
 	$("#customerDetail-edit-form input[name=mrp]").val(data.mrp);
+	$("#customerDetail-edit-form input[name=quantity]").val(data.quantity);
 	$("#customerDetail-edit-form input[name=id]").val(data.id);
 	$('#edit-customerDetail-modal').modal('toggle');
 }
