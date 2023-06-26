@@ -153,6 +153,7 @@ function displayEmployeeList(data){
 }
 
 function displayEditEmployee(id){
+console.log(id)
 	var url = getEmployeeUrl() + "/" + id;
 	$.ajax({
 	   url: url,
@@ -195,6 +196,7 @@ function displayUploadData(){
 }
 
 function displayEmployee(data){
+console.log(data)
 	$("#employee-edit-form input[name=name]").val(data.name);
 	$("#employee-edit-form input[name=age]").val(data.age);
 	$("#employee-edit-form input[name=id]").val(data.id);

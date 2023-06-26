@@ -38,8 +38,8 @@ function addCustomerDetail(event){
 	    }
 	}
 	if(error==false){
-        addedData.push({barcode: fileData[0].value,quantity: fileData[1].value ,mrp: fileData[2].value })
-        var jsonObject ={barcode: fileData[0].value,quantity: parseInt(fileData[1].value), mrp: parseFloat(fileData[2].value)}
+        addedData.push({barcode: fileData[0].value ,mrp: fileData[1].value,quantity: fileData[2].value })
+        var jsonObject ={barcode: fileData[0].value, mrp: parseFloat(fileData[1].value),quantity: parseInt(fileData[2].value)}
         //jsonObject = JSON.stringify(jsonObject,["barcode","mrp","quantity"])
 
         jsonData.push(
