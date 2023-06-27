@@ -21,6 +21,7 @@ var k =0;
             k=1;
             break;
         }
+        else checker = true
     }
    if(k==0){
     alert('barcode does not exist')
@@ -33,6 +34,7 @@ function checkInventory(data, fileData){
         alert('value accessed the inventory')
         checker = false
     }
+    else check = true;
 }
 
 
@@ -50,7 +52,7 @@ function addCustomerDetail(event){
 	fileData[0].value = fileData[0].value.toLowerCase();
 	//checks
 
-
+checker = true
 var url = $("meta[name=baseUrl]").attr("content") + "/api/product";
 
 	$.ajax({
@@ -65,18 +67,20 @@ var url = $("meta[name=baseUrl]").attr("content") + "/api/product";
 
 
 
-
+if(checker){
 var iurl = $("meta[name=baseUrl]").attr("content") + "/api/inventory" + "/" + prodId;
 	$.ajax({
 	   url: iurl,
 	   type: 'GET',
+	   async: false,
 	   success: function(data) {
 	   console.log("hi")
 	   		checkInventory(data,fileData[2].value);
 	   },
 	   error: handleAjaxError
 	});
-
+}
+console.log("hi2")
 	var error = false;
 if(!checker) error = true
 
