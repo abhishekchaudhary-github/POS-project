@@ -417,15 +417,17 @@ function orderDetail(id) {
     	   success: function(data) {
     	   console.log(data[0].orderId);
     	        var $tbody = $('#order-detail-modal-body').find('tbody')
+    	        $tbody.empty()
                 for(var i in data) {
                         var e = data[i]
                         if(e.orderId==id) {
                             var cost = e.sellingPrice * e.quantity;
                             var row =
                             '<tr>'+
-                            '<td>' + 'quantity: ' + e.quantity + '</td>' +
-                            '<td>' + 'Selling Price: ' + e.sellingPrice + '</td>' +
-                            '<td>' + 'Total Cost: ' + cost + '</td>' +
+                            '<td>'  + e.barcode + '</td>' +
+                            '<td>'  + e.quantity + '</td>' +
+                            '<td>'  + e.sellingPrice + '</td>' +
+                            '<td>'  + cost + '</td>' +
                             '</tr>';
                             $tbody.append(row);
                         }

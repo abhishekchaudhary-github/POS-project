@@ -5,6 +5,7 @@ public class OrderItemForm {
     private Integer productId;
     private Integer quantity;
     private Double sellingPrice;
+    private String barcode;
 
     public Integer getOrderId() {
         return orderId;
@@ -36,5 +37,13 @@ public class OrderItemForm {
 
     public void setSellingPrice(Double sellingPrice) {
         this.sellingPrice = sellingPrice;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
     }
 }

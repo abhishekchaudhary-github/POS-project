@@ -50,7 +50,7 @@ public class OrderItemApiController {
 
     @ApiOperation(value = "Gets list of all employees")
     @RequestMapping(path = "/api/orderitem", method = RequestMethod.GET)
-    public List<OrderItemData> getAll() {
+    public List<OrderItemData> getAll() throws ApiException {
         List<OrderItemPojo> list = service.getAll();
         List<OrderItemData> list2 = new ArrayList<OrderItemData>();
         for (OrderItemPojo p : list) {
@@ -80,12 +80,14 @@ public class OrderItemApiController {
 //    }
 
 
-    private static OrderItemData convert(OrderItemPojo p) {
+    private OrderItemData convert(OrderItemPojo p) throws ApiException {
+        ProductPojo productPojo = productService.get(p.getProductId());
         OrderItemData d = new OrderItemData();
         d.setOrderId(p.getOrderId());
         d.setProductId(p.getProductId());
         d.setQuantity(p.getQuantity());
         d.setSellingPrice(p.getSellingPrice());
+        d.setBarcode(productPojo.getBarcode());
         d.setId(p.getId());
         return d;
     }
