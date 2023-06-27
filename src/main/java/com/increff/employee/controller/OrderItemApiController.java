@@ -58,13 +58,13 @@ public class OrderItemApiController {
         }
         return list2;
     }
-//
-//    @ApiOperation(value = "Gets a OrderItem by ID")
-//    @RequestMapping(path = "/api/orderitem/{id}", method = RequestMethod.GET)
-//    public OrderItemData get(@PathVariable Integer id) throws ApiException {
-//        OrderItemPojo p = service.get(id);
-//        return convert(p);
-//    }
+
+    @ApiOperation(value = "Gets a OrderItem by ID")
+    @RequestMapping(path = "/api/orderitem/{id}", method = RequestMethod.GET)
+    public OrderItemData get(@PathVariable Integer id) throws ApiException {
+        OrderItemPojo p = service.get(id);
+        return convert(p);
+    }
 //
 //    @ApiOperation(value = "Check for items")
 //    @RequestMapping(path = "/api/orderitem/{id}", method = RequestMethod.POST)

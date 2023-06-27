@@ -255,9 +255,9 @@ if(barcodeChange==true){
 
 
 function getCustomerDetailList(){
-	var url = getCustomerDetailUrl();
+	var baseUrl = $("meta[name=baseUrl]").attr("content")+"/api/order"
 	$.ajax({
-	   url: url,
+	   url: baseUrl,
 	   type: 'GET',
 	   success: function(data) {
 	   		displayCustomerDetailList(data);
@@ -342,15 +342,46 @@ function displayCustomerDetailList(data){
 	$tbody.empty();
 	for(var i in data){
 		var e = data[i];
-		//var buttonHtml = '<button onclick="deletecustomerDetail(' + e.id + ')">delete</button>'
-		var buttonHtml = ''
-//		buttonHtml += ' <button onclick="displayEditCustomerDetail(' + e.id + ')">edit</button>'
+		var buttonHtml = '<button onclick="orderDetail(' + e.id + ')">view details</button>'
+		buttonHtml += ' <button>generate invoice</button>'
 		var row = '<tr>'
-		+ '<td>' + e.orderId + '</td>'
+		+ '<td>' + e.id + '</td>'
+		+'<td>' + e.time + '</td>'
+		+ '<td>' + buttonHtml + '</td>'
 		+ '</tr>';
         $tbody.append(row);
 	}
 }
+
+
+function orderDetail(id) {
+    var url = getCustomerDetailUrl();
+    $.ajax({
+    	   url: url,
+    	   type: 'GET',
+    	   success: function(data) {
+    	   console.log(data[0].orderId);
+    	        var $tbody = $('#order-detail-modal-body').find('tbody')
+                for(var i in data) {
+                        var e = data[i]
+                        if(e.orderId==id) {
+                            var cost = e.sellingPrice * e.quantity;
+                            var row =
+                            '<tr>'+
+                            '<td>' + 'quantity: ' + e.quantity + '</td>' +
+                            '<td>' + 'Selling Price: ' + e.sellingPrice + '</td>' +
+                            '<td>' + 'Total Cost: ' + cost + '</td>' +
+                            '</tr>';
+                            $tbody.append(row);
+                        }
+                }
+                $('#order-detail-modal').modal('toggle');
+    	   },
+    	   error: handleAjaxError
+    	});
+}
+
+
 
 function displayEditCustomerDetail(id){
 	//var url = getCustomerDetailUrl() + "/" + id;

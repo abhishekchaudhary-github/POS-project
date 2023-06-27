@@ -37,10 +37,11 @@ public class OrderItemService {
     }
 
 
-//    @Transactional(rollbackOn = ApiException.class)
-//    public OrderItemPojo get(Integer id) throws ApiException {
-//        return getCheck(id);
-//    }
+
+    @Transactional(rollbackOn = ApiException.class)
+    public OrderItemPojo get(Integer id) throws ApiException {
+        return dao.select(id);
+    }
 //
     @Transactional
     public List<OrderItemPojo> getAll() {

@@ -28,11 +28,11 @@ public class OrderItemDao extends AbstractDao {
         em.persist(p);
     }
 
-//    public OrderItemPojo select(Integer id) {
-//        TypedQuery<OrderItemPojo> query = getQuery(select_id, OrderItemPojo.class);
-//        query.setParameter("id", id);
-//        return getSingle(query);
-//    }
+    public OrderItemPojo select(Integer id) {
+        TypedQuery<OrderItemPojo> query = getQuery(select_id, OrderItemPojo.class);
+        query.setParameter("id", id);
+        return getSingle(query);
+    }
 //
     public List<OrderItemPojo> selectAll() {
         TypedQuery<OrderItemPojo> query = getQuery(select_all, OrderItemPojo.class);

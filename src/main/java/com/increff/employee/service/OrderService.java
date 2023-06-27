@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -25,6 +26,11 @@ public class OrderService {
         orderPojo.setTime(timeOfOrder);
         Integer orderId = dao.insert(orderPojo);
         return orderId;
+    }
+
+    @Transactional
+    public List<OrderPojo> getAll() {
+        return dao.selectAll();
     }
 
     protected static String timeOfOrderCreation() {

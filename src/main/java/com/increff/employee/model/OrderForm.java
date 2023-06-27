@@ -2,7 +2,7 @@ package com.increff.employee.model;
 
 public class OrderForm {
     private Integer id;
-    private Integer time;
+    private String time;
 
     public Integer getId() {
         return id;
@@ -12,11 +12,11 @@ public class OrderForm {
         this.id = id;
     }
 
-    public Integer getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Integer time) {
+    public void setTime(String time) {
         this.time = time;
     }
 }
