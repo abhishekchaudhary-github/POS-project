@@ -138,6 +138,7 @@ if(!checker) error = true
 	for(var i in addedData){
     		var e = addedData[i];
     		buttonHtml = ' <button onclick="displayEditCustomerDetail(' + i + ')">edit</button>'
+    		buttonHtml = buttonHtml + ' <button onclick="deleteEditCustomerDetail(' + i + ')">delete</button>'
     		var row = '<tr>'
     		+ '<td>' + e.barcode + '</td>' //barcode
     		+ '<td>'  + e.mrp + '</td>' //mrp
@@ -152,6 +153,39 @@ if(!checker) error = true
     	    $tbody.append(confirmButton)
     	}
 }
+
+
+
+function deleteEditCustomerDetail(id) {
+    addedData.splice(id, 1)
+    DisplayAddedData()
+}
+
+function DisplayAddedData(){
+    	var $tbody = $('#customerDetail-table').find('tbody');
+    	$tbody.empty()
+    	for(var i in addedData){
+            		var e = addedData[i];
+            		buttonHtml = ' <button onclick="displayEditCustomerDetail(' + i + ')">edit</button>'
+            		buttonHtml = buttonHtml + ' <button onclick="deleteEditCustomerDetail(' + i + ')">delete</button>'
+            		var row = '<tr>'
+            		+ '<td>' + e.barcode + '</td>' //barcode
+            		+ '<td>'  + e.mrp + '</td>' //mrp
+            		+ '<td>'  + e.quantity + '</td>' //quantity
+            		+ '<td>' + buttonHtml + '</td>'
+            		+ '</tr>';
+                    $tbody.append(row)
+            	}
+            	var confirmButton;
+            if(addedData.length>0){
+                    confirmButton = '<td>' + ' <button onclick="submitCustomerDetail(' + e.id + ')">confirm</button>' + '</td>'
+            	    $tbody.append(confirmButton)
+            	}
+        	return false;
+}
+
+
+
 
 
 
@@ -171,7 +205,8 @@ function submitCustomerDetail(){
     	  ,
     	   error: handleAjaxError
     	});
-
+//refresh the page
+location.reload();
 }
 
 function updateCustomerDetail(event){
@@ -292,6 +327,7 @@ if(barcodeChange==true){
 	for(var i in addedData){
     		var e = addedData[i];
     		buttonHtml = ' <button onclick="displayEditCustomerDetail(' + i + ')">edit</button>'
+    		buttonHtml = buttonHtml + ' <button onclick="deleteEditCustomerDetail(' + i + ')">delete</button>'
     		var row = '<tr>'
     		+ '<td>' + e.barcode + '</td>' //barcode
     		+ '<td>'  + e.mrp + '</td>' //mrp
