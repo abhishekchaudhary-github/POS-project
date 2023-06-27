@@ -187,6 +187,62 @@ function updateCustomerDetail(event){
 	var $tbody = $('#customerDetail-table').find('tbody');
 	var barcodeChange = false;
 
+
+
+
+
+
+
+
+
+
+
+checker = true
+var url = $("meta[name=baseUrl]").attr("content") + "/api/product";
+
+	$.ajax({
+	   url: url,
+	   type: 'GET',
+	   async: false,
+	   success: function(data) {
+	   		checkProduct(data,fileData);
+	   },
+	   error: handleAjaxError
+	});
+
+
+
+if(checker){
+var iurl = $("meta[name=baseUrl]").attr("content") + "/api/inventory" + "/" + prodId;
+	$.ajax({
+	   url: iurl,
+	   type: 'GET',
+	   async: false,
+	   success: function(data) {
+	   console.log("hi")
+	   		checkInventory(data,fileData[2].value);
+	   },
+	   error: handleAjaxError
+	});
+}
+console.log("hi2")
+	var error = false;
+if(!checker) error = true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	if(fileData[0].value.localeCompare(addedData[fileData[3].value].barcode)!=0){
 	//console.log(fileData[0].value)
 	//console.log(addedData[fileData[3].value].barcode)
@@ -196,7 +252,6 @@ function updateCustomerDetail(event){
     $tbody.empty();
 	fileData[0].value = fileData[0].value.toLowerCase();
 	//checks
-	var error = false;
 	if(fileData[0].value.localeCompare("")==0||fileData[1].value.localeCompare("")==0||fileData[2].value.localeCompare("")==0) {
 	    alert("fields can not be empty")
 	    error = true;
