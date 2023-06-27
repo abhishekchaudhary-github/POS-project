@@ -254,17 +254,17 @@ if(barcodeChange==true){
 }
 
 
-//function getCustomerDetailList(){
-//	var url = getCustomerDetailUrl();
-//	$.ajax({
-//	   url: url,
-//	   type: 'GET',
-//	   success: function(data) {
-//	   		displayCustomerDetailList(data);
-//	   },
-//	   error: handleAjaxError
-//	});
-//}
+function getCustomerDetailList(){
+	var url = getCustomerDetailUrl();
+	$.ajax({
+	   url: url,
+	   type: 'GET',
+	   success: function(data) {
+	   		displayCustomerDetailList(data);
+	   },
+	   error: handleAjaxError
+	});
+}
 
 function deleteCustomerDetail(id){
 	var url = getCustomerDetailUrl() + "/" + id;
@@ -337,23 +337,20 @@ function downloadErrors(){
 
 //UI DISPLAY METHODS
 
-//function displayCustomerDetailList(data){
-//	var $tbody = $('#customerDetail-table').find('tbody');
-//	$tbody.empty();
-//	for(var i in data){
-//		var e = data[i];
-//		//var buttonHtml = '<button onclick="deletecustomerDetail(' + e.id + ')">delete</button>'
-//		var buttonHtml = ''
+function displayCustomerDetailList(data){
+	var $tbody = $('#orderid-list-table').find('tbody');
+	$tbody.empty();
+	for(var i in data){
+		var e = data[i];
+		//var buttonHtml = '<button onclick="deletecustomerDetail(' + e.id + ')">delete</button>'
+		var buttonHtml = ''
 //		buttonHtml += ' <button onclick="displayEditCustomerDetail(' + e.id + ')">edit</button>'
-//		var row = '<tr>'
-//		+ '<td>' + e.barcode + '</td>'
-//		+ '<td>'  + e.mrp + '</td>'
-//		+ '<td>'  + e.quantity + '</td>'
-//		+ '<td>' + buttonHtml + '</td>'
-//		+ '</tr>';
-//        $tbody.append(row);
-//	}
-//}
+		var row = '<tr>'
+		+ '<td>' + e.orderId + '</td>'
+		+ '</tr>';
+        $tbody.append(row);
+	}
+}
 
 function displayEditCustomerDetail(id){
 	//var url = getCustomerDetailUrl() + "/" + id;

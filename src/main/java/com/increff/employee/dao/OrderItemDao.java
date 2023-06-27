@@ -34,10 +34,10 @@ public class OrderItemDao extends AbstractDao {
 //        return getSingle(query);
 //    }
 //
-//    public List<OrderItemPojo> selectAll() {
-//        TypedQuery<OrderItemPojo> query = getQuery(select_all, OrderItemPojo.class);
-//        return query.getResultList();
-//    }
+    public List<OrderItemPojo> selectAll() {
+        TypedQuery<OrderItemPojo> query = getQuery(select_all, OrderItemPojo.class);
+        return query.getResultList();
+    }
 //
 //    public OrderItemPojo checkerForDuplicate(String orderItem, String category){
 //        TypedQuery<OrderItemPojo> query = getQuery(nocommon_case, OrderItemPojo.class);

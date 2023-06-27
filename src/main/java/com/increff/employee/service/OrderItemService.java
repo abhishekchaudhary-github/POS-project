@@ -42,10 +42,10 @@ public class OrderItemService {
 //        return getCheck(id);
 //    }
 //
-//    @Transactional
-//    public List<OrderItemPojo> getAll() {
-//        return dao.selectAll();
-//    }
+    @Transactional
+    public List<OrderItemPojo> getAll() {
+        return dao.selectAll();
+    }
 //
 //    @Transactional(rollbackOn  = ApiException.class)
 //    public void update(Integer id, OrderItemPojo p) throws ApiException {

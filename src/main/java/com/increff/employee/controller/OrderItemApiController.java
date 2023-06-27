@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.increff.employee.model.CategoryDetailForm;
-import com.increff.employee.pojo.InventoryPojo;
-import com.increff.employee.pojo.OrderPojo;
-import com.increff.employee.pojo.ProductPojo;
+import com.increff.employee.model.EmployeeData;
+import com.increff.employee.pojo.*;
 import com.increff.employee.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.increff.employee.model.OrderItemData;
 import com.increff.employee.model.OrderItemForm;
-import com.increff.employee.pojo.OrderItemPojo;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -49,6 +47,17 @@ public class OrderItemApiController {
         service.add(p);
     }
 
+
+    @ApiOperation(value = "Gets list of all employees")
+    @RequestMapping(path = "/api/orderitem", method = RequestMethod.GET)
+    public List<OrderItemData> getAll() {
+        List<OrderItemPojo> list = service.getAll();
+        List<OrderItemData> list2 = new ArrayList<OrderItemData>();
+        for (OrderItemPojo p : list) {
+            list2.add(convert(p));
+        }
+        return list2;
+    }
 //
 //    @ApiOperation(value = "Gets a OrderItem by ID")
 //    @RequestMapping(path = "/api/orderitem/{id}", method = RequestMethod.GET)
