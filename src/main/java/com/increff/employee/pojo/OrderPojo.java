@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 
 @Entity
 
@@ -12,7 +13,7 @@ public class OrderPojo {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
-    private String time;
+    private LocalDateTime time;
 
     public Integer getId() {
         return id;
@@ -22,11 +23,11 @@ public class OrderPojo {
         this.id = id;
     }
 
-    public String getTime() {
+    public LocalDateTime getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(LocalDateTime time) {
         this.time = time;
     }
 }

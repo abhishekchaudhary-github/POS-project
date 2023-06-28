@@ -8,6 +8,8 @@ import com.increff.employee.pojo.OrderPojo;
 import com.increff.employee.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -21,7 +23,7 @@ public class OrderService {
 
     @Transactional(rollbackOn = ApiException.class)
     public Integer add() throws ApiException {
-        String timeOfOrder = timeOfOrderCreation();
+        LocalDateTime timeOfOrder = timeOfOrderCreation();
         OrderPojo orderPojo = new OrderPojo();
         orderPojo.setTime(timeOfOrder);
         Integer orderId = dao.insert(orderPojo);
@@ -33,10 +35,11 @@ public class OrderService {
         return dao.selectAll();
     }
 
-    protected static String timeOfOrderCreation() {
-        SimpleDateFormat createdTime = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-        Date currentDate = new Date();
-        String formattedDateTime = createdTime.format(currentDate);
-        return formattedDateTime;
+    protected static LocalDateTime timeOfOrderCreation() {
+        LocalDateTime dateTime = LocalDateTime.now();
+//        SimpleDateFormat createdTime = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+//        Date currentDate = new Date();
+//        String formattedDateTime = createdTime.format(currentDate);
+        return dateTime;
     }
 }

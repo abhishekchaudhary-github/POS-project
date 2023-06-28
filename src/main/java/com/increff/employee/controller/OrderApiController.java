@@ -1,5 +1,7 @@
 package com.increff.employee.controller;
-
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import com.increff.employee.model.CategoryDetailForm;
 import com.increff.employee.model.OrderData;
 import com.increff.employee.pojo.InventoryPojo;
@@ -11,6 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,7 +79,10 @@ public class OrderApiController {
 
     private static OrderData convert(OrderPojo p) {
         OrderData d = new OrderData();
-        d.setTime(p.getTime());
+        //convert date to string
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        String formattedDateTime = p.getTime().format(formatter);
+        d.setTime(formattedDateTime);
         d.setId(p.getId());
         return d;
     }
