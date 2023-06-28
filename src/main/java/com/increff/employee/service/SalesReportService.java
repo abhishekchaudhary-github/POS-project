@@ -17,6 +17,12 @@ import java.util.List;
 
 @Service
 public class SalesReportService {
+
+    //
+    @Autowired
+    OrderService orderService;
+
+    //
     @Autowired
     private SalesReportDao dao;
 
@@ -33,12 +39,13 @@ public class SalesReportService {
         List<OrderPojo> orderPojoList = dao.selectAllOrder(startTime1,endTime1);
         List<OrderItemPojo> orderItemPojo = new ArrayList<OrderItemPojo>();
         for(int i = 0 ; i < orderPojoList.size(); i++) {
-            //CAUTION!!!
             List<OrderItemPojo> tempOrderItemList = dao.selectOrderItem(orderPojoList.get(i).getId());
             for(OrderItemPojo tempOrderItem : tempOrderItemList ){
+                //System.out.println(tempOrderItem.getQuantity());
             orderItemPojo.add(tempOrderItem);
             }
         }
+        //System.out.println(orderItemPojo);
         List<SalesReportData> salesReportDataList = new ArrayList<SalesReportData>();
         for( OrderItemPojo orderItem : orderItemPojo ) {
             SalesReportData salesReportData = new SalesReportData();
@@ -55,15 +62,19 @@ public class SalesReportService {
         return salesReportDataList;
     }
 
-    private LocalDateTime convertTime(String initialTime){
-        //convert time string to time
+    private LocalDateTime convertTime(String dateString){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
         // Parse the string to obtain a LocalDate object
-        LocalDate date = LocalDate.parse(initialTime, formatter);
-        // Decide on a specific time to combine with the date
-        LocalTime time = LocalTime.of(0, 0); // Example: 00:00
-        // Combine the date and time to create a LocalDateTime object
-        LocalDateTime ConvertedTime = LocalDateTime.of(date, time);
-        return ConvertedTime;
+        LocalDate date = LocalDate.parse(dateString, formatter);
+
+        // Define the specific time
+        int hour = 00;
+        int minute = 00;
+        int second = 00;
+
+        // Create a LocalDateTime object with the date and specific time
+        LocalDateTime dateTime = LocalDateTime.of(date, LocalTime.of(hour, minute, second));
+        return dateTime;
     }
 }

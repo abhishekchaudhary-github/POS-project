@@ -1,10 +1,9 @@
 package com.increff.employee.controller;
 
-import com.increff.employee.model.ProductData;
-import com.increff.employee.model.SalesReportData;
-import com.increff.employee.model.SalesReportForm;
+import com.increff.employee.model.*;
 import com.increff.employee.pojo.ProductPojo;
 import com.increff.employee.service.ApiException;
+//import com.increff.employee.service.BrandReportService;
 import com.increff.employee.service.SalesReportService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,6 +20,8 @@ import java.util.List;
 @Api
 @RestController
 public class SalesReportController {
+    //@Autowired
+    //BrandReportService brandReportService;
 
     @Autowired
     private SalesReportService salesReportService;
@@ -33,10 +34,16 @@ public class SalesReportController {
 
 
 //    @ApiOperation(value = "Gets list of all Products")
-//    @RequestMapping(path = "/api/brandreport", method = RequestMethod.GET)
-//    public List<ProductData> getBrandReport() throws ApiException {
-//
+//    @RequestMapping(path = "/api/brandreport", method = RequestMethod.POST)
+//    public List<BrandData> getBrandReport(@RequestBody BrandForm form) throws ApiException {
+//        return brandReportService.getAll(form);
 //    }
+
+
+
+
+
+
 //
 //    @ApiOperation(value = "Gets list of all Products")
 //    @RequestMapping(path = "/api/inventoryreport", method = RequestMethod.GET)
