@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd59bcda-ea0a-45cb-bbdf-b0788f0265bb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/BrandReportService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/SalesReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/SalesReportController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/SalesReportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/SalesReportService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/ProductApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/ProductApiController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

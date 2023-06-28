@@ -72,7 +72,7 @@ public class ProductApiController {
         ProductData d = new ProductData();
         d.setName(p.getName());
         d.setBarcode(p.getBarcode());
-        BrandPojo brandPojo = brandService.get(p.getId());
+        BrandPojo brandPojo = brandService.get(p.getBrand_category());
 //        System.out.println(brandPojo.getId());
 //        System.out.println(brandPojo.getBrand());
 //        System.out.println(brandPojo.getCategory());
@@ -93,12 +93,6 @@ public class ProductApiController {
             throw new ApiException("this item does not exist");
         }
         p.setBrand_category(brandPojo.getId());
-//      p.setBrand_category(f.getBrand_category());
-//        List<BrandPojo> brandPojo = brandService.getAll();
-//        for(BrandPojo brandPojoObject : brandPojo ){
-//            if(brandPojoObject.getBrand()==f.getBrand()&&brandPojoObject.getCategory()==f.getCategory()&&brandPojoObject.getName()==f.getName())
-//            p.setBrand_category(brandPojoObject.getId());
-//        }
         p.setMrp(f.getMrp());
         return p;
     }
