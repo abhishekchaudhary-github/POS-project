@@ -26,6 +26,9 @@ public class ProductService {
 
     @Transactional(rollbackOn = ApiException.class)
     public void add(ProductPojo p) throws ApiException {
+        if(p.getBrand_category()==null||p.getBrand_category()==0){
+            throw new ApiException("no such item exists");
+        }
         normalize(p);
         if(StringUtil.isEmpty(p.getBarcode())) {
             throw new ApiException(" cannot be empty");

@@ -84,11 +84,15 @@ public class ProductApiController {
         return d;
     }
 
-    private ProductPojo convert(ProductForm f) {
+    private ProductPojo convert(ProductForm f) throws ApiException {
         ProductPojo p = new ProductPojo();
         p.setName(f.getName());
         p.setBarcode(f.getBarcode());
-        p.setBrand_category(brandService.getId(f.getBrand(),f.getCategory()));
+        BrandPojo brandPojo = brandService.getId(f.getBrand(),f.getCategory());
+        if(brandPojo==null){
+            throw new ApiException("this item does not exist");
+        }
+        p.setBrand_category(brandPojo.getId());
 //      p.setBrand_category(f.getBrand_category());
 //        List<BrandPojo> brandPojo = brandService.getAll();
 //        for(BrandPojo brandPojoObject : brandPojo ){
