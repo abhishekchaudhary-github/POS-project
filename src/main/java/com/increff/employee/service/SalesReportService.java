@@ -48,42 +48,37 @@ public class SalesReportService {
         }
         //System.out.println(orderItemPojo);
         List<SalesReportData> salesReportDataList = new ArrayList<SalesReportData>();
-        HashMap<Integer,SalesReportData> hm = new HashMap<Integer,SalesReportData>();
+        HashMap<String,SalesReportData> hm = new HashMap<String,SalesReportData>();
         for( OrderItemPojo orderItem : orderItemPojo ) {
             SalesReportData salesReportData = new SalesReportData();
             ProductPojo productPojo = productService.get(orderItem.getProductId());
             BrandPojo brandPojo = brandService.get(productPojo.getBrand_category());
 
             if(brand.equals(brandPojo.getBrand()) && category.equals(brandPojo.getCategory())){
-                //System.out.println("hi");
-                //String key = brand.toString()+category.toString();
-                if(!hm.containsKey(1)){
+                String key = brand + category;
+                if(!hm.containsKey(key)){
                     salesReportData.setBrand(brand);
                     salesReportData.setCategory(category);
                     salesReportData.setRevenue(orderItem.getSellingPrice());
                     salesReportData.setQuantity(orderItem.getQuantity());
-                    hm.put(1,salesReportData);
-                    System.out.println(hm.get(1).getCategory());
+                    hm.put(key,salesReportData);
                 }
                 else {
                     salesReportData.setBrand(brand);
                     salesReportData.setCategory(category);
                     salesReportData.setRevenue(orderItem.getSellingPrice());
-                   Integer quantitySum = hm.get(1).getQuantity();
+                   Integer quantitySum = hm.get(key).getQuantity();
                     quantitySum += orderItem.getQuantity();
                     salesReportData.setQuantity(quantitySum);
-                    hm.put(1,salesReportData);
-                    //hm.get(1).setQuantity(quantitySum);
+                    hm.put(key,salesReportData);
                 }
-                System.out.println(hm.get(1).getQuantity());
             }
-          //loop on hashmap and setting values in list
 
 
 
         }
-
-        for (Integer id : hm.keySet()){
+        //loop on hashmap and setting values in list
+        for (String id : hm.keySet()){
             hm.get(id).setRevenue(hm.get(id).getRevenue()*hm.get(id).getQuantity());
             salesReportDataList.add(hm.get(id));
         }
