@@ -1,10 +1,9 @@
 package com.increff.employee.controller;
 
 import com.increff.employee.model.*;
-import com.increff.employee.pojo.ProductPojo;
 import com.increff.employee.service.ApiException;
 //import com.increff.employee.service.BrandReportService;
-import com.increff.employee.service.SalesReportService;
+import com.increff.employee.service.ReportService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,18 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Api
 @RestController
-public class SalesReportController {
+public class ReportController {
     //@Autowired
     //BrandReportService brandReportService;
 
     @Autowired
-    private SalesReportService salesReportService;
+    private ReportService salesReportService;
     @ApiOperation(value = "gives sales report")
     @RequestMapping(path = "/api/salesreport", method = RequestMethod.POST)
     public List<SalesReportData> filterSalesReport(@RequestBody SalesReportForm form) throws ApiException {

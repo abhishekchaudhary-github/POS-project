@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd59bcda-ea0a-45cb-bbdf-b0788f0265bb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/SalesReportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/SalesReportService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/SchedulerApiController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/SchedulerData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/model/SchedulerForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/pojo/SchedulerPojo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/SalesReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/ReportController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/SalesReportDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/ReportDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/SalesReportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/ReportService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/snippets.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/snippets.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

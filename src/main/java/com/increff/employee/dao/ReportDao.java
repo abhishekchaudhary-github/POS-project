@@ -1,6 +1,5 @@
 package com.increff.employee.dao;
 
-import com.increff.employee.pojo.EmployeePojo;
 import com.increff.employee.pojo.OrderItemPojo;
 import com.increff.employee.pojo.OrderPojo;
 import org.springframework.stereotype.Repository;
@@ -12,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public class SalesReportDao  extends AbstractDao {
+public class ReportDao extends AbstractDao {
     private static String select_id_order = "select p from OrderPojo p where time>=:startTime and time<=:endTime";
 
     private static String select_id_order_item = "select p from OrderItemPojo p where orderId=:orderId";

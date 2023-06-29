@@ -1,7 +1,5 @@
 package com.increff.employee.service;
-import com.increff.employee.dao.EmployeeDao;
-import com.increff.employee.dao.OrderItemDao;
-import com.increff.employee.dao.SalesReportDao;
+import com.increff.employee.dao.ReportDao;
 import com.increff.employee.model.SalesReportData;
 import com.increff.employee.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Service
-public class SalesReportService {
+public class ReportService {
 
     //
     @Autowired
@@ -25,7 +23,7 @@ public class SalesReportService {
 
     //
     @Autowired
-    private SalesReportDao dao;
+    private ReportDao dao;
 
     @Autowired
     private ProductService productService;
