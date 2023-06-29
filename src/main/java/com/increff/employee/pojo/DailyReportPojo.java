@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 @Entity
-public class SchedulerPojo {
+public class DailyReportPojo {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;

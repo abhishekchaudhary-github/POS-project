@@ -1,8 +1,7 @@
 package com.increff.employee.service;
 
-import com.increff.employee.dao.SchedulerDao;
-import com.increff.employee.pojo.SchedulerPojo;
-import com.increff.employee.util.StringUtil;
+import com.increff.employee.dao.DailyReportDao;
+import com.increff.employee.pojo.DailyReportPojo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,17 +9,17 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class SchedulerService {
+public class DailyReportService {
 
     @Autowired
-    private SchedulerDao dao;
+    private DailyReportDao dao;
     @Transactional(rollbackOn = ApiException.class)
-    public void add(SchedulerPojo p) throws ApiException {
+    public void add(DailyReportPojo p) throws ApiException {
         dao.insert(p);
     }
 
     @Transactional
-    public List<SchedulerPojo> getAll() {
+    public List<DailyReportPojo> getAll() {
         return dao.selectAll();
     }
 }
