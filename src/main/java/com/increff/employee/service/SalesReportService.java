@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -47,18 +48,44 @@ public class SalesReportService {
         }
         //System.out.println(orderItemPojo);
         List<SalesReportData> salesReportDataList = new ArrayList<SalesReportData>();
+        HashMap<Integer,SalesReportData> hm = new HashMap<Integer,SalesReportData>();
         for( OrderItemPojo orderItem : orderItemPojo ) {
             SalesReportData salesReportData = new SalesReportData();
             ProductPojo productPojo = productService.get(orderItem.getProductId());
             BrandPojo brandPojo = brandService.get(productPojo.getBrand_category());
 
             if(brand.equals(brandPojo.getBrand()) && category.equals(brandPojo.getCategory())){
-            salesReportData.setBrand(brand);
-            salesReportData.setCategory(category);
-            salesReportData.setQuantity(orderItem.getQuantity());
-            salesReportData.setRevenue(orderItem.getQuantity()*orderItem.getSellingPrice());
-                salesReportDataList.add(salesReportData);
+                //System.out.println("hi");
+                //String key = brand.toString()+category.toString();
+                if(!hm.containsKey(1)){
+                    salesReportData.setBrand(brand);
+                    salesReportData.setCategory(category);
+                    salesReportData.setRevenue(orderItem.getSellingPrice());
+                    salesReportData.setQuantity(orderItem.getQuantity());
+                    hm.put(1,salesReportData);
+                    System.out.println(hm.get(1).getCategory());
+                }
+                else {
+                    salesReportData.setBrand(brand);
+                    salesReportData.setCategory(category);
+                    salesReportData.setRevenue(orderItem.getSellingPrice());
+                   Integer quantitySum = hm.get(1).getQuantity();
+                    quantitySum += orderItem.getQuantity();
+                    salesReportData.setQuantity(quantitySum);
+                    hm.put(1,salesReportData);
+                    //hm.get(1).setQuantity(quantitySum);
+                }
+                System.out.println(hm.get(1).getQuantity());
             }
+          //loop on hashmap and setting values in list
+
+
+
+        }
+
+        for (Integer id : hm.keySet()){
+            hm.get(id).setRevenue(hm.get(id).getRevenue()*hm.get(id).getQuantity());
+            salesReportDataList.add(hm.get(id));
         }
         return salesReportDataList;
     }
