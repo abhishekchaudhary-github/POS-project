@@ -41,7 +41,7 @@ public class SalesReportService {
         for(int i = 0 ; i < orderPojoList.size(); i++) {
             List<OrderItemPojo> tempOrderItemList = dao.selectOrderItem(orderPojoList.get(i).getId());
             for(OrderItemPojo tempOrderItem : tempOrderItemList ){
-                //System.out.println(tempOrderItem.getQuantity());
+      //          System.out.println(tempOrderItem.getQuantity());
             orderItemPojo.add(tempOrderItem);
             }
         }
@@ -57,6 +57,7 @@ public class SalesReportService {
             salesReportData.setCategory(category);
             salesReportData.setQuantity(orderItem.getQuantity());
             salesReportData.setRevenue(orderItem.getQuantity()*orderItem.getSellingPrice());
+                salesReportDataList.add(salesReportData);
             }
         }
         return salesReportDataList;

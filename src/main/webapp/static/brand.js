@@ -12,6 +12,14 @@ function addBrand(event){
 	//Set the values to update
 	var $form = $("#brand-form");
 	var json = toJson($form);
+	var brandField = $('#inputBrand').val()
+	if(brandField.trim()==""){
+	    $('#inputBrand').addClass('error');
+	    return
+	}
+	$('#inputBrand').click(function() {
+    		$(this).removeClass('error');
+    	});
 	var url = getBrandUrl();
 
 	$.ajax({
@@ -221,4 +229,7 @@ function init(){
 
 $(document).ready(init);
 $(document).ready(getBrandList);
-
+//$(document).ready(function() {
+//	// Add button click event
+//	$('#add-brand').click(addBrand);
+//});
