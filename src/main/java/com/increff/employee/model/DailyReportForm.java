@@ -2,17 +2,21 @@ package com.increff.employee.model;
 
 import java.time.LocalDateTime;
 
-public class SchedulerForm {
-    private LocalDateTime date;
+public class DailyReportForm {
+    private String date;
     private Integer invoiced_orders_count;
     private Integer invoiced_items_count;
     private Double total_revenue;
 
-    public LocalDateTime getDate() {
+    private String startTime;
+
+    private String endTime;
+
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -38,5 +42,21 @@ public class SchedulerForm {
 
     public void setTotal_revenue(Double total_revenue) {
         this.total_revenue = total_revenue;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 }

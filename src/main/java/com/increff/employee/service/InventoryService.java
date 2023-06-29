@@ -47,6 +47,9 @@ public class InventoryService {
         if(p.getQuantity()==null) {
             throw new ApiException("field cannot be empty");
         }
+        if(p.getQuantity()<0){
+            throw new ApiException("quantity cannot be negative");
+        }
 
         //InventoryPojo tempPojo = getCheck(id);
             InventoryPojo temp = get(id);

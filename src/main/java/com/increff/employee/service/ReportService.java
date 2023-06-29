@@ -31,6 +31,17 @@ public class ReportService {
     @Autowired
     private BrandService brandService;
 
+
+    @Transactional
+    public List<OrderPojo> getOrdersByTime(LocalDateTime startTime, LocalDateTime endTime) {
+        return dao.selectAllOrder(startTime,endTime);
+    }
+
+    @Transactional
+    public List<OrderItemPojo> getOrderItemByOrderId(Integer id){
+        return dao.selectOrderItem(id);
+    }
+
     @Transactional
     public List<SalesReportData> getAll(String startTime, String endTime, String brand, String category) throws ApiException {
         LocalDateTime startTime1 = convertTime(startTime);

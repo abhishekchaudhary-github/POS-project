@@ -1,6 +1,6 @@
 package com.increff.employee.model;
 
-public class SchedulerData extends SchedulerForm{
+public class DailyReportData extends DailyReportForm {
     private Integer id;
 
     public Integer getId() {
