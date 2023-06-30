@@ -16,13 +16,22 @@
     <div class="row">
         <div class="col-12">
             <form class="form-inline" id="inventory-form">
+
+                <div class="form-group">
+                    <label for="inputBarcode" class="col-sm-2 col-form-label">Barcode</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="barcode" id="inputBarcode" placeholder="enter barcode">
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label for="inputQuantity" class="col-sm-2 col-form-label"></label>
-<!--                    <div class="col-sm-10">-->
-<!--                        <input type="text" class="form-control" name="quantity" id="inputQuantity" placeholder="enter quantity">-->
-<!--                    </div>-->
+                    <div class="col-sm-10">
+                                 <input  type="number" class="form-control" name="quantity" id="inputQuantity" min="0" placeholder="enter quantity" oninput="validity.valid||(value='');">
+                    </div>
                 </div>
-<!--                <button type="button" class="btn btn-primary" id="add-inventory">Add</button>-->
+
+                <button type="button" class="btn btn-primary" id="add-inventory">Add</button>
                 &nbsp;
                 <button type="button" class="btn btn-primary" id="refresh-data">Refresh</button>
                 &nbsp;
@@ -43,7 +52,7 @@
             <table class="table table-striped" id="inventory-table">
                 <thead>
                 <tr>
-                    <th scope="col">Bracode</th>
+                    <th scope="col">Barcode</th>
                     <th scope="col">Quantity</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -85,6 +94,12 @@
                 </div>
                 <div class="modal-body">
                     <form class="form-inline" id="inventory-edit-form">
+                        <div class="form-group">
+                            <label for="inputBarcode" class="col-sm-2 col-form-label">Barcode</label>
+                            <div class="col-sm-10">
+                                <input  type="text" class="form-control" name="barcode">
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="inputQuantity" class="col-sm-2 col-form-label">Quantity</label>
                             <div class="col-sm-10">
