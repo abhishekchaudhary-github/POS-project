@@ -20,63 +20,62 @@
 <!--date picker-->
 
 
+
+
+
         <div class="row">
             <div class="col-12">
-                <form class="form-inline" id="start-date-form">
+                <form class="form-inline" id="sales-report-form">
+
                     <div class="form-group">
                         <label for="inputStartDate" class="col-sm-2 col-form-label">Start Date</label>
                         <div class="col-sm-10">
                             <input type="date" class="form-control" name="brand" id="inputStartDate" placeholder="enter start date">
                         </div>
                     </div>
-                </form>
-            </div>
-        </div>
 
-
-        <div class="row">
-            <div class="col-12">
-                <form class="form-inline" id="end-date-form">
                     <div class="form-group">
                         <label for="inputEndDate" class="col-sm-2 col-form-label">End Date</label>
                         <div class="col-sm-10">
                             <input type="date" class="form-control" name="brand" id="inputEndDate" placeholder="enter end dated">
                         </div>
                     </div>
+
+
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle dropdown-toggle-brand" type="button" id="dropdownMenuButtonBrand" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Brand
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item dropdown-item-brand" href="#">Action</a>
+                            <a class="dropdown-item dropdown-item-brand" href="#">Another action</a>
+                            <a class="dropdown-item dropdown-item-brand" href="#">Something else here</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle dropdown-toggle-category" type="button" id="dropdownMenuButtonCategory" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Category
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item dropdown-item-category" href="#">Action</a>
+                            <a class="dropdown-item dropdown-item-category" href="#">Another action</a>
+                            <a class="dropdown-item dropdown-item-category" href="#">Something else here</a>
+                        </div>
+                    </div>
+
+
                 </form>
             </div>
         </div>
 
 
-        <div class="row">
-            <div class="col-12">
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Brand
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-        </div>
-            </div>
-        </div>
 
-                <div class="row">
-                    <div class="col-12">
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Category
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-        </div>
-                    </div>
-                </div>
+
+
+
+
+
 
     </nav>
 
@@ -98,7 +97,7 @@
 
         <!-- Table -->
         <div class="col-12">
-            <table class="table table-striped" id="product-table">
+            <table class="table table-striped" id="sales-report-table">
                 <thead>
                 <tr>
                     <th scope="col">Brand</th>
