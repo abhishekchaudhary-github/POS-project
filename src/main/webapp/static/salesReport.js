@@ -18,35 +18,7 @@ function displaySalesReportList(data){
     	}
 }
 
-//function getSalesReportList(event){
-//    	var url = getSalesReportUrl();
-//    	$.ajax({
-//        	   url: url,
-//        	   type: 'GET',
-//        	   success: function(data) {
-//        	   		displaySalesReportList(data);
-//        	   },
-//        	   error: handleAjaxError
-//        	});
-//}
 
-//function toggleBrandClick() {
-//            var baseUrl = $("meta[name=baseUrl]").attr("content")
-//            var url = baseUrl + "/api/brand";
-//        	$.ajax({
-//            	   url: url,
-//            	   type: 'GET',
-//            	   success: function(data) {
-//                        var $tbody = $('#dropdown1').find('div');
-//                        var url = getSalesReportUrl();
-//                        $tbody.empty();
-//                        var x = '<a class="dropdown-item dropdown-item-brand" href="#">'Jaction'</a>' +
-//                        '<a class="dropdown-item dropdown-item-brand" href="#">'Action'</a>';
-//                        $tbody.append(x);
-//            	   },
-//            	   error: handleAjaxError
-//            	});
-//}
 function putValues() {
     var url = getSalesReportUrl();
     var startTime = $('#inputStartDate').val();
@@ -83,16 +55,7 @@ function putValues() {
 
 function init(){
 $('#addButton').click(putValues)
-//$('.dropdown-item-brand').click(function() {
-//      var selectedOption = $(this).text(); // Get the text of the selected option
-//      $('.dropdown-toggle-brand').text(selectedOption); // Set the button text to the selected option
-//    });
-//$('.dropdown-item-category').click(function() {
-//      var selectedOption = $(this).text(); // Get the text of the selected option
-//      $('.dropdown-toggle-category').text(selectedOption); // Set the button text to the selected option
-//    });
 
 }
 
 $(document).ready(init);
-//$(document).ready(getSalesReportList);
