@@ -7,10 +7,14 @@ import javax.persistence.Id;
 
 @Entity
 public class InventoryPojo {
+
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
     private Integer quantity;
+
+    private Integer productId;
 
     public Integer getId() {
         return id;
@@ -26,6 +30,14 @@ public class InventoryPojo {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 }
 

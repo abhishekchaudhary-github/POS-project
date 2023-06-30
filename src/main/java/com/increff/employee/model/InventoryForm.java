@@ -3,8 +3,6 @@ package com.increff.employee.model;
 public class InventoryForm {
     private Integer quantity;
 
-    private Integer id;
-
     private String barcode;
 
     public Integer getQuantity() {
@@ -15,13 +13,6 @@ public class InventoryForm {
         this.quantity = quantity;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getBarcode() {
         return barcode;

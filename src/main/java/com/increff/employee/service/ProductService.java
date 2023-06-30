@@ -21,8 +21,6 @@ public class ProductService {
     @Autowired
     private BrandDao brandDao;
 
-    @Autowired
-    private InventoryService inventoryService;
 
     @Transactional(rollbackOn = ApiException.class)
     public void add(ProductPojo p) throws ApiException {
@@ -58,7 +56,7 @@ public class ProductService {
         else throw new ApiException("this entry already exists");
 
 
-        inventoryService.add(p.getId());
+  //      inventoryService.add(p.getId());
 
     }
 
@@ -82,6 +80,16 @@ public class ProductService {
     public List<ProductPojo> getAll() {
         return dao.selectAll();
     }
+
+    @Transactional
+    public Integer getProductId(String barcode) throws ApiException {
+        ProductPojo productPojo = dao.selectBarcode(barcode);
+        if(productPojo==null) {
+            throw new ApiException("barcode does not exist");
+        }
+        return productPojo.getId();
+    }
+
 
     @Transactional(rollbackOn  = ApiException.class)
     public void update(Integer id, ProductPojo p) throws ApiException {
@@ -113,9 +121,6 @@ public class ProductService {
         tempPojo.setName(p.getName());
         tempPojo.setMrp(p.getMrp());
 
-        if(dao.checkerForDuplicate(p.getBrand_category(), p.getName())==null) {
-            inventoryService.add(tempPojo.getId());
-        }
     }
 
 

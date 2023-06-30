@@ -23,12 +23,12 @@ public class InventoryApiController {
     @Autowired
     private ProductService productService;
 
-//    @ApiOperation(value = "Adds an Inventory")
-//    @RequestMapping(path = "/api/inventory", method = RequestMethod.POST)
-//    public void add(@RequestBody InventoryForm form) throws ApiException {
-//        InventoryPojo p = convert(form);
-//        service.add(p);
-//    }
+    @ApiOperation(value = "Adds an Inventory")
+    @RequestMapping(path = "/api/inventory", method = RequestMethod.POST)
+    public void add(@RequestBody InventoryForm form) throws ApiException {
+        InventoryPojo p = convert(form);
+        service.add(p);
+    }
 
 
     @ApiOperation(value = "Gets an Inventory by ID")
@@ -65,10 +65,11 @@ public class InventoryApiController {
         return d;
     }
 
-    private static InventoryPojo convert(InventoryForm f) {
+    private InventoryPojo convert(InventoryForm f) throws ApiException {
         InventoryPojo p = new InventoryPojo();
         p.setQuantity(f.getQuantity());
-        //p.setId(f.getId());
+        Integer productId = service.getIdOfProduct(f.getBarcode());
+        p.setProductId(productId);
         return p;
     }
 

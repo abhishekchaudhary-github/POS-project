@@ -14,14 +14,20 @@ public class InventoryService {
     @Autowired
     private InventoryDao dao;
 
-
+    @Autowired
+    private ProductService productService;
 
     @Transactional(rollbackOn = ApiException.class)
-    public void add(Integer productId) throws ApiException {
-        InventoryPojo p = new InventoryPojo();
-        p.setId(productId);
-        p.setQuantity(0);
-        dao.insert(p);
+    public void add(InventoryPojo inventoryPojo) throws ApiException {
+        if(dao.select(inventoryPojo.getProductId())==null) {
+            dao.insert(inventoryPojo);
+        }
+        else {
+            Integer previousQuantity = dao.select(inventoryPojo.getProductId()).getQuantity();
+            Integer newQuantity = inventoryPojo.getQuantity()+previousQuantity;
+            inventoryPojo.setQuantity(newQuantity);
+            dao.select(inventoryPojo.getProductId()).setQuantity(newQuantity);
+        }
     }
 
 
@@ -41,6 +47,12 @@ public class InventoryService {
     public List<InventoryPojo> getAll() {
         return dao.selectAll();
     }
+
+    @Transactional
+    public Integer getIdOfProduct(String barcode) throws ApiException {
+        return productService.getProductId(barcode);
+    }
+
 
     @Transactional(rollbackOn  = ApiException.class)
     public void update(Integer id, InventoryPojo p) throws ApiException {
