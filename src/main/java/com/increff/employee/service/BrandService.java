@@ -33,6 +33,7 @@ public class BrandService {
     }
 
 
+
     @Transactional(rollbackOn = ApiException.class)
     public BrandPojo get(Integer id) throws ApiException {
         return getCheck(id);

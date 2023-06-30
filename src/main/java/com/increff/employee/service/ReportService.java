@@ -46,56 +46,71 @@ public class ReportService {
     public List<SalesReportData> getAll(String startTime, String endTime, String brand, String category) throws ApiException {
         LocalDateTime startTime1 = convertTime(startTime);
         LocalDateTime endTime1 = convertTime(endTime);
-        List<OrderPojo> orderPojoList = dao.selectAllOrder(startTime1,endTime1);
+        List<OrderPojo> orderPojoList = dao.selectAllOrder(startTime1, endTime1);
         List<OrderItemPojo> orderItemPojo = new ArrayList<OrderItemPojo>();
-        for(int i = 0 ; i < orderPojoList.size(); i++) {
+        for (int i = 0; i < orderPojoList.size(); i++) {
             List<OrderItemPojo> tempOrderItemList = dao.selectOrderItem(orderPojoList.get(i).getId());
-            for(OrderItemPojo tempOrderItem : tempOrderItemList ){
-      //          System.out.println(tempOrderItem.getQuantity());
-            orderItemPojo.add(tempOrderItem);
+            for (OrderItemPojo tempOrderItem : tempOrderItemList) {
+                orderItemPojo.add(tempOrderItem);
             }
         }
-        //System.out.println(orderItemPojo);
+
         List<SalesReportData> salesReportDataList = new ArrayList<SalesReportData>();
-        HashMap<String,SalesReportData> hm = new HashMap<String,SalesReportData>();
-        for( OrderItemPojo orderItem : orderItemPojo ) {
+        HashMap<Integer, SalesReportData> hm = new HashMap<Integer, SalesReportData>();
+
+        for (OrderItemPojo orderItem : orderItemPojo) {
             SalesReportData salesReportData = new SalesReportData();
             ProductPojo productPojo = productService.get(orderItem.getProductId());
             BrandPojo brandPojo = brandService.get(productPojo.getBrand_category());
 
-            if(brand.equals(brandPojo.getBrand()) && category.equals(brandPojo.getCategory())){
-                String key = brand + category;
-                if(!hm.containsKey(key)){
-                    salesReportData.setBrand(brand);
-                    salesReportData.setCategory(category);
-                    salesReportData.setRevenue(orderItem.getSellingPrice());
-                    salesReportData.setQuantity(orderItem.getQuantity());
-                    hm.put(key,salesReportData);
-                }
-                else {
-                    salesReportData.setBrand(brand);
-                    salesReportData.setCategory(category);
-                    salesReportData.setRevenue(orderItem.getSellingPrice());
-                   Integer quantitySum = hm.get(key).getQuantity();
-                    quantitySum += orderItem.getQuantity();
-                    salesReportData.setQuantity(quantitySum);
-                    hm.put(key,salesReportData);
-                }
+
+            if (brandPojo.getBrand().contains(brand) && brandPojo.getCategory().contains(category)) {
+                Integer key = brandPojo.getId();
+                AddInHashmap(hm, salesReportData, key, brand, category, orderItem, brandPojo);
             }
 
 
-
         }
-        //loop on hashmap and setting values in list
-        for (String id : hm.keySet()){
-            hm.get(id).setRevenue(hm.get(id).getRevenue()*hm.get(id).getQuantity());
+
+//        //loop on hashmap and setting values in list
+        for (Integer id : hm.keySet()) {
+            hm.get(id).setRevenue(hm.get(id).getRevenue() * hm.get(id).getQuantity());
             salesReportDataList.add(hm.get(id));
         }
-        return salesReportDataList;
+            return salesReportDataList;
+
     }
 
+    private void AddInHashmap(HashMap<Integer,SalesReportData> hm,SalesReportData salesReportData,Integer key,String brand,String category,OrderItemPojo orderItem,BrandPojo brandPojo) {
+        if (!hm.containsKey(key)) {
+                        if(brand!=null)
+                            salesReportData.setBrand(brand);
+                        else
+                            salesReportData.setBrand(brandPojo.getBrand());
+                        if(category!=null)
+                            salesReportData.setCategory(category);
+                        else
+                            salesReportData.setCategory(brandPojo.getCategory());
+                        salesReportData.setCategory(category);
+                        salesReportData.setRevenue(orderItem.getSellingPrice());
+                        salesReportData.setQuantity(orderItem.getQuantity());
+                        hm.put(key, salesReportData);
+                    } else {
+                        if(brand!=null)
+                            salesReportData.setBrand(brand);
+                        else
+                            salesReportData.setBrand(brandPojo.getBrand());
+                        salesReportData.setCategory(category);
+                        salesReportData.setRevenue(orderItem.getSellingPrice());
+                        Integer quantitySum = hm.get(key).getQuantity();
+                        quantitySum += orderItem.getQuantity();
+                        salesReportData.setQuantity(quantitySum);
+                        hm.put(key, salesReportData);
+                   }
+    }
     private LocalDateTime convertTime(String dateString){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        //careful here
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         // Parse the string to obtain a LocalDate object
         LocalDate date = LocalDate.parse(dateString, formatter);
