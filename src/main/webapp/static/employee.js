@@ -217,4 +217,43 @@ function init(){
 
 $(document).ready(init);
 $(document).ready(getEmployeeList);
+$(document).ready(function() {
+      $("#validateButton").click(function() {
+        var name = $("#inputName").val();
+        var age = $("#inputAge").val();
 
+        // Check if the name field is empty
+        if (name === "") {
+          $("#nameError").removeClass("d-none");
+          showDialog("Please enter a name.");
+          return;
+        } else {
+          $("#nameError").addClass("d-none");
+        }
+
+        // Check if the age field is empty
+        if (age === "") {
+          $("#ageError").removeClass("d-none");
+          showDialog("Please enter an age.");
+          return;
+        } else {
+          $("#ageError").addClass("d-none");
+        }
+
+        // Validation passed, perform further actions
+        // ...
+      });
+
+      function showDialog(message) {
+        BootstrapDialog.show({
+          title: 'Validation Error',
+          message: message,
+          buttons: [{
+            label: 'OK',
+            action: function(dialog) {
+              dialog.close();
+            }
+          }]
+        });
+      }
+    });

@@ -4,11 +4,26 @@
 
 <head th:replace="snippets.html :: name_head"></head>
 
+
+
 <body>
 
 <nav th:replace="snippets.html :: name_app_navbar"></nav>
 
 <div class="container">
+
+
+	<div class="container">
+		<div class="form-row">
+			<div class="col-md-4 mb-3">
+				<label for="inputNami">Name</label>
+				<input type="text" class="form-control" id="inputNami" placeholder="Enter name">
+				<small class="text-danger d-none" id="nameError">Please enter a name.</small>
+			</div>
+		</div>
+
+		<button class="btn btn-primary" id="validateButton">Validate</button>
+	</div>
 
 <h3>Employees</h3>
 
