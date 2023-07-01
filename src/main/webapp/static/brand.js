@@ -1,7 +1,3 @@
-/**
-remove delete function
-**/
-
 function getBrandUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
 	return baseUrl + "/api/brand";
@@ -16,10 +12,12 @@ function addBrand(event){
 	var categoryField = $form.find('#inputCategory').val().trim()
 	if(brandField==""){
 	    $form.find('#inputBrand').addClass('error');
+    	document.getElementById("errorMessageBrand").style.visibility = "visible";
 	    return
 	}
 	if(categoryField==""){
     	    $form.find('#inputCategory').addClass('error');
+    	    document.getElementById("errorMessageCategory").style.visibility = "visible";
     	    return
     	}
     	var postingData = {
@@ -28,19 +26,12 @@ function addBrand(event){
     	}
 	$form.find('#inputBrand').click(function() {
     		$(this).removeClass('error');
+    	    document.getElementById("errorMessageBrand").style.visibility = "hidden";
     	});
     $form.find('#inputCategory').click(function() {
-        		$(this).removeClass('error');
+        	$(this).removeClass('error');
+    	    document.getElementById("errorMessageCategory").style.visibility = "hidden";
         	});
-//    console.log($('#inputBrand').val());
-//    $('#inputBrand').brand.val('');
-//    $('#inputBrand').category.val('');
-//
-
-//do it later
-
-//$("#brand-form").find('#inputBrand').val()=""
-//$("#brand-form").find('#inputCategory').val('')
 	var url = getBrandUrl();
 	$.ajax({
 	   url: url,
@@ -179,8 +170,8 @@ function displayBrandList(data){
 		buttonHtml += ' <button onclick="displayEditBrand(' + e.id + ')">edit</button>'
 		var row = '<tr>'
 		+ '<td>' + e.id + '</td>'
-		+ '<td>' + e.brand+ '</td>'
-		+ '<td>'  + e.category + '</td>'
+		+ '<td>' + e.brand.slice(0,14) + '</td>'
+		+ '<td>' + e.category.slice(0,14) + '</td>'
 		+ '<td>' + buttonHtml + '</td>'
 		+ '</tr>';
         $tbody.append(row);
