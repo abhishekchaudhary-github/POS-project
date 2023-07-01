@@ -18,6 +18,8 @@ function displayBrandReportList(data){
             $tbody.append(row);
     	}
     	var download = '<button onclick="listDownload()">' + 'Download' + '</button>'
+    	$download.empty();
+    	if(data.length!=0)
     	$download.append(download);
 }
 
