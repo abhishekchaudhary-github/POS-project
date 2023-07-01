@@ -26,7 +26,7 @@ function displayBrandReportList(data){
 function listDownload() {
   var element = document.getElementById('brand-report-table');
   var opt = {
-    filename: 'brand_report.pdf',
+    filename: 'Brand Report.pdf',
     margin: [10, 10, 10, 10],
     image: { type: 'jpeg', quality: 0.98 },
     html2canvas: { scale: 2 },

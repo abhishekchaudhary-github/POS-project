@@ -5,6 +5,7 @@ function getSalesReportUrl(){
 
 function displaySalesReportList(data){
     var $tbody = $('#sales-report-table').find('tbody');
+    var $download = $('#forDownloadButton');
     	$tbody.empty();
     	for(var i in data){
     		var e = data[i];
@@ -17,17 +18,22 @@ function displaySalesReportList(data){
             $tbody.append(row);
     	}
     	var download = '<button onclick="listDownload()">' + 'Download' + '</button>'
-    	$tbody.append(download);
+            	$download.empty();
+            	if(data.length!=0)
+            	$download.append(download);
 }
 
 function listDownload() {
- var doc = new jsPDF();
-  var $table = $('#sales-report-table');
-  doc.autoTable({
-    html: $table.get(0),
-    startY: 10
-  });
-  doc.save("SalesReport.pdf");
+var element = document.getElementById('sales-report-table');
+  var opt = {
+    filename: 'Sales Report.pdf',
+    margin: [10, 10, 10, 10],
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  };
+
+  html2pdf().set(opt).from(element).save();
 }
 
 function putValues() {
