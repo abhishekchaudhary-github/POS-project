@@ -12,26 +12,26 @@ function addBrand(event){
 	//Set the values to update
 	var $form = $("#brand-form");
 	var json = toJson($form);
-	var brandField = $("#brand-form").find('#inputBrand').val().trim()
-	var categoryField = $("#brand-form").find('#inputCategory').val().trim()
+	var brandField = $form.find('#inputBrand').val().trim()
+	var categoryField = $form.find('#inputCategory').val().trim()
 	if(brandField==""){
-	    $("#brand-form").find('#inputBrand').addClass('error');
+	    $form.find('#inputBrand').addClass('error');
 	    return
 	}
 	if(categoryField==""){
-    	    $("#brand-form").find('#inputCategory').addClass('error');
+    	    $form.find('#inputCategory').addClass('error');
     	    return
     	}
     	var postingData = {
     	    brand:brandField,
     	    category:categoryField
     	}
-//	$('#inputBrand').click(function() {
-//    		$(this).removeClass('error');
-//    	});
-//    $('#inputCategory').click(function() {
-//        		$(this).removeClass('error');
-//        	});
+	$form.find('#inputBrand').click(function() {
+    		$(this).removeClass('error');
+    	});
+    $form.find('#inputCategory').click(function() {
+        		$(this).removeClass('error');
+        	});
 //    console.log($('#inputBrand').val());
 //    $('#inputBrand').brand.val('');
 //    $('#inputBrand').category.val('');
@@ -51,6 +51,8 @@ function addBrand(event){
        },
 	   success: function(response) {
 	   		getBrandList();
+	   		$form.find('#inputBrand').val('');
+            $form.find('#inputCategory').val('');
 	   },
 	   error: handleAjaxError
 	});
