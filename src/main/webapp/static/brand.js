@@ -35,8 +35,11 @@ function addBrand(event){
 //    console.log($('#inputBrand').val());
 //    $('#inputBrand').brand.val('');
 //    $('#inputBrand').category.val('');
+//
 
-//$("#brand-form").find('#inputBrand').value('')
+//do it later
+
+//$("#brand-form").find('#inputBrand').val()=""
 //$("#brand-form").find('#inputCategory').val('')
 	var url = getBrandUrl();
 	$.ajax({
