@@ -21,14 +21,9 @@ function displayBrandReportList(data){
 }
 
 function listDownload() {
- var doc = new jsPDF();
-  var $table = $('#brand-report-table');
-  doc.autoTable({
-    html: $table.get(0),
-    startY: 10
-  });
-  doc.save("BrandReport.pdf");
+  //
 }
+
 
 function putValues() {
     var url = getBrandReportUrl();
