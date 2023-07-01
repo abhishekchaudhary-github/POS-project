@@ -12,20 +12,37 @@ function addBrand(event){
 	//Set the values to update
 	var $form = $("#brand-form");
 	var json = toJson($form);
-	var brandField = $('#inputBrand').val()
-	if(brandField.trim()==""){
-	    $('#inputBrand').addClass('error');
+	var brandField = $("#brand-form").find('#inputBrand').val().trim()
+	var categoryField = $("#brand-form").find('#inputCategory').val().trim()
+	if(brandField==""){
+	    $("#brand-form").find('#inputBrand').addClass('error');
 	    return
 	}
-	$('#inputBrand').click(function() {
-    		$(this).removeClass('error');
-    	});
-	var url = getBrandUrl();
+	if(categoryField==""){
+    	    $("#brand-form").find('#inputCategory').addClass('error');
+    	    return
+    	}
+    	var postingData = {
+    	    brand:brandField,
+    	    category:categoryField
+    	}
+//	$('#inputBrand').click(function() {
+//    		$(this).removeClass('error');
+//    	});
+//    $('#inputCategory').click(function() {
+//        		$(this).removeClass('error');
+//        	});
+//    console.log($('#inputBrand').val());
+//    $('#inputBrand').brand.val('');
+//    $('#inputBrand').category.val('');
 
+//$("#brand-form").find('#inputBrand').value('')
+//$("#brand-form").find('#inputCategory').val('')
+	var url = getBrandUrl();
 	$.ajax({
 	   url: url,
 	   type: 'POST',
-	   data: json,
+	   data: JSON.stringify(postingData),
 	   headers: {
        	'Content-Type': 'application/json'
        },
@@ -34,7 +51,6 @@ function addBrand(event){
 	   },
 	   error: handleAjaxError
 	});
-
 	return false;
 }
 
