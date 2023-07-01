@@ -85,6 +85,7 @@ public class ReportService {
             ProductPojo productPojo = productService.get(orderItem.getProductId());
             BrandPojo brandPojo = brandService.get(productPojo.getBrand_category());
 
+            //"" not needed
             if(brand==null) brand="";
             if(category==null) category="";
 
@@ -107,24 +108,16 @@ public class ReportService {
 
     private void AddInHashmap(HashMap<Integer,SalesReportData> hm,SalesReportData salesReportData,Integer key,String brand,String category,OrderItemPojo orderItem,BrandPojo brandPojo) {
         if (!hm.containsKey(key)) {
-                        if(brand!=null)
-                            salesReportData.setBrand(brand);
-                        else
+
                             salesReportData.setBrand(brandPojo.getBrand());
-                        if(category!=null)
-                            salesReportData.setCategory(category);
-                        else
                             salesReportData.setCategory(brandPojo.getCategory());
-                        salesReportData.setCategory(category);
+                        salesReportData.setCategory(brandPojo.getCategory());
                         salesReportData.setRevenue(orderItem.getSellingPrice());
                         salesReportData.setQuantity(orderItem.getQuantity());
                         hm.put(key, salesReportData);
                     } else {
-                        if(brand!=null)
-                            salesReportData.setBrand(brand);
-                        else
                             salesReportData.setBrand(brandPojo.getBrand());
-                        salesReportData.setCategory(category);
+                        salesReportData.setCategory(brandPojo.getCategory());
                         salesReportData.setRevenue(orderItem.getSellingPrice());
                         Integer quantitySum = hm.get(key).getQuantity();
                         quantitySum += orderItem.getQuantity();
