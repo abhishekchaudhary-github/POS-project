@@ -16,8 +16,19 @@ function displaySalesReportList(data){
     		+ '<td>' + '</tr>';
             $tbody.append(row);
     	}
+    	var download = '<button onclick="listDownload()">' + 'Download' + '</button>'
+    	$tbody.append(download);
 }
 
+function listDownload() {
+ var doc = new jsPDF();
+  var $table = $('#sales-report-table');
+  doc.autoTable({
+    html: $table.get(0),
+    startY: 10
+  });
+  doc.save("SalesReport.pdf");
+}
 
 function putValues() {
     var url = getSalesReportUrl();
