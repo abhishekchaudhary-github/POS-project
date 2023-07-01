@@ -5,6 +5,7 @@ function getBrandReportUrl(){
 
 function displayBrandReportList(data){
     var $tbody = $('#brand-report-table').find('tbody');
+    var $download = $('#forDownloadButton');
     	$tbody.empty();
     	for(var i in data){
     		var e = data[i];
@@ -17,12 +18,22 @@ function displayBrandReportList(data){
             $tbody.append(row);
     	}
     	var download = '<button onclick="listDownload()">' + 'Download' + '</button>'
-    	$tbody.append(download);
+    	$download.append(download);
 }
 
 function listDownload() {
-  //
+  var element = document.getElementById('brand-report-table');
+  var opt = {
+    filename: 'brand_report.pdf',
+    margin: [10, 10, 10, 10],
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  };
+
+  html2pdf().set(opt).from(element).save();
 }
+
 
 
 function putValues() {
