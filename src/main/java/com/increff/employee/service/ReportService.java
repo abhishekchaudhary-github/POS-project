@@ -1,5 +1,7 @@
 package com.increff.employee.service;
 import com.increff.employee.dao.ReportDao;
+import com.increff.employee.model.BrandData;
+import com.increff.employee.model.BrandForm;
 import com.increff.employee.model.SalesReportData;
 import com.increff.employee.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,26 @@ public class ReportService {
 
 
     @Transactional
+    public List<BrandData> getBrandReport(BrandForm form) throws ApiException {
+        String brand = form.getBrand();
+        if(brand==null) brand="";
+        String category = form.getCategory();
+        if(category==null) category="";
+        List<BrandPojo> brandPojoList = brandService.getAll();
+        List<BrandData> brandDataList = new ArrayList<BrandData>();
+        for (BrandPojo brandPojo : brandPojoList) {
+            if (brandPojo.getBrand().contains(brand) && brandPojo.getCategory().contains(category)) {
+                BrandData brandData = new BrandData();
+                brandData.setCategory(brandPojo.getCategory());
+                brandData.setBrand(brandPojo.getBrand());
+                brandDataList.add(brandData);
+            }
+        }
+        return brandDataList;
+    }
+
+
+    @Transactional
     public List<OrderPojo> getOrdersByTime(LocalDateTime startTime, LocalDateTime endTime) {
         return dao.selectAllOrder(startTime,endTime);
     }
@@ -63,6 +85,8 @@ public class ReportService {
             ProductPojo productPojo = productService.get(orderItem.getProductId());
             BrandPojo brandPojo = brandService.get(productPojo.getBrand_category());
 
+            if(brand==null) brand="";
+            if(category==null) category="";
 
             if (brandPojo.getBrand().contains(brand) && brandPojo.getCategory().contains(category)) {
                 Integer key = brandPojo.getId();

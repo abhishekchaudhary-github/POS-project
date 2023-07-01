@@ -21,20 +21,20 @@ public class ReportController {
     //BrandReportService brandReportService;
 
     @Autowired
-    private ReportService salesReportService;
+    private ReportService reportService;
     @ApiOperation(value = "gives sales report")
     @RequestMapping(path = "/api/salesreport", method = RequestMethod.POST)
     public List<SalesReportData> filterSalesReport(@RequestBody SalesReportForm form) throws ApiException {
-        return salesReportService.getAll(form.getStartTime(),form.getEndTime(),form.getBrand(),form.getCategory());
+        return reportService.getAll(form.getStartTime(),form.getEndTime(),form.getBrand(),form.getCategory());
     }
 
 
 
-//    @ApiOperation(value = "Gets list of all Products")
-//    @RequestMapping(path = "/api/brandreport", method = RequestMethod.POST)
-//    public List<BrandData> getBrandReport(@RequestBody BrandForm form) throws ApiException {
-//        return brandReportService.getAll(form);
-//    }
+    @ApiOperation(value = "gives brand report")
+    @RequestMapping(path = "/api/brandreport", method = RequestMethod.POST)
+    public List<BrandData> getBrandReport(@RequestBody BrandForm form) throws ApiException {
+        return reportService.getBrandReport(form);
+    }
 
 
 
