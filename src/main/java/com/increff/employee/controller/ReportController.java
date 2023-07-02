@@ -36,18 +36,12 @@ public class ReportController {
         return reportService.getBrandReport(form);
     }
 
+    @ApiOperation(value = "gives inventory report")
+    @RequestMapping(path = "/api/inventoryreport", method = RequestMethod.POST)
+    public List<InventoryReportData> getInventoryReport(@RequestBody BrandForm form) throws ApiException {
+        return reportService.getInventoryReport(form);
+    }
 
-
-
-
-
-//
-//    @ApiOperation(value = "Gets list of all Products")
-//    @RequestMapping(path = "/api/inventoryreport", method = RequestMethod.GET)
-//    public List<ProductData> getInventoryReport() throws ApiException {
-//
-//    }
-//
 
 
 }

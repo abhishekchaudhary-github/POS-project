@@ -1,8 +1,6 @@
 package com.increff.employee.service;
 import com.increff.employee.dao.ReportDao;
-import com.increff.employee.model.BrandData;
-import com.increff.employee.model.BrandForm;
-import com.increff.employee.model.SalesReportData;
+import com.increff.employee.model.*;
 import com.increff.employee.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +31,9 @@ public class ReportService {
     @Autowired
     private BrandService brandService;
 
+    @Autowired
+    private InventoryService inventoryService;
+
 
     @Transactional
     public List<BrandData> getBrandReport(BrandForm form) throws ApiException {
@@ -53,6 +54,37 @@ public class ReportService {
         return brandDataList;
     }
 
+    @Transactional
+    public List<InventoryReportData> getInventoryReport(BrandForm form) throws ApiException {
+        String brand = form.getBrand();
+        if(brand==null) brand="";
+        String category = form.getCategory();
+        if(category==null) category="";
+        List<ProductPojo> productPojoList = productService.getAll();
+        List<BrandPojo> brandPojoList = brandService.getAll();
+        List<InventoryReportData> inventoryDataList = new ArrayList<InventoryReportData>();
+        for (BrandPojo brandPojo : brandPojoList) {
+            if (brandPojo.getBrand().contains(brand) && brandPojo.getCategory().contains(category)) {
+                InventoryReportData inventoryReportData = new InventoryReportData();
+                inventoryReportData.setCategory(brandPojo.getCategory());
+                inventoryReportData.setBrand(brandPojo.getBrand());
+                Integer brandId = brandPojo.getId();
+                //call quantity
+                Integer quantity = 0 ;
+                for(ProductPojo productPojo : productPojoList ) {
+                    if (productPojo.getBrand_category() == brandId) {
+                        quantity += inventoryService.getFromProductId(productPojo.getId()).getQuantity();
+                    }
+                }
+                //why productservice.brandCategory not working !!!!!
+//                System.out.println(productService.brandCategory(brandPojo.getId()));
+//                InventoryPojo inventoryPojo = inventoryService.getFromProductId(productPojo.getId());
+                inventoryReportData.setQuantity(quantity);
+                inventoryDataList.add(inventoryReportData);
+            }
+        }
+        return inventoryDataList;
+    }
 
     @Transactional
     public List<OrderPojo> getOrdersByTime(LocalDateTime startTime, LocalDateTime endTime) {

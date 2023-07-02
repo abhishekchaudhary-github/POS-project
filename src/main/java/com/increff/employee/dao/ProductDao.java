@@ -23,6 +23,7 @@ public class ProductDao extends AbstractDao{
     private static String nocommon_case = "select p from ProductPojo p where brand_category=:brand_category and name=:name";
 
     private static  String barcode_and_mrp = "select p from ProductPojo p where brand_category=:brand_category and mrp=:mrp";
+    private static String brand_category_select = "select p from ProductPojo p where brand_category=:brand_category";
     @PersistenceContext
     private EntityManager em;
 
@@ -42,6 +43,12 @@ public class ProductDao extends AbstractDao{
         TypedQuery<ProductPojo> query = getQuery(select_barcode, ProductPojo.class);
         query.setParameter("barcode", barcode);
         return getSingle(query);
+    }
+
+    public List<ProductPojo> brandCategory(Integer brand_category) {
+        TypedQuery<ProductPojo> query = getQuery(brand_category_select, ProductPojo.class);
+        query.setParameter("brand_category", brand_category);
+        return query.getResultList();
     }
 
     public ProductPojo checkerForDuplicate(Integer brand_category, String name){

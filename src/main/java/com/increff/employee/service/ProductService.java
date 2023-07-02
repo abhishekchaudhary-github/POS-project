@@ -72,6 +72,11 @@ public class ProductService {
     //////
 
     @Transactional(rollbackOn = ApiException.class)
+    public List<ProductPojo> brandCategory(Integer brand_category) {
+        return dao.brandCategory(brand_category);
+    }
+
+    @Transactional(rollbackOn = ApiException.class)
     public ProductPojo get(Integer id) throws ApiException {
         return getCheck(id);
     }

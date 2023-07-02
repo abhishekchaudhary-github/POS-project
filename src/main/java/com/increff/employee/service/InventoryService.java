@@ -52,7 +52,10 @@ public class InventoryService {
     public Integer getIdOfProduct(String barcode) throws ApiException {
         return productService.getProductId(barcode);
     }
-
+    @Transactional
+    public InventoryPojo getFromProductId(Integer productId) throws ApiException {
+        return dao.getFromProductId(productId);
+    }
 
     @Transactional(rollbackOn  = ApiException.class)
     public void update(Integer id, InventoryPojo p) throws ApiException {
