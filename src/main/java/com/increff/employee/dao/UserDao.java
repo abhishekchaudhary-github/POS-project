@@ -46,7 +46,6 @@ public class UserDao extends AbstractDao {
 		TypedQuery<UserPojo> query = getQuery(select_all, UserPojo.class);
 		return query.getResultList();
 	}
-
 	public void update(UserPojo p) {
 	}
 

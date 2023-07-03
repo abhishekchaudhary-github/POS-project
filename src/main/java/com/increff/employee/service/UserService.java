@@ -31,6 +31,11 @@ public class UserService {
 		return dao.select(email);
 	}
 
+	@Transactional(rollbackOn = ApiException.class)
+	public UserPojo getById(Integer id) throws ApiException {
+		return dao.select(id);
+	}
+
 	@Transactional
 	public List<UserPojo> getAll() {
 		return dao.selectAll();
