@@ -147,7 +147,7 @@ function displayInventoryList(data){
 		var e = data[i];
 		//var buttonHtml = '<button onclick="deleteinventory(' + e.id + ')">delete</button>'
 		var buttonHtml = ''
-		buttonHtml += ' <button onclick="displayEditInventory(' + e.id + ')">edit</button>'
+		buttonHtml += ' <button onclick="displayEditInventory(' + e.id + ')" class="admin-element">edit</button>'
 		var row = '<tr>'
 		+ '<td>' + e.barcode + '</td>'
 		+ '<td>'  + e.quantity + '</td>'
@@ -155,6 +155,9 @@ function displayInventoryList(data){
 		+ '</tr>';
         $tbody.append(row);
 	}
+	if($("#get-role").text().localeCompare("standard")==0) {
+                         $(".admin-element").hide();
+                     }
 }
 
 function displayEditInventory(id){
@@ -216,6 +219,10 @@ function init(){
 	$('#process-data').click(processData);
 	$('#download-errors').click(downloadErrors);
     $('#inventoryFile').on('change', updateFileName)
+        //hide all elements of class admin-element when role = standard
+        if($("#get-role").text().localeCompare("standard")==0) {
+                $(".admin-element").hide();
+            }
 }
 
 $(document).ready(init);

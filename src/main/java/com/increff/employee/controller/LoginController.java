@@ -53,7 +53,7 @@ public class LoginController {
 		SecurityUtil.createContext(session);
 		// Attach Authentication object to the Security Context
 		SecurityUtil.setAuthentication(authentication);
-
+		info.setRole(p.getRole());
 		return new ModelAndView("redirect:/ui/home");
 
 	}

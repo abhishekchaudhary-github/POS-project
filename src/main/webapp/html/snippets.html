@@ -64,9 +64,6 @@
         <li class="nav-item">
             <a class="nav-link" th:href="@{/ui/customerDetail}">Order</a>
         </li>
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/ui/admin}">Admin</a>
-      </li>
     </ul>
     
     <ul class="navbar-nav ml-auto">
@@ -76,10 +73,9 @@
 	    </li>
 	    <li class="nav-item">
 	    	<a class="nav-link" th:href="@{/session/logout}">Logout</a>
+            <p id="get-role" style="hidden">[[${info.getRole()}]]</p>
 	    </li>
     </ul>
-    
-        
   </div>
 </nav>
 

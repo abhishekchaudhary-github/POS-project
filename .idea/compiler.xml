@@ -9,5 +9,8 @@
         <module name="employee-spring-full" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="invoice" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

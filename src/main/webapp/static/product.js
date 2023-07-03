@@ -141,7 +141,7 @@ function displayProductList(data){
 	for(var i in data){
 		var e = data[i];
 //		var buttonHtml = '<button onclick="deleteProduct(' + e.id + ')">delete</button>'
-		var buttonHtml = ' <button onclick="displayEditProduct(' + e.id + ')">edit</button>'
+		var buttonHtml = ' <button onclick="displayEditProduct(' + e.id + ')" class="admin-element">edit</button>'
 		var row = '<tr>'
 		+ '<td>'  + e.barcode + '</td>'
 		+ '<td>'  + e.brand + '</td>'
@@ -152,6 +152,9 @@ function displayProductList(data){
 		+ '</tr>';
         $tbody.append(row);
 	}
+	if($("#get-role").text().localeCompare("standard")==0) {
+                    $(".admin-element").hide();
+                }
 }
 
 function displayEditProduct(id){
@@ -216,6 +219,10 @@ function init(){
 	$('#process-data').click(processData);
 	$('#download-errors').click(downloadErrors);
     $('#productFile').on('change', updateFileName)
+     //hide all elements of class admin-element when role = standard
+        if($("#get-role").text().localeCompare("standard")==0) {
+                $(".admin-element").hide();
+            }
 }
 
 $(document).ready(init);

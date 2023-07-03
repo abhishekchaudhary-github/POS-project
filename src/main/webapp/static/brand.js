@@ -167,7 +167,7 @@ function displayBrandList(data){
 		var e = data[i];
 		//var buttonHtml = '<button onclick="deletebrand(' + e.id + ')">delete</button>'
 		var buttonHtml = ''
-		buttonHtml += ' <button onclick="displayEditBrand(' + e.id + ')">edit</button>'
+		buttonHtml += ' <button onclick="displayEditBrand(' + e.id + ')"  class="admin-element">edit</button>'
 		var row = '<tr>'
 		+ '<td>' + e.id + '</td>'
 		+ '<td>' + e.brand.slice(0,14) + '</td>'
@@ -176,6 +176,9 @@ function displayBrandList(data){
 		+ '</tr>';
         $tbody.append(row);
 	}
+	if($("#get-role").text().localeCompare("standard")==0) {
+                $(".admin-element").hide();
+            }
 }
 
 function displayEditBrand(id){
@@ -237,6 +240,10 @@ function init(){
 	$('#process-data').click(processData);
 	$('#download-errors').click(downloadErrors);
     $('#brandFile').on('change', updateFileName)
+    //hide all elements of class admin-element when role = standard
+    if($("#get-role").text().localeCompare("standard")==0) {
+            $(".admin-element").hide();
+        }
 }
 
 $(document).ready(init);
