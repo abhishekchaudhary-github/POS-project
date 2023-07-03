@@ -27,10 +27,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and().authorizeRequests()//
 				.antMatchers("/api/admin/**").hasAuthority("admin")//
 
-				.antMatchers(HttpMethod.GET,"/api/ui/brand/**").hasAnyAuthority("admin","standard")//
-				.antMatchers("/api/ui/brand/**").hasAuthority("admin")//
-				.antMatchers(HttpMethod.GET,"/api/ui/product/**").hasAnyAuthority("admin","standard")//
-				.antMatchers("/api/ui/product/**").hasAuthority("admin")//
+				.antMatchers(HttpMethod.GET,"/api/brand/**").hasAnyAuthority("admin","standard")//
+				.antMatchers("/api/brand/**").hasAuthority("admin")//
+				.antMatchers(HttpMethod.GET,"/api/product/**").hasAnyAuthority("admin","standard")//
+				.antMatchers("/api/product/**").hasAuthority("admin")//
 				.antMatchers(HttpMethod.GET,"/api/ui/inventory/**").hasAnyAuthority("admin","standard")//
 				.antMatchers("/api/ui/inventory/**").hasAuthority("admin")//
 
