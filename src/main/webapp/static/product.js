@@ -9,6 +9,59 @@ function addProduct(event){
 	var $form = $("#product-form");
 	var json = toJson($form);
 	var url = getProductUrl();
+	var barcodeField = $form.find('#inputBarcode').val().trim();
+    var brandField = $form.find('#inputBrand').val().trim()
+    var categoryField = $form.find('#inputCategory').val().trim()
+    var mrpField = $form.find('#inputMrp').val().trim()
+    var nameField = $form.find('#inputName').val().trim()
+
+//setting error class for error message and red field
+    if(barcodeField==""){
+    	    $form.find('#inputBarcode').addClass('error');
+        	document.getElementById("errorMessageBarcode").style.visibility = "visible";
+    	    return
+    	}
+    if(brandField==""){
+    	    $form.find('#inputBrand').addClass('error');
+        	document.getElementById("errorMessageBrand").style.visibility = "visible";
+    	    return
+    	}
+    if(mrpField==""){
+    	    $form.find('#inputMrp').addClass('error');
+        	document.getElementById("errorMessageMrp").style.visibility = "visible";
+    	    return
+    	}
+    if(nameField==""){
+    	    $form.find('#inputName').addClass('error');
+        	document.getElementById("errorMessageName").style.visibility = "visible";
+    	    return
+    	}
+    if(categoryField==""){
+        	    $form.find('#inputCategory').addClass('error');
+            	document.getElementById("errorMessageCategory").style.visibility = "visible";
+        	    return
+        	}
+
+        	$form.find('#inputBarcode').click(function() {
+                		$(this).removeClass('error');
+                	    document.getElementById("errorMessageBarcode").style.visibility = "hidden";
+                	});
+            $form.find('#inputBrand').click(function() {
+                		$(this).removeClass('error');
+                	    document.getElementById("errorMessageBrand").style.visibility = "hidden";
+                	});
+            $form.find('#inputMrp').click(function() {
+                		$(this).removeClass('error');
+                	    document.getElementById("errorMessageMrp").style.visibility = "hidden";
+                	});
+            $form.find('#inputName').click(function() {
+                		$(this).removeClass('error');
+                	    document.getElementById("errorMessageName").style.visibility = "hidden";
+                	});
+            $form.find('#inputCategory').click(function() {
+                		$(this).removeClass('error');
+                	    document.getElementById("errorMessageCategory").style.visibility = "hidden";
+                	});
 
 	$.ajax({
 	   url: url,
