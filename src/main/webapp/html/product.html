@@ -17,47 +17,52 @@
         <div class="col-12">
             <form class="form-inline admin-element" id="product-form">
                 <div class="form-group">
-                    <label for="inputBarcode" class="col-sm-2 col-form-label">Barcode</label>
+<!--                    <label for="inputBarcode" class="col-sm-2 col-form-label">Barcode</label>-->
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="barcode" id="inputBarcode" placeholder="enter barcode">
+                        <p id="errorMessageBarcode" class="error" style="color: red; visibility: hidden;font-size: xx-small">Field cannot be empty!</p>
                     </div>
                 </div>
-                <div id="errorMessageBarcode" class="error" style="color: red; visibility: hidden;">Field cannot be empty!</div>
+
                 <div class="form-group">
-                    <label for="inputBrand" class="col-sm-2 col-form-label">Brand</label>
+<!--                    <label for="inputBrand" class="col-sm-2 col-form-label">Brand</label>-->
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="brand" id="inputBrand" placeholder="enter brand">
+                        <p id="errorMessageBrand" class="error" style="color: red; visibility: hidden;font-size: xx-small">Field cannot be empty!</p>
                     </div>
                 </div>
-                <div id="errorMessageBrand" class="error" style="color: red; visibility: hidden;">Field cannot be empty!</div>
+
                 <div class="form-group">
-                    <label for="inputCategory" class="col-sm-2 col-form-label">Category</label>
+<!--                    <label for="inputCategory" class="col-sm-2 col-form-label">Category</label>-->
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="category" id="inputCategory" placeholder="enter category">
+                        <p id="errorMessageCategory" class="error" style="color: red; visibility: hidden;font-size: xx-small">Field cannot be empty!</p>
                     </div>
                 </div>
-                <div id="errorMessageCategory" class="error" style="color: red; visibility: hidden;">Field cannot be empty!</div>
+
                 <div class="form-group">
-                    <label for="inputMrp" class="col-sm-2 col-form-label">Mrp</label>
+<!--                    <label for="inputMrp" class="col-sm-2 col-form-label">Mrp</label>-->
                     <div class="col-sm-10">
 <!--                        <input type="text" class="form-control" name="mrp" id="inputMrp" placeholder="enter mrp">-->
                         <input  type="number" class="form-control" name="mrp" min="0" step="0.1"  id="inputMrp" placeholder="enter mrp" oninput="validity.valid||(value='');">
+                        <p id="errorMessageMrp" class="error" style="color: red; visibility: hidden;font-size: xx-small">Field cannot be empty!</p>
                     </div>
                 </div>
-                <div id="errorMessageMrp" class="error" style="color: red; visibility: hidden;">Field cannot be empty!</div>
                 <div class="form-group">
-                    <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+<!--                    <label for="inputName" class="col-sm-2 col-form-label">Name</label>-->
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="name" id="inputName" placeholder="enter name">
+                        <p id="errorMessageName" class="error" style="color: red; visibility: hidden;font-size: xx-small">Field cannot be empty!</p>
                     </div>
                 </div>
-                <div id="errorMessageName" class="error" style="color: red; visibility: hidden;">Field cannot be empty!</div>
-                <button type="button" class="btn btn-primary" id="add-product">Add</button>
-                &nbsp;
-                <button type="button" class="btn btn-primary" id="refresh-data">Refresh</button>
-                &nbsp;
-                <button type="button" class="btn btn-primary" id="upload-data">Upload</button>
+
+
             </form>
+            <button type="button" class="btn btn-primary" id="add-product">Add</button>
+            &nbsp;
+            <button type="button" class="btn btn-primary" id="refresh-data">Refresh</button>
+            &nbsp;
+            <button type="button" class="btn btn-primary" id="upload-data">Upload</button>
         </div>
     </div>
 
@@ -107,7 +112,7 @@
     </div>
 
     <!-- Product Edit Modal -->
-    <div class="modal" tabindex="-1" role="dialog" id="edit-product-modal">
+    <div class="modal" tabindex="-1" role="dialog" id="edit-product-modal"  data-backdrop="static">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -141,8 +146,8 @@
                         <div class="form-group">
                             <label for="inputMrp" class="col-sm-2 col-form-label">Mrp</label>
                             <div class="col-sm-10">
-                                <input  type="number" class="form-control" name="mrp" min="0" step="0.1"  id="inputMrp" placeholder="enter mrp" oninput="validity.valid||(value='');">
-<!--                                <input type="text" class="form-control" name="mrp" placeholder="enter mrp">-->
+                                <input  type="number" class="form-control" name="mrp" min="0" step="0.1"   placeholder="enter mrp" oninput="validity.valid||(value='');">
+<!--&lt;!&ndash;                                <input type="text" class="form-control" name="mrp" placeholder="enter mrp">&ndash;&gt;  id="inputMrp"-->
                             </div>
                         </div>
 
@@ -167,7 +172,7 @@
 
 
     <!-- Product Edit Modal -->
-    <div class="modal" tabindex="-1" role="dialog" id="upload-product-modal">
+    <div class="modal" tabindex="-1" role="dialog" id="upload-product-modal"   data-backdrop="static">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
 

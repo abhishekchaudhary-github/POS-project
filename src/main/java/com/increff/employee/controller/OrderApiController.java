@@ -87,6 +87,12 @@ public class OrderApiController {
         return d;
     }
 
+//    @ApiOperation(value = "Download Invoice")
+//    @GetMapping(path = "/invoice/{id}")
+//    public ResponseEntity<byte[]> getInvoicePDF(@PathVariable Integer id) throws Exception{
+//        return dto.getInvoicePDF(id);
+//    }
+
 //    private OrderPojo convert(CategoryDetailForm f ,Integer orderPojoId) throws ApiException {
 //        OrderPojo p = new OrderPojo();
 //        ProductPojo productPojo = productService.barcodeMustExist(f.getBarcode());

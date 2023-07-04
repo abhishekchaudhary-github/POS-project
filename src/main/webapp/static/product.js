@@ -72,6 +72,11 @@ function addProduct(event){
        },
 	   success: function(response) {
 	   		getProductList();
+	   		$form.find('#inputBarcode').val('');
+	   		$form.find('#inputBrand').val('');
+	   		$form.find('#inputCategory').val('');
+	   		$form.find('#inputName').val('');
+	   		$form.find('#inputMrp').val('');
 	   },
 	   error: handleAjaxError
 	});
