@@ -35,34 +35,35 @@
 
 <div class="container">
 
+
+
     <!-- Top row with form-->
     <div class="row admin-element">
         <div class="col-12">
             <form class="form-inline" id="customerDetail-form">
 
-                <div class="form-group">
+                <div class="form-group"  style="margin-top:1.5em">
                     <label for="inputBarcode" class="col-sm-2 col-form-label">Barcode</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="barcode" id="inputBarcode" placeholder="enter barcode">
+                        <input type="text" class="form-control" name="barcode" id="inputBarcode" placeholder="enter barcode" >
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group"  style="margin-top:1.5em">
                     <label for="inputMrp" class="col-sm-2 col-form-label">Mrp</label>
                     <div class="col-sm-10">
-                        <input  type="number" class="form-control" name="mrp" min="0" step="0.1" oninput="validity.valid||(value='');" id="inputMrp" placeholder="enter mrp">
+                        <input  type="number" class="form-control" name="mrp" min="0" step="0.1" oninput="validity.valid||(value='');" id="inputMrp" placeholder="enter mrp" style="margin-left:0.3em">
 <!--                        <input type="text" class="form-control" name="mrp" id="inputMrp" placeholder="enter mrp">-->
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group"  style="margin-top:1.5em">
                     <label for="inputQuantity" class="col-sm-2 col-form-label">Quantity</label>
                     <div class="col-sm-10">
                         <input  type="number" class="form-control" name="quantity" min="0" oninput="validity.valid||(value='');" id="inputQuantity" placeholder="enter quantity">
 <!--                        <input type="text" class="form-control" name="quantity" id="inputQuantity" placeholder="enter quantity">-->
                     </div>
                 </div>
-
-                <button type="button" class="btn btn-primary" id="add-customerDetail">Add</button>
+              <button type="button" class="btn btn-primary" id="add-customerDetail"  style="margin-top:1.5em">Add</button>
                 &nbsp;
             </form>
         </div>
