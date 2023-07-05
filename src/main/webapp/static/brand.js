@@ -11,27 +11,23 @@ function addBrand(event){
 	var brandField = $form.find('#inputBrand').val().trim()
 	var categoryField = $form.find('#inputCategory').val().trim()
 	if(brandField==""){
-	    $form.find('#inputBrand').addClass('error');
-    	document.getElementById("errorMessageBrand").style.visibility = "visible";
+	$("#inputBrand").notify(
+      "field can not be empty",
+      { position:"top" }
+    );
 	    return
 	}
 	if(categoryField==""){
-    	    $form.find('#inputCategory').addClass('error');
-    	    document.getElementById("errorMessageCategory").style.visibility = "visible";
+    	    $("#inputCategory").notify(
+                  "field can not be empty",
+                  { position:"top" }
+                );
     	    return
     	}
     	var postingData = {
     	    brand:brandField,
     	    category:categoryField
     	}
-	$form.find('#inputBrand').click(function() {
-    		$(this).removeClass('error');
-    	    document.getElementById("errorMessageBrand").style.visibility = "hidden";
-    	});
-    $form.find('#inputCategory').click(function() {
-        	$(this).removeClass('error');
-    	    document.getElementById("errorMessageCategory").style.visibility = "hidden";
-        	});
 	var url = getBrandUrl();
 	$.ajax({
 	   url: url,
