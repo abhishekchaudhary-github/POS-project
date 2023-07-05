@@ -52,10 +52,18 @@ function addProduct(event){
         	    return
         	}
 
+
+    var postingData = {
+        barcode:barcodeField,
+        brand:brandField,
+        mrp:mrpField,
+        name:nameField,
+        category:categoryField
+    }
 	$.ajax({
 	   url: url,
 	   type: 'POST',
-	   data: json,
+	   data: JSON.stringify(postingData),
 	   headers: {
        	'Content-Type': 'application/json'
        },
