@@ -19,7 +19,7 @@ var k =0;
         var e = data[i];
         if(data[i].barcode.localeCompare(fileData[0].value)==0){
         if(data[i].mrp < fileData[1].value){
-        alert('Selling price cannot be greater than MRP')
+        $("#customerDetail-form").notify("Selling price cannot be greater than MRP",{className:"warn"})
             checker = false
             }
             prodId = data[i].id;
@@ -29,14 +29,14 @@ var k =0;
         else checker = true
     }
    if(k==0){
-    alert('barcode does not exist')
+   $("#customerDetail-form").notify("barcode does not exist",{className:"warn"})
     checker = false}
 }
 
 
 function checkInventory(data, fileData){
     if(data.quantity - fileData<0){
-        alert('value accessed the inventory')
+    $("#customerDetail-form").notify("value accessed the inventor",{className:"warn"})
         checker = false
     }
     else check = true;
@@ -85,7 +85,7 @@ var iurl = $("meta[name=baseUrl]").attr("content") + "/api/inventory" + "/" + pr
 	   error: handleAjaxError
 	});
 }
-console.log("hi2")
+//console.log("hi2")
 	var error = false;
 if(!checker) error = true
 
@@ -95,38 +95,38 @@ if(!checker) error = true
 
 
 	if(fileData[0].value.localeCompare("")==0||fileData[1].value.localeCompare("")==0||fileData[2].value.localeCompare("")==0) {
-	    alert("fields can not be empty")
+	    $("#customerDetail-form").notify("fields can not be empty",{className:"warn"})
 	    error = true;
 	}
 
 
 
-    if(isNaN(fileData[1].value)){
-        alert("MRP can not be in this format")
+    else if(isNaN(fileData[1].value)){
+        $("#customerDetail-form").notify("MRP can not be in this format",{className:"warn"})
         error=true;
     }
     else if(parseFloat(fileData[1].value)<0){
-    alert("MRP can't be negative")
+    $("#customerDetail-form").notify("MRP can't be negative",{className:"warn"})
             error=true;
     }
 
-       if(isNaN(fileData[2].value)){
-            alert("Quantity must be an integer")
+       else if(isNaN(fileData[2].value)){
+            $("#customerDetail-form").notify("Quantity must be an integer",{className:"warn"})
             error = true;
         }
         else if(!Number.isInteger(parseFloat(fileData[2].value))){
-            alert("Quantity must be a whole number")
+            $("#customerDetail-form").notify("Quantity must be a whole number",{className:"warn"})
             error = true;
         }
         else if(parseInt(fileData[2].value)<0){
-                alert("Quantity must be positive")
+                $("#customerDetail-form").notify("Quantity must be positive",{className:"warn"})
                 error = true;
             }
 
 	for(var i in addedData){
 	    var e = addedData[i];
 	    if(e.barcode.localeCompare(fileData[0].value)==0){
-	        alert("same barcode has been entered already")
+	        $("#customerDetail-form").notify("same barcode has been entered already",{className:"warn"})
 	        error = true;
 	        break;
 	    }
@@ -265,7 +265,7 @@ var iurl = $("meta[name=baseUrl]").attr("content") + "/api/inventory" + "/" + pr
 	   error: handleAjaxError
 	});
 }
-console.log("hi2")
+//console.log("hi2")
 	var error = false;
 if(!checker) error = true
 
@@ -293,25 +293,25 @@ if(!checker) error = true
 	fileData[0].value = fileData[0].value.toLowerCase();
 	//checks
 	if(fileData[0].value.localeCompare("")==0||fileData[1].value.localeCompare("")==0||fileData[2].value.localeCompare("")==0) {
-	    alert("fields can not be empty")
+	    $("#customerDetail-form").notify("fields can not be empty",{className:"warn"})
 	    error = true;
 	}
 
-    if(isNaN(fileData[1].value)){
-        alert("Quantity must be an integer")
+    else if(isNaN(fileData[1].value)){
+        $("#customerDetail-form").notify("Quantity must be an integer",{className:"warn"})
         error = true;
     }
 
-    if(isNaN(fileData[2].value)){
-        alert("MRP can not be in this format")
+    else if(isNaN(fileData[2].value)){
+        $("#customerDetail-form").notify("MRP can not be in this format",{className:"warn"})
         error=true;
     }
 
-if(barcodeChange==true){
+else if(barcodeChange==true){
         for(var i in addedData){
             var e = addedData[i];
             if(e.barcode.localeCompare(fileData[0].value)==0){
-                alert("same barcode has been entered already")
+                $("#customerDetail-form").notify("same barcode has been entered already",{className:"warn"})
                 error = true;
                 break;
             }

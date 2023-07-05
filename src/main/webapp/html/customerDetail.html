@@ -11,7 +11,7 @@
 
 
 
-<button type="button" class="btn btn-primary admin-element" data-toggle="modal" data-target="#exampleModal">
+<button type="button" class="btn btn-primary admin-element" data-toggle="modal" data-target="#exampleModal" style="margin-left:0.5em;">
     ADD ORDERS
 </button>
 
@@ -19,7 +19,7 @@
 
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"  data-keyboard="false" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -79,14 +79,14 @@
         <!-- Table -->
         <div class="col-12">
             <table class="table table-striped" id="customerDetail-table">
-<!--                <thead>-->
-<!--                <tr>-->
-<!--                    <th scope="col">Barcode</th>-->
-<!--                    <th scope="col">Mrp</th>-->
-<!--                    <th scope="col">Quantity</th>-->
-<!--                    <th scope="col">Actions</th>-->
-<!--                </tr>-->
-<!--                </thead>-->
+                <thead>
+                <tr>
+                    <th scope="col">Barcode</th>
+                    <th scope="col">Mrp</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
                 <tbody>
                 </tbody>
 
@@ -116,7 +116,7 @@
 
 
 <!--     CustomerDetail Edit Modal -->
-    <div class="modal" tabindex="-1" role="dialog" id="edit-customerDetail-modal">
+    <div class="modal" tabindex="-1" role="dialog" id="edit-customerDetail-modal" data-backdrop="static">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -162,7 +162,7 @@
 
 
     <!-- CustomerDetail Edit Modal -->
-    <div class="modal" tabindex="-1" role="dialog" id="upload-customerDetail-modal">
+    <div class="modal" tabindex="-1" role="dialog" id="upload-customerDetail-modal" data-backdrop="static">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
 
@@ -203,7 +203,7 @@
 
 <!--for the orderID-->
 </div>
-<h5>LIST OF ORDERS</h5>
+<h5  style="margin-left:0.5em;">LIST OF ORDERS</h5>
 <div class="col-12">
     <table class="table table-striped" id="orderid-list-table">
         <thead>
