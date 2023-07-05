@@ -11,6 +11,7 @@ import com.increff.employee.service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -87,11 +88,11 @@ public class OrderApiController {
         return d;
     }
 
-//    @ApiOperation(value = "Download Invoice")
-//    @GetMapping(path = "/invoice/{id}")
-//    public ResponseEntity<byte[]> getInvoicePDF(@PathVariable Integer id) throws Exception{
-//        return dto.getInvoicePDF(id);
-//    }
+    @ApiOperation(value = "Download Invoice")
+    @GetMapping(path = "/api/invoice/{id}")
+    public ResponseEntity<byte[]> getInvoicePDF(@PathVariable Integer id) throws Exception{
+        return service.getInvoicePDF(id);
+    }
 
 //    private OrderPojo convert(CategoryDetailForm f ,Integer orderPojoId) throws ApiException {
 //        OrderPojo p = new OrderPojo();

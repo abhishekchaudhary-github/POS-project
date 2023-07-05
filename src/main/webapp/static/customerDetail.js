@@ -7,6 +7,11 @@ function getCustomerDetailUrl(){
 	return baseUrl + "/api/orderitem";
 }
 
+function getInvoiceUrl(){
+	var baseUrl = $("meta[name=baseUrl]").attr("content")
+	return baseUrl + "/api/invoice";
+}
+
 
 function checkProduct(data, fileData) {
 var k =0;
@@ -434,7 +439,7 @@ function displayCustomerDetailList(data){
 	for(var i in data){
 		var e = data[i];
 		var buttonHtml = '<button onclick="orderDetail(' + e.id + ')">view details</button>'
-		buttonHtml += ' <button>generate invoice</button>'
+		buttonHtml += ' <button onclick="generateInvoice()">generate invoice</button>'
 		var row = '<tr>'
 		+ '<td>' + e.id + '</td>'
 		+'<td>' + e.time + '</td>'
@@ -444,6 +449,9 @@ function displayCustomerDetailList(data){
 	}
 }
 
+function generateInvoice() {
+    window.location.href = getInvoiceUrl()+'/'+'1';
+}
 
 function orderDetail(id) {
     var url = getCustomerDetailUrl();

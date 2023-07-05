@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 public class OrderDao extends AbstractDao {
 
-
+    private static String select_id = "select p from OrderPojo p where id=:id";
     private static String select_all = "select p from OrderPojo p";
 
     @PersistenceContext
@@ -30,5 +30,11 @@ public class OrderDao extends AbstractDao {
     public List<OrderPojo> selectAll() {
         TypedQuery<OrderPojo> query = getQuery(select_all, OrderPojo.class);
         return query.getResultList();
+    }
+
+    public OrderPojo orderById(Integer id) {
+        TypedQuery<OrderPojo> query = getQuery(select_id, OrderPojo.class);
+        query.setParameter("id", id);
+        return getSingle(query);
     }
 }

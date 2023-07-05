@@ -47,7 +47,9 @@ public class OrderItemService {
     public List<OrderItemPojo> getAll() {
         return dao.selectAll();
     }
-//
+
+    @Transactional
+    public List<OrderItemPojo> selectByOrderId(Integer id) {return dao.selectFromId(id);}
 //    @Transactional(rollbackOn  = ApiException.class)
 //    public void update(Integer id, OrderItemPojo p) throws ApiException {
 //        if(StringUtil.isEmpty(p.getOrderItem())) {
