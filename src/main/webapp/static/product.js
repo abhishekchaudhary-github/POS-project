@@ -17,51 +17,40 @@ function addProduct(event){
 
 //setting error class for error message and red field
     if(barcodeField==""){
-    	    $form.find('#inputBarcode').addClass('error');
-        	document.getElementById("errorMessageBarcode").style.visibility = "visible";
+    $("#inputBarcode").notify(
+          "field can not be empty",
+          { position:"top" }
+        );
     	    return
     	}
     if(brandField==""){
-    	    $form.find('#inputBrand').addClass('error');
-        	document.getElementById("errorMessageBrand").style.visibility = "visible";
+    $("#inputBrand").notify(
+              "field can not be empty",
+              { position:"top" }
+            );
     	    return
     	}
     if(mrpField==""){
-    	    $form.find('#inputMrp').addClass('error');
-        	document.getElementById("errorMessageMrp").style.visibility = "visible";
+    $("#inputMrp").notify(
+              "field can not be empty",
+              { position:"top" }
+            );
     	    return
     	}
     if(nameField==""){
-    	    $form.find('#inputName').addClass('error');
-        	document.getElementById("errorMessageName").style.visibility = "visible";
+    $("#inputName").notify(
+              "field can not be empty",
+              { position:"top" }
+            );
     	    return
     	}
     if(categoryField==""){
-        	    $form.find('#inputCategory').addClass('error');
-            	document.getElementById("errorMessageCategory").style.visibility = "visible";
+    $("#inputCategory").notify(
+                  "field can not be empty",
+                  { position:"top" }
+                );
         	    return
         	}
-
-        	$form.find('#inputBarcode').click(function() {
-                		$(this).removeClass('error');
-                	    document.getElementById("errorMessageBarcode").style.visibility = "hidden";
-                	});
-            $form.find('#inputBrand').click(function() {
-                		$(this).removeClass('error');
-                	    document.getElementById("errorMessageBrand").style.visibility = "hidden";
-                	});
-            $form.find('#inputMrp').click(function() {
-                		$(this).removeClass('error');
-                	    document.getElementById("errorMessageMrp").style.visibility = "hidden";
-                	});
-            $form.find('#inputName').click(function() {
-                		$(this).removeClass('error');
-                	    document.getElementById("errorMessageName").style.visibility = "hidden";
-                	});
-            $form.find('#inputCategory').click(function() {
-                		$(this).removeClass('error');
-                	    document.getElementById("errorMessageCategory").style.visibility = "hidden";
-                	});
 
 	$.ajax({
 	   url: url,
@@ -201,11 +190,11 @@ function displayProductList(data){
 //		var buttonHtml = '<button onclick="deleteProduct(' + e.id + ')">delete</button>'
 		var buttonHtml = ' <button onclick="displayEditProduct(' + e.id + ')" class="admin-element">edit</button>'
 		var row = '<tr>'
-		+ '<td>'  + e.barcode + '</td>'
-		+ '<td>'  + e.brand + '</td>'
+		+ '<td>'  + e.barcode.slice(0,10) + '</td>'
+		+ '<td>'  + e.brand.slice(0,10) + '</td>'
 		+ '<td>'  + e.category + '</td>'
 		+ '<td>'  + e.mrp + '</td>'
-		+ '<td>' + e.name + '</td>'
+		+ '<td>' + e.name.slice(0,10) + '</td>'
 		+ '<td>' + buttonHtml + '</td>'
 		+ '</tr>';
         $tbody.append(row);
