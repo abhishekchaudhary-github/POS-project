@@ -65,10 +65,14 @@ public class InventoryService {
         if(p.getQuantity()<0){
             throw new ApiException("quantity cannot be negative");
         }
-
+        //check if given product id exist
+        if(dao.getFromProductId(p.getProductId())!=null) {
+            throw new ApiException("given barcode already exists");
+        }
         //InventoryPojo tempPojo = getCheck(id);
             InventoryPojo temp = get(id);
             temp.setQuantity(p.getQuantity());
+            temp.setProductId(p.getProductId());
     }
 
 //    @Transactional

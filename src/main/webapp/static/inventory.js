@@ -11,21 +11,46 @@ function getInventoryUrl(){
 function addInventory(event){
 	//Set the values to update
 	var $form = $("#inventory-form");
+	var barcodeField = $form.find('#inputBarcode').val().trim()
+    var quantityField = $form.find('#inputQuantity').val().trim()
 	var json = toJson($form);
 	var url = getInventoryUrl();
+	if(barcodeField==""){
+    	$("#inputBarcode").notify(
+          "field can not be empty",
+          { position:"top" }
+        );
+    	    return
+    	}
+    if(quantityField==""){
+    	$("#inputQuantity").notify(
+          "field can not be empty",
+          { position:"top" }
+        );
+    	    return
+    	}
+
+    var postingData = {
+    	    barcode:barcodeField,
+    	    quantity:quantityField
+    	}
 
 	$.ajax({
 	   url: url,
 	   type: 'POST',
-	   data: json,
+	   data: JSON.stringify(postingData),
 	   headers: {
        	'Content-Type': 'application/json'
        },
 	   success: function(response) {
 	   		getInventoryList();
+	   		$form.find('#inputBarcode').val('');
+            $form.find('#inputQuantity').val('');
 	   },
 	   error: handleAjaxError
 	});
+
+
 
 	return false;
 }

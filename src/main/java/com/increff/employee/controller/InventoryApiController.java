@@ -60,7 +60,7 @@ public class InventoryApiController {
     private InventoryData convert(InventoryPojo p) throws ApiException {
         InventoryData d = new InventoryData();
         d.setQuantity(p.getQuantity());
-        d.setBarcode(productService.get(p.getId()).getBarcode());
+        d.setBarcode(productService.get(p.getProductId()).getBarcode());
         d.setId(p.getId());
         return d;
     }
