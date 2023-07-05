@@ -154,7 +154,7 @@ if(!checker) error = true
     	}
     	var confirmButton;
     if(addedData.length>0){
-            confirmButton = '<td>' + ' <button onclick="submitCustomerDetail(' + e.id + ')">confirm</button>' + '</td>'
+            confirmButton = '<td>' + ' <button onclick="submitCustomerDetail(' + e.id + ')" style="position: relative;left: -2px;">confirm</button>' + '</td>'
     	    $tbody.append(confirmButton)
     	}
 }
