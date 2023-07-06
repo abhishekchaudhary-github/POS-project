@@ -27,6 +27,8 @@ import com.increff.employee.util.UserPrincipal;
 
 import io.swagger.annotations.ApiOperation;
 
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 @Controller
 public class LoginController {
 
@@ -54,6 +56,8 @@ public class LoginController {
 		// Attach Authentication object to the Security Context
 		SecurityUtil.setAuthentication(authentication);
 		info.setRole(p.getRole());
+		// Store variables in the session
+//		session.setAttribute("role", p.getRole());
 		return new ModelAndView("redirect:/ui/home");
 
 	}
