@@ -450,7 +450,8 @@ function displayCustomerDetailList(data){
 }
 
 function generateInvoice(id) {
-    window.location.href = getInvoiceUrl()+'/'+id;
+      var invoiceUrl = getInvoiceUrl() + '/' + id;
+      window.open(invoiceUrl, '_blank');
 }
 
 function orderDetail(id) {
