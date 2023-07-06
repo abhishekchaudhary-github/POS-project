@@ -439,7 +439,7 @@ function displayCustomerDetailList(data){
 	for(var i in data){
 		var e = data[i];
 		var buttonHtml = '<button onclick="orderDetail(' + e.id + ')">view details</button>'
-		buttonHtml += ' <button onclick="generateInvoice()">generate invoice</button>'
+		buttonHtml += ' <button onclick="generateInvoice('+e.id+')">generate invoice</button>'
 		var row = '<tr>'
 		+ '<td>' + e.id + '</td>'
 		+'<td>' + e.time + '</td>'
@@ -449,8 +449,8 @@ function displayCustomerDetailList(data){
 	}
 }
 
-function generateInvoice() {
-    window.location.href = getInvoiceUrl()+'/'+'1';
+function generateInvoice(id) {
+    window.location.href = getInvoiceUrl()+'/'+id;
 }
 
 function orderDetail(id) {

@@ -83,27 +83,21 @@ public class OrderService {
     public InvoiceData generateInvoiceForOrder(Integer orderId) throws ApiException
     {
         InvoiceData invoiceData = new InvoiceData();
-        //OrderPojo orderPojo = dao.orderById(orderId);
-        //invoiceData.setOrderId(orderPojo.getId());
-        invoiceData.setOrderId(1);
-        //invoiceData.setPlacedDate(orderPojo.getTime().toString());
-        invoiceData.setPlacedDate("DATE");
-        //List<OrderItemPojo> orderItemPojoList = orderItemDataList.selectByOrderId(orderPojo.getId());
+        OrderPojo orderPojo = dao.orderById(orderId);
+        invoiceData.setOrderId(orderPojo.getId());
+        invoiceData.setPlacedDate(orderPojo.getTime().toString());
+        List<OrderItemPojo> orderItemPojoList = orderItemDataList.selectByOrderId(orderPojo.getId());
+
         List<OrderItem> orderItemList = new ArrayList<>();
-        //for(OrderItemPojo p: orderItemPojoList) {
-        for(int i =0;i<3;i++) {
+        for(OrderItemPojo p: orderItemPojoList) {
             OrderItem orderItem = new OrderItem();
-            //orderItem.setOrderItemId(p.getId());
-            orderItem.setOrderItemId(1);
-            //String productName = productService.getCheck(p.getProductId()).getName();
-            orderItem.setProductName("productName");
-            //orderItem.setQuantity(p.getQuantity());
-            orderItem.setQuantity(1);
-            //orderItem.setSellingPrice(p.getSellingPrice());
-            orderItem.setSellingPrice(1.1);
+            orderItem.setOrderItemId(p.getId());
+            String productName = productService.getCheck(p.getProductId()).getName();
+            orderItem.setProductName(productName);
+            orderItem.setQuantity(p.getQuantity());
+            orderItem.setSellingPrice(p.getSellingPrice());
             orderItemList.add(orderItem);
         }
-       // }
         invoiceData.setOrderItemDataList(orderItemList);
         return invoiceData;
     }

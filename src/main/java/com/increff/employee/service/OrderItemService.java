@@ -1,5 +1,6 @@
 package com.increff.employee.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -49,7 +50,16 @@ public class OrderItemService {
     }
 
     @Transactional
-    public List<OrderItemPojo> selectByOrderId(Integer id) {return dao.selectFromId(id);}
+    public List<OrderItemPojo> selectByOrderId(Integer id) {
+        List<OrderItemPojo> orderItemPojoList = dao.selectAll();
+        List<OrderItemPojo> orderItemPojoList2 = new ArrayList<OrderItemPojo>();
+        for(int i = 0; i< orderItemPojoList.size(); i++) {
+             if(orderItemPojoList.get(i).getOrderId()==id){
+                 orderItemPojoList2.add(orderItemPojoList.get(i));
+             }
+         }
+        return orderItemPojoList2;
+    }
 //    @Transactional(rollbackOn  = ApiException.class)
 //    public void update(Integer id, OrderItemPojo p) throws ApiException {
 //        if(StringUtil.isEmpty(p.getOrderItem())) {

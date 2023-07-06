@@ -36,7 +36,7 @@ public class OrderItemDao extends AbstractDao {
 //
     @Transactional
     public List<OrderItemPojo> selectFromId(Integer id) {
-        TypedQuery<com.increff.employee.pojo.OrderItemPojo> query = getQuery(select_id, com.increff.employee.pojo.OrderItemPojo.class);
+        TypedQuery<OrderItemPojo> query = getQuery(select_id, OrderItemPojo.class);
         query.setParameter("id", id);
         return query.getResultList();
     }
