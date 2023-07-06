@@ -172,7 +172,7 @@ function displayBrandList(data){
 		+ '</tr>';
         $tbody.append(row);
 	}
-	if($("#get-role").text().localeCompare("standard")==0) {
+	if($("#get-role").text().localeCompare("operator")==0) {
                 $(".admin-element").hide();
             }
 }
@@ -237,7 +237,7 @@ function init(){
 	$('#download-errors').click(downloadErrors);
     $('#brandFile').on('change', updateFileName)
     //hide all elements of class admin-element when role = standard
-    if($("#get-role").text().localeCompare("standard")==0) {
+    if($("#get-role").text().localeCompare("operator")==0) {
             $(".admin-element").hide();
         }
 }

@@ -34,9 +34,9 @@ public class SignupController {
         userPojo.setPassword(loginForm.getPassword());
         userPojo.setEmail(loginForm.getEmail());
         if(service.getById(1)==null)
-        userPojo.setRole("admin");
+        userPojo.setRole("supervisor");
         else
-            userPojo.setRole("standard");
+            userPojo.setRole("operator");
         return userPojo;
     }
 }

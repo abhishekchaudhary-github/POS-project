@@ -543,7 +543,7 @@ function init(){
 	$('#process-data').click(processData);
 	$('#download-errors').click(downloadErrors);
     $('#customerDetailFile').on('change', updateFileName)
-    	if($("#get-role").text().localeCompare("standard")==0) {
+    	if($("#get-role").text().localeCompare("operator")==0) {
                         $(".admin-element").hide();
                     }
 }
