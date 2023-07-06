@@ -439,7 +439,7 @@ function displayCustomerDetailList(data){
 	for(var i in data){
 		var e = data[i];
 		var buttonHtml = '<button onclick="orderDetail(' + e.id + ')">view details</button>'
-		buttonHtml += ' <button onclick="generateInvoice('+e.id+')">generate invoice</button>'
+		buttonHtml += ' <button onclick="generateInvoice('+e.id+')"  class="admin-element">generate invoice</button>'
 		var row = '<tr>'
 		+ '<td>' + e.id + '</td>'
 		+'<td>' + e.time + '</td>'
@@ -447,6 +447,9 @@ function displayCustomerDetailList(data){
 		+ '</tr>';
         $tbody.append(row);
 	}
+	if($("#get-role").text().localeCompare("operator")==0) {
+                     $(".admin-element").hide();
+                 }
 }
 
 function generateInvoice(id) {
