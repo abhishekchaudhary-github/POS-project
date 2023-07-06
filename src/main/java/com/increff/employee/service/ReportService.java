@@ -73,7 +73,9 @@ public class ReportService {
                 Integer quantity = 0 ;
                 for(ProductPojo productPojo : productPojoList ) {
                     if (productPojo.getBrand_category() == brandId) {
-                        quantity += inventoryService.getFromProductId(productPojo.getId()).getQuantity();
+                        InventoryPojo inventoryPojo = inventoryService.getFromProductId(productPojo.getId());
+                        if(inventoryPojo!=null)
+                        quantity += inventoryPojo.getQuantity();
                     }
                 }
                 //why productservice.brandCategory not working !!!!!
