@@ -14,7 +14,7 @@ function displaySalesReportList(data){
     		+ '<td>' + e.category + '</td>'
     		+ '<td>' + e.quantity  + '</td>'
     		+ '<td>' + e.revenue  + '</td>'
-    		+ '<td>' + '</tr>';
+    		+ '</tr>';
             $tbody.append(row);
     	}
     	var download = '<button onclick="listDownload()">' + 'Download' + '</button>'
@@ -24,16 +24,45 @@ function displaySalesReportList(data){
 }
 
 function listDownload() {
-var element = document.getElementById('sales-report-table');
-  var opt = {
-    filename: 'Sales Report.pdf',
-    margin: [10, 10, 10, 10],
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-  };
+var table = document.getElementById("sales-report-table");
+  var headerRow = table.getElementsByTagName("thead")[0].getElementsByTagName("tr")[0];
+  var rows = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
 
-  html2pdf().set(opt).from(element).save();
+  var tsvContent = "";
+  var headerCells = headerRow.getElementsByTagName("th");
+
+  // Add table header to TSV content
+  for (var i = 0; i < headerCells.length; i++) {
+    tsvContent += headerCells[i].innerText;
+    if (i < headerCells.length - 1) {
+      tsvContent += "\t"; // Use tab as the separator
+    }
+  }
+  tsvContent += "\n"; // Add a new line after the header
+
+  // Add table rows to TSV content
+  for (var i = 0; i < rows.length; i++) {
+    var cells = rows[i].getElementsByTagName("td");
+    for (var j = 0; j < cells.length; j++) {
+      tsvContent += cells[j].innerText;
+      if (j < cells.length - 1) {
+        tsvContent += "\t"; // Use tab as the separator
+      }
+    }
+    tsvContent += "\n"; // Add a new line after each row
+  }
+
+  // Create a hidden link element
+  var link = document.createElement("a");
+  link.setAttribute("href", "data:text/tsv;charset=utf-8," + encodeURIComponent(tsvContent));
+  link.setAttribute("download", "sales_report.tsv");
+  document.body.appendChild(link);
+
+  // Simulate a click event to trigger the download
+  link.click();
+
+  // Remove the link element from the DOM
+  document.body.removeChild(link);
 }
 
 function putValues() {
