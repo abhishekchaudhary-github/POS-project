@@ -434,22 +434,48 @@ function downloadErrors(){
 //UI DISPLAY METHODS
 
 function displayCustomerDetailList(data){
-	var $tbody = $('#orderid-list-table').find('tbody');
-	$tbody.empty();
-	for(var i in data){
-		var e = data[i];
-		var buttonHtml = '<button class="btn btn-info" onclick="orderDetail(' + e.id + ')"><i class="fa fa-eye"></i> Details</button>'
-		buttonHtml += ' <button class="btn btn-danger admin-element" onclick="generateInvoice('+e.id+')"><i class="fa fa-file-pdf-o"></i> Invoice</button>'
-		var row = '<tr>'
-		+ '<td>' + e.id + '</td>'
-		+'<td>' + e.time + '</td>'
-		+ '<td>' + buttonHtml + '</td>'
-		+ '</tr>';
-        $tbody.append(row);
-	}
-	if($("#get-role").text().localeCompare("operator")==0) {
-                     $(".admin-element").hide();
-                 }
+  var $table = $('#orderid-list-table');
+
+  // Destroy existing DataTable, if initialized
+  if ($.fn.DataTable.isDataTable($table)) {
+    $table.DataTable().destroy();
+  }
+
+  // Clear the table body
+  $table.find('tbody').empty();
+
+  // Populate the table with data
+  for (var i in data) {
+    var e = data[i];
+    var buttonHtml = '<button class="btn btn-info" onclick="orderDetail(' + e.id + ')"><i class="fa fa-eye"></i> Details</button>'
+      + ' <button class="btn btn-danger admin-element" onclick="generateInvoice(' + e.id + ')"><i class="fa fa-file-pdf-o"></i> Invoice</button>';
+    var row = '<tr>'
+      + '<td>' + e.id + '</td>'
+      + '<td>' + e.time + '</td>'
+      + '<td>' + buttonHtml + '</td>'
+      + '</tr>';
+    $table.find('tbody').append(row);
+  }
+
+  // Initialize DataTable
+  $table.DataTable({
+    "paging": true, // Enable pagination
+    "lengthChange": true, // Enable length change
+    "lengthMenu": [5, 10, 20], // Set the options for length change
+    "pageLength": 10, // Set the initial page length
+    "searching": false, // Disable search functionality
+    "ordering": false, // Disable sorting
+    "info": false, // Hide information display
+    "autoWidth": false, // Disable auto width calculation
+    "responsive": true, // Enable responsive mode
+    "columnDefs": [
+      { "targets": "_all", "className": "text-center" } // Center align all columns
+    ]
+  });
+
+  if ($("#get-role").text().localeCompare("operator") == 0) {
+    $(".admin-element").hide();
+  }
 }
 
 function generateInvoice(id) {
