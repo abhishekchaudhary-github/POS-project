@@ -3,6 +3,29 @@
 <html lang="en">
 
 <head th:replace="snippets.html :: name_head"></head>
+<style>
+  /* Hide the sorting arrow */
+  table.dataTable thead .sorting,
+table.dataTable thead .sorting_asc,
+table.dataTable thead .sorting_desc {
+  background-image: none !important;
+  padding-right: 0 !important;
+}
+
+table.dataTable thead .sorting::after,
+table.dataTable thead .sorting_asc::after,
+table.dataTable thead .sorting_desc::after {
+  display: none !important;
+}
+  }
+  table.dataTable {
+  border-collapse: separate;
+  border-spacing: 10px;
+}
+table.dataTable tbody tr:hover {
+  background-color: #e6e6e6;
+}
+</style>
 <link rel="stylesheet" href="../static/brand.css">
 <body>
 
@@ -47,13 +70,13 @@
 
         <!-- Table -->
         <div class="col-12">
-            <table class="table table-striped" id="brand-table">
+            <table class="table table-striped text-center" id="brand-table">
                 <thead>
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Brand</th>
-                    <th scope="col">Category</th>
-                    <th scope="col" class= "admin-element">Actions</th>
+                    <th scope="col text-center">ID</th>
+                    <th scope="col text-center">Brand</th>
+                    <th scope="col text-center">Category</th>
+                    <th scope="col text-center" class= "admin-element">Actions</th>
                 </tr>
                 </thead>
                 <tbody>

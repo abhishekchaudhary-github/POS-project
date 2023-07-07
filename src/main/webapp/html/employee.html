@@ -22,6 +22,9 @@ table.dataTable thead .sorting_desc::after {
   border-collapse: separate;
   border-spacing: 10px;
 }
+table.dataTable tbody tr:hover {
+  background-color: #e6e6e6;
+}
 </style>
 <body>
 
@@ -79,10 +82,10 @@ table.dataTable thead .sorting_desc::after {
 
  <!-- Table -->
  <div class="col-12">
-	<table class="table table-striped" id="employee-table">
+	<table class="table table-striped text-center" id="employee-table">
 	  <thead>
 	    <tr>
-	      <th scope="col">ID</th>
+	      <th scope="col text-center">ID</th>
 	      <th scope="col">Name</th>
 	      <th scope="col">Age</th>
 	      <th scope="col">Actions</th>

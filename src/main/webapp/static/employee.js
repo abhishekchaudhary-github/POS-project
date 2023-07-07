@@ -150,7 +150,7 @@ function displayEmployeeList(data){
       for (var i in data) {
         var e = data[i];
         var buttonHtml = '<button onclick="deleteEmployee(' + e.id + ')">delete</button>';
-        buttonHtml += ' <button onclick="displayEditEmployee(' + e.id + ')">edit</button>';
+        buttonHtml += ' <button class="btn btn-primary" onclick="displayEditEmployee(' + e.id + ')"><i class="fa fa-pencil"></i> </button>';
         var row = '<tr>'
           + '<td>' + e.id + '</td>'
           + '<td>' + e.name + '</td>'
@@ -164,7 +164,8 @@ function displayEmployeeList(data){
         $table.DataTable({
           "ordering": false
         });
-
+// Apply styles to table header cells
+  $table.find('th').css('text-align', 'center');
 }
 
 function displayEditEmployee(id){
