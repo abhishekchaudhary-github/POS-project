@@ -331,8 +331,8 @@ else if(barcodeChange==true){
 	}
 	for(var i in addedData){
     		var e = addedData[i];
-    		buttonHtml = ' <button onclick="displayEditCustomerDetail(' + i + ')">edit</button>'
-    		buttonHtml = buttonHtml + ' <button onclick="deleteEditCustomerDetail(' + i + ')">delete</button>'
+    		buttonHtml = ' <button onclick="displayEditCustomerDetail(' + i + ')" class="btn btn-primary"><i class="fa fa-pencil"></i></button>'
+            buttonHtml = buttonHtml + ' <button onclick="deleteEditCustomerDetail(' + i + ')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
     		var row = '<tr>'
     		+ '<td>' + e.barcode + '</td>' //barcode
     		+ '<td>'  + e.mrp + '</td>' //mrp
