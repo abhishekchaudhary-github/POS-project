@@ -1,5 +1,6 @@
 package com.increff.employee.dao;
 
+import com.increff.employee.pojo.BrandPojo;
 import com.increff.employee.pojo.DailyReportPojo;
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +16,10 @@ public class DailyReportDao extends AbstractDao{
     private static String select_all = "select p from DailyReportPojo p";
 
     private static String select_time = "select p from DailyReportPojo p where date>:startTime and date<:endTime";
+
+    private static String count_of_table = "select count(p.id) from DailyReportPojo p";
+
+    private static String select_id = "select p from DailyReportPojo p where id=:id";
     @PersistenceContext
     private EntityManager em;
 
@@ -30,5 +35,18 @@ public class DailyReportDao extends AbstractDao{
     public List<DailyReportPojo> select(LocalDateTime startTime, LocalDateTime endTime) {
         TypedQuery<DailyReportPojo> query = getQuery(select_time, DailyReportPojo.class);
         return query.getResultList();
+    }
+
+    public DailyReportPojo select(Integer id) {
+        TypedQuery<DailyReportPojo> query = getQuery(select_id, DailyReportPojo.class);
+        query.setParameter("id", id);
+        return getSingle(query);
+    }
+
+    public Integer selectLastId() {
+        //Caution!!!
+        TypedQuery<Long> query = getQuery(count_of_table, Long.class);
+        Long count = query.getSingleResult();
+        return count.intValue();
     }
 }

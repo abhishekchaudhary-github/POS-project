@@ -18,9 +18,24 @@ public class DailyReportService {
     public void add(DailyReportPojo p) throws ApiException {
         dao.insert(p);
     }
-
+    @Transactional
+    public List<DailyReportPojo> getAll() {
+        return dao.selectAll();
+    }
     @Transactional
     public List<DailyReportPojo> getAll(LocalDateTime startTime,LocalDateTime endTime) {
         return dao.select(startTime,endTime);
     }
+
+    @Transactional
+    public DailyReportPojo get(Integer id) {
+        return dao.select(id);
+    }
+
+
+    @Transactional
+    public Integer getLastId() {
+        return dao.selectLastId();
+    }
+
 }

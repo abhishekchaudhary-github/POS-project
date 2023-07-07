@@ -5,6 +5,7 @@ import com.increff.employee.dao.OrderItemDao;
 import com.increff.employee.model.InvoiceData;
 import com.increff.employee.model.OrderItem;
 import com.increff.employee.pojo.BrandPojo;
+import com.increff.employee.pojo.DailyReportPojo;
 import com.increff.employee.pojo.OrderItemPojo;
 import com.increff.employee.pojo.OrderPojo;
 import com.increff.employee.util.StringUtil;
@@ -28,6 +29,8 @@ import javax.transaction.Transactional;
 
 @Service
 public class OrderService {
+
+    private int orderItemCount;
     @Value("${invoice.url}")
     private String url;
 
@@ -43,6 +46,9 @@ public class OrderService {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private DailyReportService dailyReportService;
+
     @Transactional(rollbackOn = ApiException.class)
     public Integer add() throws ApiException {
         LocalDateTime timeOfOrder = timeOfOrderCreation();
@@ -51,6 +57,7 @@ public class OrderService {
         Integer orderId = dao.insert(orderPojo);
         return orderId;
     }
+
 
     @Transactional
     public List<OrderPojo> getAll() {
@@ -64,8 +71,9 @@ public class OrderService {
 //        String formattedDateTime = createdTime.format(currentDate);
         return dateTime;
     }
-
+    @Transactional
     public ResponseEntity<byte[]> getInvoicePDF(Integer id) throws Exception {
+        orderItemCount=0;
         InvoiceData invoiceData = generateInvoiceForOrder(id);
         RestTemplate restTemplate = new RestTemplate();
         System.out.println("before sending");
@@ -77,9 +85,15 @@ public class OrderService {
         headers.setContentDispositionFormData(filename, filename);
         headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
         ResponseEntity<byte[]> response = new ResponseEntity<>(contents, headers, HttpStatus.OK);
+        Integer lastId = dailyReportService.getLastId();
+        DailyReportPojo dailyReportPojo = dailyReportService.get(lastId);
+        dailyReportPojo.setTotal_invoice(dailyReportPojo.getTotal_invoice()+1);
+        Integer initialTotalInvoicedItems = dailyReportPojo.getTotal_invoiced_items();
+        dailyReportPojo.setTotal_invoiced_items(initialTotalInvoicedItems+orderItemCount);
         return response;
     }
 
+    @Transactional
     public InvoiceData generateInvoiceForOrder(Integer orderId) throws ApiException
     {
         InvoiceData invoiceData = new InvoiceData();
@@ -90,6 +104,7 @@ public class OrderService {
 
         List<OrderItem> orderItemList = new ArrayList<>();
         for(OrderItemPojo p: orderItemPojoList) {
+            orderItemCount ++;
             OrderItem orderItem = new OrderItem();
             orderItem.setOrderItemId(p.getId());
             String productName = productService.getCheck(p.getProductId()).getName();
