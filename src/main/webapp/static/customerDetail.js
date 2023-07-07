@@ -489,7 +489,6 @@ function orderDetail(id) {
     	   url: url,
     	   type: 'GET',
     	   success: function(data) {
-    	   console.log(data[0].orderId);
     	        var $tbody = $('#order-detail-modal-body').find('tbody')
     	        $tbody.empty()
                 for(var i in data) {
@@ -498,7 +497,7 @@ function orderDetail(id) {
                             var cost = e.sellingPrice * e.quantity;
                             var row =
                             '<tr>'+
-                            '<td>'  + e.barcode + '</td>' +
+                            '<td>'  + e.name + '</td>' +
                             '<td>'  + e.quantity + '</td>' +
                             '<td>'  + e.sellingPrice + '</td>' +
                             '<td>'  + cost + '</td>' +

@@ -7,6 +7,8 @@ public class OrderItemForm {
     private Double sellingPrice;
     private String barcode;
 
+    private String name;
+
     public Integer getOrderId() {
         return orderId;
     }
@@ -45,5 +47,13 @@ public class OrderItemForm {
 
     public void setBarcode(String barcode) {
         this.barcode = barcode;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

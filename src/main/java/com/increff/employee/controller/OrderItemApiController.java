@@ -88,6 +88,7 @@ public class OrderItemApiController {
         d.setQuantity(p.getQuantity());
         d.setSellingPrice(p.getSellingPrice());
         d.setBarcode(productPojo.getBarcode());
+        d.setName(productPojo.getName());
         d.setId(p.getId());
         return d;
     }
