@@ -3,7 +3,29 @@
 <html lang="en">
 
 <head th:replace="snippets.html :: name_head"></head>
+<style>
+  /* Hide the sorting arrow */
+  table.dataTable thead .sorting,
+table.dataTable thead .sorting_asc,
+table.dataTable thead .sorting_desc {
+  background-image: none !important;
+  padding-right: 0 !important;
+}
 
+table.dataTable thead .sorting::after,
+table.dataTable thead .sorting_asc::after,
+table.dataTable thead .sorting_desc::after {
+  display: none !important;
+}
+  }
+  table.dataTable {
+  border-collapse: separate;
+  border-spacing: 10px;
+}
+table.dataTable tbody tr:hover {
+  background-color: #e6e6e6;
+}
+</style>
 <body>
 
 <nav th:replace="snippets.html :: name_app_navbar"></nav>
@@ -63,7 +85,7 @@
 <!--                        <input type="text" class="form-control" name="quantity" id="inputQuantity" placeholder="enter quantity">-->
                     </div>
                 </div>
-                        <div class="btn btn-success col-sm-4 "  id="add-customerDetail" style="margin-left:0.9em"><i class="fa fa-plus"></i>Add</div>
+                        <div class="btn btn-success col-sm-4 "  id="add-customerDetail" style="margin-left:0.9em"><i class="fa fa-plus"></i></div>
             </form>
         </div>
     </div>
@@ -77,13 +99,12 @@
 
         <!-- Table -->
         <div class="col-12">
-            <table class="table table-striped" id="customerDetail-table">
+            <table class="table table-striped text-center" id="customerDetail-table">
                 <thead>
                 <tr>
                     <th scope="col">Barcode</th>
                     <th scope="col">Mrp</th>
                     <th scope="col">Quantity</th>
-                    <th scope="col">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -209,6 +230,7 @@
         <tr>
             <th scope="col">Barcode</th>
             <th scope="col">Creation Time</th>
+            <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody id="order-display-table">

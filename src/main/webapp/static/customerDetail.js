@@ -142,8 +142,8 @@ if(!checker) error = true
 	}
 	for(var i in addedData){
     		var e = addedData[i];
-    		buttonHtml = ' <button onclick="displayEditCustomerDetail(' + i + ')">edit</button>'
-    		buttonHtml = buttonHtml + ' <button onclick="deleteEditCustomerDetail(' + i + ')">delete</button>'
+    		buttonHtml = ' <button onclick="displayEditCustomerDetail(' + i + ')" class="btn btn-primary"><i class="fa fa-pencil"></i></button>'
+    		buttonHtml = buttonHtml + ' <button onclick="deleteEditCustomerDetail(' + i + ')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
     		var row = '<tr>'
     		+ '<td>' + e.barcode + '</td>' //barcode
     		+ '<td>'  + e.mrp + '</td>' //mrp
@@ -171,8 +171,8 @@ function DisplayAddedData(){
     	$tbody.empty()
     	for(var i in addedData){
             		var e = addedData[i];
-            		buttonHtml = ' <button onclick="displayEditCustomerDetail(' + i + ')">edit</button>'
-            		buttonHtml = buttonHtml + ' <button onclick="deleteEditCustomerDetail(' + i + ')">delete</button>'
+            		buttonHtml = ' <button onclick="displayEditCustomerDetail(' + i + ')" class="btn btn-primary"><i class="fa fa-pencil"></i></button>'
+                        		buttonHtml = buttonHtml + ' <button onclick="deleteEditCustomerDetail(' + i + ')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
             		var row = '<tr>'
             		+ '<td>' + e.barcode + '</td>' //barcode
             		+ '<td>'  + e.mrp + '</td>' //mrp
@@ -439,7 +439,7 @@ function displayCustomerDetailList(data){
 	for(var i in data){
 		var e = data[i];
 		var buttonHtml = '<button class="btn btn-info" onclick="orderDetail(' + e.id + ')"><i class="fa fa-eye"></i> Details</button>'
-		buttonHtml += ' <button class="btn btn-info admin-element" onclick="generateInvoice('+e.id+')"><i class="fa fa-file-pdf-o"></i> Invoice</button>'
+		buttonHtml += ' <button class="btn btn-danger admin-element" onclick="generateInvoice('+e.id+')"><i class="fa fa-file-pdf-o"></i> Invoice</button>'
 		var row = '<tr>'
 		+ '<td>' + e.id + '</td>'
 		+'<td>' + e.time + '</td>'
