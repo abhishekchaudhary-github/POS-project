@@ -438,8 +438,8 @@ function displayCustomerDetailList(data){
 	$tbody.empty();
 	for(var i in data){
 		var e = data[i];
-		var buttonHtml = '<button onclick="orderDetail(' + e.id + ')">view details</button>'
-		buttonHtml += ' <button onclick="generateInvoice('+e.id+')"  class="admin-element">generate invoice</button>'
+		var buttonHtml = '<button class="btn btn-info" onclick="orderDetail(' + e.id + ')"><i class="fa fa-eye"></i> Details</button>'
+		buttonHtml += ' <button class="btn btn-info admin-element" onclick="generateInvoice('+e.id+')"><i class="fa fa-file-pdf-o"></i> Invoice</button>'
 		var row = '<tr>'
 		+ '<td>' + e.id + '</td>'
 		+'<td>' + e.time + '</td>'
