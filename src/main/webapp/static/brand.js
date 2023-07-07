@@ -161,24 +161,47 @@ function downloadErrors(){
 //UI DISPLAY METHODS
 
 function displayBrandList(data){
-	var $tbody = $('#brand-table').find('tbody');
-	$tbody.empty();
-	for(var i in data){
-		var e = data[i];
-		//var buttonHtml = '<button onclick="deletebrand(' + e.id + ')">delete</button>'
-		var buttonHtml = ''
-		buttonHtml += ' <button class="btn btn-primary admin-element"  onclick="displayEditBrand(' + e.id + ')"><i class="fa fa-pencil"></i></button>'
-		var row = '<tr>'
-		+ '<td>' + e.id + '</td>'
-		+ '<td>' + e.brand.slice(0,14) + '</td>'
-		+ '<td>' + e.category.slice(0,14) + '</td>'
-		+ '<td>' + buttonHtml + '</td>'
-		+ '</tr>';
-        $tbody.append(row);
-	}
-	if($("#get-role").text().localeCompare("operator")==0) {
-                $(".admin-element").hide();
-            }
+	 var $table = $('#brand-table');
+
+      // Destroy existing DataTable, if initialized
+      if ($.fn.DataTable.isDataTable($table)) {
+        $table.DataTable().destroy();
+      }
+
+      // Clear the table body
+      $table.find('tbody').empty();
+
+      // Populate the table with data
+      for (var i in data) {
+        var e = data[i];
+        var buttonHtml = '<button class="btn btn-primary admin-element" onclick="displayEditBrand(' + e.id + ')"><i class="fa fa-pencil"></i></button>';
+        var row = '<tr>'
+          + '<td>' + e.id + '</td>'
+          + '<td>' + e.brand.slice(0, 14) + '</td>'
+          + '<td>' + e.category.slice(0, 14) + '</td>'
+          + '<td>' + buttonHtml + '</td>'
+          + '</tr>';
+        $table.find('tbody').append(row);
+      }
+
+      // Initialize DataTable
+      $table.DataTable({
+        "paging": true, // Enable pagination
+         "lengthMenu": [5, 10, 20], // Set the options for length change
+         "pageLength": 5, // Set the initial page length
+        "lengthChange": true, // Hide the page length options
+        "searching": true, // Enable search functionality
+        "ordering": false, // Disable sorting
+        "info": false, // Hide information display
+        "autoWidth": true, // Disable auto width calculation
+        "responsive": true // Enable responsive mode
+      });
+
+      if ($("#get-role").text().localeCompare("operator") == 0) {
+        $(".admin-element").hide();
+      }
+      // Apply styles to table header cells
+        $table.find('th').css('text-align', 'center');
 }
 
 function displayEditBrand(id){
@@ -192,6 +215,7 @@ function displayEditBrand(id){
 	   error: handleAjaxError
 	});
 }
+
 
 function resetUploadDialog(){
 	//Reset file name
