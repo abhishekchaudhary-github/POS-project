@@ -186,6 +186,9 @@ function DisplayAddedData(){
                     confirmButton = '<td>' + ' <button onclick="submitCustomerDetail(' + e.id + ')">confirm</button>' + '</td>'
             	    $tbody.append(confirmButton)
             	}
+            	$('#inputBarcode').val('');
+                $('#inputMrp').val('');
+                $('#inputQuantity').val('');
         	return false;
 }
 
@@ -206,12 +209,10 @@ function submitCustomerDetail(){
     	   headers: {
            	'Content-Type': 'application/json'
            },
-    	   success: console.log("posted")
-    	  ,
+    	   success: function() { location.reload(); },
     	   error: handleAjaxError
     	});
 //refresh the page
-location.reload();
 }
 
 function updateCustomerDetail(event){

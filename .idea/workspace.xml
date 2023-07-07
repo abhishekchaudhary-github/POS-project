@@ -5,16 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd59bcda-ea0a-45cb-bbdf-b0788f0265bb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/increff/employee/brand.tsv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/increff/employee/brand2.tsv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/ReportController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/ReportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/ReportService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/increff/employee/inventory.tsv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/increff/employee/inventory.tsv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/employee.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/employee.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/snippets.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/snippets.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/brand.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/brand.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/employee.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/employee.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/customerDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/customerDetail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/customerDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/customerDetail.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,8 +17,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -65,8 +58,8 @@
   },
   &quot;keyToStringList&quot;: {
     &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;CSS&quot;,
       &quot;JavaScript&quot;,
+      &quot;CSS&quot;,
       &quot;JShellLanguage&quot;
     ]
   }
