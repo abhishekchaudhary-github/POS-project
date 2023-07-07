@@ -136,20 +136,35 @@ function downloadErrors(){
 //UI DISPLAY METHODS
 
 function displayEmployeeList(data){
-	var $tbody = $('#employee-table').find('tbody');
-	$tbody.empty();
-	for(var i in data){
-		var e = data[i];
-		var buttonHtml = '<button onclick="deleteEmployee(' + e.id + ')">delete</button>'
-		buttonHtml += ' <button onclick="displayEditEmployee(' + e.id + ')">edit</button>'
-		var row = '<tr>'
-		+ '<td>' + e.id + '</td>'
-		+ '<td>' + e.name + '</td>'
-		+ '<td>'  + e.age + '</td>'
-		+ '<td>' + buttonHtml + '</td>'
-		+ '</tr>';
-        $tbody.append(row);
-	}
+	 var $table = $('#employee-table');
+
+      // Destroy existing DataTable, if initialized
+      if ($.fn.DataTable.isDataTable($table)) {
+        $table.DataTable().destroy();
+      }
+
+      // Clear the table body
+      $table.find('tbody').empty();
+
+      // Populate the table with data
+      for (var i in data) {
+        var e = data[i];
+        var buttonHtml = '<button onclick="deleteEmployee(' + e.id + ')">delete</button>';
+        buttonHtml += ' <button onclick="displayEditEmployee(' + e.id + ')">edit</button>';
+        var row = '<tr>'
+          + '<td>' + e.id + '</td>'
+          + '<td>' + e.name + '</td>'
+          + '<td>' + e.age + '</td>'
+          + '<td>' + buttonHtml + '</td>'
+          + '</tr>';
+        $table.find('tbody').append(row);
+      }
+
+      // Initialize DataTable with sorting disabled
+        $table.DataTable({
+          "ordering": false
+        });
+
 }
 
 function displayEditEmployee(id){

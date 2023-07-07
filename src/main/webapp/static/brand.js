@@ -116,6 +116,10 @@ function readFileDataCallback(results){
 }
 
 function uploadRows(){
+    if(fileData.length>5000){
+        $("#upload-brand-modal").notify("try a smaller file size",{className:"warn"})
+        return;
+    }
 	//Update progress
 	updateUploadDialog();
 	//If everything processed then return
@@ -206,6 +210,9 @@ function updateUploadDialog(){
 	$('#rowCount').html("" + fileData.length);
 	$('#processCount').html("" + processCount);
 	$('#errorCount').html("" + errorData.length);
+	if(errorData.length==0) {
+	    $("#upload-brand-modal").notify("uploaded successfully",{className:"success"})
+	}
 }
 
 function updateFileName(){

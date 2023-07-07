@@ -34,6 +34,9 @@ public class ReportService {
     @Autowired
     private InventoryService inventoryService;
 
+    @Autowired
+    private DailyReportService dailyReportService;
+
 
     @Transactional
     public List<BrandData> getBrandReport(BrandForm form) throws ApiException {
@@ -54,6 +57,13 @@ public class ReportService {
         return brandDataList;
     }
 
+    @Transactional
+    public List<DailyReportPojo> getDailySalesReport(DailyReportForm form) throws ApiException {
+        LocalDateTime startTime1 = convertTime(form.getStartTime());
+        LocalDateTime endTime1 = convertTime(form.getEndTime());
+        List<DailyReportPojo> dailyReportPojoList = dailyReportService.getAll(startTime1, endTime1);
+        return dailyReportPojoList;
+    }
     @Transactional
     public List<InventoryReportData> getInventoryReport(BrandForm form) throws ApiException {
         String brand = form.getBrand();
@@ -143,14 +153,14 @@ public class ReportService {
     private void AddInHashmap(HashMap<Integer,SalesReportData> hm,SalesReportData salesReportData,Integer key,String brand,String category,OrderItemPojo orderItem,BrandPojo brandPojo) {
         if (!hm.containsKey(key)) {
 
-                            salesReportData.setBrand(brandPojo.getBrand());
-                            salesReportData.setCategory(brandPojo.getCategory());
+                        salesReportData.setBrand(brandPojo.getBrand());
+                        salesReportData.setCategory(brandPojo.getCategory());
                         salesReportData.setCategory(brandPojo.getCategory());
                         salesReportData.setRevenue(orderItem.getSellingPrice());
                         salesReportData.setQuantity(orderItem.getQuantity());
                         hm.put(key, salesReportData);
                     } else {
-                            salesReportData.setBrand(brandPojo.getBrand());
+                        salesReportData.setBrand(brandPojo.getBrand());
                         salesReportData.setCategory(brandPojo.getCategory());
                         salesReportData.setRevenue(orderItem.getSellingPrice());
                         Integer quantitySum = hm.get(key).getQuantity();

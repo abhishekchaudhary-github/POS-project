@@ -1,6 +1,8 @@
 package com.increff.employee.controller;
 
 import com.increff.employee.model.*;
+import com.increff.employee.pojo.BrandPojo;
+import com.increff.employee.pojo.DailyReportPojo;
 import com.increff.employee.service.ApiException;
 //import com.increff.employee.service.BrandReportService;
 import com.increff.employee.service.ReportService;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Api
@@ -35,6 +38,17 @@ public class ReportController {
     public List<BrandData> getBrandReport(@RequestBody BrandForm form) throws ApiException {
         return reportService.getBrandReport(form);
     }
+    @ApiOperation(value = "gives daily sales report")
+    @RequestMapping(path = "/api/dailyreport", method = RequestMethod.POST)
+    public List<DailyReportData> getBrandReport(@RequestBody DailyReportForm form) throws ApiException {
+        List<DailyReportPojo> list = reportService.getDailySalesReport(form);
+        List<DailyReportData> list2 = new ArrayList<DailyReportData>();
+        for (DailyReportPojo p : list) {
+            list2.add(convertDailySalesReport(p));
+        }
+        return list2;
+    }
+
 
     @ApiOperation(value = "gives inventory report")
     @RequestMapping(path = "/api/inventoryreport", method = RequestMethod.POST)
@@ -42,6 +56,13 @@ public class ReportController {
         return reportService.getInventoryReport(form);
     }
 
+    private static DailyReportData convertDailySalesReport(DailyReportPojo f) {
+        DailyReportData p = new DailyReportData();
+        p.setDate(f.getDate().toString());
+        p.setInvoiced_items_count(f.getInvoiced_items_count());
+        p.setInvoiced_orders_count(f.getInvoiced_orders_count());
+        return p;
+    }
 
 
 }

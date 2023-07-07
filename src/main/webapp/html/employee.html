@@ -3,9 +3,26 @@
 <html lang="en">
 
 <head th:replace="snippets.html :: name_head"></head>
+<style>
+  /* Hide the sorting arrow */
+  table.dataTable thead .sorting,
+table.dataTable thead .sorting_asc,
+table.dataTable thead .sorting_desc {
+  background-image: none !important;
+  padding-right: 0 !important;
+}
 
-
-
+table.dataTable thead .sorting::after,
+table.dataTable thead .sorting_asc::after,
+table.dataTable thead .sorting_desc::after {
+  display: none !important;
+}
+  }
+  table.dataTable {
+  border-collapse: separate;
+  border-spacing: 10px;
+}
+</style>
 <body>
 
 <nav th:replace="snippets.html :: name_app_navbar"></nav>
@@ -18,6 +35,7 @@
 			<div class="col-md-4 mb-3">
 				<label for="inputNami">Name</label>
 				<input type="text" class="form-control" id="inputNami" placeholder="Enter name">
+				<small class="text-danger d-none" id="nameError">Please enter a name.</small>
 				<small class="text-danger d-none" id="nameError">Please enter a name.</small>
 			</div>
 		</div>

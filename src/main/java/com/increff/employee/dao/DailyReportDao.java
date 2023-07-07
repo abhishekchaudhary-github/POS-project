@@ -7,11 +7,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
 public class DailyReportDao extends AbstractDao{
-    private static String select_all = "select p from SchedulerPojo p";
+    private static String select_all = "select p from DailyReportPojo p";
+
+    private static String select_time = "select p from DailyReportPojo p where date>:startTime and date<:endTime";
     @PersistenceContext
     private EntityManager em;
 
@@ -24,5 +27,8 @@ public class DailyReportDao extends AbstractDao{
         TypedQuery<DailyReportPojo> query = getQuery(select_all, DailyReportPojo.class);
         return query.getResultList();
     }
-
+    public List<DailyReportPojo> select(LocalDateTime startTime, LocalDateTime endTime) {
+        TypedQuery<DailyReportPojo> query = getQuery(select_time, DailyReportPojo.class);
+        return query.getResultList();
+    }
 }
