@@ -154,7 +154,7 @@ if(!checker) error = true
     	}
     	var confirmButton;
     if(addedData.length>0){
-            confirmButton = '<td>' + ' <button onclick="submitCustomerDetail(' + e.id + ')" style="position: relative;left: -2px;">confirm</button>' + '</td>'
+            confirmButton = '<td>' + ' <button onclick="submitCustomerDetail(' + e.id + ')" class="btn btn-success"><i class="fa fa-check"></i> Confirm</button>' + '</td>'
     	    $tbody.append(confirmButton)
     	}
 }
@@ -463,7 +463,7 @@ function displayCustomerDetailList(data){
     "lengthChange": true, // Enable length change
     "lengthMenu": [5, 10, 20], // Set the options for length change
     "pageLength": 5, // Set the initial page length
-    "searching": false, // Disable search functionality
+    "searching": true, // Disable search functionality
     "ordering": false, // Disable sorting
     "info": false, // Hide information display
     "autoWidth": false, // Disable auto width calculation
