@@ -3,7 +3,29 @@
 <html lang="en">
 
 <head th:replace="snippets.html :: name_head"></head>
+<style>
+  /* Hide the sorting arrow */
+  table.dataTable thead .sorting,
+table.dataTable thead .sorting_asc,
+table.dataTable thead .sorting_desc {
+  background-image: none !important;
+  padding-right: 0 !important;
+}
 
+table.dataTable thead .sorting::after,
+table.dataTable thead .sorting_asc::after,
+table.dataTable thead .sorting_desc::after {
+  display: none !important;
+}
+  }
+  table.dataTable {
+  border-collapse: separate;
+  border-spacing: 10px;
+}
+table.dataTable tbody tr:hover {
+  background-color: #e6e6e6;
+}
+</style>
 <body>
 
 <nav th:replace="snippets.html :: name_app_navbar"></nav>
@@ -49,7 +71,7 @@
 
         <!-- Table -->
         <div class="col-12">
-            <table class="table table-striped" id="inventory-table">
+            <table class="table table-striped text-center" id="inventory-table">
                 <thead>
                 <tr>
                     <th scope="col">Barcode</th>
@@ -93,7 +115,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="form-inline" id="inventory-edit-form">
+                    <form class="form" id="inventory-edit-form">
                         <div class="form-group" style="margin-bottom:1.5em">
                             <label for="inputBarcode" class="col-sm-2 col-form-label">Barcode</label>
                             <div class="col-sm-10">
@@ -110,8 +132,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="update-inventory">Update</button>
+                    <button class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                    <button class="btn btn-warning" id="update-inventory"><i class="fa fa-refresh"></i> Update</button>
                 </div>
             </div>
         </div>
