@@ -40,7 +40,7 @@
     <!-- Top row with form-->
     <div class="row admin-element">
         <div class="col-12">
-            <form class="form-inline" id="customerDetail-form">
+            <form class="form" id="customerDetail-form">
 
                 <div class="form-group"  style="margin-top:1.5em">
                     <label for="inputBarcode" class="col-sm-2 col-form-label">Barcode</label>
@@ -51,7 +51,7 @@
                 <div class="form-group"  style="margin-top:1.5em">
                     <label for="inputMrp" class="col-sm-2 col-form-label">Mrp</label>
                     <div class="col-sm-10">
-                        <input  type="number" class="form-control" name="mrp" min="0" step="0.1" oninput="validity.valid||(value='');" id="inputMrp" placeholder="enter mrp" style="margin-left:0.3em">
+                        <input  type="number" class="form-control" name="mrp" min="0" step="0.1" oninput="validity.valid||(value='');" id="inputMrp" placeholder="enter mrp">
 <!--                        <input type="text" class="form-control" name="mrp" id="inputMrp" placeholder="enter mrp">-->
                     </div>
                 </div>
@@ -63,8 +63,7 @@
 <!--                        <input type="text" class="form-control" name="quantity" id="inputQuantity" placeholder="enter quantity">-->
                     </div>
                 </div>
-              <button type="button" class="btn btn-primary" id="add-customerDetail"  style="margin-top:1.5em">Add</button>
-                &nbsp;
+                        <div class="btn btn-success col-sm-4 "  id="add-customerDetail" style="margin-left:0.9em"><i class="fa fa-plus"></i>Add</div>
             </form>
         </div>
     </div>
