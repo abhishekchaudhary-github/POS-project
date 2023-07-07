@@ -462,7 +462,7 @@ function displayCustomerDetailList(data){
     "paging": true, // Enable pagination
     "lengthChange": true, // Enable length change
     "lengthMenu": [5, 10, 20], // Set the options for length change
-    "pageLength": 10, // Set the initial page length
+    "pageLength": 5, // Set the initial page length
     "searching": false, // Disable search functionality
     "ordering": false, // Disable sorting
     "info": false, // Hide information display
