@@ -27,17 +27,22 @@ public class Scheduler {
         LocalDateTime time = LocalDateTime.now();
         DailyReportPojo dailyReportPojo = new DailyReportPojo();
         dailyReportPojo.setDate(time);
-        //CHANGE LATER INVOICE
-        dailyReportPojo.setInvoiced_items_count(0);
-        LocalDateTime timeOfPreviousDay = time.minus(1, ChronoUnit.DAYS);
-//        List<OrderPojo> orderPojoList = reportService.getOrdersByTime(timeOfPreviousDay,time);
-//
-//        List<OrderItemPojo> orderItemPojoBigList = new ArrayList<OrderItemPojo>();
-//        for(OrderPojo orderPojo : orderPojoList){
-//            List<OrderItemPojo> orderItemPojoList = reportService.getOrderItemByOrderId(orderPojo.getId());
-//            orderItemPojoBigList.addAll(orderItemPojoList);
-//        }
+        Integer lastId = dailyReportService.getLastId();
+        if(lastId==null||lastId==0) {
+            throw new ApiException("database altered");
+        }
+        if(lastId==1){
+            DailyReportPojo dailyReportPojo2 = dailyReportService.get(lastId);
+            dailyReportPojo.setInvoiced_items_count(dailyReportPojo2.getTotal_invoice());
+            dailyReportPojo.setInvoiced_orders_count(dailyReportPojo2.getInvoiced_orders_count());
+        }
 
+        else {
+            DailyReportPojo dailyReportPojo1 = dailyReportService.get(lastId-1);
+            DailyReportPojo dailyReportPojo2 = dailyReportService.get(lastId);
+            dailyReportPojo.setInvoiced_items_count(dailyReportPojo2.getTotal_invoice()-dailyReportPojo1.getTotal_invoice());
+            dailyReportPojo.setInvoiced_orders_count(dailyReportPojo2.getInvoiced_orders_count()-dailyReportPojo1.getInvoiced_orders_count());
+        }
         dailyReportService.add(dailyReportPojo);
     }
 }
