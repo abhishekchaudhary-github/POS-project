@@ -87,7 +87,9 @@ public class ProductApiController {
     private ProductPojo convert(ProductForm f) throws ApiException {
         ProductPojo p = new ProductPojo();
         p.setName(f.getName());
+        if(service.barcodeMustExist(f.getBarcode())==null)
         p.setBarcode(f.getBarcode());
+        else throw new ApiException("Barcode Already exists");
         BrandPojo brandPojo = brandService.getId(f.getBrand(),f.getCategory());
         if(brandPojo==null){
             throw new ApiException("this item does not exist");

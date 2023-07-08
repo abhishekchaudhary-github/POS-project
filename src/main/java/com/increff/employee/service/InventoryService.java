@@ -20,6 +20,9 @@ public class InventoryService {
     @Transactional(rollbackOn = ApiException.class)
     public void add(InventoryPojo inventoryPojo) throws ApiException {
         if(dao.select(inventoryPojo.getProductId())==null) {
+            if(inventoryPojo.getQuantity()<1){
+                throw new ApiException("quantity can't be less than 1");
+            }
             dao.insert(inventoryPojo);
         }
         else {
@@ -62,11 +65,14 @@ public class InventoryService {
         if(p.getQuantity()==null) {
             throw new ApiException("field cannot be empty");
         }
-        if(p.getQuantity()<0){
-            throw new ApiException("quantity cannot be negative");
+        if(p.getQuantity()<1){
+            throw new ApiException("quantity cannot be less than 1");
         }
         //check if given product id exist
-        if(dao.getFromProductId(p.getProductId())!=null) {
+        if(dao.getFromProductId(p.getProductId())==null){
+
+        }
+        else if(!dao.getFromProductId(p.getProductId()).equals(dao.select(id)) && dao.getFromProductId(p.getProductId())!=null) {
             throw new ApiException("given barcode already exists");
         }
         //InventoryPojo tempPojo = getCheck(id);
