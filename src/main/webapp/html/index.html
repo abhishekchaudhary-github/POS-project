@@ -3,29 +3,244 @@
 <html lang="en">
 
 <head th:replace="snippets.html :: name_head"></head>
+<style>
+
+    *,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+.landing {
+  min-height: 100%;
+}
+
+.landing {
+  background: #100F1D;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+body {&::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    opacity: 0.9;
+  }}
+
+
+
+/*--------------------
+Landing
+--------------------*/
+.landing {
+  position: relative;
+  z-index: 2;
+  width: 710px;
+  height: 520px;
+  margin: 25px auto;
+  box-shadow: 0 3px 30px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+
+  & .logo svg {
+    fill: #1E1C45;
+  }
+
+  & .base {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    padding: 38px;
+    color: #082352;
+    background: #fff;
+  }
+
+  & .image {
+    display: none;
+  }
+
+}
+
+
+/*--------------------
+Copy
+--------------------*/
+.copy {
+  position: relative;
+  z-index: 2;
+
+  & .title {
+    font-size: 69px;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 30px;
+  margin-left: -3px;
+  background-image: linear-gradient(45deg, #C4DFDF, #C4DFDF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+    & small {
+      font-size: 18px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-top: 50px;
+      line-height: 1;
+      display: block;
+      text-indent: 3px;
+    }
+  }
+
+  & .text {
+    color: #282652;
+    width: 400px;
+    font-size: 110%;
+  }
+
+  & .cta {
+   cursor: pointer;
+  margin-top: 40px;
+  background: linear-gradient(25deg, #C4DFDF, #C4DFDF);
+  color: #000000; /* Black text color */
+  text-transform: uppercase;
+  display: inline-block;
+  border-radius: 30px;
+  text-decoration: none;
+  padding: 10px 30px;
+  font-weight: 600;
+  margin-left:1.5em;
+  }
+
+}
+
+
+/*--------------------
+Overlay
+--------------------*/
+.base.overlay {
+  z-index: 2;
+  clip-path: polygon(375px 0, 710px 0, 710px 530px, 469px 530px);
+  color: #fff;
+  background: linear-gradient(45deg, #C4DFDF, #C4DFDF);
+  transition: all .6s ease-in-out;
+  transform-origin: 0 0;
+
+  &.over {
+    clip-path: polygon(-1750px 0, 710px 0, 710px 630px, 0 710px);
+  }
+
+  & .logo svg {
+    fill: #fff;
+  }
+
+  & .image {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    z-index: 1;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      right: 0;
+      z-index: 1;
+      background: linear-gradient(42deg, #C4DFDF, #C4DFDF);
+      opacity: 0.8;
+    }
+  }
+
+  & .title {
+    background-image: linear-gradient(0, #fff, #fff);
+  }
+
+  & .text {
+    color: #fff;
+  }
+
+  & .cta {
+    background: #fff;
+    color: #0A2452;
+  }
+}
+
+
+
+</style>
 
 <body>
 
 <nav th:replace="snippets.html :: name_site_navbar"></nav>
 
-<div class="container">
-<div class="row">
-<div class="col-6">
+<!--
 
-<div class="jumbotron">
-  <h1 class="display-4">Hello, world!</h1>
-  <p class="lead">Welcome to Increff Spring Tutorial</p>
-  <hr class="my-4">
-  <p>This application teaches you Spring concepts and creating awesome web applications</p>
-  <a class="btn btn-primary btn-lg" th:href="@{/site/login}" role="button">Get Started</a>
-</div>
+Follow me on
+Dribbble: https://dribbble.com/supahfunk
+Twitter: https://twitter.com/supahfunk
+Codepen: https://codepen.io/supah/
 
+-->
+<!--
+
+Follow me on
+Dribbble: https://dribbble.com/supahfunk
+Twitter: https://twitter.com/supahfunk
+Codepen: https://codepen.io/supah/
+
+-->
+<div class="landing">
+    <div class="base">
+        <div class="image">
+            <img src="http://www.supah.it/dribbble/frame-dailyui-003.jpg" />
+        </div>
+        <div class="copy">
+            <div class="logo">
+            </div>
+            <div class="title">
+                POINT OF SALE</div>
+            <div class="text">
+                Introducing our comprehensive Point of Sale solution, empowering smarter decisions, increased profitability, and superior customer experiences.
+                <br>
+                <a class="cta" style="color:black" th:href="@{/site/login}" role="button">LOGIN</a>
+                <a class="cta" style="color:black">SIGNUP</a>
+            </div>
+        </div>
+    </div>
 </div>
-</div>
-</div> <!--Container-->
 
 <footer th:replace="snippets.html :: name_footer"></footer>
+<script>
 
+    $('.base').clone().addClass('overlay').appendTo('.landing');
+$('.cta').hover(function() {
+  $('.overlay').toggleClass('over');
+});
+
+/*--------------------
+Codepen Preview Tile
+--------------------*/
+setTimeout(function() {
+  $('.overlay').addClass('over').delay(600).queue(function() {
+    $(this).removeClass("over").dequeue();
+  });
+}, 400)
+
+</script>
 </body>
 
 </html>
