@@ -44,6 +44,7 @@ function addInventory(event){
        },
 	   success: function(response) {
 	   		getInventoryList();
+	   		$.notify("UPDATED SUCCESSFULLY",{ className:"success" , globalPosition: 'top center'})
 	   		$form.find('#inputBarcode').val('');
             $form.find('#inputQuantity').val('');
 	   },
@@ -59,7 +60,20 @@ function updateInventory(event){
 	$('#edit-inventory-modal').modal('toggle');
 	//Get the ID
 	var id = $("#inventory-edit-form input[name=id]").val();
-	var url = getInventoryUrl() + "/" + id;
+//	var arr;
+//	var url = getInventoryUrl();
+//    	$.ajax({
+//    	   url: url,
+//    	   type: 'GET',
+//    	   async: false,
+//    	   success: function(data) {
+//    	   		    arr.push(data);
+//    	   		    console.log(arr);
+//    	   },
+//    	   error: handleAjaxError
+//    	});
+//
+//	url = getInventoryUrl() + "/" + id;
 
 	//Set the values to update
 	var $form = $("#inventory-edit-form");
@@ -129,7 +143,9 @@ function uploadRows(){
 	updateUploadDialog();
 	//If everything processed then return
 	if(processCount==fileData.length){
-		return;
+	if(errorData.length==0)
+    $.notify("UPLOADED SUCCESSFULLY", {globalPosition: 'top center'})
+	return;
 	}
 
 	//Process next row
@@ -151,6 +167,7 @@ function uploadRows(){
 	   		uploadRows();
 	   },
 	   error: function(response){
+	        $.notify("ERROR IN UPLOADING",{className:"warn", globalPosition: 'top center' })
 	   		row.error=response.responseText
 	   		errorData.push(row);
 	   		uploadRows();
