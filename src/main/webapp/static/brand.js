@@ -38,6 +38,7 @@ function addBrand(event){
        },
 	   success: function(response) {
 	   		getBrandList();
+	   		$.notify("ADDED SUCCESSFULLY",{ className:"success" })
 	   		$form.find('#inputBrand').val('');
             $form.find('#inputCategory').val('');
 	   },
@@ -124,6 +125,8 @@ function uploadRows(){
 	updateUploadDialog();
 	//If everything processed then return
 	if(processCount==fileData.length){
+	if(errorData.length==0)
+    	$.notify("UPLOADED SUCCESSFULLY")
 		return;
 	}
 
@@ -146,6 +149,7 @@ function uploadRows(){
 	   		uploadRows();
 	   },
 	   error: function(response){
+	        $.notify("ERROR IN UPLOADING",{className:"warn", globalPosition: 'top center' })
 	   		row.error=response.responseText
 	   		errorData.push(row);
 	   		uploadRows();
@@ -234,9 +238,6 @@ function updateUploadDialog(){
 	$('#rowCount').html("" + fileData.length);
 	$('#processCount').html("" + processCount);
 	$('#errorCount').html("" + errorData.length);
-	if(errorData.length==0) {
-	    $("#upload-brand-modal").notify("uploaded successfully",{className:"success"})
-	}
 }
 
 function updateFileName(){
