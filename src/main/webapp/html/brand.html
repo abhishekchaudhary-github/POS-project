@@ -35,10 +35,28 @@ table.dataTable tbody tr:hover {
 
     <h3>Brands</h3>
 
+    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#addOrderDetail-modal">Add</button>
+    &nbsp;
+    <button type="button" class="btn btn-outline-info" id="refresh-data">Refresh</button>
+    &nbsp;
+    <button type="button" class="btn btn-outline-info" id="upload-data">Upload</button>
+
+
+
     <!-- Top row with form-->
+    <div class="modal" tabindex="-1" role="dialog" id="addOrderDetail-modal" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">ADD BRANDS</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
     <div class="row">
         <div class="col-12">
-            <form class="form-inline admin-element" id="brand-form">
+            <form class="form admin-element" id="brand-form">
                 <div class="form-group">
 <!--                    <label for="inputBrand" class="col-sm-2 col-form-label">Brand</label>-->
                     <div class="col-sm-10">
@@ -51,15 +69,19 @@ table.dataTable tbody tr:hover {
                         <input type="text" class="form-control" name="category" id="inputCategory" placeholder="enter category">
                     </div>
                 </div>
-
-                <button type="button" class="btn btn-primary" id="add-brand">Add</button>
-                &nbsp;
-                <button type="button" class="btn btn-primary" id="refresh-data">Refresh</button>
-                &nbsp;
-                <button type="button" class="btn btn-primary" id="upload-data">Upload</button>
             </form>
         </div>
     </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" style="background-color: #45CFDD;border-color: #45CFDD;"  id="add-brand">ADD</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
     <!-- Blank Row -->

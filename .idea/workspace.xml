@@ -5,9 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd59bcda-ea0a-45cb-bbdf-b0788f0265bb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/landingpage.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/brand.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/brand.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/brandReport.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/brandReport.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/customerDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/customerDetail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/dailyReport.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/dailyReport.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/inventory.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/inventory.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/inventoryReport.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/inventoryReport.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/product.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/product.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/salesReport.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/salesReport.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/signup.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/snippets.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/snippets.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
