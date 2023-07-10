@@ -31,11 +31,7 @@ table.dataTable tbody tr:hover {
 <nav th:replace="snippets.html :: name_app_navbar"></nav>
 
 
-<div class="container">
 
-<button type="button" class="btn btn-primary admin-element" data-toggle="modal" data-target="#exampleModal">
-    ADD ORDERS
-</button>
 
 
 
@@ -222,8 +218,11 @@ table.dataTable tbody tr:hover {
 
 
 <!--for the orderID-->
-</div>
-<h5  style="margin-left:0.5em;">LIST OF ORDERS</h5>
+<div class="container">
+<h3>LIST OF ORDERS</h3>
+    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal" style="margin-left:1em;margin-bottom:1.5em;">
+        ADD ORDERS
+    </button>
 <div class="col-12">
     <table class="table table-striped" id="orderid-list-table">
         <thead>
@@ -284,7 +283,7 @@ table.dataTable tbody tr:hover {
 
 </div>
 
-</div>
+
 
 <footer th:replace="snippets.html :: name_footer"></footer>
 
