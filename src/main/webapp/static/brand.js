@@ -38,7 +38,7 @@ function addBrand(event){
        },
 	   success: function(response) {
 	   		getBrandList();
-	   		$.notify("ADDED SUCCESSFULLY",{ className:"success" })
+	   		$.notify("ADDED SUCCESSFULLY",{ className:"success" , globalPosition: 'top center'})
 	   		$form.find('#inputBrand').val('');
             $form.find('#inputCategory').val('');
 	   },
@@ -126,7 +126,7 @@ function uploadRows(){
 	//If everything processed then return
 	if(processCount==fileData.length){
 	if(errorData.length==0)
-    	$.notify("UPLOADED SUCCESSFULLY")
+    	$.notify("UPLOADED SUCCESSFULLY", {globalPosition: 'top center'})
 		return;
 	}
 
