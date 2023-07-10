@@ -79,7 +79,7 @@ table.dataTable tbody tr:hover {
 
                 <div class="form-group col-sm-4"  style="margin-top:1.5em">
 <!--                    <label for="inputQuantity" class="col-sm-2 col-form-label">Quantity</label>-->
-                        <input  type="number" class="form-control" name="quantity" min="0" oninput="validity.valid||(value='');" id="inputQuantity" placeholder="enter quantity">
+                        <input  type="number" class="form-control" name="quantity" min="1" oninput="validity.valid||(value='');" id="inputQuantity" placeholder="enter quantity">
 <!--                        <input type="text" class="form-control" name="quantity" id="inputQuantity" placeholder="enter quantity">-->
 
                 </div>
@@ -137,12 +137,12 @@ table.dataTable tbody tr:hover {
 
 
 <!--     CustomerDetail Edit Modal -->
-    <div class="modal" tabindex="-1" role="dialog" id="edit-customerDetail-modal" data-backdrop="static">
+    <div class="modal edit-details" tabindex="-1" role="dialog" id="edit-customerDetail-modal" data-backdrop="static">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit CustomerDetail</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title">Edit Details</h5>
+                    <button type="button" class="close" data-dismiss="modal edit-details" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -165,7 +165,7 @@ table.dataTable tbody tr:hover {
                 <div class="form-group">
                     <label for="inputQuantity" class="col-sm-2 col-form-label">Quantity</label>
                     <div class="col-sm-10">
-                        <input  type="number" class="form-control" name="quantity" min="0" oninput="validity.valid||(value='');" placeholder="enter quantity">
+                        <input  type="number" class="form-control" name="quantity" min="1" oninput="validity.valid||(value='');" placeholder="enter quantity">
 <!--                        <input type="text" class="form-control" name="quantity" placeholder="enter quantity">-->
                     </div>
                 </div>
@@ -174,7 +174,7 @@ table.dataTable tbody tr:hover {
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="edit-details">Cancel</button>
                     <button type="button" class="btn btn-primary" id="update-customerDetail">Update</button>
                 </div>
             </div>
