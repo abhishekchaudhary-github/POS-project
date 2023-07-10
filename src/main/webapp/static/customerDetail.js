@@ -157,6 +157,9 @@ if(!checker) error = true
             confirmButton = '<td>' + ' <button onclick="submitCustomerDetail(' + e.id + ')" class="btn btn-success"><i class="fa fa-check"></i> Confirm</button>' + '</td>'
     	    $tbody.append(confirmButton)
     	}
+    	$('#inputBarcode').val('');
+        $('#inputMrp').val('');
+        $('#inputQuantity').val('');
 }
 
 
