@@ -1,6 +1,14 @@
+var brandArray=[]
+var arrayOfBrand=[];
+var arrayOfCategory=[];
 function getBrandReportUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
 	return baseUrl + "/api/brandreport";
+}
+
+function getBrandUrl(){
+	var baseUrl = $("meta[name=baseUrl]").attr("content")
+	return baseUrl + "/api/brand";
 }
 
 function displayBrandReportList(data){
@@ -74,7 +82,7 @@ function putValues() {
     var category = $('#inputCategory').val();
     if(brand=="") { brand = null }
     if(category=="") { category = null }
-    console.log(brand)
+
     var form = {
                  brand: brand,
                  category: category
@@ -94,10 +102,52 @@ function putValues() {
                 	});
 
 }
+function getBrandValues() {
+    var url = getBrandUrl();
+    	$.ajax({
+    	   url: url,
+    	   type: 'GET',
+    	   async:false,
+    	   success: function(data) {
+    	   		brandArray.push(data);
+    	   		for(var i =0;i<brandArray[0].length;i++) {
+    	   		    arrayOfBrand.push(brandArray[0][i].brand)
+    	   		    arrayOfCategory.push(brandArray[0][i].category)
+    	   		}
+    	   		//console.log(arrayOfBrand)
+    	   },
+    	   error: handleAjaxError
+    	});
+    	arrayOfBrand.sort()
+    	arrayOfCategory.sort()
+    	var $brandList = $("#brandList");
+    	for(var i=0;i<arrayOfBrand.length;i++) {
+    	    var row = '<option>' + arrayOfBrand[i] +'</option>'
+    	    $brandList.append(row);
+    	}
+
+    	var $categoryList = $("#categoryList");
+            	for(var i=0;i<arrayOfCategory.length;i++) {
+            	    var row = '<option value='+ arrayOfCategory[i] +'>'
+            	    $categoryList.append(row);
+            	}
+}
+
+
+
+
+
+
+
+
+
+
+
 
 function init(){
 $('#addButton').click(putValues)
-
+ $('.select2').select2();
 }
 
 $(document).ready(init);
+$(document).ready(getBrandValues);
