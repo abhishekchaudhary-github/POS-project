@@ -128,10 +128,10 @@ Copy
 Overlay
 --------------------*/
 .base.overlay {
-  z-index: 2;
+   z-index: 2;
   clip-path: polygon(375px 0, 710px 0, 710px 530px, 469px 530px);
   color: #fff;
-  background: linear-gradient(45deg, #C4DFDF, #C4DFDF);
+  background: linear-gradient(45deg, #C4DFDF, #C4DFDF) url('../static/landingpage.png') no-repeat right top;
   transition: all .6s ease-in-out;
   transform-origin: 0 0;
 
@@ -175,6 +175,20 @@ Overlay
 
   & .cta {
     background: #fff;
+    color: #000000;
+  }
+  }
+
+  & .title {
+    background-image: linear-gradient(0, #fff, #fff);
+  }
+
+  & .text {
+    color: #fff;
+  }
+
+  & .cta {
+    background: #fff;
     color: #0A2452;
   }
 }
@@ -206,7 +220,7 @@ Codepen: https://codepen.io/supah/
 <div class="landing">
     <div class="base">
         <div class="image">
-            <img src="http://www.supah.it/dribbble/frame-dailyui-003.jpg" />
+            <img src="../static/landingpage.png" />
         </div>
         <div class="copy">
             <div class="logo">
