@@ -160,8 +160,7 @@ function getBrandValues() {
 
 function changeBrand(id){
            var selectedBrand = arrayOfBrand[id];
-           console.log($('#dropdownMenuButton'))
-             $('#dropdownMenuButton').text(selectedBrand);
+            $('#brandText').text(selectedBrand);
           }
 
 function changeCategory(id){
