@@ -1,6 +1,17 @@
+var brandArray=[]
+var arrayOfBrand=[];
+var arrayOfCategory=[];
+var brand;
+var category;
+
 function getInventoryReportUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
 	return baseUrl + "/api/inventoryreport";
+}
+
+function getBrandUrl(){
+	var baseUrl = $("meta[name=baseUrl]").attr("content")
+	return baseUrl + "/api/brand";
 }
 
 function displayInventoryReportList(data){
@@ -70,11 +81,11 @@ function listDownload() {
 
 function putValues() {
     var url = getInventoryReportUrl();
-    var brand = $('#inputBrand').val();
-    var category = $('#inputCategory').val();
+//    var brand = $('#inputBrand').val();
+//    var category = $('#inputCategory').val();
     if(brand=="") { brand = null }
     if(category=="") { category = null }
-    console.log(brand)
+
     var form = {
                  brand: brand,
                  category: category
@@ -95,9 +106,55 @@ function putValues() {
 
 }
 
-function init(){
-$('#addButton').click(putValues)
+function getBrandValues() {
+    var url = getBrandUrl();
+    	$.ajax({
+    	   url: url,
+    	   type: 'GET',
+    	   async:false,
+    	   success: function(data) {
+    	   		brandArray.push(data);
+    	   		for(var i =0;i<brandArray[0].length;i++) {
+    	   		    arrayOfBrand.push(brandArray[0][i].brand)
+    	   		    arrayOfCategory.push(brandArray[0][i].category)
+    	   		}
+    	   		//console.log(arrayOfBrand)
+    	   },
+    	   error: handleAjaxError
+    	});
 
+    	var $brandList = $("#brand-dropper");
+    	console.log(arrayOfBrand)
+    	for(var i=0;i<arrayOfBrand.length;i++) {
+    	    var row = '<button class="dropdown-item" type="button" onclick="changeBrand(' + i + ')">'+arrayOfBrand[i]+'</button>'
+    	    $brandList.append(row);
+    	}
+
+    	var $categoryList = $("#category-dropper");
+            	console.log(arrayOfCategory)
+            	for(var i=0;i<arrayOfCategory.length;i++) {
+            	    var row = '<button class="dropdown-item" type="button" onclick="changeCategory(' + i + ')">'+arrayOfCategory[i]+'</button>'
+            	    $categoryList.append(row);
+            	}
 }
 
+
+function init(){
+$('#addButton').click(putValues)
+}
+
+
+function changeBrand(id){
+           var selectedBrand = arrayOfBrand[id];
+           brand = selectedBrand;
+            $('#brandText').text(selectedBrand);
+          }
+
+function changeCategory(id){
+            var selectedCategory = arrayOfCategory[id];
+            category = selectedCategory;
+              $('#categoryText').text(selectedCategory);
+          }
+
 $(document).ready(init);
+$(document).ready(getBrandValues);

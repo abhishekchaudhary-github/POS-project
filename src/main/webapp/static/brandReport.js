@@ -1,6 +1,9 @@
 var brandArray=[]
 var arrayOfBrand=[];
 var arrayOfCategory=[];
+var brand;
+var category;
+
 function getBrandReportUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
 	return baseUrl + "/api/brandreport";
@@ -102,8 +105,8 @@ function listDownload() {
 
 function putValues() {
     var url = getBrandReportUrl();
-    var brand = $('#inputBrand').val();
-    var category = $('#inputCategory').val();
+//    var brand = $('#inputBrand').val();
+//    var category = $('#inputCategory').val();
     if(brand=="") { brand = null }
     if(category=="") { category = null }
 
@@ -160,11 +163,13 @@ function getBrandValues() {
 
 function changeBrand(id){
            var selectedBrand = arrayOfBrand[id];
+           brand = selectedBrand;
             $('#brandText').text(selectedBrand);
           }
 
 function changeCategory(id){
             var selectedCategory = arrayOfCategory[id];
+            category = selectedCategory;
               $('#categoryText').text(selectedCategory);
           }
 
