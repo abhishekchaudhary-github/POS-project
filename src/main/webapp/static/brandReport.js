@@ -146,20 +146,21 @@ function getBrandValues() {
     	var $brandList = $("#brand-dropper");
     	console.log(arrayOfBrand)
     	for(var i=0;i<arrayOfBrand.length;i++) {
-    	    var row = '<a class="dropdown-item">' + arrayOfBrand[i] + '</a>'
+    	    var row = '<button class="dropdown-item" type="button">'+arrayOfBrand[i]+'</button>'
     	    $brandList.append(row);
     	}
 
-//    	var $categoryList = $("#categoryList");
-//            	for(var i=0;i<arrayOfCategory.length;i++) {
-//            	    var row = '<option value='+ arrayOfCategory[i] +' class="brand-items" onClick="changeBrand(' + i + ')>'
-//            	    $categoryList.append(row);
-//            	}
+    	var $categoryList = $("#category-dropper");
+            	console.log(arrayOfCategory)
+            	for(var i=0;i<arrayOfCategory.length;i++) {
+            	    var row = '<button class="dropdown-item" type="button">'+arrayOfCategory[i]+'</button>'
+            	    $categoryList.append(row);
+            	}
 }
 
 function changeBrand(id){
             // $('dropdownMenuButton').val(arrayOfBrand[id]);
-          })
+          }
 
 
 function init(){
