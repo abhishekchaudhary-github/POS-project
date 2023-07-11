@@ -155,7 +155,7 @@ function uploadRows(){
 	updateUploadDialog();
 	//If everything processed then return
 	if(processCount==fileData.length){
-	if(errorData.length==0)
+	if(errorData.length==0){
         	$.notify("UPLOADED SUCCESSFULLY", {globalPosition: 'top center'})
     		return;
     	}
