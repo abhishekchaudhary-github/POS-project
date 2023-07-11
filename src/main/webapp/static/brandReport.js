@@ -165,7 +165,7 @@ function changeBrand(id){
 
 function changeCategory(id){
             var selectedCategory = arrayOfCategory[id];
-              $('#dropdownMenuButton2').text(selectedCategory);
+              $('#categoryText').text(selectedCategory);
           }
 
 function init(){
