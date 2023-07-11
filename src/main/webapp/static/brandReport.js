@@ -144,15 +144,15 @@ function getBrandValues() {
     	});
     	arrayOfBrand.sort()
     	arrayOfCategory.sort()
-    	var $brandList = $("#inputBrand");
+    	var $brandList = $("#brandList");
     	for(var i=0;i<arrayOfBrand.length;i++) {
-    	    var row = '<option  value="'+(i+1)+'"> '+arrayOfBrand[i]+' </option>'
+    	    var row = '<option>' + arrayOfBrand[i] +'</option>'
     	    $brandList.append(row);
     	}
 
-    	var $categoryList = $("#inputCategory");
+    	var $categoryList = $("#categoryList");
             	for(var i=0;i<arrayOfCategory.length;i++) {
-            	    var row = '<option  value="'+(i+1)+'"> '+arrayOfCategory[i]+' </option>'
+            	    var row = '<option value='+ arrayOfCategory[i] +'>'
             	    $categoryList.append(row);
             	}
 }
