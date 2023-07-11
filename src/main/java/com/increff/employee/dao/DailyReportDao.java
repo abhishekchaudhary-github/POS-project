@@ -34,6 +34,8 @@ public class DailyReportDao extends AbstractDao{
     }
     public List<DailyReportPojo> select(LocalDateTime startTime, LocalDateTime endTime) {
         TypedQuery<DailyReportPojo> query = getQuery(select_time, DailyReportPojo.class);
+        query.setParameter("startTime", startTime);
+        query.setParameter("endTime", endTime);
         return query.getResultList();
     }
 

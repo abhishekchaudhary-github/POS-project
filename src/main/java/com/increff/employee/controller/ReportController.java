@@ -40,7 +40,7 @@ public class ReportController {
     }
     @ApiOperation(value = "gives daily sales report")
     @RequestMapping(path = "/api/dailyreport", method = RequestMethod.POST)
-    public List<DailyReportData> getBrandReport(@RequestBody DailyReportForm form) throws ApiException {
+    public List<DailyReportData> getBrandReport(@RequestBody postDailyform form) throws ApiException {
         List<DailyReportPojo> list = reportService.getDailySalesReport(form);
         List<DailyReportData> list2 = new ArrayList<DailyReportData>();
         for (DailyReportPojo p : list) {

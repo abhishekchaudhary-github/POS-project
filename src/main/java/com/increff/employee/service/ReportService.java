@@ -58,10 +58,11 @@ public class ReportService {
     }
 
     @Transactional
-    public List<DailyReportPojo> getDailySalesReport(DailyReportForm form) throws ApiException {
+    public List<DailyReportPojo> getDailySalesReport(postDailyform form) throws ApiException {
         LocalDateTime startTime1 = convertTime(form.getStartTime());
         LocalDateTime endTime1 = convertTime(form.getEndTime());
         List<DailyReportPojo> dailyReportPojoList = dailyReportService.getAll(startTime1, endTime1);
+        System.out.println("01-06-2025");
         return dailyReportPojoList;
     }
     @Transactional
