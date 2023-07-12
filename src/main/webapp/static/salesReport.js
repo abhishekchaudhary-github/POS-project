@@ -15,9 +15,12 @@ function getBrandUrl(){
 }
 
 function displaySalesReportList(data){
-    var $tbody = $('#sales-report-table').find('tbody');
+    var $table = $('#sales-report-table')
     var $download = $('#forDownloadButton');
-    	$tbody.empty();
+    if ($.fn.DataTable.isDataTable($table)) {
+                         $table.DataTable().destroy();
+                       }
+    $table.find('tbody').empty();
     	for(var i in data){
     		var e = data[i];
     		var row = '<tr>'
@@ -26,12 +29,28 @@ function displaySalesReportList(data){
     		+ '<td>' + e.quantity  + '</td>'
     		+ '<td>' + e.revenue  + '</td>'
     		+ '</tr>';
-            $tbody.append(row);
+            $table.find('tbody').append(row);
     	}
     	var download = '<button onclick="listDownload()" class="btn btn-info" style="margin-top:1em;><i class="fa fa-download""></i> Download</button>'
             	$download.empty();
             	if(data.length!=0)
             	$download.append(download);
+            	// Initialize DataTable
+                                      $table.DataTable({
+                                        "paging": false, // Enable pagination
+                                        "lengthChange": true, // Hide the page length options
+                                        "searching": true, // Enable search functionality
+                                        "ordering": false, // Disable sorting
+                                        "info": false, // Hide information display
+                                        "autoWidth": true, // Disable auto width calculation
+                                        "responsive": true // Enable responsive mode
+                                      });
+
+                                      if ($("#get-role").text().localeCompare("operator") == 0) {
+                                        $(".admin-element").hide();
+                                      }
+                                      // Apply styles to table header cells
+                                        $table.find('th').css('text-align', 'center');
 }
 
 function listDownload() {
