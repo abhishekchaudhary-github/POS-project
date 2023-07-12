@@ -135,8 +135,7 @@ public class ProductService {
         List<ProductPojo> productPojoList = dao.barcodeMustExistList(p.getBarcode());
         if(productPojoList.size()==1) {
            if(productPojoList.get(0).getId()!=id){
-               System.out.println(p.getId());
-               System.out.println(productPojoList.get(0).getId());
+               throw new ApiException("Barcode Already exists");
            }
         }
         if(productPojoList.size()>1) {
