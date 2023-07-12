@@ -44,6 +44,13 @@ public class ProductDao extends AbstractDao{
         query.setParameter("barcode", barcode);
         return getSingle(query);
     }
+    public List<ProductPojo> barcodeMustExistList(String barcode) {
+        TypedQuery<ProductPojo> query = getQuery(select_barcode, ProductPojo.class);
+        query.setParameter("barcode", barcode);
+        return query.getResultList();
+    }
+
+
 
     public List<ProductPojo> brandCategory(Integer brand_category) {
         TypedQuery<ProductPojo> query = getQuery(brand_category_select, ProductPojo.class);

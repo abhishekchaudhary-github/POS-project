@@ -24,14 +24,6 @@ import io.swagger.annotations.ApiOperation;
 @Api
 @RestController
 public class ProductApiController {
-
-
-    //dto
-    @Autowired
-    private BrandService brandService;
-
-
-    //
     @Autowired
     private ProductService service;
 
@@ -72,10 +64,7 @@ public class ProductApiController {
         ProductData d = new ProductData();
         d.setName(p.getName());
         d.setBarcode(p.getBarcode());
-        BrandPojo brandPojo = brandService.get(p.getBrand_category());
-//        System.out.println(brandPojo.getId());
-//        System.out.println(brandPojo.getBrand());
-//        System.out.println(brandPojo.getCategory());
+        BrandPojo brandPojo = service.getBrandPojoFromBrandCategory(p);
         d.setBrand(brandPojo.getBrand());
         d.setCategory(brandPojo.getCategory());
         d.setMrp(p.getMrp());
@@ -87,13 +76,12 @@ public class ProductApiController {
     private ProductPojo convert(ProductForm f) throws ApiException {
         ProductPojo p = new ProductPojo();
         p.setName(f.getName());
-        if(service.barcodeMustExist(f.getBarcode())==null)
+        //service.checkBarcodeThrowErrorIfExists(f.getBarcode());
         p.setBarcode(f.getBarcode());
-        else throw new ApiException("Barcode Already exists");
-        BrandPojo brandPojo = brandService.getId(f.getBrand(),f.getCategory());
-        if(brandPojo==null){
-            throw new ApiException("this item does not exist");
-        }
+        BrandPojo brandPojo = service.getBrandPojoFromForm(f);
+//        if(brandPojo==null){
+//            throw new ApiException("this item does not exist");
+//        }
         p.setBrand_category(brandPojo.getId());
         p.setMrp(f.getMrp());
         return p;
