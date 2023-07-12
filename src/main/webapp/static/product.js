@@ -83,24 +83,74 @@ function addProduct(event){
 }
 
 function updateProduct(event){
-	$('#edit-product-modal').modal('toggle');
+	$('#edit-product-modal').modal('show');
 	//Get the ID
 	var id = $("#product-edit-form input[name=id]").val();
 	var url = getProductUrl() + "/" + id;
 
 	//Set the values to update
 	var $form = $("#product-edit-form");
-	var json = toJson($form);
+	//var json = toJson($form);
+    var barcodeField = $form.find('#inputBarcode1').val().trim();
+        var brandField = $form.find('#inputBrand1').val().trim()
+        var categoryField = $form.find('#inputCategory1').val().trim()
+        var mrpField = $form.find('#inputMrp1').val().trim()
+        var nameField = $form.find('#inputName1').val().trim()
+
+	 if(barcodeField==""){
+        $("#inputBarcode1").notify(
+              "field can not be empty",
+              { position:"top" }
+            );
+        	    return
+        	}
+        if(brandField==""){
+        $("#inputBrand1").notify(
+                  "field can not be empty",
+                  { position:"top" }
+                );
+        	    return
+        	}
+        if(mrpField==""){
+        $("#inputMrp1").notify(
+                  "field can not be empty",
+                  { position:"top" }
+                );
+        	    return
+        	}
+        if(nameField==""){
+        $("#inputName1").notify(
+                  "field can not be empty",
+                  { position:"top" }
+                );
+        	    return
+        	}
+        if(categoryField==""){
+        $("#inputCategory1").notify(
+                      "field can not be empty",
+                      { position:"top" }
+                    );
+            	    return
+            	}
+     var postingData = {
+            barcode:barcodeField,
+            brand:brandField,
+            mrp:mrpField,
+            name:nameField,
+            category:categoryField
+        }
 
 	$.ajax({
 	   url: url,
 	   type: 'PUT',
-	   data: json,
+	   data: JSON.stringify(postingData),
 	   headers: {
        	'Content-Type': 'application/json'
        },
 	   success: function(response) {
+	        $('#edit-product-modal').modal('hide');
 	   		getProductList();
+	   		$.notify("UPDATED SUCCESSFULLY",{ className:"success" , globalPosition: 'top center'})
 	   },
 	   error: handleAjaxError
 	});

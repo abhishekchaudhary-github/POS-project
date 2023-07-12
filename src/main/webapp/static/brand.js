@@ -48,7 +48,7 @@ function addBrand(event){
 }
 
 function updateBrand(event){
-	$('#edit-brand-modal').modal('toggle');
+	$('#edit-brand-modal').modal('show');
 	//Get the ID
 	var id = $("#brand-edit-form input[name=id]").val();
 	var url = getBrandUrl() + "/" + id;
@@ -56,16 +56,37 @@ function updateBrand(event){
 	//Set the values to update
 	var $form = $("#brand-edit-form");
 	var json = toJson($form);
-
+	var brandField = $form.find('#inputBrand1').val().trim()
+	var categoryField = $form.find('#inputCategory1').val().trim()
+	if(brandField==""){
+    	$("#inputBrand1").notify(
+          "field can not be empty",
+          { position:"top" }
+        );
+    	    return
+    	}
+    	if(categoryField==""){
+        	    $("#inputCategory1").notify(
+                      "field can not be empty",
+                      { position:"top" }
+                    );
+        	    return
+        	}
+        	var postingData = {
+        	    brand:brandField,
+        	    category:categoryField
+        	}
 	$.ajax({
 	   url: url,
 	   type: 'PUT',
-	   data: json,
+	   data: JSON.stringify(postingData),
 	   headers: {
        	'Content-Type': 'application/json'
        },
 	   success: function(response) {
+	        $('#edit-brand-modal').modal('hide');
 	   		getBrandList();
+	   		$.notify("UPDATED SUCCESSFULLY",{ className:"success" , globalPosition: 'top center'})
 	   },
 	   error: handleAjaxError
 	});
@@ -86,18 +107,18 @@ function getBrandList(){
 	});
 }
 
-function deleteBrand(id){
-	var url = getBrandUrl() + "/" + id;
-
-	$.ajax({
-	   url: url,
-	   type: 'DELETE',
-	   success: function(data) {
-	   		getBrandList();
-	   },
-	   error: handleAjaxError
-	});
-}
+//function deleteBrand(id){
+//	var url = getBrandUrl() + "/" + id;
+//
+//	$.ajax({
+//	   url: url,
+//	   type: 'DELETE',
+//	   success: function(data) {
+//	   		getBrandList();
+//	   },
+//	   error: handleAjaxError
+//	});
+//}
 
 // FILE UPLOAD METHODS
 var fileData = [];

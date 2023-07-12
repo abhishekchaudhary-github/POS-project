@@ -186,7 +186,7 @@ function DisplayAddedData(){
             	}
             	var confirmButton;
             if(addedData.length>0){
-                    confirmButton = '<td>' + ' <button onclick="submitCustomerDetail(' + e.id + ')">confirm</button>' + '</td>'
+                confirmButton = '<td>' + ' <button onclick="submitCustomerDetail(' + e.id + ')" class="btn btn-success"><i class="fa fa-check"></i> Confirm</button>' + '</td>'
             	    $tbody.append(confirmButton)
             	}
             	$('#inputBarcode').val('');
