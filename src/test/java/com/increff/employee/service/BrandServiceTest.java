@@ -192,5 +192,12 @@ public class BrandServiceTest extends AbstractUnitTest {
         assertEquals("category2",brandPojo1.getCategory());
     }
 
-
+    @Test
+    public void testNormalize() throws ApiException {
+        BrandPojo brandPojo = new BrandPojo();
+        brandPojo.setBrand("nIkE");
+        brandPojo.setCategory("ShOE");
+        brandService.normalize(brandPojo);
+        assertEquals("shoe",brandPojo.getCategory());
+    }
 }
