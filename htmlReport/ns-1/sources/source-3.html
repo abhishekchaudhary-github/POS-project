@@ -40,26 +40,32 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">BrandService</td>
 <td class="coverageStat">
   <span class="percent">
-    37.5%
+    100%
   </span>
   <span class="absValue">
-    (3/8)
+    (8/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    37.9%
+    100%
   </span>
   <span class="absValue">
-    (11/29)
+    (29/29)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">BrandService$$EnhancerBySpringCGLIB$$55ae31ab</td>
+    <td class="name">BrandService$$EnhancerBySpringCGLIB$$9a4d86fb</td>
   </tr>
   <tr>
-    <td class="name">BrandService$$EnhancerBySpringCGLIB$$55ae31ab$$FastClassBySpringCGLIB$$3dc5053f</td>
+    <td class="name">BrandService$$EnhancerBySpringCGLIB$$9a4d86fb$$FastClassBySpringCGLIB$$a80615ae</td>
+  </tr>
+  <tr>
+    <td class="name">BrandService$$EnhancerBySpringCGLIB$$de1cf065</td>
+  </tr>
+  <tr>
+    <td class="name">BrandService$$EnhancerBySpringCGLIB$$de1cf065$$FastClassBySpringCGLIB$$e959b758</td>
   </tr>
   <tr>
     <td class="name">BrandService$$FastClassBySpringCGLIB$$74a6665d</td>
@@ -68,18 +74,18 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    37.5%
+    100%
   </span>
   <span class="absValue">
-    (3/8)
+    (8/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    37.9%
+    100%
   </span>
   <span class="absValue">
-    (11/29)
+    (29/29)
   </span>
 </td>
 </tr>
@@ -128,44 +134,44 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;    @Transactional(rollbackOn = ApiException.class)
 &nbsp;    public BrandPojo get(Integer id) throws ApiException {
-<b class="nc">&nbsp;        return getCheck(id);</b>
+<b class="fc">&nbsp;        return getCheck(id);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    @Transactional
 &nbsp;    public List&lt;BrandPojo&gt; getAll() {
-<b class="nc">&nbsp;        return dao.selectAll();</b>
+<b class="fc">&nbsp;        return dao.selectAll();</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    @Transactional(rollbackOn  = ApiException.class)
 &nbsp;    public void update(Integer id, BrandPojo p) throws ApiException {
-<b class="nc">&nbsp;        if(StringUtil.isEmpty(p.getBrand())) {</b>
-<b class="nc">&nbsp;            throw new ApiException(&quot;brand cannot be empty&quot;);</b>
+<b class="fc">&nbsp;        if(StringUtil.isEmpty(p.getBrand())) {</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;brand cannot be empty&quot;);</b>
 &nbsp;        }
-<b class="nc">&nbsp;        if(StringUtil.isEmpty(p.getCategory())) {</b>
-<b class="nc">&nbsp;            throw new ApiException(&quot;category cannot be empty&quot;);</b>
+<b class="fc">&nbsp;        if(StringUtil.isEmpty(p.getCategory())) {</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;category cannot be empty&quot;);</b>
 &nbsp;        }
-<b class="nc">&nbsp;        normalize(p);</b>
-<b class="nc">&nbsp;        BrandPojo tempPojo = getCheck(id);</b>
-<b class="nc">&nbsp;        if(dao.select(id).getBrand().equals(p.getBrand()) &amp;&amp; dao.select(id).getCategory().equals(p.getCategory())){</b>
+<b class="fc">&nbsp;        normalize(p);</b>
+<b class="fc">&nbsp;        BrandPojo tempPojo = getCheck(id);</b>
+<b class="fc">&nbsp;        if(dao.select(id).getBrand().equals(p.getBrand()) &amp;&amp; dao.select(id).getCategory().equals(p.getCategory())){</b>
 &nbsp;            return;
 &nbsp;        }
-<b class="nc">&nbsp;        if(dao.checkerForDuplicate(p.getBrand(), p.getCategory())==null){</b>
-<b class="nc">&nbsp;        tempPojo.setBrand(p.getBrand());</b>
-<b class="nc">&nbsp;        tempPojo.setCategory(p.getCategory());}</b>
-<b class="nc">&nbsp;        else throw new ApiException(&quot;category already exists&quot;);</b>
+<b class="fc">&nbsp;        if(dao.checkerForDuplicate(p.getBrand(), p.getCategory())==null){</b>
+<b class="fc">&nbsp;        tempPojo.setBrand(p.getBrand());</b>
+<b class="fc">&nbsp;        tempPojo.setCategory(p.getCategory());}</b>
+<b class="fc">&nbsp;        else throw new ApiException(&quot;category already exists&quot;);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    @Transactional
 &nbsp;    public BrandPojo getId(String productBrand,String productCategory){
-<b class="nc">&nbsp;        return dao.checkerForDuplicate(productBrand,productCategory);</b>
+<b class="fc">&nbsp;        return dao.checkerForDuplicate(productBrand,productCategory);</b>
 &nbsp;    }
 &nbsp;    @Transactional
 &nbsp;    public BrandPojo getCheck(Integer id) throws ApiException {
-<b class="nc">&nbsp;        BrandPojo p = dao.select(id);</b>
-<b class="nc">&nbsp;        if (p == null) {</b>
-<b class="nc">&nbsp;            throw new ApiException(&quot;Employee with given ID does not exit, id: &quot; + id);</b>
+<b class="fc">&nbsp;        BrandPojo p = dao.select(id);</b>
+<b class="fc">&nbsp;        if (p == null) {</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;Brand with given ID does not exit, id: &quot; + id);</b>
 &nbsp;        }
-<b class="nc">&nbsp;        return p;</b>
+<b class="fc">&nbsp;        return p;</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    protected static void normalize(BrandPojo p) {
@@ -197,7 +203,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-12 09:53</div>
+    <div style="float:right;">generated on 2023-07-12 13:46</div>
 </div>
 </body>
 </html>
