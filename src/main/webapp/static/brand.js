@@ -293,6 +293,10 @@ function init(){
     if($("#get-role").text().localeCompare("operator")==0) {
             $(".admin-element").hide();
         }
+     $('#modal-add').click(function(){
+        $('#inputBrand').val('');
+        $('#inputCategory').val('');
+     });
 }
 
 $(document).ready(init);

@@ -311,6 +311,10 @@ function init(){
         if($("#get-role").text().localeCompare("operator")==0) {
                 $(".admin-element").hide();
             }
+     $('#modal-add').click(function(){
+            $('#inputBarcode').val('');
+            $('#inputQuantity').val('');
+         });
 }
 
 $(document).ready(init);
