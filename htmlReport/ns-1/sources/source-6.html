@@ -1,0 +1,207 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > InventoryService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.increff.employee.service</a>
+</div>
+
+<h1>Coverage Summary for Class: InventoryService (com.increff.employee.service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">InventoryService</td>
+<td class="coverageStat">
+  <span class="percent">
+    12.5%
+  </span>
+  <span class="absValue">
+    (1/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    3.8%
+  </span>
+  <span class="absValue">
+    (1/26)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">InventoryService$$EnhancerBySpringCGLIB$$3091dbac</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    12.5%
+  </span>
+  <span class="absValue">
+    (1/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    3.8%
+  </span>
+  <span class="absValue">
+    (1/26)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.increff.employee.service;
+&nbsp;
+&nbsp;import com.increff.employee.dao.InventoryDao;
+&nbsp;import com.increff.employee.pojo.InventoryPojo;
+&nbsp;import com.increff.employee.util.StringUtil;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import javax.transaction.Transactional;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;public class InventoryService {</b>
+&nbsp;    @Autowired
+&nbsp;    private InventoryDao dao;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private ProductService productService;
+&nbsp;
+&nbsp;    @Transactional(rollbackOn = ApiException.class)
+&nbsp;    public void add(InventoryPojo inventoryPojo) throws ApiException {
+<b class="nc">&nbsp;        if(dao.select(inventoryPojo.getProductId())==null) {</b>
+<b class="nc">&nbsp;            if(inventoryPojo.getQuantity()&lt;1){</b>
+<b class="nc">&nbsp;                throw new ApiException(&quot;quantity can&#39;t be less than 1&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            dao.insert(inventoryPojo);</b>
+&nbsp;        }
+&nbsp;        else {
+<b class="nc">&nbsp;            Integer previousQuantity = dao.select(inventoryPojo.getProductId()).getQuantity();</b>
+<b class="nc">&nbsp;            Integer newQuantity = inventoryPojo.getQuantity()+previousQuantity;</b>
+<b class="nc">&nbsp;            inventoryPojo.setQuantity(newQuantity);</b>
+<b class="nc">&nbsp;            dao.select(inventoryPojo.getProductId()).setQuantity(newQuantity);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    @Transactional(rollbackOn = ApiException.class)
+&nbsp;    public void deductQuantity(Integer productId, Integer quantity){
+<b class="nc">&nbsp;        InventoryPojo productToBeChanged = dao.select(productId);</b>
+<b class="nc">&nbsp;        Integer previousQuantity = productToBeChanged.getQuantity();</b>
+<b class="nc">&nbsp;        productToBeChanged.setQuantity(previousQuantity - quantity);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional(rollbackOn = ApiException.class)
+&nbsp;    public InventoryPojo get(Integer id) throws ApiException {
+<b class="nc">&nbsp;        return dao.select(id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public List&lt;InventoryPojo&gt; getAll() {
+<b class="nc">&nbsp;        return dao.selectAll();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public Integer getIdOfProduct(String barcode) throws ApiException {
+<b class="nc">&nbsp;        return productService.getProductId(barcode);</b>
+&nbsp;    }
+&nbsp;    @Transactional
+&nbsp;    public InventoryPojo getFromProductId(Integer productId) throws ApiException {
+<b class="nc">&nbsp;        return dao.getFromProductId(productId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional(rollbackOn  = ApiException.class)
+&nbsp;    public void update(Integer id, InventoryPojo p) throws ApiException {
+<b class="nc">&nbsp;        if(p.getQuantity()==null) {</b>
+<b class="nc">&nbsp;            throw new ApiException(&quot;field cannot be empty&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if(p.getQuantity()&lt;1){</b>
+<b class="nc">&nbsp;            throw new ApiException(&quot;quantity cannot be less than 1&quot;);</b>
+&nbsp;        }
+&nbsp;        //check if given product id exist
+<b class="nc">&nbsp;        if(dao.getFromProductId(p.getProductId())==null){</b>
+&nbsp;
+&nbsp;        }
+<b class="nc">&nbsp;        else if(!dao.getFromProductId(p.getProductId()).equals(dao.select(id)) &amp;&amp; dao.getFromProductId(p.getProductId())!=null) {</b>
+<b class="nc">&nbsp;            throw new ApiException(&quot;given barcode already exists&quot;);</b>
+&nbsp;        }
+&nbsp;        //InventoryPojo tempPojo = getCheck(id);
+<b class="nc">&nbsp;            InventoryPojo temp = get(id);</b>
+<b class="nc">&nbsp;            temp.setQuantity(p.getQuantity());</b>
+<b class="nc">&nbsp;            temp.setProductId(p.getProductId());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;//    @Transactional
+&nbsp;//    public InventoryPojo getCheck(Integer id) throws ApiException {
+&nbsp;//        InventoryPojo p = dao.select(id);
+&nbsp;//        if (p == null) {
+&nbsp;//            throw new ApiException(&quot;Employee with given ID does not exit, id: &quot; + id);
+&nbsp;//        }
+&nbsp;//        return p;
+&nbsp;//    }
+&nbsp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-07-12 09:53</div>
+</div>
+</body>
+</html>

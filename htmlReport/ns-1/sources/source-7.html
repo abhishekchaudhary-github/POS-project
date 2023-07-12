@@ -1,0 +1,209 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > OrderItemService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.increff.employee.service</a>
+</div>
+
+<h1>Coverage Summary for Class: OrderItemService (com.increff.employee.service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">OrderItemService</td>
+<td class="coverageStat">
+  <span class="percent">
+    20%
+  </span>
+  <span class="absValue">
+    (1/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    6.7%
+  </span>
+  <span class="absValue">
+    (1/15)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">OrderItemService$$EnhancerBySpringCGLIB$$2c1a3b3d</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    20%
+  </span>
+  <span class="absValue">
+    (1/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    6.7%
+  </span>
+  <span class="absValue">
+    (1/15)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.increff.employee.service;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import javax.transaction.Transactional;
+&nbsp;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import com.increff.employee.dao.OrderItemDao;
+&nbsp;import com.increff.employee.pojo.OrderItemPojo;
+&nbsp;import com.increff.employee.util.StringUtil;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;public class OrderItemService {</b>
+&nbsp;
+&nbsp;    //dto
+&nbsp;    @Autowired
+&nbsp;    private InventoryService inventoryService;
+&nbsp;
+&nbsp;    //
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private OrderItemDao dao;
+&nbsp;
+&nbsp;    @Transactional(rollbackOn = ApiException.class)
+&nbsp;    public void add(List&lt;OrderItemPojo&gt; p) throws ApiException {
+<b class="nc">&nbsp;        for(OrderItemPojo orderItemPojoItem : p){</b>
+&nbsp;            //HERE!!!
+<b class="nc">&nbsp;            inventoryService.deductQuantity(orderItemPojoItem.getProductId(),orderItemPojoItem.getQuantity());</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        for(OrderItemPojo orderItemPojoItem : p){</b>
+<b class="nc">&nbsp;            dao.insert(orderItemPojoItem);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    @Transactional(rollbackOn = ApiException.class)
+&nbsp;    public OrderItemPojo get(Integer id) throws ApiException {
+<b class="nc">&nbsp;        return dao.select(id);</b>
+&nbsp;    }
+&nbsp;//
+&nbsp;    @Transactional
+&nbsp;    public List&lt;OrderItemPojo&gt; getAll() {
+<b class="nc">&nbsp;        return dao.selectAll();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public List&lt;OrderItemPojo&gt; selectByOrderId(Integer id) {
+<b class="nc">&nbsp;        List&lt;OrderItemPojo&gt; orderItemPojoList = dao.selectAll();</b>
+<b class="nc">&nbsp;        List&lt;OrderItemPojo&gt; orderItemPojoList2 = new ArrayList&lt;OrderItemPojo&gt;();</b>
+<b class="nc">&nbsp;        for(int i = 0; i&lt; orderItemPojoList.size(); i++) {</b>
+<b class="nc">&nbsp;             if(orderItemPojoList.get(i).getOrderId()==id){</b>
+<b class="nc">&nbsp;                 orderItemPojoList2.add(orderItemPojoList.get(i));</b>
+&nbsp;             }
+&nbsp;         }
+<b class="nc">&nbsp;        return orderItemPojoList2;</b>
+&nbsp;    }
+&nbsp;//    @Transactional(rollbackOn  = ApiException.class)
+&nbsp;//    public void update(Integer id, OrderItemPojo p) throws ApiException {
+&nbsp;//        if(StringUtil.isEmpty(p.getOrderItem())) {
+&nbsp;//            throw new ApiException(&quot;orderItem cannot be empty&quot;);
+&nbsp;//        }
+&nbsp;//        if(StringUtil.isEmpty(p.getCategory())) {
+&nbsp;//            throw new ApiException(&quot;category cannot be empty&quot;);
+&nbsp;//        }
+&nbsp;//        normalize(p);
+&nbsp;//        OrderItemPojo tempPojo = getCheck(id);
+&nbsp;//        if(dao.select(id).getOrderItem().equals(p.getOrderItem()) &amp;&amp; dao.select(id).getCategory().equals(p.getCategory())){
+&nbsp;//            return;
+&nbsp;//        }
+&nbsp;//        if(dao.checkerForDuplicate(p.getOrderItem(), p.getCategory())==null){
+&nbsp;//            tempPojo.setOrderItem(p.getOrderItem());
+&nbsp;//            tempPojo.setCategory(p.getCategory());}
+&nbsp;//        else throw new ApiException(&quot;category already exists&quot;);
+&nbsp;//    }
+&nbsp;//
+&nbsp;//    @Transactional
+&nbsp;//    public OrderItemPojo getCheck(Integer id) throws ApiException {
+&nbsp;//        OrderItemPojo p = dao.select(id);
+&nbsp;//        if (p == null) {
+&nbsp;//            throw new ApiException(&quot;Employee with given ID does not exit, id: &quot; + id);
+&nbsp;//        }
+&nbsp;//        return p;
+&nbsp;//    }
+&nbsp;//
+&nbsp;//    protected static void normalize(OrderItemPojo p) {
+&nbsp;//        p.setOrderItem(StringUtil.toLowerCase(p.getOrderItem()));
+&nbsp;//        p.setCategory(StringUtil.toLowerCase(p.getCategory()));
+&nbsp;//    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-07-12 09:53</div>
+</div>
+</body>
+</html>

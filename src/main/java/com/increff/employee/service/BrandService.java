@@ -71,7 +71,7 @@ public class BrandService {
     public BrandPojo getCheck(Integer id) throws ApiException {
         BrandPojo p = dao.select(id);
         if (p == null) {
-            throw new ApiException("Employee with given ID does not exit, id: " + id);
+            throw new ApiException("Brand with given ID does not exit, id: " + id);
         }
         return p;
     }
