@@ -73,21 +73,44 @@ function updateInventory(event){
 //    	   error: handleAjaxError
 //    	});
 //
-//	url = getInventoryUrl() + "/" + id;
+	url = getInventoryUrl() + "/" + id;
 
 	//Set the values to update
 	var $form = $("#inventory-edit-form");
-	var json = toJson($form);
+	var barcodeField = $form.find('#inputBarcode1').val().trim()
+        var quantityField = $form.find('#inputQuantity1').val().trim()
+    	var json = toJson($form);
+    	if(barcodeField==""){
+        	$("#inputBarcode1").notify(
+              "field can not be empty",
+              { position:"top" }
+            );
+        	    return
+        	}
+        if(quantityField==""){
+        	$("#inputQuantity1").notify(
+              "field can not be empty",
+              { position:"top" }
+            );
+        	    return
+        	}
+
+        var postingData = {
+        	    barcode:barcodeField,
+        	    quantity:quantityField
+        	}
 
 	$.ajax({
 	   url: url,
 	   type: 'PUT',
-	   data: json,
+	   data: JSON.stringify(postingData),
 	   headers: {
        	'Content-Type': 'application/json'
        },
 	   success: function(response) {
+	        $('#edit-inventory-modal').modal('hide');
 	   		getInventoryList();
+	   		$.notify("UPDATED SUCCESSFULLY",{ className:"success" , globalPosition: 'top center'})
 	   },
 	   error: handleAjaxError
 	});
