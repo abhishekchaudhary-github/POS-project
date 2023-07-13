@@ -16,6 +16,7 @@ public class InventoryDao  extends AbstractDao {
 
     private static String get_quantity_from_productId = "select p from InventoryPojo p where productId=:productId";
 
+
     @PersistenceContext
     private EntityManager em;
 
@@ -26,6 +27,12 @@ public class InventoryDao  extends AbstractDao {
 
     @Transactional
     public InventoryPojo getFromProductId(Integer productId) {
+        TypedQuery<InventoryPojo> query = getQuery(get_quantity_from_productId, InventoryPojo.class);
+        query.setParameter("productId", productId);
+        return getSingle(query);
+    }
+
+    public InventoryPojo getIdFromBarcode(Integer productId) {
         TypedQuery<InventoryPojo> query = getQuery(get_quantity_from_productId, InventoryPojo.class);
         query.setParameter("productId", productId);
         return getSingle(query);

@@ -38,6 +38,12 @@ public class InventoryApiController {
         return convert(p);
     }
 
+    @ApiOperation(value = "Gets an Inventory by barcode")
+    @RequestMapping(path = "/api/inventory/barcode/{barcode}", method = RequestMethod.GET)
+    public Integer getInventoryFromBarcode(@PathVariable String barcode) throws ApiException {
+        return service.getIdFromBarcode(barcode);
+    }
+
     @ApiOperation(value = "Gets list of all Inventories")
     @RequestMapping(path = "/api/inventory", method = RequestMethod.GET)
     public List<InventoryData> getAll() throws ApiException {

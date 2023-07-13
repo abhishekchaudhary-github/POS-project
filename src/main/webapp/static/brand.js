@@ -86,7 +86,7 @@ function updateBrand(event){
 	   success: function(response) {
 	        $('#edit-brand-modal').modal('hide');
 	   		getBrandList();
-	   		$.notify("UPDATED SUCCESSFULLY",{ className:"success" , globalPosition: 'top center'})
+	   		$.notify("updated successfully",{ className:"success" , globalPosition: 'top center'})
 	   },
 	   error: handleAjaxError
 	});
@@ -129,26 +129,54 @@ var processCount = 0;
 function processData(){
 
 	var file = $('#brandFile')[0].files[0];
+	console.log(file)
+	if(file==null){
+	    $.notify("select a valid tsv file",{globalPosition: 'top center', className:"warn"})
+	}
 	readFileData(file, readFileDataCallback);
 }
 
 function readFileDataCallback(results){
 	fileData = results.data;
-	uploadRows();
-}
-
-function uploadRows(){
     if(fileData.length>5000){
         $("#upload-brand-modal").notify("try a smaller file size",{className:"warn"})
         return;
     }
+	for(var i =0 ;i < fileData.length; i++) {
+//	console.log(fileData[i])
+//	    let keys = Object.keys(fileData[i]);
+//	    console.log(keys)
+//	    if(Object.getOwnPropertyNames(fileData[i]).length!=2) {
+//	        $.notify("file format not available",{globalPosition: 'top center', className:"error"})
+//	        return;
+//	    }
+//	    //replace data with a key
+//	    for(var j=0;j<keys.length;j++) {
+//	        var tempData = fileData[i].key[j];
+//	        delete thisIsObject[key[j]];
+//	        keys[j]=keys[j].trim();
+//	        fileData[i].keys[j] = tempData;
+//	    }
+
+	    console.log(fileData[i][0])
+	    fileData[i].brand = fileData[i].brand.trim();
+	    fileData[i].category = fileData[i].category.trim();
+	}
+	uploadRows();
+}
+
+function uploadRows(){
 	//Update progress
 	updateUploadDialog();
 	//If everything processed then return
 	if(processCount==fileData.length){
-	if(errorData.length==0)
-    	$.notify("UPLOADED SUCCESSFULLY", {globalPosition: 'top center'})
-		return;
+	if(errorData.length==0){
+    	$.notify("uploaded successfully", {globalPosition: 'top center',className:"success"})
+        $('#upload-brand-modal').modal('hide');
+    }
+    else
+	    $.notify("error in uploading",{className:"warn", globalPosition: 'top center' })
+	return;
 	}
 
 	//Process next row
@@ -170,7 +198,6 @@ function uploadRows(){
 	   		uploadRows();
 	   },
 	   error: function(response){
-	        $.notify("ERROR IN UPLOADING",{className:"warn", globalPosition: 'top center' })
 	   		row.error=response.responseText
 	   		errorData.push(row);
 	   		uploadRows();
@@ -180,6 +207,10 @@ function uploadRows(){
 }
 
 function downloadErrors(){
+if(errorData.length==0) {
+     $.notify("no errors",{className:"warn", globalPosition: 'top center' })
+     return;
+}
 	writeFileData(errorData);
 }
 

@@ -153,11 +153,24 @@ var processCount = 0;
 function processData(){
 
 	var file = $('#inventoryFile')[0].files[0];
+	if(file==null){
+    	    $.notify("select a valid tsv file",{globalPosition: 'top center', className:"warn"})
+    	}
 	readFileData(file, readFileDataCallback);
 }
 
 function readFileDataCallback(results){
 	fileData = results.data;
+	 if(fileData.length>5000){
+            $("#upload-brand-modal").notify("try a smaller file size",{className:"warn"})
+            return;
+        }
+	for(var i =0 ;i < fileData.length; i++) {
+	    console.log(fileData[i][0])
+	    fileData[i].barcode = fileData[i].barcode.trim();
+	    fileData[i].quantity = fileData[i].quantity.trim();
+	    fileData[i].quantity = parseInt(fileData[i].quantity)
+	}
 	uploadRows();
 }
 
@@ -166,16 +179,21 @@ function uploadRows(){
 	updateUploadDialog();
 	//If everything processed then return
 	if(processCount==fileData.length){
-	if(errorData.length==0)
-    $.notify("UPLOADED SUCCESSFULLY", {globalPosition: 'top center'})
-	return;
-	}
+	if(errorData.length==0){
+        	$.notify("uploaded successfully", {globalPosition: 'top center',className:"success"})
+            $('#upload-brand-modal').modal('hide');
+        }
+        else
+    	    $.notify("error in uploading",{className:"warn", globalPosition: 'top center' })
+    	return;
+    	}
 
 	//Process next row
 	var row = fileData[processCount];
 	processCount++;
-    var id = row.id;
+    var barcode = row.barcode;
 	var json = JSON.stringify(row);
+
 	var url = getInventoryUrl() + "/" + id;
 
 	//Make ajax call
@@ -200,6 +218,10 @@ function uploadRows(){
 }
 
 function downloadErrors(){
+if(errorData.length==0) {
+     $.notify("no errors",{className:"warn", globalPosition: 'top center' })
+     return;
+}
 	writeFileData(errorData);
 }
 

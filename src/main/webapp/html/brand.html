@@ -179,7 +179,6 @@ table.dataTable tbody tr:hover {
                         <input type="file" class="custom-file-input" id="brandFile">
                         <label class="custom-file-label" for="brandFile" id="brandFileName">Choose file</label>
                     </div>
-                    <a th:href="@{/sample/brand.tsv}" target="_blank">Download Sample</a>
                     <br>
                     Rows: <span id="rowCount">0</span>,
                     Processed: <span id="processCount">0</span>,
@@ -187,9 +186,10 @@ table.dataTable tbody tr:hover {
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="process-data" accept=".tsv">Upload</button>
-                    <button type="button" class="btn btn-warning" id="download-errors">Download Errors</button>
+                    <a th:href="@{/sample/brand.tsv}" class="btn btn-outline-info" target="_blank"><i class="fa fa-file"></i> Sample</a>
+                    <button type="button" class="btn btn-outline-info" id="process-data" accept=".tsv"><i class="fa fa-upload"></i> Upload</button>
+                    <button type="button" class="btn btn-outline-info" id="download-errors"> <i class="fa fa-exclamation-circle"></i> Errors</button>
+                    <button type="button" class="btn btn-outline-info" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
                 </div>
             </div>
         </div>
