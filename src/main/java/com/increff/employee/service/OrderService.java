@@ -78,9 +78,19 @@ public class OrderService {
         return dateTime;
     }
 
-    public Integer getLastOrderId() {
-        return dao.getLastOrderId();
-    }
+//    public Integer getLastOrderId() {
+//         List<OrderPojo> orderPojoList = dao.selectAll();
+//         if(orderPojoList.size()==0) {
+//             return 0;
+//         }
+//         int k=1;
+//         for(int i=0;i<orderPojoList.size();i++) {
+//             if(orderPojoList.get(i).getId()>k) {
+//                 k = orderPojoList.get(i).getId();
+//             }
+//         }
+//         return k;
+//    }
 
     public OrderPojo getOrderById(Integer id) {
         return dao.orderById(id);

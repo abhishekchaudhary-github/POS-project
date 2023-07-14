@@ -29,10 +29,11 @@ public class OrderItemApiController {
     @RequestMapping(path = "/api/orderitem", method = RequestMethod.POST)
     public void add(@RequestBody List<CategoryDetailForm> form) throws ApiException {
         List<OrderItemPojo> p = new ArrayList<OrderItemPojo>();
-        Integer orderPojoId = service.getOrderId()+1;
+        for(CategoryDetailForm categoryDetailItem : form)
+            check(categoryDetailItem);
+        Integer orderPojoId = service.addInOrder();
         for(CategoryDetailForm categoryDetailItem : form)
             p.add(convert(categoryDetailItem,orderPojoId));
-        service.addInOrder();
         service.add(p);
     }
 
@@ -96,17 +97,34 @@ public class OrderItemApiController {
         return d;
     }
 
-    private OrderItemPojo convert(CategoryDetailForm f ,Integer orderPojoId) throws ApiException {
+    private OrderItemPojo convert(CategoryDetailForm f) throws ApiException {
         OrderItemPojo p = new OrderItemPojo();
         service.productBarcodeMustExist(f);
         Integer productId = service.getInventoryIdOfProduct(f.getBarcode());
         service.getInventoryFromProductId(productId,f.getQuantity());
-            p.setOrderId(orderPojoId);
             p.setProductId(productId);
             p.setQuantity(f.getQuantity());
             p.setSellingPrice(f.getMrp());
             return p;
     }
+
+    private OrderItemPojo convert(CategoryDetailForm f ,Integer orderPojoId) throws ApiException {
+        OrderItemPojo p = new OrderItemPojo();
+        service.productBarcodeMustExist(f);
+        Integer productId = service.getInventoryIdOfProduct(f.getBarcode());
+        service.getInventoryFromProductId(productId,f.getQuantity());
+        p.setOrderId(orderPojoId);
+        p.setProductId(productId);
+        p.setQuantity(f.getQuantity());
+        p.setSellingPrice(f.getMrp());
+        return p;
+    }
+    private void check(CategoryDetailForm f) throws ApiException {
+        service.productBarcodeMustExist(f);
+        Integer productId = service.getInventoryIdOfProduct(f.getBarcode());
+        service.getInventoryFromProductId(productId,f.getQuantity());
+    }
+
 
     private OrderItemPojo convertEdit(OrderItemEditForm f) throws ApiException {
         OrderItemPojo orderItemPojo = new OrderItemPojo();

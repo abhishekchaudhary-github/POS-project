@@ -76,7 +76,8 @@ public class OrderItemService {
                 Integer quantity = inventoryPojo.getQuantity();
                 quantity += orderItemPojoList.get(i).getQuantity();
                 inventoryPojo.setQuantity(quantity);
-                dao.delete(orderItemPojoList.get(i).getId());
+                deleteOrderItemJust(orderItemPojoList.get(i).getId());
+                //dao.delete(orderItemPojoList.get(i).getId());
             }
         }
     }
@@ -108,6 +109,11 @@ public class OrderItemService {
         orderService.delete(orderId);
     }
 
+    @Transactional(rollbackOn = ApiException.class)
+    public void deleteOrderItemJust(Integer id) {
+        dao.delete(id);
+    }
+
     @Transactional
     public void editOrder(OrderItemPojo orderItemPojo1) throws ApiException {
         OrderPojo orderPojo = orderService.getOrderById(orderItemPojo1.getOrderId());
@@ -130,10 +136,10 @@ public class OrderItemService {
         return dao.selectAll();
     }
 
-    @Transactional
-    public Integer getOrderId() {
-        return orderService.getLastOrderId();
-    }
+//    @Transactional
+//    public Integer getOrderId() {
+//        return orderService.getLastOrderId();
+//    }
 
     @Transactional
     public List<OrderItemPojo> selectByOrderId(Integer id) {
