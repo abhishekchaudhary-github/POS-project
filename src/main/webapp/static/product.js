@@ -197,47 +197,66 @@ function processData(){
 
 function readFileDataCallback(results){
 	fileData = results.data;
+	if(fileData.length>5000){
+            $.notify("try a smaller file size",{globalPosition: 'top center',className:"warn"})
+            return;
+        }
+    if(fileData.length==0){
+            $.notify("no data in the file",{globalPosition: 'top center',className:"warn"})
+            return;
+        }
+     if( !(fileData[0].hasOwnProperty('barcode') || fileData[0].hasOwnProperty('brand') || fileData[0].hasOwnProperty('category') || fileData[0].hasOwnProperty('mrp') || fileData[0].hasOwnProperty('name')) ){
+            $.notify("name of fields are not as per requirement",{globalPosition: 'top center',className:"error"})
+            return;
+        }
+        for(var i =0 ;i < fileData.length; i++) {
+                    fileData[i].barcode = fileData[i].barcode.trim();
+            	    fileData[i].brand = fileData[i].brand.trim();
+            	    fileData[i].category = fileData[i].category.trim();
+            	    fileData[i].mrp = parseFloat(fileData[i].mrp.trim());
+            	    fileData[i].name = fileData[i].name.trim();
+        }
 	uploadRows();
 }
 
 function uploadRows(){
 	//Update progress
-	updateUploadDialog();
-	//If everything processed then return
-	if(processCount==fileData.length){
-	if(errorData.length==0){
-        	$.notify("UPLOADED SUCCESSFULLY", {globalPosition: 'top center'})
-    		return;
+    	updateUploadDialog();
+    	//If everything processed then return
+    	if(processCount==fileData.length){
+    	if(errorData.length==0){
+        	$.notify("uploaded successfully", {globalPosition: 'top center',className:"success"})
+            $('#upload-brand-modal').modal('hide');
+        }
+        else
+    	    $.notify("error in uploading",{className:"warn", globalPosition: 'top center' })
+    	return;
     	}
-		return;
-	}
 
-	//Process next row
-	var row = fileData[processCount];
-	processCount++;
+    	//Process next row
+    	var row = fileData[processCount];
+    	processCount++;
 
-	var json = JSON.stringify(row);
-	var url = getProductUrl();
+    	var json = JSON.stringify(row);
+    	var url = getProductUrl();
 
-	//Make ajax call
-	$.ajax({
-	   url: url,
-	   type: 'POST',
-	   data: json,
-	   headers: {
-       	'Content-Type': 'application/json'
-       },
-	   success: function(response) {
-	   		uploadRows();
-	   },
-	   error: function(response){
-	        $.notify("ERROR IN UPLOADING",{className:"warn", globalPosition: 'top center' })
-	   		row.error=response.responseText
-	   		errorData.push(row);
-	   		uploadRows();
-	   }
-	});
-
+    	//Make ajax call
+    	$.ajax({
+    	   url: url,
+    	   type: 'POST',
+    	   data: json,
+    	   headers: {
+           	'Content-Type': 'application/json'
+           },
+    	   success: function(response) {
+    	   		uploadRows();
+    	   },
+    	   error: function(response){
+    	   		row.error=response.responseText
+    	   		errorData.push(row);
+    	   		uploadRows();
+    	   }
+    	});
 }
 
 function downloadErrors(){

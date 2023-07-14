@@ -32,11 +32,11 @@ public class InventoryDao  extends AbstractDao {
         return getSingle(query);
     }
 
-    public InventoryPojo getIdFromBarcode(Integer productId) {
-        TypedQuery<InventoryPojo> query = getQuery(get_quantity_from_productId, InventoryPojo.class);
-        query.setParameter("productId", productId);
-        return getSingle(query);
-    }
+//    public InventoryPojo getIdFromBarcode(Integer productId) {
+//        TypedQuery<InventoryPojo> query = getQuery(get_quantity_from_productId, InventoryPojo.class);
+//        query.setParameter("productId", productId);
+//        return getSingle(query);
+//    }
 
     public InventoryPojo select(Integer id) {
         TypedQuery<InventoryPojo> query = getQuery(select_id, InventoryPojo.class);

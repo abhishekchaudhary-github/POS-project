@@ -60,12 +60,12 @@ public class InventoryService {
         return dao.getFromProductId(productId);
     }
 
-    public Integer getIdFromBarcode(String barcode) throws ApiException {
-        Integer productId = productService.getProductId(barcode);
-        InventoryPojo inventoryPojo = dao.getIdFromBarcode(productId);
-        if(inventoryPojo==null) return null;
-        else return inventoryPojo.getId();
-    }
+//    public Integer getIdFromBarcode(String barcode) throws ApiException {
+//        Integer productId = productService.getProductId(barcode);
+ //       InventoryPojo inventoryPojo = dao.getIdFromBarcode(productId);
+//        if(inventoryPojo==null) return -1;
+//        else return inventoryPojo.getId();
+//    }
 
 
     @Transactional(rollbackOn  = ApiException.class)

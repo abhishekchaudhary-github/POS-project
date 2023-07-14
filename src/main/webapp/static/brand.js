@@ -138,10 +138,20 @@ function processData(){
 
 function readFileDataCallback(results){
 	fileData = results.data;
+	console.log(fileData)
     if(fileData.length>5000){
-        $("#upload-brand-modal").notify("try a smaller file size",{className:"warn"})
+        $.notify("try a smaller file size",{globalPosition: 'top center',className:"warn"})
         return;
     }
+    if(fileData.length==0){
+        $.notify("no data in the file",{globalPosition: 'top center',className:"warn"})
+        return;
+    }
+    if( !(fileData[0].hasOwnProperty('brand') || fileData[0].hasOwnProperty('category')) ) {
+        $.notify("name of fields are not as per requirement",{globalPosition: 'top center',className:"error"})
+        return;
+    }
+    console.log(fileData[0])
 	for(var i =0 ;i < fileData.length; i++) {
 //	console.log(fileData[i])
 //	    let keys = Object.keys(fileData[i]);

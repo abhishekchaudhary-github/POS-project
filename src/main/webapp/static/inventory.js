@@ -7,6 +7,12 @@ function getInventoryUrl(){
 	return baseUrl + "/api/inventory";
 }
 
+function getBarcodeUrl(){
+	var baseUrl = $("meta[name=baseUrl]").attr("content")
+	return baseUrl + "/api/inventory/barcode";
+}
+
+
 //BUTTON ACTIONS
 function addInventory(event){
 	//Set the values to update
@@ -165,6 +171,14 @@ function readFileDataCallback(results){
             $("#upload-brand-modal").notify("try a smaller file size",{className:"warn"})
             return;
         }
+      if(fileData.length==0){
+             $.notify("no data in the file",{globalPosition: 'top center',className:"warn"})
+             return;
+         }
+         if( !(fileData[0].hasOwnProperty('barcode') || fileData[0].hasOwnProperty('quantity')) ) {
+             $.notify("name of fields are not as per requirement",{globalPosition: 'top center',className:"error"})
+             return;
+         }
 	for(var i =0 ;i < fileData.length; i++) {
 	    console.log(fileData[i][0])
 	    fileData[i].barcode = fileData[i].barcode.trim();
@@ -175,31 +189,30 @@ function readFileDataCallback(results){
 }
 
 function uploadRows(){
-	//Update progress
+//Update progress
 	updateUploadDialog();
 	//If everything processed then return
 	if(processCount==fileData.length){
 	if(errorData.length==0){
-        	$.notify("uploaded successfully", {globalPosition: 'top center',className:"success"})
-            $('#upload-brand-modal').modal('hide');
-        }
-        else
-    	    $.notify("error in uploading",{className:"warn", globalPosition: 'top center' })
-    	return;
-    	}
+    	$.notify("uploaded successfully", {globalPosition: 'top center',className:"success"})
+        $('#upload-brand-modal').modal('hide');
+    }
+    else
+	    $.notify("error in uploading",{className:"warn", globalPosition: 'top center' })
+	return;
+	}
 
 	//Process next row
 	var row = fileData[processCount];
 	processCount++;
-    var barcode = row.barcode;
-	var json = JSON.stringify(row);
 
-	var url = getInventoryUrl() + "/" + id;
+	var json = JSON.stringify(row);
+	var url = getInventoryUrl();
 
 	//Make ajax call
 	$.ajax({
 	   url: url,
-	   type: 'PUT',
+	   type: 'POST',
 	   data: json,
 	   headers: {
        	'Content-Type': 'application/json'
@@ -208,7 +221,6 @@ function uploadRows(){
 	   		uploadRows();
 	   },
 	   error: function(response){
-	        $.notify("ERROR IN UPLOADING",{className:"warn", globalPosition: 'top center' })
 	   		row.error=response.responseText
 	   		errorData.push(row);
 	   		uploadRows();
@@ -319,6 +331,22 @@ function displayInventory(data){
 	$('#edit-inventory-modal').modal('toggle');
 }
 
+var InventoryData;
+
+function getInventoryData() {
+var url = getInventoryUrl();
+    $.ajax({
+        	   url: url,
+        	   type: 'GET',
+        	   async: false,
+        	   success: function(data) {
+        	   		InventoryData = data
+        	   		console.log(InventoryData)
+        	   },
+        	   error: handleAjaxError
+        	});
+}
+
 
 //INITIALIZATION CODE
 function init(){
@@ -341,3 +369,4 @@ function init(){
 
 $(document).ready(init);
 $(document).ready(getInventoryList);
+$(document).ready(getInventoryData)
