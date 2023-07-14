@@ -1,3 +1,4 @@
+//77 100 101
 package com.increff.employee.service;
 
 import com.increff.employee.dao.OrderDao;
@@ -60,6 +61,11 @@ public class OrderService {
 
 
     @Transactional
+    public void delete(Integer id) {
+        dao.delete(id);
+    }
+
+    @Transactional
     public List<OrderPojo> getAll() {
         return dao.selectAll();
     }
@@ -71,6 +77,11 @@ public class OrderService {
 //        String formattedDateTime = createdTime.format(currentDate);
         return dateTime;
     }
+
+    public OrderPojo getOrderById(Integer id) {
+        return dao.orderById(id);
+    }
+
     @Transactional
     public ResponseEntity<byte[]> getInvoicePDF(Integer id) throws Exception {
         orderItemCount=0;
@@ -90,6 +101,9 @@ public class OrderService {
         dailyReportPojo.setTotal_invoice(dailyReportPojo.getTotal_invoice()+1);
         Integer initialTotalInvoicedItems = dailyReportPojo.getTotal_invoiced_items();
         dailyReportPojo.setTotal_invoiced_items(initialTotalInvoicedItems+orderItemCount);
+        //uneditable
+        OrderPojo orderPojo = getOrderById(id);
+        orderPojo.setEditable();
         return response;
     }
 

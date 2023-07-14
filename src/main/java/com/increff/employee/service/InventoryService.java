@@ -55,6 +55,10 @@ public class InventoryService {
     public Integer getIdOfProduct(String barcode) throws ApiException {
         return productService.getProductId(barcode);
     }
+    public String getForBarcode(Integer productId) throws ApiException {
+        return productService.get(productId).getBarcode();
+    }
+
     @Transactional
     public InventoryPojo getFromProductId(Integer productId) throws ApiException {
         return dao.getFromProductId(productId);

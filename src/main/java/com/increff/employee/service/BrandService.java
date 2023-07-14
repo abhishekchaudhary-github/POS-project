@@ -32,7 +32,9 @@ public class BrandService {
 
     }
 
-
+    public BrandPojo brandMustExist (Integer brand_category) {
+        return dao.brandMustExist(brand_category);
+    }
 
     @Transactional(rollbackOn = ApiException.class)
     public BrandPojo get(Integer id) throws ApiException {

@@ -23,9 +23,6 @@ public class ProductService {
     @Autowired
     private ProductDao dao;
 
-    @Autowired
-    private BrandDao brandDao;
-
 
     @Transactional(rollbackOn = ApiException.class)
     public void add(ProductPojo p) throws ApiException {
@@ -54,7 +51,7 @@ public class ProductService {
         }
 
         //barcode originality
-        if(brandDao.brandMustExist(p.getBrand_category())==null)
+        if(brandService.brandMustExist(p.getBrand_category())==null)
             throw new ApiException(" brand of such brand category does not exist ");
 
         if(dao.barcodeMustExist(p.getBarcode())!=null)

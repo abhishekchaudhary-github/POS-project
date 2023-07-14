@@ -36,7 +36,6 @@ public class EmployeeApiController {
 	
 	@ApiOperation(value = "Deletes an employee")
 	@RequestMapping(path = "/api/employee/{id}", method = RequestMethod.DELETE)
-	// /api/1
 	public void delete(@PathVariable Integer id) {
 		service.delete(id);
 	}

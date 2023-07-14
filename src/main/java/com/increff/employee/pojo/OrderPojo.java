@@ -15,6 +15,16 @@ public class OrderPojo {
     private Integer id;
     private LocalDateTime time;
 
+    private boolean editable = true;
+
+    public boolean isEditable() {
+        return editable;
+    }
+
+    public void setEditable() {
+        this.editable = false;
+    }
+
     public Integer getId() {
         return id;
     }

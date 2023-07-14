@@ -19,7 +19,6 @@ import java.util.List;
 public class InventoryApiController {
     @Autowired
     private InventoryService service;
-
     @Autowired
     private ProductService productService;
 
@@ -66,7 +65,7 @@ public class InventoryApiController {
     private InventoryData convert(InventoryPojo p) throws ApiException {
         InventoryData d = new InventoryData();
         d.setQuantity(p.getQuantity());
-        d.setBarcode(productService.get(p.getProductId()).getBarcode());
+        d.setBarcode(service.getForBarcode(p.getProductId()));
         d.setId(p.getId());
         return d;
     }

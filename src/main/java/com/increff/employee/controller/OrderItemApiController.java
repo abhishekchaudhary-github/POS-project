@@ -20,19 +20,11 @@ import com.increff.employee.model.OrderItemForm;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+import javax.transaction.Transactional;
+
 @Api
 @RestController
 public class OrderItemApiController {
-    //dto
-    @Autowired
-    private ProductService productService;
-
-    @Autowired
-    private InventoryService inventoryService;
-
-    @Autowired
-    private OrderService orderService;
-
     //
     @Autowired
     private OrderItemService service;
@@ -41,10 +33,23 @@ public class OrderItemApiController {
     @RequestMapping(path = "/api/orderitem", method = RequestMethod.POST)
     public void add(@RequestBody List<CategoryDetailForm> form) throws ApiException {
         List<OrderItemPojo> p = new ArrayList<OrderItemPojo>();
-        Integer orderPojoId = orderService.add();
+        Integer orderPojoId = service.addInOrder();
         for(CategoryDetailForm categoryDetailItem : form)
             p.add(convert(categoryDetailItem,orderPojoId));
         service.add(p);
+    }
+
+
+    @ApiOperation(value = "Deletes an Order so give orderId")
+    @RequestMapping(path = "/api/order/{id}", method = RequestMethod.DELETE)
+    public void deleteOrder(@PathVariable Integer id) {
+        service.deleteOrder(id);
+    }
+
+    @ApiOperation(value = "Deletes an orderitems so give id")
+    @RequestMapping(path = "/api/orderitem/{id}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable Integer id) {
+        service.delete(id);
     }
 
 
@@ -72,43 +77,38 @@ public class OrderItemApiController {
 //        service.check(form);
 //    }
 //
-//    @ApiOperation(value = "Updates a OrderItem")
-//    @RequestMapping(path = "/api/orderitem/{id}", method = RequestMethod.PUT)
-//    public void update(@PathVariable Integer id, @RequestBody OrderItemForm f) throws ApiException {
-//        OrderItemPojo p = convert(f);
-//        service.update(id, p);
-//    }
+    @ApiOperation(value = "Updates a OrderItem")
+    @RequestMapping(path = "/api/orderitem/{id}", method = RequestMethod.PUT)
+    public void update(@PathVariable Integer id, @RequestBody CategoryDetailForm f) throws ApiException {
+        OrderItemPojo p = convert(f,id);
+        service.editOrder(p);
+    }
 
 
     private OrderItemData convert(OrderItemPojo p) throws ApiException {
-        ProductPojo productPojo = productService.get(p.getProductId());
+        String barcode = service.getFromProductBarcode(p);
+        String name = service.getFromProductName(p);
         OrderItemData d = new OrderItemData();
         d.setOrderId(p.getOrderId());
         d.setProductId(p.getProductId());
         d.setQuantity(p.getQuantity());
         d.setSellingPrice(p.getSellingPrice());
-        d.setBarcode(productPojo.getBarcode());
-        d.setName(productPojo.getName());
+        d.setBarcode(barcode);
+        d.setName(name);
         d.setId(p.getId());
         return d;
     }
 
     private OrderItemPojo convert(CategoryDetailForm f ,Integer orderPojoId) throws ApiException {
         OrderItemPojo p = new OrderItemPojo();
-        ProductPojo productPojo = productService.barcodeMustExist(f.getBarcode());
-        if(productPojo!=null) {
-            if(productPojo.getMrp()<f.getMrp())
-                throw new ApiException("Selling price cannot be greater than mrp");
-            InventoryPojo inventoryPojo = inventoryService.get(productPojo.getId());
-//            Integer orderPojoId = orderService.add();
+        service.productBarcodeMustExist(f);
+        Integer productId = service.getInventoryIdOfProduct(f.getBarcode());
+        service.getInventoryFromProductId(productId);
             p.setOrderId(orderPojoId);
-            p.setProductId(productPojo.getId());
+            p.setProductId(productId);
             p.setQuantity(f.getQuantity());
             p.setSellingPrice(f.getMrp());
             return p;
-        }
-
-        else throw new ApiException("Barcode does not exist");
     }
 
 }
