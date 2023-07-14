@@ -121,6 +121,9 @@ public class OrderItemService {
         if(orderPojo.isEditable()==true){
             orderItemPojo.setQuantity(orderItemPojo1.getQuantity());
             orderItemPojo.setSellingPrice(orderItemPojo1.getSellingPrice());
+            if(orderItemPojo1.getQuantity()==0) {
+                delete(orderItemPojo1.getId());
+            }
         }
         else throw new ApiException("this order is not editable");
     }
