@@ -3,8 +3,7 @@ package com.increff.employee.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.increff.employee.model.CategoryDetailForm;
-import com.increff.employee.model.EmployeeData;
+import com.increff.employee.model.*;
 import com.increff.employee.pojo.*;
 import com.increff.employee.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.increff.employee.model.OrderItemData;
-import com.increff.employee.model.OrderItemForm;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,9 +29,10 @@ public class OrderItemApiController {
     @RequestMapping(path = "/api/orderitem", method = RequestMethod.POST)
     public void add(@RequestBody List<CategoryDetailForm> form) throws ApiException {
         List<OrderItemPojo> p = new ArrayList<OrderItemPojo>();
-        Integer orderPojoId = service.addInOrder();
+        Integer orderPojoId = service.getOrderId()+1;
         for(CategoryDetailForm categoryDetailItem : form)
             p.add(convert(categoryDetailItem,orderPojoId));
+        service.addInOrder();
         service.add(p);
     }
 
@@ -48,7 +45,7 @@ public class OrderItemApiController {
 
     @ApiOperation(value = "Deletes an orderitems so give id")
     @RequestMapping(path = "/api/orderitem/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable Integer id) {
+    public void delete(@PathVariable Integer id) throws ApiException {
         service.delete(id);
     }
 
@@ -79,8 +76,8 @@ public class OrderItemApiController {
 //
     @ApiOperation(value = "Updates a OrderItem")
     @RequestMapping(path = "/api/orderitem/{id}", method = RequestMethod.PUT)
-    public void update(@PathVariable Integer id, @RequestBody CategoryDetailForm f) throws ApiException {
-        OrderItemPojo p = convert(f,id);
+    public void update(@PathVariable Integer id, @RequestBody OrderItemEditForm f) throws ApiException {
+        OrderItemPojo p = convertEdit(f);
         service.editOrder(p);
     }
 
@@ -103,12 +100,20 @@ public class OrderItemApiController {
         OrderItemPojo p = new OrderItemPojo();
         service.productBarcodeMustExist(f);
         Integer productId = service.getInventoryIdOfProduct(f.getBarcode());
-        service.getInventoryFromProductId(productId);
+        service.getInventoryFromProductId(productId,f.getQuantity());
             p.setOrderId(orderPojoId);
             p.setProductId(productId);
             p.setQuantity(f.getQuantity());
             p.setSellingPrice(f.getMrp());
             return p;
+    }
+
+    private OrderItemPojo convertEdit(OrderItemEditForm f) throws ApiException {
+        OrderItemPojo orderItemPojo = new OrderItemPojo();
+        service.getInventoryFromProductId(f,f.getId());
+        orderItemPojo.setQuantity(f.getQuantity());
+        orderItemPojo.setSellingPrice(f.getSelling_price());
+        return orderItemPojo;
     }
 
 }

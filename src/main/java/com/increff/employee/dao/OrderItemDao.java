@@ -19,7 +19,7 @@ public class OrderItemDao extends AbstractDao {
     private static String select_id = "select p from OrderItemPojo p where id=:id";
     private static String select_all = "select p from OrderItemPojo p";
     private static String nocommon_case = "select p from OrderItemPojo p where orderItem=:orderItem and category=:category";
-    private static String delete_id = "delete from OrderItemPojo p where p.id=:id";
+    private static String delete_id = "delete from OrderItemPojo p where id=:id";
 
     private static String select_order_id = "select p from OrderItemPojo p where orderId=:orderId";
 
@@ -27,9 +27,10 @@ public class OrderItemDao extends AbstractDao {
     private EntityManager em;
 
 
-    public void delete(Integer id) {
+    public Integer delete(Integer id) {
         Query query = em.createQuery(delete_id);
         query.setParameter("id", id);
+        return query.executeUpdate();
     }
 
     @Transactional

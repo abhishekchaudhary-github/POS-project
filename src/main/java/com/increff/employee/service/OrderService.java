@@ -78,6 +78,10 @@ public class OrderService {
         return dateTime;
     }
 
+    public Integer getLastOrderId() {
+        return dao.getLastOrderId();
+    }
+
     public OrderPojo getOrderById(Integer id) {
         return dao.orderById(id);
     }

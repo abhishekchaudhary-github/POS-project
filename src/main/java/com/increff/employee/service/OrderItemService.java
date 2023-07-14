@@ -1,11 +1,13 @@
 package com.increff.employee.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
 import com.increff.employee.model.CategoryDetailForm;
+import com.increff.employee.model.OrderItemEditForm;
 import com.increff.employee.model.OrderItemForm;
 import com.increff.employee.pojo.InventoryPojo;
 import com.increff.employee.pojo.OrderPojo;
@@ -58,19 +60,30 @@ public class OrderItemService {
 
 
 
-    @Transactional
+    @Transactional(rollbackOn = ApiException.class)
     public void deleteOrder(Integer orderId) {
         orderService.delete(orderId);
         List<OrderItemPojo> orderItemPojoList = dao.selectAll();
         System.out.println(orderItemPojoList);
-        for(int i=0;i<orderItemPojoList.size();i++) {
-            if(orderItemPojoList.get(i).getOrderId()==orderId)
+        List<InventoryPojo> inventoryPojoList = inventoryService.getAll();
+        HashMap<Integer, InventoryPojo> hm = new HashMap<Integer, InventoryPojo>();
+        for (int i = 0; i < inventoryPojoList.size(); i++) {
+            hm.put(inventoryPojoList.get(i).getProductId(), inventoryPojoList.get(i));
+        }
+
+        for (int i = 0; i < orderItemPojoList.size(); i++) {
+            if (orderItemPojoList.get(i).getOrderId() == orderId) {
+                InventoryPojo inventoryPojo = hm.get(orderItemPojoList.get(i).getProductId());
+                Integer quantity = inventoryPojo.getQuantity();
+                quantity += orderItemPojoList.get(i).getQuantity();
+                inventoryPojo.setQuantity(quantity);
                 dao.delete(orderItemPojoList.get(i).getId());
+            }
         }
     }
 
-    @Transactional
-    public void delete(Integer id) {
+    @Transactional(rollbackOn = ApiException.class)
+    public void delete(Integer id) throws ApiException {
         OrderItemPojo orderItemPojo = dao.select(id);
         List<OrderItemPojo> orderItemPojoList = dao.selectAll();
         int count=0;
@@ -82,6 +95,11 @@ public class OrderItemService {
         if(count<2) {
             orderService.delete(orderItemPojo.getOrderId());
         }
+        //psuedo inventory pojo
+        InventoryPojo inventoryPojo  = inventoryService.getFromProductId(orderItemPojo.getProductId());
+        Integer quantity = inventoryPojo.getQuantity();
+        quantity += orderItemPojo.getQuantity();
+        inventoryPojo.setQuantity(quantity);
         dao.delete(id);
     }
 
@@ -108,6 +126,11 @@ public class OrderItemService {
     }
 
     @Transactional
+    public Integer getOrderId() {
+        return orderService.getLastOrderId();
+    }
+
+    @Transactional
     public List<OrderItemPojo> selectByOrderId(Integer id) {
         List<OrderItemPojo> orderItemPojoList = dao.selectAll();
         List<OrderItemPojo> orderItemPojoList2 = new ArrayList<OrderItemPojo>();
@@ -126,11 +149,39 @@ public class OrderItemService {
     }
 
     @Transactional
-    public void getInventoryFromProductId(Integer productId) throws ApiException {
+    public void getInventoryFromProductId(Integer productId,Integer quantity) throws ApiException {
         InventoryPojo inventoryPojo = inventoryService.getFromProductId(productId);
         if(inventoryPojo==null) {
             throw new ApiException("this product is not present in the inventory");
         }
+        if(quantity>inventoryPojo.getQuantity()){
+            throw new ApiException("quantity of item more than the quantity in inventory");
+        }
+        if(quantity<=0) {
+            throw new ApiException("quantity must be at least 1");
+        }
+        //check for it
+//        if( quantity % 1 != 0) {
+//            throw new ApiException("quantity can't be fractional");
+//        }
+
+    }
+
+    @Transactional
+    public void getInventoryFromProductId(OrderItemEditForm orderItemEditForm, Integer id) throws ApiException {
+        OrderItemPojo orderItemPojo = dao.select(id);
+        InventoryPojo inventoryPojo = inventoryService.getFromProductId(orderItemEditForm.getProductId());
+        ProductPojo productPojo = productService.get(inventoryPojo.getProductId());
+        if(inventoryPojo==null) {
+            throw new ApiException("this product is not present in the inventory");
+        }
+        if(orderItemEditForm.getQuantity()>inventoryPojo.getQuantity()+orderItemPojo.getQuantity()){
+            throw new ApiException("quantity of item more than the quantity in inventory");
+        }
+        if(orderItemEditForm.getSelling_price()>productPojo.getMrp()){
+            throw new ApiException("price of item can't be more than MRP");
+        }
+        inventoryPojo.setQuantity(inventoryPojo.getQuantity()+orderItemPojo.getQuantity()-orderItemEditForm.getQuantity());
     }
 
     @Transactional
