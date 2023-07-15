@@ -40,7 +40,7 @@ public class OrderItemApiController {
 
     @ApiOperation(value = "Deletes an Order so give orderId")
     @RequestMapping(path = "/api/order/{id}", method = RequestMethod.DELETE)
-    public void deleteOrder(@PathVariable Integer id) {
+    public void deleteOrder(@PathVariable Integer id) throws ApiException {
         service.deleteOrder(id);
     }
 
@@ -128,7 +128,7 @@ public class OrderItemApiController {
 
     private OrderItemPojo convertEdit(OrderItemEditForm f) throws ApiException {
         OrderItemPojo orderItemPojo = new OrderItemPojo();
-        service.getInventoryFromProductId(f,f.getId());
+        //service.getInventoryFromProductId(f,f.getId());
         orderItemPojo.setQuantity(f.getQuantity());
         orderItemPojo.setSellingPrice(f.getSelling_price());
         orderItemPojo.setOrderId(f.getOrderId());
