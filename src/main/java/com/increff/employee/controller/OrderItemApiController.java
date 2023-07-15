@@ -79,7 +79,7 @@ public class OrderItemApiController {
     @RequestMapping(path = "/api/orderitem/{id}", method = RequestMethod.PUT)
     public void update(@PathVariable Integer id, @RequestBody OrderItemEditForm f) throws ApiException {
         OrderItemPojo p = convertEdit(f);
-        service.editOrder(p);
+        service.editOrder(id,p);
     }
 
 
@@ -131,6 +131,9 @@ public class OrderItemApiController {
         service.getInventoryFromProductId(f,f.getId());
         orderItemPojo.setQuantity(f.getQuantity());
         orderItemPojo.setSellingPrice(f.getSelling_price());
+        orderItemPojo.setOrderId(f.getOrderId());
+        orderItemPojo.setProductId(f.getProductId());
+        orderItemPojo.setId(f.getId());
         return orderItemPojo;
     }
 

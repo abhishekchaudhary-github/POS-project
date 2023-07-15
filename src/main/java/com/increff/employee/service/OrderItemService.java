@@ -9,15 +9,12 @@ import javax.transaction.Transactional;
 import com.increff.employee.model.CategoryDetailForm;
 import com.increff.employee.model.OrderItemEditForm;
 import com.increff.employee.model.OrderItemForm;
-import com.increff.employee.pojo.InventoryPojo;
-import com.increff.employee.pojo.OrderPojo;
-import com.increff.employee.pojo.ProductPojo;
+import com.increff.employee.pojo.*;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.increff.employee.dao.OrderItemDao;
-import com.increff.employee.pojo.OrderItemPojo;
 import com.increff.employee.util.StringUtil;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -114,11 +111,12 @@ public class OrderItemService {
         dao.delete(id);
     }
 
-    @Transactional
-    public void editOrder(OrderItemPojo orderItemPojo1) throws ApiException {
+    @Transactional(rollbackOn = ApiException.class)
+    public void editOrder(Integer id, OrderItemPojo orderItemPojo1) throws ApiException {
         OrderPojo orderPojo = orderService.getOrderById(orderItemPojo1.getOrderId());
-        OrderItemPojo orderItemPojo = dao.select(orderItemPojo1.getProductId());
+        //OrderItemPojo orderItemPojo = dao.select(orderItemPojo1.getProductId());
         if(orderPojo.isEditable()==true){
+            OrderItemPojo orderItemPojo = getCheck(id);
             orderItemPojo.setQuantity(orderItemPojo1.getQuantity());
             orderItemPojo.setSellingPrice(orderItemPojo1.getSellingPrice());
             if(orderItemPojo1.getQuantity()==0) {
@@ -245,5 +243,15 @@ public class OrderItemService {
 //    protected static void normalize(OrderItemPojo p) {
 //        p.setBarcode(StringUtil.toLowerCase(p.getBarcode()));
 //    }
+
+    @Transactional
+    public OrderItemPojo getCheck(Integer id) throws ApiException {
+        OrderItemPojo p = dao.select(id);
+        if (p == null) {
+            throw new ApiException("Order with given ID does not exit, id: " + id);
+        }
+        return p;
+    }
+
 
 }
