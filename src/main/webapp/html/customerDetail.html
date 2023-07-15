@@ -39,7 +39,7 @@ table.dataTable tbody tr:hover {
 
 <!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"  data-keyboard="false" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static"  id="exampleModal">
-    <div class="modal-dialog  modal-lg" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Order List</h5>
@@ -58,27 +58,29 @@ table.dataTable tbody tr:hover {
 
     <!-- Top row with form-->
     <div class="row admin-element">
-        <div class="col-12">
-            <form class="form-inline" id="customerDetail-form">
+        <div >
+            <form class="d-flex justify-content-around" id="customerDetail-form">
 
-                <div class="form-group col-sm-4"  style="margin-top:1.5em">
+                <div class="form-group col-sm-3"  >
 <!--                    <label for="inputBarcode" class="col-sm-2 col-form-label">Barcode</label>-->
                         <input type="text" class="form-control" name="barcode" id="inputBarcode" placeholder="enter barcode" >
 
                 </div>
-                <div class="form-group col-sm-4"  style="margin-top:1.5em" >
+                <div class="form-group col-sm-3"   >
 <!--                    <label for="inputMrp" class="col-sm-2 col-form-label">Mrp</label>-->
                         <input  type="number" class="form-control" name="mrp" min="0" step="0.1" oninput="validity.valid||(value='');" id="inputMrp" placeholder="enter mrp">
 <!--                        <input type="text" class="form-control" name="mrp" id="inputMrp" placeholder="enter mrp">-->
 
                 </div>
 
-                <div class="form-group col-sm-4"  style="margin-top:1.5em">
+                <div class="form-group col-sm-3" >
 <!--                    <label for="inputQuantity" class="col-sm-2 col-form-label">Quantity</label>-->
                         <input  type="number" class="form-control" name="quantity" min="1" oninput="validity.valid||(value='');" id="inputQuantity" placeholder="enter quantity">
 <!--                        <input type="text" class="form-control" name="quantity" id="inputQuantity" placeholder="enter quantity">-->
 
                 </div>
+                <div class="form-group btn btn-success col-sm-2 "  id="add-customerDetail" ><i class="fa fa-plus"></i></div>
+
             </form>
         </div>
     </div>
@@ -86,7 +88,6 @@ table.dataTable tbody tr:hover {
 
 <!--     Blank Row-->
     <div class="row">
-        &nbsp;
     </div>
     <div class="row">
 
@@ -118,9 +119,7 @@ table.dataTable tbody tr:hover {
 
 
 </div>
-<div class="modal-footer">
-
-    <div class="btn btn-success col-sm-4 "  id="add-customerDetail" style="margin-left:0.9em"><i class="fa fa-plus"></i></div>
+<div class="modal-footer d-flex justify-content-end" id="confirm">
 <!--    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
 <!--    <button type="button" class="btn btn-primary">Save changes</button>-->
 </div>
@@ -133,8 +132,8 @@ table.dataTable tbody tr:hover {
 
 
 <!--     CustomerDetail Edit Modal -->
-    <div class="modal edit-details" tabindex="-1" role="dialog" id="edit-customerDetail-modal" data-backdrop="static">
-        <div class="modal-dialog" role="document">
+    <div class="modal edit-details fade bd-example-modal-lg" tabindex="-1" role="dialog" id="edit-customerDetail-modal"  aria-labelledby="myExtraLargeModalLabel" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog  modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Edit Details</h5>
@@ -143,23 +142,23 @@ table.dataTable tbody tr:hover {
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="form-inline" id="customerDetail-edit-form">
+                    <form class="form" id="customerDetail-edit-form">
 
-                        <div class="form-group" style="margin-bottom:0.5em;">
+                        <div class="form-group" style="margin-bottom:5em;">
                             <label for="inputBarcode" class="col-sm-2 col-form-label">Barcode</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="barcode" placeholder="enter barcode" >
                             </div>
                         </div>
-                        <div class="form-group" style="margin-bottom:0.5em;">
+                        <div class="form-group" style="margin-bottom:5em;">
                             <label for="inputMrp" class="col-sm-2 col-form-label">Mrp</label>
                             <div class="col-sm-10">
                                 <input  type="number" class="form-control" name="mrp" min="0" step="0.1"  oninput="validity.valid||(value='');" placeholder="enter mrp" style="margin-left:0.3em">
 <!--                                <input type="text" class="form-control" name="mrp" placeholder="enter mrp">-->
                             </div>
                         </div>
-                <div class="form-group">
-                    <label for="inputQuantity" class="col-sm-2 col-form-label">Quantity</label>
+                <div class="form-group" style="margin-bottom:5em;">
+                    <label for="inputQuantity" class="col-sm-2 col-form-label" >Quantity</label>
                     <div class="col-sm-10">
                         <input  type="number" class="form-control" name="quantity" min="1" oninput="validity.valid||(value='');" placeholder="enter quantity">
 <!--                        <input type="text" class="form-control" name="quantity" placeholder="enter quantity">-->

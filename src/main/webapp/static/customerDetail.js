@@ -51,6 +51,8 @@ function checkInventory(data, fileData){
 //BUTTON ACTIONS
 function addCustomerDetail(event){
 	var $form = $("#customerDetail-form");
+	var $confirm = $('#confirm');
+	$confirm.empty();
 	var fileData = $form.serializeArray();
 	var $tbody = $('#customerDetail-table').find('tbody');
 	$tbody.empty();
@@ -153,9 +155,10 @@ if(!checker) error = true
             $tbody.append(row)
     	}
     	var confirmButton;
+    	$confirm.empty();
     if(addedData.length>0){
             confirmButton = '<td>' + ' <button onclick="submitCustomerDetail(' + e.id + ')" class="btn btn-success"><i class="fa fa-check"></i> Confirm</button>' + '</td>'
-    	    $tbody.append(confirmButton)
+    	    $confirm.append(confirmButton)
     	}
     	$('#inputBarcode').val('');
         $('#inputMrp').val('');
@@ -171,6 +174,8 @@ function deleteEditCustomerDetail(id) {
 
 function DisplayAddedData(){
     	var $tbody = $('#customerDetail-table').find('tbody');
+    	var $confirm = $('#confirm');
+    	$confirm.empty();
     	$tbody.empty()
     	for(var i in addedData){
             		var e = addedData[i];
@@ -185,9 +190,11 @@ function DisplayAddedData(){
                     $tbody.append(row)
             	}
             	var confirmButton;
+            	$confirm.empty();
             if(addedData.length>0){
-                confirmButton = '<td>' + ' <button onclick="submitCustomerDetail(' + e.id + ')" class="btn btn-success"><i class="fa fa-check"></i> Confirm</button>' + '</td>'
-            	    $tbody.append(confirmButton)
+                $confirm.empty();
+                confirmButton =  '<button onclick="submitCustomerDetail(' + e.id + ')" class="btn btn-success"><i class="fa fa-check"></i> Confirm</button>'
+            	    $confirm.append(confirmButton)
             	}
             	$('#inputBarcode').val('');
                 $('#inputMrp').val('');
@@ -346,9 +353,11 @@ else if(barcodeChange==true){
             $tbody.append(row)
     	}
     	var confirmButton;
+    var $confirm = $('#confirm');
+    $confirm.empty();
     if(addedData.length>0){
-            confirmButton = '<td>' + ' <button onclick="submitCustomerDetail(' + e.id + ')">confirm</button>' + '</td>'
-    	    $tbody.append(confirmButton)
+            confirmButton = '<td>' + ' <button onclick="submitCustomerDetail(' + e.id + ')" class="btn btn-success"><i class="fa fa-check"></i> Confirm</button>' + '</td>'
+    	    $confirm.append(confirmButton)
     	}
 	return false;
 }
