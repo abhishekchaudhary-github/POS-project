@@ -574,6 +574,10 @@ function displayCustomerDetail(id){
 	$('#edit-customerDetail-modal').modal('toggle');
 }
 
+function modalCLose() {
+        console.log("hello")
+        $("#edit-customerDetail-modal").modal('hide')
+}
 
 //INITIALIZATION CODE
 function init(){
@@ -587,6 +591,7 @@ function init(){
     	if($("#get-role").text().localeCompare("operator")==0) {
                         $(".admin-element").hide();
                     }
+    $('.edit-cancel').click(modalCLose)
 }
 
 $(document).ready(init);
