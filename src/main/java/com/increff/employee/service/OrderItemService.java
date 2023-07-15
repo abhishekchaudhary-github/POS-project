@@ -179,7 +179,7 @@ public class OrderItemService {
 
     }
 
-    @Transactional
+    @Transactional(rollbackOn = ApiException.class)
     public void getInventoryFromProductId(OrderItemEditForm orderItemEditForm, Integer id) throws ApiException {
         OrderItemPojo orderItemPojo = dao.select(id);
         InventoryPojo inventoryPojo = inventoryService.getFromProductId(orderItemEditForm.getProductId());
@@ -193,7 +193,7 @@ public class OrderItemService {
         if(orderItemEditForm.getSelling_price()>productPojo.getMrp()){
             throw new ApiException("price of item can't be more than MRP");
         }
-        inventoryPojo.setQuantity(inventoryPojo.getQuantity()+orderItemPojo.getQuantity()-orderItemEditForm.getQuantity());
+        inventoryPojo.setQuantity((inventoryPojo.getQuantity()+orderItemPojo.getQuantity()-orderItemEditForm.getQuantity()));
     }
 
     @Transactional
