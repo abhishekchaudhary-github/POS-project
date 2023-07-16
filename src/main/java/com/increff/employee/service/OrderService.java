@@ -128,13 +128,14 @@ public class OrderService {
                 throw new ApiException("database has been altered");
             }
             Integer countOfInvoices = dailyReportFirstPojo.getInvoiced_orders_count();
-            Integer countOfOrders = dailyReportFirstPojo.getInvoiced_orders_count();
+            Integer countOfOrders = dailyReportFirstPojo.getInvoiced_items_count();
             Double totalRevenue = dailyReportFirstPojo.getTotal_revenue();
-            countOfInvoices++;
+            System.out.println(countOfInvoices);
+            countOfInvoices+=1;
             countOfOrders+=orderItemCount;
             totalRevenue+=initialRevenue;
             dailyReportFirstPojo.setInvoiced_orders_count(countOfInvoices);
-            dailyReportFirstPojo.setInvoiced_orders_count(countOfOrders);
+            dailyReportFirstPojo.setInvoiced_items_count(countOfOrders);
             dailyReportFirstPojo.setTotal_revenue(totalRevenue);
         }
         //
