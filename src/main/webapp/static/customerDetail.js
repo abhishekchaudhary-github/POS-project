@@ -521,7 +521,7 @@ function orderDetail(id) {
                             '<td>'  + e.sellingPrice + '</td>' +
                             '<td>'  + cost + '</td>' +
                             '<td>'  + ' <button onclick="displayEditOrderDetail(' + e.id + ')" class="btn btn-primary"><i class="fa fa-pencil"></i></button>'
-                            + ' <button onclick="deleteEditOrderDetail(' + id + ')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
+                            + ' <button onclick="deleteEditOrderDetail(' + e.id + ')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
                              + '</td>' +
                             '</tr>';
                             $tbody.append(row);
