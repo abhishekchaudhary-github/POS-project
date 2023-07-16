@@ -7,6 +7,11 @@ function getCustomerDetailUrl(){
 	return baseUrl + "/api/orderitem";
 }
 
+function getOrderUrl(){
+	var baseUrl = $("meta[name=baseUrl]").attr("content")
+	return baseUrl + "/api/order";
+}
+
 function getInvoiceUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
 	return baseUrl + "/api/invoice";
@@ -461,7 +466,8 @@ function displayCustomerDetailList(data){
   for (var i in data) {
     var e = data[i];
     var buttonHtml = '<button class="btn btn-info" onclick="orderDetail(' + e.id + ')"><i class="fa fa-eye"></i> Details</button>'
-      + ' <button class="btn btn-danger admin-element" onclick="generateInvoice(' + e.id + ')"><i class="fa fa-file-pdf-o"></i> Invoice</button>';
+      + ' <button class="btn btn-danger admin-element" onclick="generateInvoice(' + e.id + ')"><i class="fa fa-file-pdf-o"></i> Invoice</button>'
+      + '<button type="button" class="btn btn-secondary" onclick="deleteTheOrder(' + e.id + ')">Delete</button>'
     var row = '<tr>'
       + '<td>' + e.id + '</td>'
       + '<td>' + e.time + '</td>'
@@ -515,7 +521,7 @@ function orderDetail(id) {
                             '<td>'  + e.sellingPrice + '</td>' +
                             '<td>'  + cost + '</td>' +
                             '<td>'  + ' <button onclick="displayEditOrderDetail(' + e.id + ')" class="btn btn-primary"><i class="fa fa-pencil"></i></button>'
-                            + ' <button onclick="deleteEditOrderDetail(' + e.id + ')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
+                            + ' <button onclick="deleteEditOrderDetail(' + id + ')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
                              + '</td>' +
                             '</tr>';
                             $tbody.append(row);
@@ -544,6 +550,18 @@ function displayOrderItemDetail(data){
 	    $("#edit-order-form input[name=quantity]").val(data.quantity);
     	$("#edit-order-form input[name=sellingPrice]").val(data.sellingPrice);
     	$('#edit-order-modal').modal('toggle');
+}
+
+function deleteEditOrderDetail(id) {
+     var url = getCustomerDetailUrl() + "/" + id;
+        	$.ajax({
+        	   url: url,
+        	   type: 'DELETE',
+        	   success: function(data) {
+        	   		location.reload();
+        	   },
+        	   error: handleAjaxError
+        	});
 }
 
 function displayEditCustomerDetail(id){
@@ -597,6 +615,18 @@ function displayCustomerDetail(id){
 function modalCLose() {
         console.log("hello")
         $("#edit-customerDetail-modal").modal('hide')
+}
+
+function deleteTheOrder(id) {
+    var url = getOrderUrl() + '/' + id
+    $.ajax({
+    	   url: url,
+    	   type: 'DELETE',
+    	   success: function(data) {
+    	   		location.reload();
+    	   },
+    	   error: handleAjaxError
+    	});
 }
 
 //INITIALIZATION CODE
