@@ -514,6 +514,9 @@ function orderDetail(id) {
                             '<td>'  + e.quantity + '</td>' +
                             '<td>'  + e.sellingPrice + '</td>' +
                             '<td>'  + cost + '</td>' +
+                            '<td>'  + ' <button onclick="displayEditOrderDetail(' + e.id + ')" class="btn btn-primary"><i class="fa fa-pencil"></i></button>'
+                            + ' <button onclick="deleteEditOrderDetail(' + e.id + ')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
+                             + '</td>' +
                             '</tr>';
                             $tbody.append(row);
                         }
@@ -524,7 +527,24 @@ function orderDetail(id) {
     	});
 }
 
+function displayEditOrderDetail(id){
+    var url = getCustomerDetailUrl() + "/" + id;
+    	$.ajax({
+    	   url: url,
+    	   type: 'GET',
+    	   success: function(data) {
+    	   console.log(data)
+    	   		displayOrderItemDetail(data);
+    	   },
+    	   error: handleAjaxError
+    	});
+}
 
+function displayOrderItemDetail(data){
+	    $("#edit-order-form input[name=quantity]").val(data.quantity);
+    	$("#edit-order-form input[name=sellingPrice]").val(data.sellingPrice);
+    	$('#edit-order-modal').modal('toggle');
+}
 
 function displayEditCustomerDetail(id){
 	//var url = getCustomerDetailUrl() + "/" + id;
