@@ -92,17 +92,18 @@ public class OrderItemService {
                     count++;
                 }
             }
-            if (count < 2) {
-                //orderService.delete(orderItemPojo.getOrderId());
-                deleteOrderJust(orderItemPojo.getOrderId());
-            }
             //psuedo inventory pojo
             InventoryPojo inventoryPojo = inventoryService.getFromProductId(orderItemPojo.getProductId());
             Integer quantity = inventoryPojo.getQuantity();
             quantity += orderItemPojo.getQuantity();
             inventoryPojo.setQuantity(quantity);
             orderPojo.setTime(LocalDateTime.now());
-            dao.delete(id);
+            if (count < 2) {
+                //orderService.delete(orderItemPojo.getOrderId());
+                deleteOrder(orderItemPojo.getOrderId());
+            }
+            else{
+            dao.delete(id);}
         }
         else {
             throw new ApiException("this order is not editable");
