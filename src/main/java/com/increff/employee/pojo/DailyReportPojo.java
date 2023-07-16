@@ -13,9 +13,7 @@ public class DailyReportPojo {
     private LocalDateTime date;
     private Integer invoiced_orders_count;
     private Integer invoiced_items_count;
-    private Double total_revenue;
-    private Integer total_invoice;
-    private Integer total_invoiced_items;
+    private Double total_revenue = 0.0;
 
     public Integer getId() {
         return id;
@@ -57,19 +55,4 @@ public class DailyReportPojo {
         this.total_revenue = total_revenue;
     }
 
-    public Integer getTotal_invoice() {
-        return total_invoice;
-    }
-
-    public void setTotal_invoice(Integer total_invoice) {
-        this.total_invoice = total_invoice;
-    }
-
-    public Integer getTotal_invoiced_items() {
-        return total_invoiced_items;
-    }
-
-    public void setTotal_invoiced_items(Integer total_invoiced_items) {
-        this.total_invoiced_items = total_invoiced_items;
-    }
 }

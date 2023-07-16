@@ -9,6 +9,7 @@ import com.increff.employee.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -23,26 +24,35 @@ public class Scheduler {
     ReportService reportService;
 
     @Scheduled(cron = "0 0 0 * * *")
+    @Transactional(rollbackOn  = ApiException.class)
     public void Scheduler() throws ApiException {
         LocalDateTime time = LocalDateTime.now();
         DailyReportPojo dailyReportPojo = new DailyReportPojo();
         dailyReportPojo.setDate(time);
         Integer lastId = dailyReportService.getLastId();
-        if(lastId==null||lastId==0) {
+        //
+        DailyReportPojo baseItem = dailyReportService.get(1);
+        DailyReportPojo lastItem = dailyReportService.get(lastId);
+        if(baseItem==null) {
             throw new ApiException("database altered");
         }
-        if(lastId==1){
-            DailyReportPojo dailyReportPojo2 = dailyReportService.get(lastId);
-            dailyReportPojo.setInvoiced_items_count(dailyReportPojo2.getTotal_invoice());
-            dailyReportPojo.setInvoiced_orders_count(dailyReportPojo2.getInvoiced_orders_count());
-        }
-
-        else {
-            DailyReportPojo dailyReportPojo1 = dailyReportService.get(lastId-1);
-            DailyReportPojo dailyReportPojo2 = dailyReportService.get(lastId);
-            dailyReportPojo.setInvoiced_items_count(dailyReportPojo2.getTotal_invoice()-dailyReportPojo1.getTotal_invoice());
-            dailyReportPojo.setInvoiced_orders_count(dailyReportPojo2.getInvoiced_orders_count()-dailyReportPojo1.getInvoiced_orders_count());
-        }
+//        if(lastItem.==1){
+//            dailyReportPojo.setInvoiced_items_count(baseItem.getInvoiced_items_count());
+//            dailyReportPojo.setInvoiced_orders_count(baseItem.getInvoiced_orders_count());
+//        }
+//
+//        else {
+////            DailyReportPojo dailyReportPojo1 = dailyReportService.get(max-1);
+////            DailyReportPojo dailyReportPojo2 = dailyReportService.get(max);
+//            dailyReportPojo.setInvoiced_items_count(baseItem.getInvoiced_items_count()-lastItem.getInvoiced_items_count());
+//            dailyReportPojo.setInvoiced_orders_count(baseItem.getInvoiced_orders_count()-lastItem.getInvoiced_orders_count());
+//        }
+        dailyReportPojo.setInvoiced_items_count(baseItem.getInvoiced_items_count());
+        dailyReportPojo.setInvoiced_orders_count(baseItem.getInvoiced_orders_count());
+        baseItem.setInvoiced_items_count(0);
+        baseItem.setInvoiced_orders_count(0);
+        baseItem.setTotal_revenue(0.0);
+        //
         dailyReportService.add(dailyReportPojo);
     }
 }

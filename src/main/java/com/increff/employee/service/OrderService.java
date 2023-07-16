@@ -32,6 +32,8 @@ import javax.transaction.Transactional;
 public class OrderService {
 
     private int orderItemCount;
+
+    private Double initialRevenue;
     @Value("${invoice.url}")
     private String url;
 
@@ -96,9 +98,10 @@ public class OrderService {
         return dao.orderById(id);
     }
 
-    @Transactional
+    @Transactional(rollbackOn  = ApiException.class)
     public ResponseEntity<byte[]> getInvoicePDF(Integer id) throws Exception {
         orderItemCount=0;
+        initialRevenue=0.0;
         InvoiceData invoiceData = generateInvoiceForOrder(id);
         RestTemplate restTemplate = new RestTemplate();
         System.out.println("before sending");
@@ -110,18 +113,36 @@ public class OrderService {
         headers.setContentDispositionFormData(filename, filename);
         headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
         ResponseEntity<byte[]> response = new ResponseEntity<>(contents, headers, HttpStatus.OK);
-        Integer lastId = dailyReportService.getLastId();
-        DailyReportPojo dailyReportPojo = dailyReportService.get(lastId);
-        dailyReportPojo.setTotal_invoice(dailyReportPojo.getTotal_invoice()+1);
-        Integer initialTotalInvoicedItems = dailyReportPojo.getTotal_invoiced_items();
-        dailyReportPojo.setTotal_invoiced_items(initialTotalInvoicedItems+orderItemCount);
+//        Integer lastId = dailyReportService.getLastId();
+//        DailyReportPojo dailyReportFirstPojo = dailyReportService.get(1);
+
+        //dailyReportPojo.setTotal_invoice(dailyReportPojo.getTotal_invoice()+1);
+        //Integer initialTotalInvoicedItems = dailyReportPojo.getTotal_invoiced_items();
+        //dailyReportPojo.setTotal_invoiced_items(initialTotalInvoicedItems+orderItemCount);
         //uneditable
         OrderPojo orderPojo = getOrderById(id);
+        //
+        if(orderPojo.isEditable()==true) {
+            DailyReportPojo dailyReportFirstPojo = dailyReportService.get(1);
+            if(dailyReportFirstPojo==null) {
+                throw new ApiException("database has been altered");
+            }
+            Integer countOfInvoices = dailyReportFirstPojo.getInvoiced_orders_count();
+            Integer countOfOrders = dailyReportFirstPojo.getInvoiced_orders_count();
+            Double totalRevenue = dailyReportFirstPojo.getTotal_revenue();
+            countOfInvoices++;
+            countOfOrders+=orderItemCount;
+            totalRevenue+=initialRevenue;
+            dailyReportFirstPojo.setInvoiced_orders_count(countOfInvoices);
+            dailyReportFirstPojo.setInvoiced_orders_count(countOfOrders);
+            dailyReportFirstPojo.setTotal_revenue(totalRevenue);
+        }
+        //
         orderPojo.setEditable();
         return response;
     }
 
-    @Transactional
+    @Transactional(rollbackOn  = ApiException.class)
     public InvoiceData generateInvoiceForOrder(Integer orderId) throws ApiException
     {
         InvoiceData invoiceData = new InvoiceData();
@@ -140,6 +161,9 @@ public class OrderService {
             orderItem.setQuantity(p.getQuantity());
             orderItem.setSellingPrice(p.getSellingPrice());
             orderItemList.add(orderItem);
+            //
+            initialRevenue+=p.getSellingPrice()*p.getQuantity();
+            //
         }
         invoiceData.setOrderItemDataList(orderItemList);
         return invoiceData;
