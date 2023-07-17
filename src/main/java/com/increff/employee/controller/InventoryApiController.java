@@ -25,7 +25,8 @@ public class InventoryApiController {
     @ApiOperation(value = "Adds an Inventory")
     @RequestMapping(path = "/api/inventory", method = RequestMethod.POST)
     public void add(@RequestBody InventoryForm form) throws ApiException {
-        InventoryPojo p = convert(form);
+        Integer productId = service.getIdOfProduct(form.getBarcode());
+        InventoryPojo p = convert(form,productId);
         service.add(p);
     }
 
@@ -34,7 +35,8 @@ public class InventoryApiController {
     @RequestMapping(path = "/api/inventory/{id}", method = RequestMethod.GET)
     public InventoryData get(@PathVariable Integer id) throws ApiException {
         InventoryPojo p = service.get(id);
-        return convert(p);
+        String barcode = service.getForBarcode(p.getProductId());
+        return convert(p,barcode);
     }
 
 //    @ApiOperation(value = "Gets an Inventory by barcode")
@@ -49,31 +51,34 @@ public class InventoryApiController {
         List<InventoryPojo> list = service.getAll();
         List<InventoryData> list2 = new ArrayList<InventoryData>();
         for (InventoryPojo p : list) {
-            list2.add(convert(p));
+            String barcode = service.getForBarcode(p.getProductId());
+            list2.add(convert(p,barcode));
         }
         return list2;
     }
 
     @ApiOperation(value = "Updates an Inventory")
     @RequestMapping(path = "/api/inventory/{id}", method = RequestMethod.PUT)
-    public void update(@PathVariable Integer id, @RequestBody InventoryForm f) throws ApiException {
-        InventoryPojo p = convert(f);
+    public void update(@PathVariable Integer id, @RequestBody InventoryForm form) throws ApiException {
+        Integer productId = service.getIdOfProduct(form.getBarcode());
+        InventoryPojo p = convert(form,productId);
         service.update(id, p);
     }
 
 
-    private InventoryData convert(InventoryPojo p) throws ApiException {
+    private static InventoryData convert(InventoryPojo p,String barcode) throws ApiException {
         InventoryData d = new InventoryData();
         d.setQuantity(p.getQuantity());
-        d.setBarcode(service.getForBarcode(p.getProductId()));
+        //d.setBarcode(service.getForBarcode(p.getProductId()));
+        d.setBarcode(barcode);
         d.setId(p.getId());
         return d;
     }
 
-    private InventoryPojo convert(InventoryForm f) throws ApiException {
+    private static InventoryPojo convert(InventoryForm f,Integer productId) throws ApiException {
         InventoryPojo p = new InventoryPojo();
         p.setQuantity(f.getQuantity());
-        Integer productId = service.getIdOfProduct(f.getBarcode());
+        //Integer productId = service.getIdOfProduct(f.getBarcode());
         p.setProductId(productId);
         return p;
     }
