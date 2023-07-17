@@ -26,43 +26,45 @@ public class ProductService {
 
     @Transactional(rollbackOn = ApiException.class)
     public void add(ProductPojo p) throws ApiException {
+        normalize(p);
         ProductPojo productPojo = dao.barcodeMustExist(p.getBarcode());
         if(productPojo!=null) {
-            throw new ApiException("Barcode Already exists");
+            throw new ApiException("same barcode already exists");
         }
-        if(p.getBrand_category()==null||p.getBrand_category()==0){
-            throw new ApiException("no such item exists");
-        }
-        normalize(p);
         if(StringUtil.isEmpty(p.getBarcode())) {
             throw new ApiException("barcode cannot be empty");
         }
         if(p.getBrand_category()==null) {
             throw new ApiException("brand_category cannot be empty");
         }
+
+        if(p.getBrand_category()==null||p.getBrand_category()==0){
+            throw new ApiException("product with this brand category combination does not exist");
+        }
         if(p.getMrp()==null){
-            throw new ApiException("mrp cannot be empty");
+            throw new ApiException("MRP cannot be empty");
         }
         if(StringUtil.isEmpty(p.getName())) {
             throw new ApiException("name cannot be empty");
         }
         if(p.getMrp()<0) {
-            throw new ApiException("MRP can't be a negative value");
+            throw new ApiException("MRP can not be a negative value");
         }
 
-        //barcode originality
-        if(brandService.brandMustExist(p.getBrand_category())==null)
-            throw new ApiException(" brand of such brand category does not exist ");
 
-        if(dao.barcodeMustExist(p.getBarcode())!=null)
-            throw new ApiException(" put another barcode ");
+//        if(dao.barcodeMustExist(p.getBarcode())!=null)
+//            throw new ApiException(" put another barcode ");
 
         if (!p.getBarcode().matches("^[a-zA-Z0-9]*$")) {
-            throw new ApiException("Barcode should only contain alphanumeric characters.");
+            throw new ApiException("barcode must only contain alphanumeric characters");
         }
+        //barcode originality
+        if(brandService.brandMustExist(p.getBrand_category())==null)
+            throw new ApiException("product with this brand category combination does not exist");
+
         if(dao.checkerForDuplicate(p.getBrand_category(), p.getName())==null)
             dao.insert(p);
-        else throw new ApiException("this entry already exists");
+        else throw new ApiException("this product already exists");
 
 
   //      inventoryService.add(p.getId());
@@ -108,7 +110,7 @@ public class ProductService {
     public BrandPojo getBrandPojoFromForm(ProductForm f) throws ApiException {
         BrandPojo brandPojo =  brandService.getId(f.getBrand(),f.getCategory());
         if(brandPojo==null) {
-            throw new ApiException("this item does not exist");
+            throw new ApiException("this product does not exist");
         }
         return brandPojo;
     }

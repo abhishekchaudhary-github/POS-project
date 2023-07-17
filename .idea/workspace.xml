@@ -5,6 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd59bcda-ea0a-45cb-bbdf-b0788f0265bb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_BLOCK.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_BLOCK.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_BLOCK_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_BLOCK_DESC.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_CLASS.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_CLASS.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_CLASS_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_CLASS_DESC.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_LINE.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_LINE.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_LINE_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_LINE_DESC.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_METHOD.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_METHOD.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_METHOD_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_METHOD_DESC.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_NAME_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_NAME_DESC.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_BLOCK.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_BLOCK.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_BLOCK_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_BLOCK_DESC.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_CLASS.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_CLASS.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_CLASS_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_CLASS_DESC.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_LINE.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_LINE.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_LINE_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_LINE_DESC.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_METHOD.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_METHOD.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_METHOD_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_METHOD_DESC.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_NAME_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_NAME_DESC.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-2.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-3.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-4.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-4.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-5.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-5.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-6.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-6.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-7.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-7.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-8.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-8.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-9.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-9.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-a.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-a.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-b.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-b.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/ProductDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/ProductService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/ProductServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/ProductServiceTest.java" afterDir="false" />
     </list>
@@ -82,7 +115,7 @@
       <recent name="$PROJECT_DIR$/src/main/webapp/html" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.BrandServiceTest">
+  <component name="RunManager" selected="JUnit.ProductServiceTest">
     <configuration name="BrandServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
@@ -202,8 +235,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.BrandServiceTest" />
         <item itemvalue="JUnit.ProductServiceTest" />
+        <item itemvalue="JUnit.BrandServiceTest" />
         <item itemvalue="JUnit.ProductServiceTest.testAdd" />
         <item itemvalue="JUnit.service in employee-spring-full" />
         <item itemvalue="JUnit.BrandServiceTest.testUpdateValues" />
@@ -234,6 +267,9 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/employee_spring$BrandServiceTest.ic" NAME="BrandServiceTest Coverage Results" MODIFIED="1689150403346" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.increff.employee.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/employee_spring$ProductServiceTest.ic" NAME="ProductServiceTest Coverage Results" MODIFIED="1689575181497" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.increff.employee.service.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/employee_spring$BrandServiceTest_testGetId.ic" NAME="BrandServiceTest.testGetId Coverage Results" MODIFIED="1689138313159" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

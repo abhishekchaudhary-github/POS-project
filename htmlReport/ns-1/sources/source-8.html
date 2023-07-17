@@ -40,43 +40,40 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">OrderService</td>
 <td class="coverageStat">
   <span class="percent">
-    16.7%
+    12.5%
   </span>
   <span class="absValue">
-    (1/6)
+    (1/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    2.2%
+    1.7%
   </span>
   <span class="absValue">
-    (1/45)
+    (1/60)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">OrderService$$EnhancerBySpringCGLIB$$2f2a0310</td>
-  </tr>
-  <tr>
-    <td class="name">OrderService$$EnhancerBySpringCGLIB$$eb5a99a6</td>
+    <td class="name">OrderService$$EnhancerBySpringCGLIB$$8f53c331</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    16.7%
+    12.5%
   </span>
   <span class="absValue">
-    (1/6)
+    (1/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    2.2%
+    1.7%
   </span>
   <span class="absValue">
-    (1/45)
+    (1/60)
   </span>
 </td>
 </tr>
@@ -87,7 +84,8 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package com.increff.employee.service;
+<code class="sourceCode" id="sourceCode">&nbsp;//77 100 101
+&nbsp;package com.increff.employee.service;
 &nbsp;
 &nbsp;import com.increff.employee.dao.OrderDao;
 &nbsp;import com.increff.employee.dao.OrderItemDao;
@@ -120,6 +118,8 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;public class OrderService {</b>
 &nbsp;
 &nbsp;    private int orderItemCount;
+&nbsp;
+&nbsp;    private Double initialRevenue;
 &nbsp;    @Value(&quot;${invoice.url}&quot;)
 &nbsp;    private String url;
 &nbsp;
@@ -149,6 +149,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;
 &nbsp;    @Transactional
+&nbsp;    public void delete(Integer id) {
+<b class="nc">&nbsp;        dao.delete(id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional
 &nbsp;    public List&lt;OrderPojo&gt; getAll() {
 <b class="nc">&nbsp;        return dao.selectAll();</b>
 &nbsp;    }
@@ -160,9 +165,29 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;//        String formattedDateTime = createdTime.format(currentDate);
 <b class="nc">&nbsp;        return dateTime;</b>
 &nbsp;    }
-&nbsp;    @Transactional
+&nbsp;
+&nbsp;//    public Integer getLastOrderId() {
+&nbsp;//         List&lt;OrderPojo&gt; orderPojoList = dao.selectAll();
+&nbsp;//         if(orderPojoList.size()==0) {
+&nbsp;//             return 0;
+&nbsp;//         }
+&nbsp;//         int k=1;
+&nbsp;//         for(int i=0;i&lt;orderPojoList.size();i++) {
+&nbsp;//             if(orderPojoList.get(i).getId()&gt;k) {
+&nbsp;//                 k = orderPojoList.get(i).getId();
+&nbsp;//             }
+&nbsp;//         }
+&nbsp;//         return k;
+&nbsp;//    }
+&nbsp;
+&nbsp;    public OrderPojo getOrderById(Integer id) {
+<b class="nc">&nbsp;        return dao.orderById(id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional(rollbackOn  = ApiException.class)
 &nbsp;    public ResponseEntity&lt;byte[]&gt; getInvoicePDF(Integer id) throws Exception {
 <b class="nc">&nbsp;        orderItemCount=0;</b>
+<b class="nc">&nbsp;        initialRevenue=0.0;</b>
 <b class="nc">&nbsp;        InvoiceData invoiceData = generateInvoiceForOrder(id);</b>
 <b class="nc">&nbsp;        RestTemplate restTemplate = new RestTemplate();</b>
 <b class="nc">&nbsp;        System.out.println(&quot;before sending&quot;);</b>
@@ -174,15 +199,37 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc">&nbsp;        headers.setContentDispositionFormData(filename, filename);</b>
 <b class="nc">&nbsp;        headers.setCacheControl(&quot;must-revalidate, post-check=0, pre-check=0&quot;);</b>
 <b class="nc">&nbsp;        ResponseEntity&lt;byte[]&gt; response = new ResponseEntity&lt;&gt;(contents, headers, HttpStatus.OK);</b>
-<b class="nc">&nbsp;        Integer lastId = dailyReportService.getLastId();</b>
-<b class="nc">&nbsp;        DailyReportPojo dailyReportPojo = dailyReportService.get(lastId);</b>
-<b class="nc">&nbsp;        dailyReportPojo.setTotal_invoice(dailyReportPojo.getTotal_invoice()+1);</b>
-<b class="nc">&nbsp;        Integer initialTotalInvoicedItems = dailyReportPojo.getTotal_invoiced_items();</b>
-<b class="nc">&nbsp;        dailyReportPojo.setTotal_invoiced_items(initialTotalInvoicedItems+orderItemCount);</b>
+&nbsp;//        Integer lastId = dailyReportService.getLastId();
+&nbsp;//        DailyReportPojo dailyReportFirstPojo = dailyReportService.get(1);
+&nbsp;
+&nbsp;        //dailyReportPojo.setTotal_invoice(dailyReportPojo.getTotal_invoice()+1);
+&nbsp;        //Integer initialTotalInvoicedItems = dailyReportPojo.getTotal_invoiced_items();
+&nbsp;        //dailyReportPojo.setTotal_invoiced_items(initialTotalInvoicedItems+orderItemCount);
+&nbsp;        //uneditable
+<b class="nc">&nbsp;        OrderPojo orderPojo = getOrderById(id);</b>
+&nbsp;        //
+<b class="nc">&nbsp;        if(orderPojo.isEditable()==true) {</b>
+<b class="nc">&nbsp;            DailyReportPojo dailyReportFirstPojo = dailyReportService.get(1);</b>
+<b class="nc">&nbsp;            if(dailyReportFirstPojo==null) {</b>
+<b class="nc">&nbsp;                throw new ApiException(&quot;database has been altered&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            Integer countOfInvoices = dailyReportFirstPojo.getInvoiced_orders_count();</b>
+<b class="nc">&nbsp;            Integer countOfOrders = dailyReportFirstPojo.getInvoiced_items_count();</b>
+<b class="nc">&nbsp;            Double totalRevenue = dailyReportFirstPojo.getTotal_revenue();</b>
+<b class="nc">&nbsp;            System.out.println(countOfInvoices);</b>
+<b class="nc">&nbsp;            countOfInvoices+=1;</b>
+<b class="nc">&nbsp;            countOfOrders+=orderItemCount;</b>
+<b class="nc">&nbsp;            totalRevenue+=initialRevenue;</b>
+<b class="nc">&nbsp;            dailyReportFirstPojo.setInvoiced_orders_count(countOfInvoices);</b>
+<b class="nc">&nbsp;            dailyReportFirstPojo.setInvoiced_items_count(countOfOrders);</b>
+<b class="nc">&nbsp;            dailyReportFirstPojo.setTotal_revenue(totalRevenue);</b>
+&nbsp;        }
+&nbsp;        //
+<b class="nc">&nbsp;        orderPojo.setEditable();</b>
 <b class="nc">&nbsp;        return response;</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    @Transactional
+&nbsp;    @Transactional(rollbackOn  = ApiException.class)
 &nbsp;    public InvoiceData generateInvoiceForOrder(Integer orderId) throws ApiException
 &nbsp;    {
 <b class="nc">&nbsp;        InvoiceData invoiceData = new InvoiceData();</b>
@@ -201,6 +248,9 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc">&nbsp;            orderItem.setQuantity(p.getQuantity());</b>
 <b class="nc">&nbsp;            orderItem.setSellingPrice(p.getSellingPrice());</b>
 <b class="nc">&nbsp;            orderItemList.add(orderItem);</b>
+&nbsp;            //
+<b class="nc">&nbsp;            initialRevenue+=p.getSellingPrice()*p.getQuantity();</b>
+&nbsp;            //
 <b class="nc">&nbsp;        }</b>
 <b class="nc">&nbsp;        invoiceData.setOrderItemDataList(orderItemList);</b>
 <b class="nc">&nbsp;        return invoiceData;</b>
@@ -229,7 +279,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-12 13:46</div>
+    <div style="float:right;">generated on 2023-07-17 12:00</div>
 </div>
 </body>
 </html>
