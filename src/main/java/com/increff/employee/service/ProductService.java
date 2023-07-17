@@ -128,6 +128,7 @@ public class ProductService {
 
     @Transactional
     public Integer getProductId(String barcode) throws ApiException {
+        normalizeBarcode(barcode);
         ProductPojo productPojo = dao.selectBarcode(barcode);
         if(productPojo==null) {
             throw new ApiException("this barcode does not exist");
@@ -200,5 +201,9 @@ public class ProductService {
         p.setName(StringUtil.toLowerCase(p.getName()));
     }
 
+    protected static String normalizeBarcode(String barcode) {
+        String normalizedBarcode = StringUtil.toLowerCase(barcode);
+        return normalizedBarcode;
+    }
 
 }
