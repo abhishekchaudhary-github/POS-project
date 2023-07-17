@@ -593,4 +593,27 @@ public class ProductServiceTest extends AbstractUnitTest {
         assertEquals("name1",productpojo.getName());
     }
 
+    //***tests for get check function****
+    //functionality of getCheck function works fine
+    @Test
+    public void testGetCheckNoError() throws ApiException {
+        ProductPojo productPojo = new ProductPojo();
+        productPojo.setBarcode("barcode");
+        productPojo.setBrand_category(brandId);
+        productPojo.setMrp(1.12);
+        productPojo.setName("name");
+        Integer productId = productService.add(productPojo);
+        assertNotNull(productService.getCheck(productId));
+    }
+
+    //getCheck function if given pojo is not in the database
+    @Test
+    public void testGetCheckError() throws ApiException {
+        try {
+            productService.getCheck(1);
+        }
+        catch(ApiException err) {
+            assertEquals("Product with given ID does not exit, id: 1",err.getMessage());
+        }
+    }
 }
