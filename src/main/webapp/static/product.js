@@ -348,6 +348,21 @@ function displayUploadData(){
 	$('#upload-product-modal').modal('toggle');
 }
 
+function validateInput(input) {
+  // Get the value entered by the user
+  const inputValue = input.value;
+
+  // Regular expression to match alphanumeric characters
+  const alphanumericPattern = /^[a-zA-Z0-9]*$/;
+
+  // Check if the input matches the alphanumeric pattern
+  if (!alphanumericPattern.test(inputValue)) {
+    // If it contains special characters, remove them from the input
+    const sanitizedValue = inputValue.replace(/[^a-zA-Z0-9]/g, '');
+    input.value = sanitizedValue;
+  }
+}
+
 function displayProduct(data){
 	$("#product-edit-form input[name=barcode]").val(data.barcode);
 	$("#product-edit-form input[name=brand]").val(data.brand);

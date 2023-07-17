@@ -57,6 +57,9 @@ public class ProductService {
         if(dao.barcodeMustExist(p.getBarcode())!=null)
             throw new ApiException(" put another barcode ");
 
+        if (!p.getBarcode().matches("^[a-zA-Z0-9]*$")) {
+            throw new ApiException("Barcode should only contain alphanumeric characters.");
+        }
         if(dao.checkerForDuplicate(p.getBrand_category(), p.getName())==null)
             dao.insert(p);
         else throw new ApiException("this entry already exists");

@@ -50,6 +50,32 @@ public class BrandServiceTest extends AbstractUnitTest {
     }
 
     @Test
+    public void testEmptyStringInBrandGiven() throws ApiException {
+        try{
+            BrandPojo brandPojo = new BrandPojo();
+            brandPojo.setBrand("");
+            brandPojo.setCategory("category");
+            brandService.add(brandPojo);
+        }
+        catch(ApiException err) {
+            assertEquals("brand cannot be empty",err.getMessage());
+        }
+    }
+
+    @Test
+    public void testEmptyStringInCategoryGiven() throws ApiException {
+        try{
+            BrandPojo brandPojo = new BrandPojo();
+            brandPojo.setBrand("brand");
+            brandPojo.setCategory(" ");
+            brandService.add(brandPojo);
+        }
+        catch(ApiException err) {
+            assertEquals("category cannot be empty",err.getMessage());
+        }
+    }
+
+    @Test
     public void testCategoryAlreadyExists() throws ApiException {
         try {
                 BrandPojo brandPojo = new BrandPojo();
