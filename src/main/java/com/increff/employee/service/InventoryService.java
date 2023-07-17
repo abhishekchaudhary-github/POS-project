@@ -21,7 +21,7 @@ public class InventoryService {
     public void add(InventoryPojo inventoryPojo) throws ApiException {
         if(dao.select(inventoryPojo.getProductId())==null) {
             if(inventoryPojo.getQuantity()<1){
-                throw new ApiException("quantity can't be less than 1");
+                throw new ApiException("quantity can not be less than 1");
             }
             dao.insert(inventoryPojo);
         }
