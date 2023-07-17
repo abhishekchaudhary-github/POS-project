@@ -240,5 +240,6 @@ public class BrandServiceTest extends AbstractUnitTest {
         brandPojo.setCategory("ShOE");
         brandService.normalize(brandPojo);
         assertEquals("shoe",brandPojo.getCategory());
+        assertEquals("nike",brandPojo.getBrand());
     }
 }

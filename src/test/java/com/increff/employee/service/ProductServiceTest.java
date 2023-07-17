@@ -616,4 +616,21 @@ public class ProductServiceTest extends AbstractUnitTest {
             assertEquals("Product with given ID does not exit, id: 1",err.getMessage());
         }
     }
+
+    @Test
+    public void testNormalize() throws ApiException {
+        ProductPojo productPojo = new ProductPojo();
+        productPojo.setBarcode("bArCodE");
+        productPojo.setName("naME");
+        productService.normalize(productPojo);
+        assertEquals("barcode",productPojo.getBarcode());
+        assertEquals("name",productPojo.getName());
+    }
+
+    @Test
+    public void testNormalizeBarcode() throws ApiException {
+       String barcode = "BarCoDE";
+        String barcode1 = productService.normalizeBarcode(barcode);
+        assertEquals("barcode",barcode1);
+    }
 }
