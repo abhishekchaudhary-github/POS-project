@@ -1,5 +1,6 @@
 package com.increff.employee.service;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -25,7 +26,7 @@ public class ProductService {
 
 
     @Transactional(rollbackOn = ApiException.class)
-    public void add(ProductPojo p) throws ApiException {
+    public Integer add(ProductPojo p) throws ApiException {
         normalize(p);
         ProductPojo productPojo = dao.barcodeMustExist(p.getBarcode());
         if(productPojo!=null) {
@@ -62,8 +63,12 @@ public class ProductService {
         if(brandService.brandMustExist(p.getBrand_category())==null)
             throw new ApiException("product with this brand category combination does not exist");
 
+        //truncate to 2 decimal places
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        p.setMrp(Double.parseDouble(decimalFormat.format(p.getMrp())));
+
         if(dao.checkerForDuplicate(p.getBrand_category(), p.getName())==null)
-            dao.insert(p);
+            return dao.insert(p);
         else throw new ApiException("this product already exists");
 
 

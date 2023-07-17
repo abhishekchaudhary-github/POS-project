@@ -28,8 +28,9 @@ public class ProductDao extends AbstractDao{
     private EntityManager em;
 
     @Transactional
-    public void insert(ProductPojo p) {
+    public Integer insert(ProductPojo p) {
         em.persist(p);
+        return p.getId();
     }
 
     public ProductPojo barcodeAndMrp(String barcode, Double mrp) {

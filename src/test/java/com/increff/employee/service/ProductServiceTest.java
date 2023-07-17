@@ -35,8 +35,8 @@ public class ProductServiceTest extends AbstractUnitTest {
         productPojo.setBrand_category(id);
         productPojo.setMrp(1.12);
         productPojo.setName("name");
-        productService.add(productPojo);
-        ProductPojo productPojo1 = productService.get(1);
+        Integer productId = productService.add(productPojo);
+        ProductPojo productPojo1 = productService.get(productId);
         assertEquals("barcode",productPojo1.getBarcode());
         assertEquals(new Integer(id) ,productPojo1.getBrand_category());
         assertEquals(new Double(1.12) ,productPojo1.getMrp());
@@ -210,4 +210,15 @@ public class ProductServiceTest extends AbstractUnitTest {
         }
     }
 
+    @Test
+    public void testTruncateMrp() throws ApiException {
+        ProductPojo productPojo = new ProductPojo();
+        productPojo.setBarcode("barcode");
+        productPojo.setBrand_category(id);
+        productPojo.setMrp(1.1353);
+        productPojo.setName("name");
+        Integer productId = productService.add(productPojo);
+        ProductPojo productPojo1 = productService.get(productId);
+        assertEquals(new Double(1.14) , productPojo1.getMrp());
+    }
 }
