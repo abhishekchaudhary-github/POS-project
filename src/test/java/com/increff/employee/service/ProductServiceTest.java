@@ -23,6 +23,7 @@ public class ProductServiceTest extends AbstractUnitTest {
         brandService.add(brandPojo);
     }
 
+    //add tests
     @Test
     public void testAdd() throws ApiException {
         ProductPojo productPojo = new ProductPojo();
@@ -38,5 +39,57 @@ public class ProductServiceTest extends AbstractUnitTest {
         assertEquals("name",productPojo1.getName());
     }
 
-    
+    //empty fields tests
+    @Test
+    public void testEmptyBarcode() {
+        try {
+            ProductPojo productPojo = new ProductPojo();
+            productPojo.setBrand_category(1);
+            productPojo.setMrp(1.12);
+            productPojo.setName("name");
+            productService.add(productPojo);
+        } catch (ApiException err) {
+            assertEquals("barcode cannot be empty",err.getMessage());
+        }
+    }
+
+    @Test
+    public void testEmptyBrand_category() {
+        try {
+            ProductPojo productPojo = new ProductPojo();
+            productPojo.setBarcode("barcode");
+            productPojo.setMrp(1.12);
+            productPojo.setName("name");
+            productService.add(productPojo);
+        } catch (ApiException err) {
+            assertEquals("brand_category cannot be empty",err.getMessage());
+        }
+    }
+
+    @Test
+    public void testEmptyMrp() {
+        try {
+            ProductPojo productPojo = new ProductPojo();
+            productPojo.setBarcode("barcode");
+            productPojo.setBrand_category(1);
+            productPojo.setName("name");
+            productService.add(productPojo);
+        } catch (ApiException err) {
+            assertEquals("mrp cannot be empty",err.getMessage());
+        }
+    }
+
+    @Test
+    public void testEmptyName() {
+        try {
+            ProductPojo productPojo = new ProductPojo();
+            productPojo.setBarcode("barcode");
+            productPojo.setBrand_category(1);
+            productPojo.setMrp(1.12);
+            productService.add(productPojo);
+        } catch (ApiException err) {
+            assertEquals("name cannot be empty",err.getMessage());
+        }
+    }
+
 }

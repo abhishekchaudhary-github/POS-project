@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd59bcda-ea0a-45cb-bbdf-b0788f0265bb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/ProductServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/ProductApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/ProductApiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/ProductServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/ProductServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +82,7 @@
       <recent name="$PROJECT_DIR$/src/main/webapp/html" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ProductServiceTest">
+  <component name="RunManager" selected="JUnit.BrandServiceTest">
     <configuration name="BrandServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
@@ -203,10 +202,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.BrandServiceTest" />
         <item itemvalue="JUnit.ProductServiceTest" />
         <item itemvalue="JUnit.ProductServiceTest.testAdd" />
         <item itemvalue="JUnit.service in employee-spring-full" />
-        <item itemvalue="JUnit.BrandServiceTest" />
         <item itemvalue="JUnit.BrandServiceTest.testUpdateValues" />
       </list>
     </recent_temporary>

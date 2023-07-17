@@ -35,16 +35,16 @@ public class ProductService {
         }
         normalize(p);
         if(StringUtil.isEmpty(p.getBarcode())) {
-            throw new ApiException(" cannot be empty");
+            throw new ApiException("barcode cannot be empty");
         }
         if(p.getBrand_category()==null) {
-            throw new ApiException(" cannot be empty");
-        }
-        if(StringUtil.isEmpty(p.getName())) {
-            throw new ApiException(" cannot be empty");
+            throw new ApiException("brand_category cannot be empty");
         }
         if(p.getMrp()==null){
-            throw new ApiException(" cannot be empty");
+            throw new ApiException("mrp cannot be empty");
+        }
+        if(StringUtil.isEmpty(p.getName())) {
+            throw new ApiException("name cannot be empty");
         }
         if(p.getMrp()<0) {
             throw new ApiException("MRP can't be a negative value");
