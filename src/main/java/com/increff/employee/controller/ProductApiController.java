@@ -30,7 +30,8 @@ public class ProductApiController {
     @ApiOperation(value = "Adds a Product")
     @RequestMapping(path = "/api/product", method = RequestMethod.POST)
     public void add(@RequestBody ProductForm form) throws ApiException {
-        ProductPojo p = convert(form);
+        BrandPojo brandPojo = service.getBrandPojoFromForm(form);
+        ProductPojo p = convert(form,brandPojo);
         service.add(p);
     }
 
@@ -38,7 +39,8 @@ public class ProductApiController {
     @RequestMapping(path = "/api/product/{id}", method = RequestMethod.GET)
     public ProductData get(@PathVariable Integer id) throws ApiException {
         ProductPojo p = service.get(id);
-        return convert(p);
+        BrandPojo brandPojo = service.getBrandPojoFromBrandCategory(p);
+        return convert(p,brandPojo);
     }
 
     @ApiOperation(value = "Gets list of all Products")
@@ -47,7 +49,8 @@ public class ProductApiController {
         List<ProductPojo> list = service.getAll();
         List<ProductData> list2 = new ArrayList<ProductData>();
         for (ProductPojo p : list) {
-            list2.add(convert(p));
+            BrandPojo brandPojo = service.getBrandPojoFromBrandCategory(p);
+            list2.add(convert(p,brandPojo));
         }
         return list2;
     }
@@ -55,16 +58,17 @@ public class ProductApiController {
     @ApiOperation(value = "Updates a Product")
     @RequestMapping(path = "/api/product/{id}", method = RequestMethod.PUT)
     public void update(@PathVariable Integer id, @RequestBody ProductForm f) throws ApiException {
-        ProductPojo p = convert(f);
+        BrandPojo brandPojo = service.getBrandPojoFromForm(f);
+        ProductPojo p = convert(f,brandPojo);
         service.update(id, p);
     }
 
 
-    private ProductData convert(ProductPojo p) throws ApiException {
+    private static ProductData convert(ProductPojo p,BrandPojo brandPojo) throws ApiException {
         ProductData d = new ProductData();
         d.setName(p.getName());
         d.setBarcode(p.getBarcode());
-        BrandPojo brandPojo = service.getBrandPojoFromBrandCategory(p);
+        //BrandPojo brandPojo = service.getBrandPojoFromBrandCategory(p);
         d.setBrand(brandPojo.getBrand());
         d.setCategory(brandPojo.getCategory());
         d.setMrp(p.getMrp());
@@ -73,12 +77,12 @@ public class ProductApiController {
         return d;
     }
 
-    private ProductPojo convert(ProductForm f) throws ApiException {
+    private static ProductPojo convert(ProductForm f,BrandPojo brandPojo) throws ApiException {
         ProductPojo p = new ProductPojo();
         p.setName(f.getName());
         //service.checkBarcodeThrowErrorIfExists(f.getBarcode());
         p.setBarcode(f.getBarcode());
-        BrandPojo brandPojo = service.getBrandPojoFromForm(f);
+ //       BrandPojo brandPojo = service.getBrandPojoFromForm(f);
 //        if(brandPojo==null){
 //            throw new ApiException("this item does not exist");
 //        }

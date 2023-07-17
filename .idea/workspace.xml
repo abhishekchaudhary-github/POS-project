@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd59bcda-ea0a-45cb-bbdf-b0788f0265bb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/ProductServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/product.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/product.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/product.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/product.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/BrandServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/BrandServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/ProductApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/ProductApiController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +83,7 @@
       <recent name="$PROJECT_DIR$/src/main/webapp/html" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.BrandServiceTest">
+  <component name="RunManager" selected="JUnit.ProductServiceTest">
     <configuration name="BrandServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
@@ -101,22 +100,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BrandServiceTest.testGetId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="employee-spring-full" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.increff.employee.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.increff.employee.service" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.BrandServiceTest" />
-      <option name="METHOD_NAME" value="testGetId" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="BrandServiceTest.testUpdateValues" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
@@ -129,6 +112,45 @@
       <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.BrandServiceTest" />
       <option name="METHOD_NAME" value="testUpdateValues" />
       <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employee-spring-full" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.increff.employee.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.increff.employee.service" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.ProductServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductServiceTest.testAdd" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employee-spring-full" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.increff.employee.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.increff.employee.service" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.ProductServiceTest" />
+      <option name="METHOD_NAME" value="testAdd" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="service in employee-spring-full" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employee-spring-full" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test/java/com/increff/employee/service" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -172,16 +194,20 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="JUnit.ProductServiceTest" />
+      <item itemvalue="JUnit.ProductServiceTest.testAdd" />
+      <item itemvalue="JUnit.service in employee-spring-full" />
       <item itemvalue="JUnit.BrandServiceTest" />
-      <item itemvalue="JUnit.BrandServiceTest.testGetId" />
       <item itemvalue="JUnit.BrandServiceTest.testUpdateValues" />
       <item itemvalue="Maven.employee-spring-full [jetty:run]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ProductServiceTest" />
+        <item itemvalue="JUnit.ProductServiceTest.testAdd" />
+        <item itemvalue="JUnit.service in employee-spring-full" />
         <item itemvalue="JUnit.BrandServiceTest" />
         <item itemvalue="JUnit.BrandServiceTest.testUpdateValues" />
-        <item itemvalue="JUnit.BrandServiceTest.testGetId" />
       </list>
     </recent_temporary>
   </component>
