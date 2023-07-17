@@ -344,6 +344,16 @@ else if(barcodeChange==true){
             return item
            })
            addedData = tempData
+        iterationNumber = 0 ;
+        var tempData1 = jsonData.map(item => {
+                   if(iterationNumber ++ == fileData[3].value) {
+                   return { barcode: fileData[0].value,mrp: parseFloat(fileData[1].value),quantity: parseInt(fileData[2].value) }
+                    }
+                    else
+                    return item
+                   })
+                   jsonData = tempData1
+
 	}
 	for(var i in addedData){
     		var e = addedData[i];
