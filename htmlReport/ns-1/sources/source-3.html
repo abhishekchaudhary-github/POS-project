@@ -40,26 +40,26 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">BrandService</td>
 <td class="coverageStat">
   <span class="percent">
-    55.6%
+    77.8%
   </span>
   <span class="absValue">
-    (5/9)
+    (7/9)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    33.3%
+    46.7%
   </span>
   <span class="absValue">
-    (10/30)
+    (14/30)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">BrandService$$EnhancerBySpringCGLIB$$3e46b086</td>
+    <td class="name">BrandService$$EnhancerBySpringCGLIB$$e9fa8b7e</td>
   </tr>
   <tr>
-    <td class="name">BrandService$$EnhancerBySpringCGLIB$$3e46b086$$FastClassBySpringCGLIB$$9e2b79c</td>
+    <td class="name">BrandService$$EnhancerBySpringCGLIB$$e9fa8b7e$$FastClassBySpringCGLIB$$93e931e3</td>
   </tr>
   <tr>
     <td class="name">BrandService$$FastClassBySpringCGLIB$$74a6665d</td>
@@ -68,18 +68,18 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    55.6%
+    77.8%
   </span>
   <span class="absValue">
-    (5/9)
+    (7/9)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    33.3%
+    46.7%
   </span>
   <span class="absValue">
-    (10/30)
+    (14/30)
   </span>
 </td>
 </tr>
@@ -130,7 +130,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;    @Transactional(rollbackOn = ApiException.class)
 &nbsp;    public BrandPojo get(Integer id) throws ApiException {
-<b class="nc">&nbsp;        return getCheck(id);</b>
+<b class="fc">&nbsp;        return getCheck(id);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    @Transactional
@@ -163,11 +163,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    }
 &nbsp;    @Transactional
 &nbsp;    public BrandPojo getCheck(Integer id) throws ApiException {
-<b class="nc">&nbsp;        BrandPojo p = dao.select(id);</b>
-<b class="nc">&nbsp;        if (p == null) {</b>
+<b class="fc">&nbsp;        BrandPojo p = dao.select(id);</b>
+<b class="fc">&nbsp;        if (p == null) {</b>
 <b class="nc">&nbsp;            throw new ApiException(&quot;Brand with given ID does not exit, id: &quot; + id);</b>
 &nbsp;        }
-<b class="nc">&nbsp;        return p;</b>
+<b class="fc">&nbsp;        return p;</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    protected static void normalize(BrandPojo p) {
@@ -199,7 +199,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-17 12:00</div>
+    <div style="float:right;">generated on 2023-07-17 15:12</div>
 </div>
 </body>
 </html>

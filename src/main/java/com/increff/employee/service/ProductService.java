@@ -130,7 +130,7 @@ public class ProductService {
     public Integer getProductId(String barcode) throws ApiException {
         ProductPojo productPojo = dao.selectBarcode(barcode);
         if(productPojo==null) {
-            throw new ApiException("barcode does not exist");
+            throw new ApiException("this barcode does not exist");
         }
         return productPojo.getId();
     }
@@ -140,36 +140,41 @@ public class ProductService {
     public void update(Integer id, ProductPojo p) throws ApiException {
         normalize(p);
         List<ProductPojo> productPojoList = dao.barcodeMustExistList(p.getBarcode());
-        if(productPojoList.size()==1) {
-           if(productPojoList.get(0).getId()!=id){
-               throw new ApiException("Barcode Already exists");
-           }
-        }
+//        if(productPojoList.size()==1) {
+//           if(productPojoList.get(0).getId()!=id){
+//               throw new ApiException("same barcode already exists");
+//           }
+//        }
         if(productPojoList.size()>1) {
-            throw new ApiException("Barcode Already exists");
+            throw new ApiException("same barcode already exists");
         }
         ProductPojo tempPojo = getCheck(id);
         if(StringUtil.isEmpty(p.getBarcode())) {
-            throw new ApiException("brand cannot be empty");
+            throw new ApiException("barcode cannot be empty");
         }
         if(p.getBrand_category()==null) {
-            throw new ApiException("category cannot be empty");
-        }
-        if(StringUtil.isEmpty(p.getName())) {
-            throw new ApiException("name cannot be empty");
+            throw new ApiException("brand_category cannot be empty");
         }
         if(p.getMrp()==null) {
             throw new ApiException("MRP cannot be empty");
+        }
+        if(StringUtil.isEmpty(p.getName())) {
+            throw new ApiException("name cannot be empty");
         }
         if(p.getMrp()<0) {
             throw new ApiException("MRP can't be a negative value");
         }
         //
+        if (!p.getBarcode().matches("^[a-zA-Z0-9]*$")) {
+            throw new ApiException("barcode must only contain alphanumeric characters");
+        }
+
 
         //NOTHING INSERTED
         if(tempPojo.getBarcode().equals(p.getBarcode()) && tempPojo.getName().equals(p.getName()) && tempPojo.getMrp()==p.getMrp() && tempPojo.getBrand_category()==p.getBrand_category()){
             return;
         }
+
         tempPojo.setBarcode(p.getBarcode());
         tempPojo.setBrand_category(p.getBrand_category());
         tempPojo.setName(p.getName());
