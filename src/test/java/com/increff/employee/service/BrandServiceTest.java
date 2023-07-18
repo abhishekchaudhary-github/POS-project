@@ -20,7 +20,8 @@ public class BrandServiceTest extends AbstractUnitTest {
         brandPojo.setBrand("brand");
         brandPojo.setCategory("category");
         brandService.add(brandPojo);
-        BrandPojo brandPojo1 = brandService.get(1);
+        BrandPojo brandIdPojo = brandService.getId("brand","category");
+        BrandPojo brandPojo1 = brandService.get(brandIdPojo.getId());
         assertEquals("brand",brandPojo1.getBrand());
         assertEquals("category",brandPojo1.getCategory());
     }
@@ -157,24 +158,36 @@ public class BrandServiceTest extends AbstractUnitTest {
             }
     }
 
-//    @Test(expected = ApiException.class)
-//    public void testUpdateNoChangeInInputs() throws ApiException {
-//        try{
-//            for (int i = 1; i <= 2; i++) {
-//                BrandPojo brandPojo = new BrandPojo();
-//                brandPojo.setBrand("brand" + i);
-//                brandPojo.setCategory("category" + i);
-//                brandService.add(brandPojo);
-//            }
-//            BrandPojo brandPojo = new BrandPojo();
-//            brandPojo.setBrand("brand" + 1);
-//            brandPojo.setCategory("category" + 1);
-//            brandService.update(2, brandPojo);
-//        }
-//        catch(ApiException err) {
-//
-//        }
-//    }
+//no update in values
+    @Test(expected = ApiException.class)
+    public void testUpdateNoChangeInInputs() throws ApiException {
+            for (int i = 1; i <= 2; i++) {
+                BrandPojo brandPojo = new BrandPojo();
+                brandPojo.setBrand("brand" + i);
+                brandPojo.setCategory("category" + i);
+                brandService.add(brandPojo);
+            }
+            BrandPojo brandPojo = new BrandPojo();
+            brandPojo.setBrand("brand" + 1);
+            brandPojo.setCategory("category" + 1);
+            Integer status = brandService.update(2, brandPojo);
+            assertEquals(new Integer(0),status);
+    }
+
+    @Test(expected = ApiException.class)
+    public void testUpdateOnChangeInInputs() throws ApiException {
+        for (int i = 1; i <= 2; i++) {
+            BrandPojo brandPojo = new BrandPojo();
+            brandPojo.setBrand("brand" + i);
+            brandPojo.setCategory("category" + i);
+            brandService.add(brandPojo);
+        }
+        BrandPojo brandPojo = new BrandPojo();
+        brandPojo.setBrand("brand" + 2);
+        brandPojo.setCategory("category" + 2);
+        Integer status = brandService.update(2, brandPojo);
+        assertEquals(new Integer(1),status);
+    }
     @Test
     public void testUpdateCheckIfUpdatesDuplicateValue() throws ApiException {
         try{
