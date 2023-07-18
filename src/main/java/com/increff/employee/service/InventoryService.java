@@ -73,7 +73,7 @@ public class InventoryService {
 
 
     @Transactional(rollbackOn  = ApiException.class)
-    public void update(Integer id, InventoryPojo p) throws ApiException {
+    public Integer update(Integer id, InventoryPojo p) throws ApiException {
         if(p.getQuantity()==null) {
             throw new ApiException("field cannot be empty");
         }
@@ -89,8 +89,12 @@ public class InventoryService {
         }
         //InventoryPojo tempPojo = getCheck(id);
             InventoryPojo temp = get(id);
+        if( temp.getQuantity().equals(p.getQuantity()) && temp.getProductId().equals(p.getProductId()) ) {
+            return 0;
+        }
             temp.setQuantity(p.getQuantity());
             temp.setProductId(p.getProductId());
+            return 1;
     }
 
 //    @Transactional

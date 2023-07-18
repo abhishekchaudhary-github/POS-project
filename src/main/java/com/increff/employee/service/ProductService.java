@@ -138,7 +138,7 @@ public class ProductService {
 
 
     @Transactional(rollbackOn  = ApiException.class)
-    public void update(Integer id, ProductPojo p) throws ApiException {
+    public Integer update(Integer id, ProductPojo p) throws ApiException {
         normalize(p);
         List<ProductPojo> productPojoList = dao.barcodeMustExistList(p.getBarcode());
 //        if(productPojoList.size()==1) {
@@ -173,14 +173,14 @@ public class ProductService {
 
         //NOTHING INSERTED
         if(tempPojo.getBarcode().equals(p.getBarcode()) && tempPojo.getName().equals(p.getName()) && tempPojo.getMrp()==p.getMrp() && tempPojo.getBrand_category()==p.getBrand_category()){
-            return;
+            return 0;
         }
 
         tempPojo.setBarcode(p.getBarcode());
         tempPojo.setBrand_category(p.getBrand_category());
         tempPojo.setName(p.getName());
         tempPojo.setMrp(p.getMrp());
-
+        return 1;
     }
 
 

@@ -87,7 +87,9 @@ function updateBrand(event){
 	   success: function(response) {
 	        $('#edit-brand-modal').modal('hide');
 	   		getBrandList();
-	   		$.notify("updated successfully",{ className:"success" , globalPosition: 'top center'})
+	   		if(response == 1){
+	   		    $.notify("updated successfully",{ className:"success" , globalPosition: 'top center'})
+	   		}
 	   },
 	   error: handleAjaxError
 	});
