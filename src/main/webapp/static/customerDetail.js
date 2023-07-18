@@ -224,8 +224,14 @@ function submitCustomerDetail(){
     	   headers: {
            	'Content-Type': 'application/json'
            },
-    	   success: function() { location.reload(); },
-    	   error: handleAjaxError
+    	   success: function() {
+
+    	       $.notify("ADDED SUCCESSFULLY", { className: "success", globalPosition: 'top center' });
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1000);
+    	   },
+    	   error: handleAjaxError,
     	});
 //refresh the page
 }
@@ -559,7 +565,12 @@ function displayEditOrderDetail(id){
 function displayOrderItemDetail(data){
 	    $("#edit-order-form input[name=quantity]").val(data.quantity);
     	$("#edit-order-form input[name=sellingPrice]").val(data.sellingPrice);
+//    	 //when modal opens
+//                        $('#edit-order-modal').on('shown.bs.modal', function (e) {
+//                          $("#pageContent").css({ opacity: 0.9 });
+//                        })
     	$('#edit-order-modal').modal('toggle');
+
 }
 
 function deleteEditOrderDetail(id) {
@@ -623,9 +634,12 @@ function displayCustomerDetail(id){
 }
 
 function modalCLose() {
-        console.log("hello")
         $("#edit-customerDetail-modal").modal('hide')
 }
+function modalClose2() {
+        $("#edit-order-modal").modal('hide')
+}
+
 
 function deleteTheOrder(id) {
     var url = getOrderUrl() + '/' + id
@@ -652,6 +666,7 @@ function init(){
                         $(".admin-element").hide();
                     }
     $('.edit-cancel').click(modalCLose)
+    $('.edit-order-cancel').click(modalClose2)
 }
 
 $(document).ready(init);
