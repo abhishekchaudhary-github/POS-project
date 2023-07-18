@@ -2,6 +2,7 @@ package com.increff.employee.service;
 
 import com.increff.employee.model.ProductForm;
 import com.increff.employee.pojo.BrandPojo;
+import com.increff.employee.pojo.InventoryPojo;
 import com.increff.employee.pojo.ProductPojo;
 import org.junit.Before;
 import org.junit.Test;
@@ -593,6 +594,50 @@ public class ProductServiceTest extends AbstractUnitTest {
         assertEquals("name1",productpojo.getName());
     }
 
+    //test nothing updates returns 0
+    @Test
+    public void testUpdateIfNothingUpdatesReturn0() throws ApiException {
+        ProductPojo productPojo = new ProductPojo();
+        productPojo.setBarcode("barcode");
+        productPojo.setBrand_category(brandId);
+        productPojo.setMrp(1.12);
+        productPojo.setName("name");
+        Integer productId = productService.add(productPojo);
+
+        ProductPojo productPojo1 = new ProductPojo();
+        productPojo1.setBarcode("barcode");
+        productPojo1.setBrand_category(brandId);
+        productPojo1.setMrp(1.12);
+        productPojo1.setName("name");
+        Integer status = productService.update(productId, productPojo1);
+
+        assertEquals(new Integer(0),status);
+    }
+
+
+    //test is updates returns 1
+    @Test
+    public void testUpdateIfUpdatesReturn1() throws ApiException {
+        ProductPojo productPojo = new ProductPojo();
+        productPojo.setBarcode("barcode");
+        productPojo.setBrand_category(brandId);
+        productPojo.setMrp(1.12);
+        productPojo.setName("name");
+        Integer productId = productService.add(productPojo);
+
+        ProductPojo productPojo1 = new ProductPojo();
+        productPojo1.setBarcode("barcode1");
+        productPojo1.setBrand_category(brandId);
+        productPojo1.setMrp(1.12);
+        productPojo1.setName("name1");
+        Integer status = productService.update(productId, productPojo1);
+
+        assertEquals(new Integer(1),status);
+    }
+
+
+
+
     //***tests for get check function****
     //functionality of getCheck function works fine
     @Test
@@ -603,7 +648,12 @@ public class ProductServiceTest extends AbstractUnitTest {
         productPojo.setMrp(1.12);
         productPojo.setName("name");
         Integer productId = productService.add(productPojo);
-        assertNotNull(productService.getCheck(productId));
+        ProductPojo productPojo1 = productService.getCheck(productId);
+
+        assertEquals("barcode",productPojo1.getBarcode());
+        assertEquals(brandId,productPojo1.getBrand_category());
+        assertEquals(new Double(1.12),productPojo1.getMrp());
+        assertEquals("name",productPojo1.getName());
     }
 
     //getCheck function if given pojo is not in the database

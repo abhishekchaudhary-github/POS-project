@@ -81,12 +81,12 @@ public class InventoryService {
     @Transactional(rollbackOn  = ApiException.class)
     public Integer update(Integer id, InventoryPojo p) throws ApiException {
         if(p.getQuantity()==null) {
-            throw new ApiException("field cannot be empty");
+            throw new ApiException("quantity of given product cannot be empty");
         }
         if(p.getQuantity()<1){
-            throw new ApiException("quantity cannot be less than 1");
+            throw new ApiException("quantity of given product cannot be less than 1");
         }
-        //check if given product id exist
+        //check if given product id exist in inventory
         if(dao.getFromProductId(p.getProductId())==null){
 
         }
@@ -110,7 +110,7 @@ public class InventoryService {
     public InventoryPojo getCheck(Integer id) throws ApiException {
         InventoryPojo p = dao.select(id);
         if (p == null) {
-            throw new ApiException("Employee with given ID does not exit, id: " + id);
+            throw new ApiException("Inventory with given ID does not exit, id: " + id);
         }
         return p;
     }
