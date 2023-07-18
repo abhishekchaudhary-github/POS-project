@@ -172,7 +172,7 @@ public class ProductService {
 
 
         //NOTHING INSERTED
-        if(tempPojo.getBarcode().equals(p.getBarcode()) && tempPojo.getName().equals(p.getName()) && tempPojo.getMrp()==p.getMrp() && tempPojo.getBrand_category()==p.getBrand_category()){
+        if((dao.select(id).getBarcode()+"").equals((p.getBarcode()+"")) && (dao.select(id).getName()+"").equals((p.getName()+"")) && (dao.select(id).getMrp()+"").equals(p.getMrp()+"") && (dao.select(id).getBrand_category()+"").equals(p.getBrand_category()+"")){
             return 0;
         }
 

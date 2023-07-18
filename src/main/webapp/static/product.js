@@ -151,7 +151,9 @@ function updateProduct(event){
 	   success: function(response) {
 	        $('#edit-product-modal').modal('hide');
 	   		getProductList();
-	   		$.notify("UPDATED SUCCESSFULLY",{ className:"success" , globalPosition: 'top center'})
+	   		if(response == 1) {
+                $.notify("updated successfully",{ className:"success" , globalPosition: 'top center'})
+            }
 	   },
 	   error: handleAjaxError
 	});

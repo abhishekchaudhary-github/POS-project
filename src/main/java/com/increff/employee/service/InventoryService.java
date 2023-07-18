@@ -87,24 +87,27 @@ public class InventoryService {
         else if(!dao.getFromProductId(p.getProductId()).equals(dao.select(id)) && dao.getFromProductId(p.getProductId())!=null) {
             throw new ApiException("given barcode already exists");
         }
-        //InventoryPojo tempPojo = getCheck(id);
-            InventoryPojo temp = get(id);
-        if( temp.getQuantity().equals(p.getQuantity()) && temp.getProductId().equals(p.getProductId()) ) {
+        InventoryPojo tempPojo = getCheck(id);
+        String s1 = dao.select(id).getQuantity()+"";
+        String s2 = p.getQuantity()+"";
+        String s3 = dao.select(id).getQuantity()+"";
+        String s4 = p.getQuantity()+"";
+        if( s1.equals(s2) && s3.equals(s4) ) {
             return 0;
         }
-            temp.setQuantity(p.getQuantity());
-            temp.setProductId(p.getProductId());
+        tempPojo.setQuantity(p.getQuantity());
+        tempPojo.setProductId(p.getProductId());
             return 1;
     }
 
-//    @Transactional
-//    public InventoryPojo getCheck(Integer id) throws ApiException {
-//        InventoryPojo p = dao.select(id);
-//        if (p == null) {
-//            throw new ApiException("Employee with given ID does not exit, id: " + id);
-//        }
-//        return p;
-//    }
+    @Transactional
+    public InventoryPojo getCheck(Integer id) throws ApiException {
+        InventoryPojo p = dao.select(id);
+        if (p == null) {
+            throw new ApiException("Employee with given ID does not exit, id: " + id);
+        }
+        return p;
+    }
 
 
 }

@@ -87,7 +87,7 @@ function updateBrand(event){
 	   success: function(response) {
 	        $('#edit-brand-modal').modal('hide');
 	   		getBrandList();
-	   		if(response == 1){
+	   		if(response == 1) {
 	   		    $.notify("updated successfully",{ className:"success" , globalPosition: 'top center'})
 	   		}
 	   },

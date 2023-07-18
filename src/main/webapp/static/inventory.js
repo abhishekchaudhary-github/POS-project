@@ -51,7 +51,7 @@ function addInventory(event){
 	   success: function(response) {
 	   		getInventoryList();
 	   		('.modal').modal('hide')
-	   		$.notify("UPDATED SUCCESSFULLY",{ className:"success" , globalPosition: 'top center'})
+                $.notify("updated successfully",{ className:"success" , globalPosition: 'top center'})
 	   		$form.find('#inputBarcode').val('');
             $form.find('#inputQuantity').val('');
 	   },
@@ -117,7 +117,9 @@ function updateInventory(event){
 	   success: function(response) {
 	        $('#edit-inventory-modal').modal('hide');
 	   		getInventoryList();
+	   		if(response == 1) {
 	   		$.notify("UPDATED SUCCESSFULLY",{ className:"success" , globalPosition: 'top center'})
+	   		}
 	   },
 	   error: handleAjaxError
 	});
