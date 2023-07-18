@@ -1,6 +1,7 @@
 package com.increff.employee.service;
 
 import com.increff.employee.pojo.BrandPojo;
+import helper.pojoHelper;
 import io.swagger.annotations.Api;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,7 @@ public class BrandServiceTest extends AbstractUnitTest {
     //add function tests
     @Test
     public void testAdd() throws ApiException {
-        BrandPojo brandPojo = new BrandPojo();
-        brandPojo.setBrand("brand");
-        brandPojo.setCategory("category");
+        BrandPojo brandPojo = pojoHelper.makeBrandPojo("brand","category");
         brandService.add(brandPojo);
         BrandPojo brandIdPojo = brandService.getId("brand","category");
         BrandPojo brandPojo1 = brandService.get(brandIdPojo.getId());
@@ -29,8 +28,7 @@ public class BrandServiceTest extends AbstractUnitTest {
     @Test
     public void testNoBrandGiven() throws ApiException {
         try{
-            BrandPojo brandPojo = new BrandPojo();
-            brandPojo.setCategory("category");
+            BrandPojo brandPojo = pojoHelper.makeBrandPojo(null,"category");
             brandService.add(brandPojo);
         }
         catch(ApiException err) {
@@ -41,8 +39,7 @@ public class BrandServiceTest extends AbstractUnitTest {
     @Test
     public void testNoCategoryGiven() throws ApiException {
         try{
-            BrandPojo brandPojo = new BrandPojo();
-            brandPojo.setBrand("brand");
+            BrandPojo brandPojo = pojoHelper.makeBrandPojo("brand",null);
             brandService.add(brandPojo);
         }
         catch(ApiException err) {
@@ -53,9 +50,7 @@ public class BrandServiceTest extends AbstractUnitTest {
     @Test
     public void testEmptyStringInBrandGiven() throws ApiException {
         try{
-            BrandPojo brandPojo = new BrandPojo();
-            brandPojo.setBrand("");
-            brandPojo.setCategory("category");
+            BrandPojo brandPojo = pojoHelper.makeBrandPojo("","category");
             brandService.add(brandPojo);
         }
         catch(ApiException err) {
@@ -66,9 +61,7 @@ public class BrandServiceTest extends AbstractUnitTest {
     @Test
     public void testEmptyStringInCategoryGiven() throws ApiException {
         try{
-            BrandPojo brandPojo = new BrandPojo();
-            brandPojo.setBrand("brand");
-            brandPojo.setCategory(" ");
+            BrandPojo brandPojo = pojoHelper.makeBrandPojo("brand"," ");
             brandService.add(brandPojo);
         }
         catch(ApiException err) {
@@ -79,13 +72,9 @@ public class BrandServiceTest extends AbstractUnitTest {
     @Test
     public void testCategoryAlreadyExists() throws ApiException {
         try {
-                BrandPojo brandPojo = new BrandPojo();
-                brandPojo.setBrand("brand");
-                brandPojo.setCategory("category");
+                BrandPojo brandPojo = pojoHelper.makeBrandPojo("brand","category");
                 brandService.add(brandPojo);
-                BrandPojo brandPojo1 = new BrandPojo();
-                brandPojo1.setBrand("brand");
-                brandPojo1.setCategory("category");
+                BrandPojo brandPojo1 = pojoHelper.makeBrandPojo("brand","category");
                 brandService.add(brandPojo1);
         } catch(ApiException err) {
             assertEquals("category already exists",err.getMessage());
@@ -95,9 +84,7 @@ public class BrandServiceTest extends AbstractUnitTest {
     @Test
     public void testGet() throws ApiException {
         for(int i = 1; i <= 4 ; i ++ ) {
-            BrandPojo brandPojo = new BrandPojo();
-            brandPojo.setBrand("brand"+i);
-            brandPojo.setCategory("category"+i);
+            BrandPojo brandPojo = pojoHelper.makeBrandPojo("brand"+i,"category"+i);
             brandService.add(brandPojo);
         }
         Integer id=null;
@@ -111,9 +98,7 @@ public class BrandServiceTest extends AbstractUnitTest {
     @Test
     public void testGetAll() throws ApiException {
         for(int i = 1; i <= 4 ; i ++ ) {
-            BrandPojo brandPojo = new BrandPojo();
-            brandPojo.setBrand("brand"+i);
-            brandPojo.setCategory("category"+i);
+            BrandPojo brandPojo = pojoHelper.makeBrandPojo("brand"+i,"category"+i);
             brandService.add(brandPojo);
         }
         List<BrandPojo> brandPojoList = brandService.getAll();
@@ -127,9 +112,7 @@ public class BrandServiceTest extends AbstractUnitTest {
     public void testUpdateEmptyBrand() throws ApiException {
         try {
             for (int i = 1; i <= 2; i++) {
-                BrandPojo brandPojo = new BrandPojo();
-                brandPojo.setBrand("brand" + i);
-                brandPojo.setCategory("category" + i);
+                BrandPojo brandPojo = pojoHelper.makeBrandPojo("brand"+i,"category"+i);
                 brandService.add(brandPojo);
             }
                 BrandPojo brandPojo = new BrandPojo();
@@ -144,9 +127,7 @@ public class BrandServiceTest extends AbstractUnitTest {
     public void testUpdateEmptyCategory() throws ApiException {
             try {
                     for(int i = 1 ; i <= 2; i++) {
-                        BrandPojo brandPojo = new BrandPojo();
-                        brandPojo.setBrand("brand"+i);
-                        brandPojo.setCategory("category"+i);
+                        BrandPojo brandPojo = pojoHelper.makeBrandPojo("brand"+i,"category"+i);
                         brandService.add(brandPojo);
                     }
                     BrandPojo brandPojo = new BrandPojo();
@@ -162,9 +143,7 @@ public class BrandServiceTest extends AbstractUnitTest {
     @Test(expected = ApiException.class)
     public void testUpdateNoChangeInInputs() throws ApiException {
             for (int i = 1; i <= 2; i++) {
-                BrandPojo brandPojo = new BrandPojo();
-                brandPojo.setBrand("brand" + i);
-                brandPojo.setCategory("category" + i);
+                BrandPojo brandPojo = pojoHelper.makeBrandPojo("brand"+i,"category"+i);
                 brandService.add(brandPojo);
             }
             BrandPojo brandPojo = new BrandPojo();
@@ -177,9 +156,7 @@ public class BrandServiceTest extends AbstractUnitTest {
     @Test(expected = ApiException.class)
     public void testUpdateOnChangeInInputs() throws ApiException {
         for (int i = 1; i <= 2; i++) {
-            BrandPojo brandPojo = new BrandPojo();
-            brandPojo.setBrand("brand" + i);
-            brandPojo.setCategory("category" + i);
+            BrandPojo brandPojo = pojoHelper.makeBrandPojo("brand"+i,"category"+i);
             brandService.add(brandPojo);
         }
         BrandPojo brandPojo = new BrandPojo();
@@ -192,16 +169,12 @@ public class BrandServiceTest extends AbstractUnitTest {
     public void testUpdateCheckIfUpdatesDuplicateValue() throws ApiException {
         try{
                 for(int i = 1;i<=2;i++) {
-                BrandPojo brandPojo = new BrandPojo();
-                brandPojo.setBrand("brand" + 1);
-                brandPojo.setCategory("category" + i);
+                BrandPojo brandPojo = pojoHelper.makeBrandPojo("brand"+i,"category"+i);
                 brandService.add(brandPojo);
             }
 
-                BrandPojo brandPojo = new BrandPojo();
-                brandPojo.setBrand("brand"+1);
-                brandPojo.setCategory("category"+1);
-                BrandPojo brandPojo1 = brandService.getId("brand1","category2");
+            BrandPojo brandPojo = pojoHelper.makeBrandPojo("brand"+1,"category"+1);
+                BrandPojo brandPojo1 = brandService.getId("brand2","category2");
                 brandService.update(brandPojo1.getId(),brandPojo);
             }
         catch(ApiException err){
@@ -212,14 +185,10 @@ public class BrandServiceTest extends AbstractUnitTest {
     @Test
     public void testUpdateValues() throws ApiException {
         for(int i = 1 ; i <= 2; i++) {
-            BrandPojo brandPojo = new BrandPojo();
-            brandPojo.setBrand("brand"+i);
-            brandPojo.setCategory("category"+i);
+            BrandPojo brandPojo = pojoHelper.makeBrandPojo("brand"+i,"category"+i);
             brandService.add(brandPojo);
         }
-        BrandPojo brandPojo = new BrandPojo();
-        brandPojo.setBrand("brand"+3);
-        brandPojo.setCategory("category"+3);
+        BrandPojo brandPojo = pojoHelper.makeBrandPojo("brand"+3,"category"+3);
         Integer id=null;
         BrandPojo brandPojo1 = brandService.getId("brand2","category2");
         if(brandPojo1!=null)
@@ -233,14 +202,10 @@ public class BrandServiceTest extends AbstractUnitTest {
     @Test
     public void testGetId() throws ApiException {
         for(int i = 1 ; i <= 2; i++) {
-            BrandPojo brandPojo = new BrandPojo();
-            brandPojo.setBrand("brand"+i);
-            brandPojo.setCategory("category"+i);
+            BrandPojo brandPojo = pojoHelper.makeBrandPojo("brand"+i,"category"+i);
             brandService.add(brandPojo);
         }
-        BrandPojo brandPojo = new BrandPojo();
-        brandPojo.setBrand("brand2");
-        brandPojo.setCategory("category2");
+        BrandPojo brandPojo = pojoHelper.makeBrandPojo("brand2","category2");
         BrandPojo brandPojo1 = brandService.getId(brandPojo.getBrand(),brandPojo.getCategory());
         assertEquals("brand2",brandPojo1.getBrand());
         assertEquals("category2",brandPojo1.getCategory());
@@ -248,9 +213,7 @@ public class BrandServiceTest extends AbstractUnitTest {
 
     @Test
     public void testNormalize() throws ApiException {
-        BrandPojo brandPojo = new BrandPojo();
-        brandPojo.setBrand("nIkE");
-        brandPojo.setCategory("ShOE");
+        BrandPojo brandPojo = pojoHelper.makeBrandPojo("nIkE","ShOE");
         brandService.normalize(brandPojo);
         assertEquals("shoe",brandPojo.getCategory());
         assertEquals("nike",brandPojo.getBrand());
