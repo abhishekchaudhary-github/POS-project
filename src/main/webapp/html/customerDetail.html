@@ -25,6 +25,10 @@ table.dataTable thead .sorting_desc::after {
 table.dataTable tbody tr:hover {
   background-color: #e6e6e6;
 }
+/* Custom CSS to set higher z-index for notify.js messages */
+.notifyjs-corner {
+  z-index: 2000 !important;
+}
 </style>
 <body>
 
@@ -227,7 +231,7 @@ table.dataTable tbody tr:hover {
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary edit-order-cancel" data-dismiss="edit-details">Cancel</button>
-                <button type="button" class="btn btn-primary">Update</button>
+                <button type="button" class="btn btn-primary" id="update-edited-order">Update</button>
             </div>
         </div>
     </div>

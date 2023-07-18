@@ -2,6 +2,7 @@ var addedData = [];
 var jsonData = [];
 var checker = true
 var prodId = -1;
+var editOrderData;
 function getCustomerDetailUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
 	return baseUrl + "/api/orderitem";
@@ -565,6 +566,8 @@ function displayEditOrderDetail(id){
 function displayOrderItemDetail(data){
 	    $("#edit-order-form input[name=quantity]").val(data.quantity);
     	$("#edit-order-form input[name=sellingPrice]").val(data.sellingPrice);
+    	editOrderData = data;
+    	console.log(editOrderData)
 //    	 //when modal opens
 //                        $('#edit-order-modal').on('shown.bs.modal', function (e) {
 //                          $("#pageContent").css({ opacity: 0.9 });
@@ -653,10 +656,44 @@ function deleteTheOrder(id) {
     	});
 }
 
+function updateEditedOrder() {
+    $('#edit-order-modal').modal('toggle');
+    var $form = $('#edit-order-form');
+    var json = toJson($form);
+    var fileData = $form.serializeArray();
+    var objectForm = {
+        id : editOrderData.id,
+        orderId : editOrderData.orderId,
+        productId : editOrderData.productId,
+        quantity : parseInt(fileData[0].value),
+        selling_price : parseFloat(fileData[1].value)
+    }
+    var url = getCustomerDetailUrl() + '/' + editOrderData.id;
+
+    $.ajax({
+        	   url: url,
+        	   type: 'PUT',
+        	   data: JSON.stringify(objectForm),
+        	   headers: {
+               	'Content-Type': 'application/json'
+               },
+        	   success: function() {
+
+        	       $.notify("ADDED SUCCESSFULLY", { className: "success", globalPosition: 'top center' });
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1000);
+        	   },
+        	   error: handleAjaxError,
+        	});
+
+}
+
 //INITIALIZATION CODE
 function init(){
 	$('#add-customerDetail').click(addCustomerDetail);
 	$('#update-customerDetail').click(updateCustomerDetail);
+	$('#update-edited-order').click(updateEditedOrder);
 	$('#refresh-data').click(getCustomerDetailList);
 	$('#upload-data').click(displayUploadData);
 	$('#process-data').click(processData);
@@ -668,6 +705,6 @@ function init(){
     $('.edit-cancel').click(modalCLose)
     $('.edit-order-cancel').click(modalClose2)
 }
-
+$.notify.defaults({globalPosition: 'top left'})
 $(document).ready(init);
 $(document).ready(getCustomerDetailList);
