@@ -10,4 +10,13 @@ public class pojoHelper {
         brandPojo.setCategory(category);
         return brandPojo;
     }
+
+    public static ProductPojo makeProductPojo(String barcode, Integer brand_category, Double mrp, String name ) {
+        ProductPojo productPojo = new ProductPojo();
+        productPojo.setBarcode(barcode);
+        productPojo.setBrand_category(brand_category);
+        productPojo.setMrp(mrp);
+        productPojo.setName(name);
+        return productPojo;
+    }
 }
