@@ -18,18 +18,20 @@ public class InventoryService {
     private ProductService productService;
 
     @Transactional(rollbackOn = ApiException.class)
-    public void add(InventoryPojo inventoryPojo) throws ApiException {
+    public Integer add(InventoryPojo inventoryPojo) throws ApiException {
         if(dao.select(inventoryPojo.getProductId())==null) {
             if(inventoryPojo.getQuantity()<1){
                 throw new ApiException("quantity can not be less than 1");
             }
-            dao.insert(inventoryPojo);
+            return dao.insert(inventoryPojo);
         }
         else {
             Integer previousQuantity = dao.select(inventoryPojo.getProductId()).getQuantity();
             Integer newQuantity = inventoryPojo.getQuantity()+previousQuantity;
             inventoryPojo.setQuantity(newQuantity);
-            dao.select(inventoryPojo.getProductId()).setQuantity(newQuantity);
+            InventoryPojo inventoryPojo1 = dao.select(inventoryPojo.getProductId());
+            inventoryPojo1.setQuantity(newQuantity);
+            return inventoryPojo1.getId();
         }
     }
 

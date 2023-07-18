@@ -42,7 +42,7 @@ var k =0;
 
 function checkInventory(data, fileData){
     if(data.quantity - fileData<0){
-    $("#customerDetail-form").notify("value accessed the inventor",{className:"warn"})
+    $("#customerDetail-form").notify("given quantity exceeded the quantity present in the inventory",{className:"warn"})
         checker = false
     }
     else check = true;

@@ -23,7 +23,7 @@ public class InventoryServiceTest extends AbstractUnitTest {
     private Integer brandId ;
     private Integer brandIdSecondPojo;
     private Integer productId;
-
+    private Integer productId2;
     BrandPojo brandPojo;
     @Before
     public void preTest() throws ApiException {
@@ -50,7 +50,7 @@ public class InventoryServiceTest extends AbstractUnitTest {
         productPojo1.setBrand_category(brandIdSecondPojo);
         productPojo1.setMrp(1.10);
         productPojo1.setName("name1");
-        productId = productService.add(productPojo1);
+        productId2 = productService.add(productPojo1);
     }
 
     //adding quantity less than 1
@@ -65,6 +65,35 @@ public class InventoryServiceTest extends AbstractUnitTest {
         catch (ApiException err) {
             assertEquals("quantity can not be less than 1",err.getMessage());
         }
+    }
+
+    //adding already existing product
+    @Test
+    public void testAddAlreadyExisting() throws ApiException {
+        InventoryPojo inventoryPojo = new InventoryPojo();
+        inventoryPojo.setQuantity(2);
+        inventoryPojo.setProductId(productId);
+        inventoryService.add(inventoryPojo);
+
+        InventoryPojo inventoryPojo1 = new InventoryPojo();
+        inventoryPojo1.setQuantity(2);
+        inventoryPojo1.setProductId(productId);
+        Integer inventoryId = inventoryService.add(inventoryPojo1);
+
+        assertEquals(new Integer(4),inventoryService.get(inventoryId).getQuantity());
+        assertEquals(productId,inventoryService.get(inventoryId).getProductId());
+    }
+
+    //adding a product not existing in the inventory
+    @Test
+    public void testAddNew() throws ApiException {
+        InventoryPojo inventoryPojo = new InventoryPojo();
+        inventoryPojo.setQuantity(2);
+        inventoryPojo.setProductId(productId);
+        Integer inventoryId = inventoryService.add(inventoryPojo);
+
+        assertEquals(new Integer(2),inventoryService.get(inventoryId).getQuantity());
+        assertEquals(productId,inventoryService.get(inventoryId).getProductId());
     }
 
 }
