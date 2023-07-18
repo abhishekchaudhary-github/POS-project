@@ -38,6 +38,7 @@ function addBrand(event){
        },
 	   success: function(response) {
 	   		getBrandList();
+	   		$('#addOrderDetail-modal').modal('hide');
 	   		$.notify("ADDED SUCCESSFULLY",{ className:"success" , globalPosition: 'top center'})
 	   		$form.find('#inputBrand').val('');
             $form.find('#inputCategory').val('');

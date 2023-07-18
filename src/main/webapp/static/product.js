@@ -69,6 +69,7 @@ function addProduct(event){
        },
 	   success: function(response) {
 	   		getProductList();
+	   		$('#addProductDetail-modal').modal('hide');
 	   		$.notify("ADDED SUCCESSFULLY",{ className:"success" , globalPosition: 'top center'})
 	   		$form.find('#inputBarcode').val('');
 	   		$form.find('#inputBrand').val('');
@@ -192,6 +193,9 @@ var processCount = 0;
 
 function processData(){
 	var file = $('#productFile')[0].files[0];
+	if(file==null){
+    	    $.notify("select a valid tsv file",{globalPosition: 'top center', className:"warn"})
+    	}
 	readFileData(file, readFileDataCallback);
 }
 
@@ -225,8 +229,8 @@ function uploadRows(){
     	//If everything processed then return
     	if(processCount==fileData.length){
     	if(errorData.length==0){
+            $('#upload-product-modal').modal('hide');
         	$.notify("uploaded successfully", {globalPosition: 'top center',className:"success"})
-            $('#upload-brand-modal').modal('hide');
         }
         else
     	    $.notify("error in uploading",{className:"warn", globalPosition: 'top center' })
@@ -260,6 +264,10 @@ function uploadRows(){
 }
 
 function downloadErrors(){
+if(errorData.length==0) {
+     $.notify("no errors",{className:"warn", globalPosition: 'top center' })
+     return;
+}
 	writeFileData(errorData);
 }
 

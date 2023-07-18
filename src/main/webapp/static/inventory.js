@@ -50,6 +50,7 @@ function addInventory(event){
        },
 	   success: function(response) {
 	   		getInventoryList();
+	   		('.modal').modal('hide')
 	   		$.notify("UPDATED SUCCESSFULLY",{ className:"success" , globalPosition: 'top center'})
 	   		$form.find('#inputBarcode').val('');
             $form.find('#inputQuantity').val('');
@@ -194,6 +195,7 @@ function uploadRows(){
 	//If everything processed then return
 	if(processCount==fileData.length){
 	if(errorData.length==0){
+	    $('#upload-inventory-modal').modal('hide');
     	$.notify("uploaded successfully", {globalPosition: 'top center',className:"success"})
         $('#upload-brand-modal').modal('hide');
     }
