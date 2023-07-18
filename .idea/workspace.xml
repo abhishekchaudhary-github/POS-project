@@ -6,10 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="dd59bcda-ea0a-45cb-bbdf-b0788f0265bb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/InventoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/InventoryDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/InventoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/InventoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/snippets.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/snippets.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/customerDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/customerDetail.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/InventoryServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/InventoryServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,23 +83,7 @@
       <recent name="$PROJECT_DIR$/src/main/webapp/html" />
     </key>
   </component>
-  <component name="RunManager" selected="Maven.employee-spring-full [jetty:run]">
-    <configuration name="BrandServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="employee-spring-full" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.increff.employee.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.increff.employee.service" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.BrandServiceTest" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.InventoryServiceTest">
     <configuration name="InventoryServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
@@ -118,7 +99,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProductServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="InventoryServiceTest.testAddAlreadyExisting" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
         <pattern>
@@ -127,29 +108,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.increff.employee.service" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.ProductServiceTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ProductServiceTest.testAdd" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="employee-spring-full" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.increff.employee.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.increff.employee.service" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.ProductServiceTest" />
-      <option name="METHOD_NAME" value="testAdd" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.InventoryServiceTest" />
+      <option name="METHOD_NAME" value="testAddAlreadyExisting" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProductServiceTest.testBarcodeMustExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="InventoryServiceTest.testDeductQuantity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
         <pattern>
@@ -158,8 +124,40 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.increff.employee.service" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.ProductServiceTest" />
-      <option name="METHOD_NAME" value="testBarcodeMustExist" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.InventoryServiceTest" />
+      <option name="METHOD_NAME" value="testDeductQuantity" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InventoryServiceTest.testGet" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employee-spring-full" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.increff.employee.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.increff.employee.service" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.InventoryServiceTest" />
+      <option name="METHOD_NAME" value="testGet" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InventoryServiceTest.testGetAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employee-spring-full" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.increff.employee.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.increff.employee.service" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.InventoryServiceTest" />
+      <option name="METHOD_NAME" value="testGetAll" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -204,20 +202,20 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="JUnit.InventoryServiceTest.testAddAlreadyExisting" />
+      <item itemvalue="JUnit.InventoryServiceTest.testDeductQuantity" />
+      <item itemvalue="JUnit.InventoryServiceTest.testGet" />
+      <item itemvalue="JUnit.InventoryServiceTest.testGetAll" />
       <item itemvalue="JUnit.InventoryServiceTest" />
-      <item itemvalue="JUnit.ProductServiceTest" />
-      <item itemvalue="JUnit.ProductServiceTest.testAdd" />
-      <item itemvalue="JUnit.ProductServiceTest.testBarcodeMustExist" />
-      <item itemvalue="JUnit.BrandServiceTest" />
       <item itemvalue="Maven.employee-spring-full [jetty:run]" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.BrandServiceTest" />
-        <item itemvalue="JUnit.ProductServiceTest" />
         <item itemvalue="JUnit.InventoryServiceTest" />
-        <item itemvalue="JUnit.ProductServiceTest.testBarcodeMustExist" />
-        <item itemvalue="JUnit.ProductServiceTest.testAdd" />
+        <item itemvalue="JUnit.InventoryServiceTest.testAddAlreadyExisting" />
+        <item itemvalue="JUnit.InventoryServiceTest.testDeductQuantity" />
+        <item itemvalue="JUnit.InventoryServiceTest.testGet" />
+        <item itemvalue="JUnit.InventoryServiceTest.testGetAll" />
       </list>
     </recent_temporary>
   </component>

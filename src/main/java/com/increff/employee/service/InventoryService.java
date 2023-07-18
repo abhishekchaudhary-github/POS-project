@@ -26,19 +26,23 @@ public class InventoryService {
             return dao.insert(inventoryPojo);
         }
         else {
+            if(inventoryPojo.getQuantity()<1){
+                throw new ApiException("quantity can not be less than 1");
+            }
             Integer previousQuantity = dao.select(inventoryPojo.getProductId()).getQuantity();
             Integer newQuantity = inventoryPojo.getQuantity()+previousQuantity;
             inventoryPojo.setQuantity(newQuantity);
             InventoryPojo inventoryPojo1 = dao.select(inventoryPojo.getProductId());
+            Integer inventoryId = inventoryPojo1.getId();
             inventoryPojo1.setQuantity(newQuantity);
-            return inventoryPojo1.getId();
+            return inventoryId;
         }
     }
 
 
     @Transactional(rollbackOn = ApiException.class)
-    public void deductQuantity(Integer productId, Integer quantity){
-        InventoryPojo productToBeChanged = dao.select(productId);
+    public void deductQuantity(Integer inventoryId, Integer quantity){
+        InventoryPojo productToBeChanged = dao.select(inventoryId);
         Integer previousQuantity = productToBeChanged.getQuantity();
         productToBeChanged.setQuantity(previousQuantity - quantity);
     }
