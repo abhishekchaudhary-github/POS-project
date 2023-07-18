@@ -23,7 +23,7 @@ function checkProduct(data, fileData) {
 var k =0;
     for( i in data ) {
         var e = data[i];
-        if(data[i].barcode.localeCompare(fileData[0].value)==0){
+        if(data[i].barcode.localeCompare(fileData[0].value.trim())==0){
         if(data[i].mrp < fileData[1].value){
         $("#customerDetail-form").notify("Selling price cannot be greater than MRP",{className:"warn"})
             checker = false
@@ -102,7 +102,7 @@ if(!checker) error = true
 
 
 
-	if(fileData[0].value.localeCompare("")==0||fileData[1].value.localeCompare("")==0||fileData[2].value.localeCompare("")==0) {
+	if(fileData[0].value.trim().localeCompare("")==0||fileData[1].value.localeCompare("")==0||fileData[2].value.localeCompare("")==0) {
 	    $("#customerDetail-form").notify("fields can not be empty",{className:"warn"})
 	    error = true;
 	}
@@ -133,15 +133,15 @@ if(!checker) error = true
 
 	for(var i in addedData){
 	    var e = addedData[i];
-	    if(e.barcode.localeCompare(fileData[0].value)==0){
+	    if(e.barcode.localeCompare(fileData[0].value.trim())==0){
 	        $("#customerDetail-form").notify("same barcode has been entered already",{className:"warn"})
 	        error = true;
 	        break;
 	    }
 	}
 	if(error==false){
-        addedData.push({barcode: fileData[0].value ,mrp: fileData[1].value,quantity: fileData[2].value })
-        var jsonObject ={barcode: fileData[0].value, mrp: parseFloat(fileData[1].value),quantity: parseInt(fileData[2].value)}
+        addedData.push({barcode: fileData[0].value.trim() ,mrp: parseFloat(fileData[1].value),quantity: fileData[2].value })
+        var jsonObject ={barcode: fileData[0].value.trim(), mrp: parseFloat(fileData[1].value),quantity: parseInt(fileData[2].value)}
         //jsonObject = JSON.stringify(jsonObject,["barcode","mrp","quantity"])
 
         jsonData.push(
@@ -306,16 +306,16 @@ if(!checker) error = true
 
 
 
-	if(fileData[0].value.localeCompare(addedData[fileData[3].value].barcode)!=0){
+	if(fileData[0].value.trim().localeCompare(addedData[fileData[3].value.trim()].barcode)!=0){
 	//console.log(fileData[0].value)
 	//console.log(addedData[fileData[3].value].barcode)
 	    barcodeChange=true;
 	}
 
     $tbody.empty();
-	fileData[0].value = fileData[0].value.toLowerCase();
+	fileData[0].value = fileData[0].value.trim().toLowerCase();
 	//checks
-	if(fileData[0].value.localeCompare("")==0||fileData[1].value.localeCompare("")==0||fileData[2].value.localeCompare("")==0) {
+	if(fileData[0].value.trim().localeCompare("")==0||fileData[1].value.localeCompare("")==0||fileData[2].value.localeCompare("")==0) {
 	    $("#customerDetail-form").notify("fields can not be empty",{className:"warn"})
 	    error = true;
 	}
@@ -333,7 +333,7 @@ if(!checker) error = true
 else if(barcodeChange==true){
         for(var i in addedData){
             var e = addedData[i];
-            if(e.barcode.localeCompare(fileData[0].value)==0){
+            if(e.barcode.localeCompare(fileData[0].value.trim())==0){
                 $("#customerDetail-form").notify("same barcode has been entered already",{className:"warn"})
                 error = true;
                 break;
@@ -345,7 +345,7 @@ else if(barcodeChange==true){
         var iterationNumber = 0 ;
        	var tempData = addedData.map(item => {
            if(iterationNumber ++ == fileData[3].value) {
-           return { barcode: fileData[0].value,mrp: fileData[1].value,quantity: fileData[2].value }
+           return { barcode: fileData[0].value.trim(),mrp: parseFloat(fileData[1]).value,quantity: fileData[2].value }
             }
             else
             return item
@@ -354,7 +354,7 @@ else if(barcodeChange==true){
         iterationNumber = 0 ;
         var tempData1 = jsonData.map(item => {
                    if(iterationNumber ++ == fileData[3].value) {
-                   return { barcode: fileData[0].value,mrp: parseFloat(fileData[1].value),quantity: parseInt(fileData[2].value) }
+                   return { barcode: fileData[0].value.trim(),mrp: parseFloat(fileData[1].value),quantity: parseInt(fileData[2].value) }
                     }
                     else
                     return item
