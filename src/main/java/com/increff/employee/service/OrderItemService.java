@@ -173,8 +173,11 @@ public class OrderItemService {
     @Transactional
     public void productBarcodeMustExist(CategoryDetailForm categoryDetailForm) throws ApiException {
         ProductPojo productPojo = productService.barcodeMustExist(categoryDetailForm.getBarcode());
+        if(productPojo==null){
+            throw new ApiException("this barcode does not exists");
+        }
         if(productPojo.getMrp()<categoryDetailForm.getMrp())
-                throw new ApiException("Selling price cannot be greater than mrp");
+                throw new ApiException("selling price cannot be greater than mrp");
     }
 
     @Transactional

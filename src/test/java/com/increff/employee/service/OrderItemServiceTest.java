@@ -1,9 +1,7 @@
 package com.increff.employee.service;
 
-import com.increff.employee.pojo.BrandPojo;
-import com.increff.employee.pojo.InventoryPojo;
-import com.increff.employee.pojo.OrderItemPojo;
-import com.increff.employee.pojo.ProductPojo;
+import com.increff.employee.model.CategoryDetailForm;
+import com.increff.employee.pojo.*;
 import helper.pojoHelper;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,8 +12,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class OrderItemServiceTest extends AbstractUnitTest {
     @Autowired
@@ -28,6 +25,9 @@ public class OrderItemServiceTest extends AbstractUnitTest {
 
     @Autowired
     OrderItemService orderItemService;
+
+    @Autowired
+    OrderService orderService;
 
     private Integer brandId ;
     private Integer brandIdSecondPojo;
@@ -77,5 +77,86 @@ public class OrderItemServiceTest extends AbstractUnitTest {
         assertTrue(orderItemPojoList1.size() == orderItemPojoList.size() && orderItemPojoList1.containsAll(orderItemPojoList) && orderItemPojoList.containsAll(orderItemPojoList1));
     }
 
+    @Test
+    public void testAddExceedingQuantity() throws ApiException {
+        try {
+            List<OrderItemPojo> orderItemPojoList = new ArrayList<OrderItemPojo>();
+            OrderItemPojo orderItemPojo = pojoHelper.makeOrderItemPojo(orderId, productId, 10000, 1.0);
+            orderItemPojoList.add(orderItemPojo);
+            orderItemService.add(orderItemPojoList);
+
+            List<OrderItemPojo> orderItemPojoList1 = orderItemService.selectByOrderId(orderId);
+
+            assertTrue(orderItemPojoList1.size() == orderItemPojoList.size() && orderItemPojoList1.containsAll(orderItemPojoList) && orderItemPojoList.containsAll(orderItemPojoList1));
+        }
+        catch (ApiException err) {
+            assertEquals("quantity is more than what is present in the inventory",err.getMessage());
+        }
+    }
+
+    //initialize order
+    @Test
+    public void testAddInOrder() throws ApiException {
+        Integer orderId2 = orderItemService.addInOrder();
+        OrderPojo orderPojo = orderService.getOrderById(orderId2);
+        //time???
+        assertNotNull(orderPojo);
+    }
+
+    //order by id
+    @Test
+    public void testSelectOrderById() throws ApiException {
+        List<OrderItemPojo> orderItemPojoList = new ArrayList<OrderItemPojo>();
+        for(int i=1;i<=4;i++) {
+            OrderItemPojo orderItemPojo = pojoHelper.makeOrderItemPojo(orderId, productId, 1, 1.0);
+            OrderItemPojo orderItemPojo1 = pojoHelper.makeOrderItemPojo(orderId, productId2, 1, 1.0);
+            orderItemPojoList.add(orderItemPojo);
+            orderItemPojoList.add(orderItemPojo1);
+        }
+        orderItemService.add(orderItemPojoList);
+
+        List<OrderItemPojo> orderItemPojoList1 = orderItemService.selectByOrderId(orderId);
+
+        assertTrue(orderItemPojoList1.size() == orderItemPojoList.size() && orderItemPojoList1.containsAll(orderItemPojoList) && orderItemPojoList.containsAll(orderItemPojoList1));
+    }
+
+    //given barcode exists ??no assertion
+    @Test
+    public void testProductBarcodeMustExistExists() throws ApiException {
+        CategoryDetailForm categoryDetailForm = new CategoryDetailForm();
+        categoryDetailForm.setBarcode("barcode");
+        categoryDetailForm.setMrp(1.1);
+        categoryDetailForm.setQuantity(1);
+        orderItemService.productBarcodeMustExist(categoryDetailForm);
+    }
+
+    //barcode does not exist
+    @Test
+    public void testProductBarcodeMustExistNotExists() throws ApiException {
+        try {
+            CategoryDetailForm categoryDetailForm = new CategoryDetailForm();
+            categoryDetailForm.setBarcode("barcode7");
+            categoryDetailForm.setMrp(1.1);
+            categoryDetailForm.setQuantity(1);
+            orderItemService.productBarcodeMustExist(categoryDetailForm);
+        }
+        catch (ApiException err) {
+            assertEquals("this barcode does not exists",err.getMessage());
+        }
+    }
+    //sellingprice>mrp
+    @Test
+    public void testProductBarcodeMustExistSellingPriceHigh() throws ApiException {
+        try {
+            CategoryDetailForm categoryDetailForm = new CategoryDetailForm();
+            categoryDetailForm.setBarcode("barcode");
+            categoryDetailForm.setMrp(1.1);
+            categoryDetailForm.setQuantity(10000);
+            orderItemService.productBarcodeMustExist(categoryDetailForm);
+        }
+        catch (ApiException err) {
+            assertEquals("selling price cannot be greater than mrp",err.getMessage());
+        }
+    }
 
 }

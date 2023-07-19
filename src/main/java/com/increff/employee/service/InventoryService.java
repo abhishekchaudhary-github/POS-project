@@ -39,9 +39,12 @@ public class InventoryService {
 
 
     @Transactional(rollbackOn = ApiException.class)
-    public void deductQuantity(Integer inventoryId, Integer quantity){
+    public void deductQuantity(Integer inventoryId, Integer quantity) throws ApiException {
         InventoryPojo productToBeChanged = dao.select(inventoryId);
         Integer previousQuantity = productToBeChanged.getQuantity();
+        if(previousQuantity - quantity<0){
+            throw new ApiException("quantity is more than what is present in the inventory");
+        }
         productToBeChanged.setQuantity(previousQuantity - quantity);
     }
 

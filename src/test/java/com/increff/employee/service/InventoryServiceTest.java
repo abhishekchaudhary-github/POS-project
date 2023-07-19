@@ -97,6 +97,21 @@ public class InventoryServiceTest extends AbstractUnitTest {
         assertEquals(new Integer(1),quantity);
     }
 
+    @Test
+    public void testDeductExceedQuantity() throws ApiException {
+
+        try {
+            InventoryPojo inventoryPojo = pojoHelper.makeInventoryPojo(productId, 2);
+            Integer inventoryId = inventoryService.add(inventoryPojo);
+            inventoryService.deductQuantity(inventoryId, 100);
+            Integer quantity = inventoryService.get(inventoryId).getQuantity();
+            assertEquals(new Integer(1), quantity);
+        }
+        catch (ApiException err) {
+            assertEquals("quantity is more than what is present in the inventory",err.getMessage());
+        }
+    }
+
     //test get() function
     @Test
     public void testGet() throws ApiException {
