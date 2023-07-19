@@ -188,7 +188,6 @@ public class ProductServiceTest extends AbstractUnitTest {
         productService.add(productPojo);
         ProductPojo productPojo1 = productService.barcodeMustExist("existingbarcode");
         ProductPojo productPojo2 = productService.barcodeMustExist("notExistingBarcode");
-        System.out.println(productPojo1);
         assertNotNull(productPojo1);
         assertNull(productPojo2);
     }
@@ -198,10 +197,7 @@ public class ProductServiceTest extends AbstractUnitTest {
     public void testBrandCategory() throws ApiException {
         ArrayList<ProductPojo> productPojoList = new ArrayList<ProductPojo>();
         for( int i = 1 ; i <= 7 ; i ++ ) {
-            ProductPojo productPojo = new ProductPojo();
-            productPojo.setBarcode("barcode" + i);
-            productPojo.setBrand_category(brandId);
-            productPojo.setMrp(1.13);
+            ProductPojo productPojo = pojoHelper.makeProductPojo("barcode" + i,brandId,1.13,"name"+i);
             productPojo.setName("name"+i);
             productPojoList.add(productPojo);
             productService.add(productPojo);
@@ -213,19 +209,8 @@ public class ProductServiceTest extends AbstractUnitTest {
     //getId function check
     @Test
     public void testGetId() throws ApiException {
-            Integer id2;
-            ProductPojo productPojo = new ProductPojo();
-            productPojo.setBarcode("barcode" + 1);
-            productPojo.setBrand_category(brandId);
-            productPojo.setMrp(1.13);
-            productPojo.setName("name"+1);
-            ProductPojo productPojo1 = new ProductPojo();
-            productPojo1.setBarcode("barcode" + 1);
-            productPojo1.setBrand_category(brandId);
-            productPojo1.setMrp(1.13);
-            productPojo1.setName("name"+1);
-            id2 = productService.add(productPojo1);
-
+            ProductPojo productPojo1 = pojoHelper.makeProductPojo("barcode" + 1,brandId,1.13,"name"+1);
+            Integer id2 = productService.add(productPojo1);
             ProductPojo productPojo2 = productService.get(id2);
             assertEquals(productPojo1,productPojo2);
     }
@@ -233,11 +218,7 @@ public class ProductServiceTest extends AbstractUnitTest {
     //getBrandPojoFromBrandCategory function
     @Test
     public void testGetBrandPojoFromBrandCategory() throws ApiException {
-        ProductPojo productPojo = new ProductPojo();
-        productPojo.setBarcode("barcode");
-        productPojo.setBrand_category(brandId);
-        productPojo.setMrp(1.13);
-        productPojo.setName("name");
+        ProductPojo productPojo = pojoHelper.makeProductPojo("barcode",brandId,1.13,"name");
         productService.add(productPojo);
         BrandPojo brandPojo1 = productService.getBrandPojoFromBrandCategory(productPojo);
         assertEquals(brandPojo,brandPojo1);
@@ -246,11 +227,6 @@ public class ProductServiceTest extends AbstractUnitTest {
     //getBrandPojoFromForm function
     @Test
     public void testGetBrandPojoFromForm() throws ApiException {
-        ProductPojo productPojo = new ProductPojo();
-        productPojo.setBarcode("barcode");
-        productPojo.setBrand_category(brandId);
-        productPojo.setMrp(1.1);
-        productPojo.setName("name");
 
         ProductForm f = new ProductForm();
         f.setBarcode("barcode");
@@ -267,11 +243,8 @@ public class ProductServiceTest extends AbstractUnitTest {
     @Test
     public void testGetBrandPojoFromFormBarcodeNotExist() throws ApiException {
         try {
-            ProductPojo productPojo = new ProductPojo();
-            productPojo.setBarcode("barcode");
-            productPojo.setBrand_category(brandId);
-            productPojo.setMrp(1.1);
-            productPojo.setName("name");
+
+            ProductPojo productPojo = pojoHelper.makeProductPojo("barcode",brandId,1.1,"name");
 
             ProductForm f = new ProductForm();
             f.setBarcode("barcode1");
@@ -280,7 +253,7 @@ public class ProductServiceTest extends AbstractUnitTest {
             f.setMrp(1.1);
             f.setName("name");
 
-            BrandPojo brandPojo1 = productService.getBrandPojoFromForm(f);
+            productService.getBrandPojoFromForm(f);
         }
         catch (ApiException err) {
             assertEquals("this barcode does not exist",err.getMessage());
@@ -292,11 +265,8 @@ public class ProductServiceTest extends AbstractUnitTest {
     public void testGetAll() throws ApiException {
         ArrayList<ProductPojo> productPojoList = new ArrayList<ProductPojo>();
         for( int i = 1 ; i <= 7 ; i ++ ) {
-            ProductPojo productPojo = new ProductPojo();
-            productPojo.setBarcode("barcode" + i);
-            productPojo.setBrand_category(brandId);
-            productPojo.setMrp(1.13);
-            productPojo.setName("name"+i);
+
+            ProductPojo productPojo = pojoHelper.makeProductPojo("barcode"+i,brandId,1.13,"name"+i);
             productPojoList.add(productPojo);
             productService.add(productPojo);
         }
@@ -307,11 +277,8 @@ public class ProductServiceTest extends AbstractUnitTest {
     //*****test getProductId function*******
     //barcode exists
     public void testGetProductId() throws ApiException {
-        ProductPojo productPojo = new ProductPojo();
-        productPojo.setBarcode("barcode");
-        productPojo.setBrand_category(brandId);
-        productPojo.setMrp(1.1);
-        productPojo.setName("name");
+
+        ProductPojo productPojo = pojoHelper.makeProductPojo("barcode",brandId,1.1,"name");
         Integer productId = productService.add(productPojo);
         Integer productId1 = productService.getProductId("barcode");
         assertEquals(productId,productId1);
@@ -321,11 +288,8 @@ public class ProductServiceTest extends AbstractUnitTest {
     //barcode does not exists
     public void testGetProductIdNotExist() throws ApiException {
        try {
-            ProductPojo productPojo = new ProductPojo();
-            productPojo.setBarcode("barcode");
-            productPojo.setBrand_category(brandId);
-            productPojo.setMrp(1.1);
-            productPojo.setName("name");
+
+           ProductPojo productPojo = pojoHelper.makeProductPojo("barcode",brandId,1.1,"name");
             Integer productId = productService.add(productPojo);
             Integer productId1 = productService.getProductId("wrongbarcode");
         }
@@ -340,26 +304,16 @@ public class ProductServiceTest extends AbstractUnitTest {
     @Test
     public void testDuplicateBarcodeUpdate() throws ApiException {
         try {
-            ProductPojo productPojo = new ProductPojo();
-            productPojo.setBarcode("barcode");
-            productPojo.setBrand_category(brandId);
-            productPojo.setMrp(1.12);
-            productPojo.setName("name");
+
+            ProductPojo productPojo = pojoHelper.makeProductPojo("barcode",brandId,1.12,"name");
             productService.add(productPojo);
 
-            ProductPojo productPojo1 = new ProductPojo();
-            productPojo1.setBarcode("barcode1");
-            productPojo1.setBrand_category(brandId);
-            productPojo1.setMrp(1.13);
-            productPojo1.setName("name2");
+
+            ProductPojo productPojo1 = pojoHelper.makeProductPojo("barcode1",brandId,1.13,"name2");
             Integer productId = productService.add(productPojo);
 
-            ProductPojo productPojo2 = new ProductPojo();
-            productPojo2.setBarcode("barcode");
-            productPojo2.setBrand_category(brandId);
-            productPojo2.setMrp(1.13);
-            productPojo2.setName("name2");
 
+            ProductPojo productPojo2 = pojoHelper.makeProductPojo("barcode",brandId,1.13,"name2");
             productService.update(productId,productPojo2);
         }
         catch(ApiException err) {
@@ -371,16 +325,11 @@ public class ProductServiceTest extends AbstractUnitTest {
     @Test
     public void testEmptyBarcodeUpdate() {
         try {
-            ProductPojo productPojo = new ProductPojo();
-            productPojo.setBarcode("barcode");
-            productPojo.setBrand_category(brandId);
-            productPojo.setMrp(1.12);
-            productPojo.setName("name");
+
+            ProductPojo productPojo = pojoHelper.makeProductPojo("barcode",brandId,1.12,"name");
             Integer productId = productService.add(productPojo);
-            ProductPojo productPojo1 = new ProductPojo();
-            productPojo1.setBrand_category(brandId);
-            productPojo1.setMrp(1.12);
-            productPojo1.setName("name");
+
+            ProductPojo productPojo1 = pojoHelper.makeProductPojo("barcode",brandId,1.12,"name");
             productService.update(productId,productPojo1);
         } catch (ApiException err) {
             assertEquals("barcode cannot be empty",err.getMessage());
@@ -391,16 +340,10 @@ public class ProductServiceTest extends AbstractUnitTest {
     @Test
     public void testEmptyBrand_categoryUpdate() {
         try {
-            ProductPojo productPojo = new ProductPojo();
-            productPojo.setBarcode("barcode");
-            productPojo.setBrand_category(brandId);
-            productPojo.setMrp(1.12);
-            productPojo.setName("name");
+
+            ProductPojo productPojo = pojoHelper.makeProductPojo("barcode",brandId,1.12,"name");
             Integer productId = productService.add(productPojo);
-            ProductPojo productPojo1 = new ProductPojo();
-            productPojo1.setBarcode("barcode");
-            productPojo1.setMrp(1.12);
-            productPojo1.setName("name");
+            ProductPojo productPojo1 = pojoHelper.makeProductPojo("barcode",brandId,1.12,"name");
             productService.update(productId,productPojo1);
         } catch (ApiException err) {
             assertEquals("brand_category cannot be empty",err.getMessage());
@@ -411,16 +354,10 @@ public class ProductServiceTest extends AbstractUnitTest {
     @Test
     public void testEmptyMrpUpdate() {
         try {
-            ProductPojo productPojo = new ProductPojo();
-            productPojo.setBarcode("barcode");
-            productPojo.setBrand_category(brandId);
-            productPojo.setMrp(1.12);
-            productPojo.setName("name");
+
+            ProductPojo productPojo = pojoHelper.makeProductPojo("barcode",brandId,1.12,"name");
             Integer productId = productService.add(productPojo);
-            ProductPojo productPojo1 = new ProductPojo();
-            productPojo1.setBarcode("barcode");
-            productPojo1.setBrand_category(brandId);
-            productPojo1.setName("name");
+            ProductPojo productPojo1 = pojoHelper.makeProductPojo("barcode",brandId,null,"name");
             productService.update(productId,productPojo1);
         } catch (ApiException err) {
             assertEquals("MRP cannot be empty",err.getMessage());
@@ -431,16 +368,10 @@ public class ProductServiceTest extends AbstractUnitTest {
     @Test
     public void testEmptyNameUpdate() {
         try {
-            ProductPojo productPojo = new ProductPojo();
-            productPojo.setBarcode("barcode");
-            productPojo.setBrand_category(brandId);
-            productPojo.setMrp(1.12);
-            productPojo.setName("name");
+
+            ProductPojo productPojo = pojoHelper.makeProductPojo("barcode",brandId,1.12,"name");
             Integer productId = productService.add(productPojo);
-            ProductPojo productPojo1 = new ProductPojo();
-            productPojo1.setBarcode("barcode");
-            productPojo1.setBrand_category(brandId);
-            productPojo1.setMrp(1.12);
+            ProductPojo productPojo1 = pojoHelper.makeProductPojo("barcode",brandId,1.13,null);
             productService.update(productId,productPojo1);
         } catch (ApiException err) {
             assertEquals("name cannot be empty",err.getMessage());
@@ -451,17 +382,10 @@ public class ProductServiceTest extends AbstractUnitTest {
     @Test
     public void testMRPCanNotBeNegativeUpdate() {
         try {
-            ProductPojo productPojo = new ProductPojo();
-            productPojo.setBarcode("barcode");
-            productPojo.setBrand_category(brandId);
-            productPojo.setMrp(1.12);
-            productPojo.setName("name");
+
+            ProductPojo productPojo = pojoHelper.makeProductPojo("barcode",brandId,1.12,"name");
             Integer productId = productService.add(productPojo);
-            ProductPojo productPojo1 = new ProductPojo();
-            productPojo1.setBarcode("barcode");
-            productPojo1.setBrand_category(brandId);
-            productPojo1.setMrp(1.12);
-            productPojo1.setName("name");
+            ProductPojo productPojo1 = pojoHelper.makeProductPojo("barcode",brandId,-1.12,"name");
             productService.update(productId,productPojo1);
         }
         catch(ApiException err) {
@@ -473,17 +397,9 @@ public class ProductServiceTest extends AbstractUnitTest {
     @Test
     public void testBarcodeMustNotHaveSpecialCharactersUpdate() {
         try {
-            ProductPojo productPojo = new ProductPojo();
-            productPojo.setBarcode("barcode");
-            productPojo.setBrand_category(brandId);
-            productPojo.setMrp(1.12);
-            productPojo.setName("name");
+            ProductPojo productPojo = pojoHelper.makeProductPojo("barcode",brandId,1.12,"name");
             Integer productId = productService.add(productPojo);
-            ProductPojo productPojo1 = new ProductPojo();
-            productPojo1.setBarcode("ba$rcode");
-            productPojo1.setBrand_category(brandId);
-            productPojo1.setMrp(1.12);
-            productPojo1.setName("name");
+            ProductPojo productPojo1 = pojoHelper.makeProductPojo("ba$rcode",brandId,1.12,"name");
             productService.update(productId,productPojo1);
         }
         catch(ApiException err) {
@@ -494,17 +410,9 @@ public class ProductServiceTest extends AbstractUnitTest {
     //no values changed in update function
     @Test
     public void testNoValuesChangesInUpdate() throws ApiException {
-        ProductPojo productPojo = new ProductPojo();
-        productPojo.setBarcode("barcode");
-        productPojo.setBrand_category(brandId);
-        productPojo.setMrp(1.12);
-        productPojo.setName("name");
+        ProductPojo productPojo = pojoHelper.makeProductPojo("barcode",brandId,1.12,"name");
         Integer productId = productService.add(productPojo);
-        ProductPojo productPojo1 = new ProductPojo();
-        productPojo1.setBarcode("barcode");
-        productPojo1.setBrand_category(brandId);
-        productPojo1.setMrp(1.12);
-        productPojo1.setName("name");
+        ProductPojo productPojo1 = pojoHelper.makeProductPojo("barcode",brandId,1.12,"name");
         productService.update(productId,productPojo1);
         ProductPojo productpojo = productService.get(productId);
         assertEquals("barcode",productpojo.getBarcode());
@@ -516,17 +424,9 @@ public class ProductServiceTest extends AbstractUnitTest {
     //updating values
     @Test
     public void testUpdate() throws ApiException {
-        ProductPojo productPojo = new ProductPojo();
-        productPojo.setBarcode("barcode");
-        productPojo.setBrand_category(brandId);
-        productPojo.setMrp(1.12);
-        productPojo.setName("name");
+        ProductPojo productPojo = pojoHelper.makeProductPojo("barcode",brandId,1.12,"name");
         Integer productId = productService.add(productPojo);
-        ProductPojo productPojo1 = new ProductPojo();
-        productPojo1.setBarcode("barcode1");
-        productPojo1.setBrand_category(brandIdSecondPojo);
-        productPojo1.setMrp(1.10);
-        productPojo1.setName("name1");
+        ProductPojo productPojo1 = pojoHelper.makeProductPojo("barcode1",brandIdSecondPojo,1.10,"name1");
         productService.update(productId,productPojo1);
         ProductPojo productpojo = productService.get(productId);
         assertEquals("barcode1",productpojo.getBarcode());
@@ -538,18 +438,9 @@ public class ProductServiceTest extends AbstractUnitTest {
     //test nothing updates returns 0
     @Test
     public void testUpdateIfNothingUpdatesReturn0() throws ApiException {
-        ProductPojo productPojo = new ProductPojo();
-        productPojo.setBarcode("barcode");
-        productPojo.setBrand_category(brandId);
-        productPojo.setMrp(1.12);
-        productPojo.setName("name");
+        ProductPojo productPojo = pojoHelper.makeProductPojo("barcode",brandId,1.12,"name");
         Integer productId = productService.add(productPojo);
-
-        ProductPojo productPojo1 = new ProductPojo();
-        productPojo1.setBarcode("barcode");
-        productPojo1.setBrand_category(brandId);
-        productPojo1.setMrp(1.12);
-        productPojo1.setName("name");
+        ProductPojo productPojo1 = pojoHelper.makeProductPojo("barcode",brandId,1.12,"name");
         Integer status = productService.update(productId, productPojo1);
 
         assertEquals(new Integer(0),status);
@@ -559,18 +450,10 @@ public class ProductServiceTest extends AbstractUnitTest {
     //test is updates returns 1
     @Test
     public void testUpdateIfUpdatesReturn1() throws ApiException {
-        ProductPojo productPojo = new ProductPojo();
-        productPojo.setBarcode("barcode");
-        productPojo.setBrand_category(brandId);
-        productPojo.setMrp(1.12);
-        productPojo.setName("name");
+        ProductPojo productPojo = pojoHelper.makeProductPojo("barcode",brandId,1.12,"name");
         Integer productId = productService.add(productPojo);
 
-        ProductPojo productPojo1 = new ProductPojo();
-        productPojo1.setBarcode("barcode1");
-        productPojo1.setBrand_category(brandId);
-        productPojo1.setMrp(1.12);
-        productPojo1.setName("name1");
+        ProductPojo productPojo1 = pojoHelper.makeProductPojo("barcode1",brandId,1.12,"name1");
         Integer status = productService.update(productId, productPojo1);
 
         assertEquals(new Integer(1),status);
@@ -583,11 +466,7 @@ public class ProductServiceTest extends AbstractUnitTest {
     //functionality of getCheck function works fine
     @Test
     public void testGetCheckNoError() throws ApiException {
-        ProductPojo productPojo = new ProductPojo();
-        productPojo.setBarcode("barcode");
-        productPojo.setBrand_category(brandId);
-        productPojo.setMrp(1.12);
-        productPojo.setName("name");
+        ProductPojo productPojo = pojoHelper.makeProductPojo("barcode",brandId,1.12,"name");
         Integer productId = productService.add(productPojo);
         ProductPojo productPojo1 = productService.getCheck(productId);
 
@@ -610,9 +489,7 @@ public class ProductServiceTest extends AbstractUnitTest {
 
     @Test
     public void testNormalize() throws ApiException {
-        ProductPojo productPojo = new ProductPojo();
-        productPojo.setBarcode("bArCodE");
-        productPojo.setName("naME");
+        ProductPojo productPojo = pojoHelper.makeProductPojo("bArCodE",brandId,1.12,"naME");
         productService.normalize(productPojo);
         assertEquals("barcode",productPojo.getBarcode());
         assertEquals("name",productPojo.getName());
