@@ -204,6 +204,27 @@ public class OrderItemServiceTest extends AbstractUnitTest {
         assertNull(orderItemService.get(id));
     }
 
+    @Test
+    public void testEditOrderItemJust() throws ApiException {
+        ArrayList<OrderItemPojo> orderItemPojoList = new ArrayList<OrderItemPojo>();
+        OrderItemPojo orderItemPojo = pojoHelper.makeOrderItemPojo(orderId, productId, 1, 0.9);
+        orderItemPojoList.add(orderItemPojo);
+        orderItemService.add(orderItemPojoList);
+        List<OrderItemPojo> orderItemPojoList1 = orderItemService.getAll();
+        Integer id = 1;
+        for(int i=0;i<orderItemPojoList1.size();i++){
+            if(orderId==orderItemPojoList1.get(i).getOrderId()&&productId==orderItemPojoList1.get(i).getProductId()) {
+                id = orderItemPojoList1.get(i).getId();
+                break;
+            }
+        }
+        OrderItemPojo orderItemPojo1 = pojoHelper.makeOrderItemPojo(orderId, productId, 2, 0.8);
+        orderItemService.editOrder(id,orderItemPojo1);
+        OrderItemPojo orderItemPojo2 = orderItemService.get(id);
+        assertEquals(new Integer(2),orderItemPojo2.getQuantity());
+        assertEquals(new Double(0.8),orderItemPojo2.getSellingPrice());
+    }
+
     /////delete 2 FUNCTIONS + EDIT ORDER
 
 //    //order by id

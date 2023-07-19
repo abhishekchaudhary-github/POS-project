@@ -130,7 +130,7 @@ public class OrderItemService {
         OrderPojo orderPojo = orderService.getOrderById(orderItemPojo1.getOrderId());
         //OrderItemPojo orderItemPojo = dao.select(orderItemPojo1.getProductId());
         if(orderPojo.isEditable()==true){
-            getInventoryFromProductId(orderItemPojo1,orderItemPojo1.getId());
+            getInventoryFromProductId(orderItemPojo1,id);
             OrderItemPojo orderItemPojo = getCheck(id);
             orderItemPojo.setQuantity(orderItemPojo1.getQuantity());
             orderItemPojo.setSellingPrice(orderItemPojo1.getSellingPrice());

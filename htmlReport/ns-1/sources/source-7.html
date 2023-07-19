@@ -40,26 +40,26 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">OrderItemService</td>
 <td class="coverageStat">
   <span class="percent">
-    78.9%
+    89.5%
   </span>
   <span class="absValue">
-    (15/19)
+    (17/19)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    57.3%
+    82.3%
   </span>
   <span class="absValue">
-    (55/96)
+    (79/96)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">OrderItemService$$EnhancerBySpringCGLIB$$b6290f12</td>
+    <td class="name">OrderItemService$$EnhancerBySpringCGLIB$$e426dc1a</td>
   </tr>
   <tr>
-    <td class="name">OrderItemService$$EnhancerBySpringCGLIB$$b6290f12$$FastClassBySpringCGLIB$$9f76c9a8</td>
+    <td class="name">OrderItemService$$EnhancerBySpringCGLIB$$e426dc1a$$FastClassBySpringCGLIB$$6d3b2b78</td>
   </tr>
   <tr>
     <td class="name">OrderItemService$$FastClassBySpringCGLIB$$40c8d5a3</td>
@@ -68,18 +68,18 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    78.9%
+    89.5%
   </span>
   <span class="absValue">
-    (15/19)
+    (17/19)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    57.3%
+    82.3%
   </span>
   <span class="absValue">
-    (55/96)
+    (79/96)
   </span>
 </td>
 </tr>
@@ -160,12 +160,12 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;        }
 &nbsp;
 <b class="fc">&nbsp;        for (int i = 0; i &lt; orderItemPojoList.size(); i++) {</b>
-<b class="nc">&nbsp;            if (orderItemPojoList.get(i).getOrderId() == orderId) {</b>
-<b class="nc">&nbsp;                InventoryPojo inventoryPojo = hm.get(orderItemPojoList.get(i).getProductId());</b>
-<b class="nc">&nbsp;                Integer quantity = inventoryPojo.getQuantity();</b>
-<b class="nc">&nbsp;                quantity += orderItemPojoList.get(i).getQuantity();</b>
-<b class="nc">&nbsp;                inventoryPojo.setQuantity(quantity);</b>
-<b class="nc">&nbsp;                deleteOrderItemJust(orderItemPojoList.get(i).getId());</b>
+<b class="fc">&nbsp;            if (orderItemPojoList.get(i).getOrderId() == orderId) {</b>
+<b class="fc">&nbsp;                InventoryPojo inventoryPojo = hm.get(orderItemPojoList.get(i).getProductId());</b>
+<b class="fc">&nbsp;                Integer quantity = inventoryPojo.getQuantity();</b>
+<b class="fc">&nbsp;                quantity += orderItemPojoList.get(i).getQuantity();</b>
+<b class="fc">&nbsp;                inventoryPojo.setQuantity(quantity);</b>
+<b class="fc">&nbsp;                deleteOrderItemJust(orderItemPojoList.get(i).getId());</b>
 &nbsp;                //dao.delete(orderItemPojoList.get(i).getId());
 &nbsp;            }
 &nbsp;        }
@@ -173,29 +173,29 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;    @Transactional(rollbackOn = ApiException.class)
 &nbsp;    public void delete(Integer id) throws ApiException {
-<b class="nc">&nbsp;        OrderItemPojo orderItemPojo = dao.select(id);</b>
-<b class="nc">&nbsp;        OrderPojo orderPojo = orderService.getOrderById(orderItemPojo.getOrderId());</b>
-<b class="nc">&nbsp;        if(orderPojo.isEditable()==true) {</b>
-<b class="nc">&nbsp;            List&lt;OrderItemPojo&gt; orderItemPojoList = dao.selectAll();</b>
-<b class="nc">&nbsp;            int count = 0;</b>
-<b class="nc">&nbsp;            for (int i = 0; i &lt; orderItemPojoList.size(); i++) {</b>
-<b class="nc">&nbsp;                if (orderItemPojoList.get(i).getOrderId() == orderItemPojo.getOrderId()) {</b>
-<b class="nc">&nbsp;                    count++;</b>
+<b class="fc">&nbsp;        OrderItemPojo orderItemPojo = dao.select(id);</b>
+<b class="fc">&nbsp;        OrderPojo orderPojo = orderService.getOrderById(orderItemPojo.getOrderId());</b>
+<b class="fc">&nbsp;        if(orderPojo.isEditable()==true) {</b>
+<b class="fc">&nbsp;            List&lt;OrderItemPojo&gt; orderItemPojoList = dao.selectAll();</b>
+<b class="fc">&nbsp;            int count = 0;</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; orderItemPojoList.size(); i++) {</b>
+<b class="fc">&nbsp;                if (orderItemPojoList.get(i).getOrderId() == orderItemPojo.getOrderId()) {</b>
+<b class="fc">&nbsp;                    count++;</b>
 &nbsp;                }
 &nbsp;            }
 &nbsp;            //psuedo inventory pojo
-<b class="nc">&nbsp;            InventoryPojo inventoryPojo = inventoryService.getFromProductId(orderItemPojo.getProductId());</b>
-<b class="nc">&nbsp;            Integer quantity = inventoryPojo.getQuantity();</b>
-<b class="nc">&nbsp;            quantity += orderItemPojo.getQuantity();</b>
-<b class="nc">&nbsp;            inventoryPojo.setQuantity(quantity);</b>
-<b class="nc">&nbsp;            orderPojo.setTime(LocalDateTime.now());</b>
-<b class="nc">&nbsp;            if (count &lt; 2) {</b>
+<b class="fc">&nbsp;            InventoryPojo inventoryPojo = inventoryService.getFromProductId(orderItemPojo.getProductId());</b>
+<b class="fc">&nbsp;            Integer quantity = inventoryPojo.getQuantity();</b>
+<b class="fc">&nbsp;            quantity += orderItemPojo.getQuantity();</b>
+<b class="fc">&nbsp;            inventoryPojo.setQuantity(quantity);</b>
+<b class="fc">&nbsp;            orderPojo.setTime(LocalDateTime.now());</b>
+<b class="fc">&nbsp;            if (count &lt; 2) {</b>
 &nbsp;                //orderService.delete(orderItemPojo.getOrderId());
-<b class="nc">&nbsp;                deleteOrder(orderItemPojo.getOrderId());</b>
+<b class="fc">&nbsp;                deleteOrder(orderItemPojo.getOrderId());</b>
 &nbsp;            }
 &nbsp;            else{
-<b class="nc">&nbsp;            dao.delete(id);}</b>
-<b class="nc">&nbsp;        }</b>
+<b class="fc">&nbsp;            dao.delete(id);}</b>
+<b class="fc">&nbsp;        }</b>
 &nbsp;        else {
 <b class="nc">&nbsp;            throw new ApiException(&quot;this order is not editable&quot;);</b>
 &nbsp;        }
@@ -214,7 +214,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;    @Transactional(rollbackOn = ApiException.class)
 &nbsp;    public void deleteOrderItemJust(Integer id) {
-<b class="nc">&nbsp;        dao.delete(id);</b>
+<b class="fc">&nbsp;        dao.delete(id);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    @Transactional(rollbackOn = ApiException.class)
@@ -390,7 +390,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-19 16:01</div>
+    <div style="float:right;">generated on 2023-07-19 16:56</div>
 </div>
 </body>
 </html>
