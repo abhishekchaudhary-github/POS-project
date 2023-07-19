@@ -31,11 +31,9 @@ public class InventoryService {
             }
             Integer previousQuantity = dao.select(inventoryPojo.getProductId()).getQuantity();
             Integer newQuantity = inventoryPojo.getQuantity()+previousQuantity;
-            inventoryPojo.setQuantity(newQuantity);
             InventoryPojo inventoryPojo1 = dao.select(inventoryPojo.getProductId());
-            Integer inventoryId = inventoryPojo1.getId();
             inventoryPojo1.setQuantity(newQuantity);
-            return inventoryId;
+            return inventoryPojo1.getId();
         }
     }
 
@@ -88,21 +86,21 @@ public class InventoryService {
         }
         //check if given product id exist in inventory
         if(dao.getFromProductId(p.getProductId())==null){
-
+            throw new ApiException("inventory of this productId does  not exist");
         }
         else if(!dao.getFromProductId(p.getProductId()).equals(dao.select(id)) && dao.getFromProductId(p.getProductId())!=null) {
-            throw new ApiException("given barcode already exists");
+            throw new ApiException("inventory can not be updated because of alter in productId");
         }
         InventoryPojo tempPojo = getCheck(id);
         String s1 = dao.select(id).getQuantity()+"";
         String s2 = p.getQuantity()+"";
-        String s3 = dao.select(id).getQuantity()+"";
-        String s4 = p.getQuantity()+"";
-        if( s1.equals(s2) && s3.equals(s4) ) {
+//        String s3 = dao.select(id).getQuantity()+"";
+//        String s4 = p.getQuantity()+"";
+        if( s1.equals(s2) ) {
             return 0;
         }
         tempPojo.setQuantity(p.getQuantity());
-        tempPojo.setProductId(p.getProductId());
+//        tempPojo.setProductId(p.getProductId());
             return 1;
     }
 

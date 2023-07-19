@@ -1,6 +1,7 @@
 package helper;
 
 import com.increff.employee.pojo.BrandPojo;
+import com.increff.employee.pojo.InventoryPojo;
 import com.increff.employee.pojo.ProductPojo;
 
 public class pojoHelper {
@@ -19,4 +20,12 @@ public class pojoHelper {
         productPojo.setName(name);
         return productPojo;
     }
+
+    public static InventoryPojo makeInventoryPojo(Integer productId, Integer quantity ) {
+        InventoryPojo inventoryPojo = new InventoryPojo();
+        inventoryPojo.setProductId(productId);
+        inventoryPojo.setQuantity(quantity);
+        return inventoryPojo;
+    }
+
 }

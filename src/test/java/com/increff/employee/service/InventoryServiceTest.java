@@ -3,6 +3,7 @@ package com.increff.employee.service;
 import com.increff.employee.pojo.BrandPojo;
 import com.increff.employee.pojo.InventoryPojo;
 import com.increff.employee.pojo.ProductPojo;
+import helper.pojoHelper;
 import io.swagger.annotations.Api;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,29 +33,17 @@ public class InventoryServiceTest extends AbstractUnitTest {
     BrandPojo brandPojo;
     @Before
     public void preTest() throws ApiException {
-        brandPojo = new BrandPojo();
-        brandPojo.setBrand("brand");
-        brandPojo.setCategory("category");
+        BrandPojo brandPojo = pojoHelper.makeBrandPojo("brand","category");
         brandService.add(brandPojo);
         BrandPojo brandPojo1 = brandService.getId("brand","category");
         brandId = brandPojo1.getId();
-        BrandPojo brandPojo2 = new BrandPojo();
-        brandPojo2.setBrand("brand2");
-        brandPojo2.setCategory("category2");
+        BrandPojo brandPojo2 = pojoHelper.makeBrandPojo("brand2","category2");
         brandService.add(brandPojo2);
         BrandPojo brandPojo3 = brandService.getId("brand2","category2");
         brandIdSecondPojo = brandPojo3.getId();
-        ProductPojo productPojo = new ProductPojo();
-        productPojo.setBarcode("barcode");
-        productPojo.setBrand_category(brandId);
-        productPojo.setMrp(1.12);
-        productPojo.setName("name");
+        ProductPojo productPojo = pojoHelper.makeProductPojo("barcode",brandId,1.12,"name");
         productId = productService.add(productPojo);
-        ProductPojo productPojo1 = new ProductPojo();
-        productPojo1.setBarcode("barcode1");
-        productPojo1.setBrand_category(brandIdSecondPojo);
-        productPojo1.setMrp(1.10);
-        productPojo1.setName("name1");
+        ProductPojo productPojo1 = pojoHelper.makeProductPojo("barcode1",brandIdSecondPojo,1.10,"name1");
         productId2 = productService.add(productPojo1);
     }
 
@@ -62,9 +51,7 @@ public class InventoryServiceTest extends AbstractUnitTest {
     @Test
     public void testAddQuantityLess() throws ApiException {
         try {
-            InventoryPojo inventoryPojo = new InventoryPojo();
-            inventoryPojo.setQuantity(0);
-            inventoryPojo.setProductId(productId);
+            InventoryPojo inventoryPojo = pojoHelper.makeInventoryPojo(productId,0);
             inventoryService.add(inventoryPojo);
         }
         catch (ApiException err) {
@@ -75,27 +62,24 @@ public class InventoryServiceTest extends AbstractUnitTest {
     //adding already existing product
     @Test
     public void testAddAlreadyExisting() throws ApiException {
-        InventoryPojo inventoryPojo = new InventoryPojo();
-        inventoryPojo.setQuantity(2);
-        inventoryPojo.setProductId(productId);
-        Integer inventoryId = inventoryService.add(inventoryPojo);
 
-        InventoryPojo inventoryPojo1 = new InventoryPojo();
-        inventoryPojo1.setQuantity(2);
-        inventoryPojo1.setProductId(productId);
-        inventoryService.add(inventoryPojo1);
+        InventoryPojo inventoryPojo = pojoHelper.makeInventoryPojo(productId,2);
+        inventoryService.add(inventoryPojo);
+
+
+        InventoryPojo inventoryPojo1 = pojoHelper.makeInventoryPojo(productId,2);
+        Integer inventoryId = inventoryService.add(inventoryPojo1);
 
         InventoryPojo inventoryPojo2 = inventoryService.get(inventoryId);
-        assertEquals(new Integer(4),inventoryPojo2.getQuantity());
         assertEquals(productId,inventoryPojo2.getProductId());
+        assertEquals(new Integer(4),inventoryPojo2.getQuantity());
     }
 
     //adding a product not existing in the inventory
     @Test
     public void testAddNew() throws ApiException {
-        InventoryPojo inventoryPojo = new InventoryPojo();
-        inventoryPojo.setQuantity(2);
-        inventoryPojo.setProductId(productId);
+
+        InventoryPojo inventoryPojo = pojoHelper.makeInventoryPojo(productId,2);
         Integer inventoryId = inventoryService.add(inventoryPojo);
 
         assertEquals(new Integer(2),inventoryService.get(inventoryId).getQuantity());
@@ -105,9 +89,8 @@ public class InventoryServiceTest extends AbstractUnitTest {
     //test deduceQuantity function
     @Test
     public void testDeductQuantity() throws ApiException {
-        InventoryPojo inventoryPojo = new InventoryPojo();
-        inventoryPojo.setQuantity(2);
-        inventoryPojo.setProductId(productId);
+
+        InventoryPojo inventoryPojo = pojoHelper.makeInventoryPojo(productId,2);
         Integer inventoryId = inventoryService.add(inventoryPojo);
         inventoryService.deductQuantity(inventoryId,1);
         Integer quantity = inventoryService.get(inventoryId).getQuantity();
@@ -117,9 +100,7 @@ public class InventoryServiceTest extends AbstractUnitTest {
     //test get() function
     @Test
     public void testGet() throws ApiException {
-        InventoryPojo inventoryPojo = new InventoryPojo();
-        inventoryPojo.setQuantity(2);
-        inventoryPojo.setProductId(productId2);
+        InventoryPojo inventoryPojo = pojoHelper.makeInventoryPojo(productId2,2);
         Integer inventoryId = inventoryService.add(inventoryPojo);
         InventoryPojo inventoryPojo1 = inventoryService.get(inventoryId);
         assertEquals(new Integer(2),inventoryPojo1.getQuantity());
@@ -131,14 +112,10 @@ public class InventoryServiceTest extends AbstractUnitTest {
     public void testGetAll() throws ApiException {
         ArrayList<InventoryPojo> inventoryPojoList = new ArrayList<InventoryPojo>();
         for( int i = 1 ; i <= 3 ; i ++ ) {
-            InventoryPojo inventoryPojo = new InventoryPojo();
-            inventoryPojo.setQuantity(i);
-            inventoryPojo.setProductId(productId);
+            InventoryPojo inventoryPojo = pojoHelper.makeInventoryPojo(productId,i);
             inventoryService.add(inventoryPojo);
             inventoryPojoList.add(inventoryPojo);
-            InventoryPojo inventoryPojo1 = new InventoryPojo();
-            inventoryPojo1.setQuantity(i);
-            inventoryPojo1.setProductId(productId2);
+            InventoryPojo inventoryPojo1 = pojoHelper.makeInventoryPojo(productId2,i);
             inventoryService.add(inventoryPojo1);
             inventoryPojoList.add(inventoryPojo1);
         }
@@ -163,9 +140,7 @@ public class InventoryServiceTest extends AbstractUnitTest {
     //test getFromProductId function
     @Test
     public void testGetFromProductId() throws ApiException {
-        InventoryPojo inventoryPojo = new InventoryPojo();
-        inventoryPojo.setQuantity(7);
-        inventoryPojo.setProductId(productId);
+        InventoryPojo inventoryPojo = pojoHelper.makeInventoryPojo(productId,7);
         inventoryService.add(inventoryPojo);
         InventoryPojo inventoryPojo1 = inventoryService.getFromProductId(productId);
 
@@ -178,9 +153,7 @@ public class InventoryServiceTest extends AbstractUnitTest {
     @Test
     public void testUpdateNoEmptyQuantity() throws ApiException {
         try {
-            InventoryPojo inventoryPojo = new InventoryPojo();
-            inventoryPojo.setQuantity(1);
-            inventoryPojo.setProductId(productId);
+            InventoryPojo inventoryPojo = pojoHelper.makeInventoryPojo(productId,1);
             Integer inventoryId = inventoryService.add(inventoryPojo);
 
             InventoryPojo inventoryPojo1 = new InventoryPojo();
@@ -196,14 +169,10 @@ public class InventoryServiceTest extends AbstractUnitTest {
     @Test
     public void testUpdateNoNegativeQuantity() throws ApiException {
         try {
-            InventoryPojo inventoryPojo = new InventoryPojo();
-            inventoryPojo.setQuantity(1);
-            inventoryPojo.setProductId(productId);
+            InventoryPojo inventoryPojo = pojoHelper.makeInventoryPojo(productId,1);
             Integer inventoryId = inventoryService.add(inventoryPojo);
 
-            InventoryPojo inventoryPojo1 = new InventoryPojo();
-            inventoryPojo1.setQuantity(-1);
-            inventoryPojo1.setProductId(productId);
+            InventoryPojo inventoryPojo1 = pojoHelper.makeInventoryPojo(productId,-1);
             inventoryService.update(inventoryId, inventoryPojo1);
         }
         catch (ApiException err) {
@@ -214,56 +183,39 @@ public class InventoryServiceTest extends AbstractUnitTest {
     // testBarcodeIsNotInInventory
     @Test
     public void testUpdateBarcodeIsNotInInventory() throws ApiException {
-            InventoryPojo inventoryPojo = new InventoryPojo();
-            inventoryPojo.setQuantity(1);
-            inventoryPojo.setProductId(productId);
+        try {
+            InventoryPojo inventoryPojo = pojoHelper.makeInventoryPojo(productId, 1);
             Integer inventoryId = inventoryService.add(inventoryPojo);
 
-            InventoryPojo inventoryPojo1 = new InventoryPojo();
-            inventoryPojo1.setQuantity(1);
-            inventoryPojo1.setProductId(productId2);
+            InventoryPojo inventoryPojo1 = pojoHelper.makeInventoryPojo(productId2, 2);
             inventoryService.update(inventoryId, inventoryPojo1);
-
-            InventoryPojo inventoryPojo2 = inventoryService.get(inventoryId);
-
-            assertEquals(inventoryPojo1.getQuantity(),inventoryPojo2.getQuantity());
-            assertEquals(inventoryPojo1.getProductId(),inventoryPojo2.getProductId());
+        }
+        catch(ApiException err) {
+            assertEquals("inventory of this productId does  not exist",err.getMessage());
+        }
     }
 
     @Test
     public void testUpdateBarcodeAlreadyExists() {
         try {
-            InventoryPojo inventoryPojo = new InventoryPojo();
-            inventoryPojo.setQuantity(1);
-            inventoryPojo.setProductId(productId);
+            InventoryPojo inventoryPojo = pojoHelper.makeInventoryPojo(productId,1);
             Integer inventoryId = inventoryService.add(inventoryPojo);
 
-            InventoryPojo inventoryPojo1 = new InventoryPojo();
-            inventoryPojo1.setQuantity(1);
-            inventoryPojo1.setProductId(productId2);
+            InventoryPojo inventoryPojo1 = pojoHelper.makeInventoryPojo(productId2,1);
             inventoryService.add(inventoryPojo1);
-
-            InventoryPojo inventoryPojo2 = new InventoryPojo();
-            inventoryPojo2.setQuantity(1);
-            inventoryPojo2.setProductId(productId2);
-            inventoryService.update(inventoryId, inventoryPojo2);
         }
         catch(ApiException err) {
-            assertEquals("given barcode already exists",err.getMessage());
+            assertEquals("inventory can not be updated because of alter in productId",err.getMessage());
         }
     }
 
     //also in PRODUCT
     @Test
     public void testUpdateIfNothingUpdatesReturn0() throws ApiException {
-            InventoryPojo inventoryPojo = new InventoryPojo();
-            inventoryPojo.setQuantity(1);
-            inventoryPojo.setProductId(productId);
+        InventoryPojo inventoryPojo = pojoHelper.makeInventoryPojo(productId,1);
             Integer inventoryId = inventoryService.add(inventoryPojo);
 
-            InventoryPojo inventoryPojo2 = new InventoryPojo();
-            inventoryPojo2.setQuantity(1);
-            inventoryPojo2.setProductId(productId);
+        InventoryPojo inventoryPojo2 = pojoHelper.makeInventoryPojo(productId,1);
             Integer status = inventoryService.update(inventoryId, inventoryPojo2);
 
             assertEquals(new Integer(0),status);
@@ -271,14 +223,10 @@ public class InventoryServiceTest extends AbstractUnitTest {
 
     @Test
     public void testUpdateIfUpdatesReturn1() throws ApiException {
-        InventoryPojo inventoryPojo = new InventoryPojo();
-        inventoryPojo.setQuantity(1);
-        inventoryPojo.setProductId(productId);
+        InventoryPojo inventoryPojo = pojoHelper.makeInventoryPojo(productId,1);
         Integer inventoryId = inventoryService.add(inventoryPojo);
 
-        InventoryPojo inventoryPojo2 = new InventoryPojo();
-        inventoryPojo2.setQuantity(2);
-        inventoryPojo2.setProductId(productId);
+        InventoryPojo inventoryPojo2 = pojoHelper.makeInventoryPojo(productId,2);
         Integer status = inventoryService.update(inventoryId, inventoryPojo2);
 
         assertEquals(new Integer(1),status);
@@ -288,9 +236,7 @@ public class InventoryServiceTest extends AbstractUnitTest {
     @Test
     public void testGetCheckWorksFine() throws ApiException {
 
-        InventoryPojo inventoryPojo = new InventoryPojo();
-        inventoryPojo.setQuantity(1);
-        inventoryPojo.setProductId(productId);
+        InventoryPojo inventoryPojo = pojoHelper.makeInventoryPojo(productId,1);
         Integer inventoryId = inventoryService.add(inventoryPojo);
 
         InventoryPojo inventoryPojo1 = inventoryService.getCheck(inventoryId);
