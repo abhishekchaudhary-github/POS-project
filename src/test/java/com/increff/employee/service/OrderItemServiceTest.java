@@ -146,7 +146,63 @@ public class OrderItemServiceTest extends AbstractUnitTest {
         assertNull(orderItemService.get(checkId));
     }
 
+    //delete order if all items of order are deleted
+    @Test
+    public void testDeleteOrderIfAllOrderItemsDeleted() throws ApiException {
+        ArrayList<OrderItemPojo> orderItemPojoList = new ArrayList<OrderItemPojo>();
+        OrderItemPojo orderItemPojo = pojoHelper.makeOrderItemPojo(orderId, productId, 1, 1.0);
+        OrderItemPojo orderItemPojo1 = pojoHelper.makeOrderItemPojo(orderId, productId2, 1, 1.0);
+        orderItemPojoList.add(orderItemPojo);
+        orderItemPojoList.add(orderItemPojo1);
+        orderItemService.add(orderItemPojoList);
 
+        List<OrderItemPojo> orderItemPojoList1 = orderItemService.getAll();
+        Integer orderItemId = 1;
+        Integer orderItemId2 = 1;
+        for(int i=0;i<orderItemPojoList1.size();i++) {
+            if(orderItemPojoList1.get(i).getOrderId()==orderId && orderItemPojoList1.get(i).getProductId()==productId) {
+                orderItemId = orderItemPojoList1.get(i).getId();
+            }
+            if(orderItemPojoList1.get(i).getOrderId()==orderId && orderItemPojoList1.get(i).getProductId()==productId2) {
+                orderItemId2 = orderItemPojoList1.get(i).getId();
+            }
+        }
+        OrderItemPojo orderItemPojo2 = orderItemService.get(orderItemId);
+        Integer checkId = orderItemPojo2.getId();
+        orderItemService.delete(orderItemId);
+        orderItemService.delete(orderItemId2);
+        assertNull(orderService.getOrderById(orderId));
+    }
+
+
+    //is testDeleteOrderJust works fine
+    @Test
+    public void testDeleteOrderJust() throws ApiException {
+        orderItemService.deleteOrderJust(orderId);
+        assertNull(orderService.getOrderById(orderId));
+    }
+
+    //is deleteOrderJust works fine
+//    @Test
+//    public void testDeleteOrderJustNotEditable() throws ApiException {
+//        OrderPojo orderPojo = orderService.getOrderById(orderId);
+//        orderPojo.setEditable(false);
+//        orderItemService.deleteOrderJust(orderId);
+//        assertNull(orderService.getOrderById(orderId));
+//    }
+//
+    //is deleteOrderItemJust works fine
+    @Test
+    public void testDeleteOrderItemJust() throws ApiException {
+        ArrayList<OrderItemPojo> orderItemPojoList = new ArrayList<OrderItemPojo>();
+        OrderItemPojo orderItemPojo = pojoHelper.makeOrderItemPojo(orderId, productId, 1, 1.0);
+        orderItemPojoList.add(orderItemPojo);
+        orderItemService.add(orderItemPojoList);
+        List<OrderItemPojo> orderItemPojoList1 = orderItemService.getAll();
+        Integer id = orderItemPojoList1.get(0).getId();
+        orderItemService.deleteOrderItemJust(id);
+        assertNull(orderItemService.get(id));
+    }
 
     /////delete 2 FUNCTIONS + EDIT ORDER
 
