@@ -55,8 +55,8 @@ public class OrderItemServiceTest extends AbstractUnitTest {
         productId2 = productService.add(productPojo1);
         InventoryPojo inventoryPojo = pojoHelper.makeInventoryPojo(productId,1000);
         inventoryId = inventoryService.add(inventoryPojo);
-        InventoryPojo inventoryPojo2 = pojoHelper.makeInventoryPojo(productId,2000);
-        inventoryId2 = inventoryService.add(inventoryPojo);
+        InventoryPojo inventoryPojo2 = pojoHelper.makeInventoryPojo(productId2,2000);
+        inventoryId2 = inventoryService.add(inventoryPojo2);
         orderId = orderItemService.addInOrder();
     }
 
@@ -65,8 +65,8 @@ public class OrderItemServiceTest extends AbstractUnitTest {
     public void testAddNew() throws ApiException {
         List<OrderItemPojo> orderItemPojoList = new ArrayList<OrderItemPojo>();
         for(int i=1;i<=4;i++) {
-            OrderItemPojo orderItemPojo = pojoHelper.makeOrderItemPojo(orderId, productId, 1+i, 55.5+i);
-            OrderItemPojo orderItemPojo1 = pojoHelper.makeOrderItemPojo(orderId, productId2, 1+i, 55.5+i);
+            OrderItemPojo orderItemPojo = pojoHelper.makeOrderItemPojo(orderId, productId, 1, 1.0);
+            OrderItemPojo orderItemPojo1 = pojoHelper.makeOrderItemPojo(orderId, productId2, 1, 1.0);
             orderItemPojoList.add(orderItemPojo);
             orderItemPojoList.add(orderItemPojo1);
         }
