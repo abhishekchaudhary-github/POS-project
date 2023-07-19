@@ -50,7 +50,6 @@ public class OrderItemService {
         }
 
     }
-
     @Transactional(rollbackOn = ApiException.class)
     public Integer addInOrder() throws ApiException {
         return orderService.add();
@@ -189,7 +188,7 @@ public class OrderItemService {
         if(quantity>inventoryPojo.getQuantity()){
             throw new ApiException("quantity of item more than the quantity in inventory");
         }
-        if(quantity<=0) {
+        if(quantity<=1) {
             throw new ApiException("quantity must be at least 1");
         }
         //check for it
@@ -201,24 +200,25 @@ public class OrderItemService {
 
     @Transactional(rollbackOn = ApiException.class)
     public void getInventoryFromProductId(OrderItemPojo orderItemEditPojo, Integer id) throws ApiException {
-        OrderItemPojo orderItemPojo = dao.select(id);
         InventoryPojo inventoryPojo = inventoryService.getFromProductId(orderItemEditPojo.getProductId());
-        ProductPojo productPojo = productService.get(inventoryPojo.getProductId());
         if(inventoryPojo==null) {
             throw new ApiException("this product is not present in the inventory");
         }
+        OrderItemPojo orderItemPojo = dao.select(id);
         if(orderItemEditPojo.getQuantity()>inventoryPojo.getQuantity()+orderItemPojo.getQuantity()){
             throw new ApiException("quantity of item more than the quantity in inventory");
         }
+        ProductPojo productPojo = productService.get(inventoryPojo.getProductId());
         if(orderItemEditPojo.getSellingPrice()>productPojo.getMrp()){
-            throw new ApiException("price of item can't be more than MRP");
+            throw new ApiException("selling price of item can not be more than MRP");
         }
         inventoryPojo.setQuantity((inventoryPojo.getQuantity()+orderItemPojo.getQuantity()-orderItemEditPojo.getQuantity()));
     }
 
     @Transactional
     public Integer getInventoryIdOfProduct(String barcode) throws ApiException {
-        return inventoryService.getIdOfProduct(barcode);
+        String barcode1 = normalize(barcode);
+        return inventoryService.getIdOfProduct(barcode1);
     }
 
     @Transactional
@@ -260,9 +260,9 @@ public class OrderItemService {
 //        return p;
 //    }
 //
-//    protected static void normalize(OrderItemPojo p) {
-//        p.setBarcode(StringUtil.toLowerCase(p.getBarcode()));
-//    }
+    protected static String normalize(String barcode) {
+        return StringUtil.toLowerCase(barcode);
+    }
 
     @Transactional
     public OrderItemPojo getCheck(Integer id) throws ApiException {
