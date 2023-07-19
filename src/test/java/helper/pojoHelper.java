@@ -1,8 +1,8 @@
 package helper;
 
-import com.increff.employee.pojo.BrandPojo;
-import com.increff.employee.pojo.InventoryPojo;
-import com.increff.employee.pojo.ProductPojo;
+import com.increff.employee.pojo.*;
+
+import java.time.LocalDateTime;
 
 public class pojoHelper {
     public static BrandPojo makeBrandPojo(String brand, String category) {
@@ -26,6 +26,21 @@ public class pojoHelper {
         inventoryPojo.setProductId(productId);
         inventoryPojo.setQuantity(quantity);
         return inventoryPojo;
+    }
+
+    public static OrderItemPojo makeOrderItemPojo(Integer orderId, Integer productId, Integer quantity, Double sellingPrice ) {
+        OrderItemPojo orderItemPojo = new OrderItemPojo();
+        orderItemPojo.setOrderId(orderId);
+        orderItemPojo.setProductId(productId);
+        orderItemPojo.setQuantity(quantity);
+        orderItemPojo.setSellingPrice(sellingPrice);
+        return orderItemPojo;
+    }
+
+    public static OrderPojo makeOrderPojo(LocalDateTime time ) {
+        OrderPojo orderPojo = new OrderPojo();
+        orderPojo.setTime(time);
+        return orderPojo;
     }
 
 }

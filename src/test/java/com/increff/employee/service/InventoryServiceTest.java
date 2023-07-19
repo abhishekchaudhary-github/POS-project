@@ -33,7 +33,7 @@ public class InventoryServiceTest extends AbstractUnitTest {
     BrandPojo brandPojo;
     @Before
     public void preTest() throws ApiException {
-        BrandPojo brandPojo = pojoHelper.makeBrandPojo("brand","category");
+        brandPojo = pojoHelper.makeBrandPojo("brand","category");
         brandService.add(brandPojo);
         BrandPojo brandPojo1 = brandService.getId("brand","category");
         brandId = brandPojo1.getId();
