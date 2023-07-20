@@ -50,101 +50,47 @@ table.dataTable tbody tr:hover {
                     </button>
                 </div>
                 <div class="modal-body">
+                    <div class="row">
+                        <div >
+                            <form class="form-inline" id="brand-report-form">
+                                <div class="form-group col-sm-4">
+                                    <div>
 
-<!--    <nav class="navbar navbar-expand-lg navbar-light bg-light  mb-1" >-->
+                                        <select class="form-control" id="brand-dropper">
+                                            <option value="">Brand</option>
+                                        </select>
 
-        <div class="row">
-            <div >
-                <form class="form-inline" id="brand-report-form">
-                    <div class="form-group col-sm-4">
-                    <div>
-<!--                        <label for="inputBrand">Brand</label>-->
-
-<!--                                <input type="text" class="form-control" id="inputBrand" placeholder="Enter brand"  list="brandList">-->
-<!--                        <datalist id="brandList"></datalist>-->
-<!--                        <nav class="navbar navbar-expand-lg navbar-light bg-light  mb-1 col-sm-4" >-->
-
-<!--                            <div class="dropdown">-->
-<!--                                <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                                    <span id="brandText">Brand</span>-->
-<!--                                </button>-->
-<!--                                <div class="dropdown-menu" id="brand-dropper" aria-labelledby="dropdownMenu">-->
-<!--&lt;!&ndash;                                    <button class="dropdown-item" type="button">Action</button>&ndash;&gt;-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </nav>-->
+                                        <select class="form-control" id="category-dropper">
+                                            <option value="">Category</option>
+                                        </select>
 
 
-                        <div>
-                        <select class="form-control select2" id="brand">
-                            <option value="">Brand</option>
-                        </select>
-                       </div>
 
-
-                        <div>
-                            <select class="form-control select2" id="category">
-                                <option value="">Brand</option>
-                            </select>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-
-
-                        <!--                        <nav class="navbar navbar-expand-lg navbar-light bg-light  mb-1 col-sm-4" >-->
-<!--                            <div class="dropdown">-->
-<!--                                <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                                    <span id="categoryText">Category</span>-->
-<!--                                </button>-->
-<!--                                <div class="dropdown-menu" id="category-dropper" aria-labelledby="dropdownMenu2">-->
-<!--&lt;!&ndash;                                    <button class="dropdown-item" type="button">Action</button>&ndash;&gt;-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </nav>-->
-
-
-
-
-                    </div>
                     </div>
 
-<!--                    <div class="form-group">-->
-<!--                    <div class="col-sm-10">-->
-<!--&lt;!&ndash;                        <label for="inputCategory">Category</label>&ndash;&gt;-->
-<!--                        <input type="text" class="form-control" id="inputCategory" placeholder="Enter Category" list="categoryList">-->
-<!--                        <datalist id="categoryList"></datalist>-->
-<!--                    </div>-->
-<!--                    </div>-->
-
-
-
-
-
-
-
-
-
-                </form>
-            </div>
-        </div>
-
-                <div class="modal-footer">
-<!--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>-->
-                    <button id="addButton" class="btn btn-success" data-dismiss="modal" style="background-color: #45CFDD;border-color: #45CFDD;"><i class="fa fa-plus"></i></button>
+                    <div class="modal-footer">
+                        <!--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>-->
+                        <button id="addButton" class="btn btn-success" data-dismiss="modal" style="background-color: #45CFDD;border-color: #45CFDD;"><i class="fa fa-plus"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
-<!--    </nav>-->
+        <!--    </nav>-->
 
 
-    <div class="row">
-        <div class="col-12">
+        <div class="row">
+            <div class="col-12">
 
 
 
+            </div>
         </div>
-    </div>
 
     </div>
 
@@ -170,6 +116,8 @@ table.dataTable tbody tr:hover {
 <footer th:replace="snippets.html :: name_footer"></footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 <script th:src="@{/static/brandReport.js}"/></script>
+<!-- Other body content -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 </body>
 
 </html>

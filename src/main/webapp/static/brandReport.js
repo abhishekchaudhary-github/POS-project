@@ -105,7 +105,7 @@ function listDownload() {
 
 function putValues() {
     var url = getBrandReportUrl();
-//    var brand = $('#brand-dro').val();
+//    var brand = $('#inputBrand').val();
 //    var category = $('#inputCategory').val();
     if(brand=="") { brand = null }
     if(category=="") { category = null }
@@ -141,74 +141,42 @@ function getBrandValues() {
     	   		    arrayOfBrand.push(brandArray[0][i].brand)
     	   		    arrayOfCategory.push(brandArray[0][i].category)
     	   		}
-    	   		//console.log(arrayOfBrand)
-    	   		 // Initialize the Select2 dropdown for brand input
-                            $('#brand-dropper').select2({
-                                data: arrayOfBrand
-                            });
-
-                            // Initialize the Select2 dropdown for category input
-                            $('#category-dropper').select2({
-                                data: arrayOfCategory
-                            });
     	   },
     	   error: handleAjaxError
     	});
 
-//    	var $brandList = $("#brand-dropper");
-//    	console.log(arrayOfBrand)
-//    	for(var i=0;i<arrayOfBrand.length;i++) {
-//    	    var row = '<button class="dropdown-item" type="button" onclick="changeBrand(' + i + ')">'+arrayOfBrand[i]+'</button>'
-//    	    $brandList.append(row);
-//    	}
-//
-//    	var $categoryList = $("#category-dropper");
-//            	console.log(arrayOfCategory)
-//            	for(var i=0;i<arrayOfCategory.length;i++) {
-//            	    var row = '<button class="dropdown-item" type="button" onclick="changeCategory(' + i + ')">'+arrayOfCategory[i]+'</button>'
-//            	    $categoryList.append(row);
-//            	}
+    	var $brandList = $("#brand-dropper");
+        let setBrandDropper = [...new Set(arrayOfBrand)];
+            	$("#brand-dropper").select2({
+            	data:setBrandDropper});
+
+    let setBrandDropper2 = [...new Set(arrayOfCategory)];
+
+
+    	var $categoryList = $("#category-dropper");
+            	console.log(arrayOfCategory)
+            	$("#category-dropper").select2({
+            	data:setBrandDropper2});
 }
 
-function changeBrand(){
-            var selectedBrand = $('#brand-dropper').val();
-                brand = selectedBrand;
-
-                // Convert the array of selected brands to a comma-separated string
-                var selectedBrandText = selectedBrand.join(', ');
-
-                // Update the text displayed in the dropdown button to the selected brand(s).
-                $('#brandText').text(selectedBrandText);
-
-                // Trigger the change event on the Select2 dropdown to update the dropdown button text
-                $('#brand-dropper').trigger('change');
+function changeBrand(id){
+           var selectedBrand = $("#brand-dropper").val();
+              brand = selectedBrand;
+//              $('#brandText').text(selectedBrand);
           }
 
-function changeCategory(){
-            var selectedCategory = $('#category-dropper').val();
-                brand = selectedCategory;
-
-                // Convert the array of selected brands to a comma-separated string
-                var selectedCategoryText = selectedBrand.join(', ');
-
-                // Update the text displayed in the dropdown button to the selected brand(s).
-                $('#brandText').text(selectedCategoryText);
-
-                // Trigger the change event on the Select2 dropdown to update the dropdown button text
-                $('#category-dropper').trigger('change');
+function changeCategory(id){
+             var selectedCategory = $("#category-dropper").val();
+                category = selectedCategory;
+//                $('#categoryText').text(selectedBrand);
           }
 
 function init(){
 $('#addButton').click(putValues)
- // Initialize the Select2 dropdown for brand input
-    $('#brand-dropper').select2({
-        data: arrayOfBrand
-    });
-
-    // Initialize the Select2 dropdown for category input
-    $('#category-dropper').select2({
-        data: arrayOfCategory
-    });
+$("#brand-dropper").on("change", changeBrand);
+$("#category-dropper").on("change", changeCategory);
+$("#select2-brand-dropper-container").click(changeBrand);
+$("#select2-category-dropper-container").click(changeCategory);
 }
 
 $(document).ready(init);
