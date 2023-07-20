@@ -40,13 +40,10 @@ public class BrandApiController {
     @ApiOperation(value = "tsv upload")
     @RequestMapping(path = "/api/brand/tsv", method = RequestMethod.POST)
     public List<Errors> addBulk(@RequestBody List<BrandForm>  form) throws ApiException {
-        //List<OrderItemPojo> p = new ArrayList<OrderItemPojo>();
         ArrayList<Errors> data = service.fileCheck(form);
-//        if(data.get(data.size()-1).isCheckError()==false) {
-//        for(BrandForm BrandItem : form) {
-//            service.add(convert(BrandItem));
-//        }
-//        }
+        if(data.get(data.size()-1).isCheckError()==false)
+            for(BrandForm BrandItem : form)
+                service.add(convert(BrandItem));
         return data;
     }
 
