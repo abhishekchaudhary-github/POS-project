@@ -1,9 +1,12 @@
 package com.increff.employee.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.increff.employee.model.BrandForm;
+import com.increff.employee.model.Errors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,7 +67,7 @@ public class BrandService {
         tempPojo.setCategory(p.getCategory());
         return 1;
         }
-        else throw new ApiException("category already exists");
+        else throw new ApiException("this category already exists");
     }
 
     @Transactional
@@ -85,4 +88,58 @@ public class BrandService {
         p.setCategory(StringUtil.toLowerCase(p.getCategory()));
     }
 
+    @Transactional
+    public Errors checkError(BrandForm brandForm, List<BrandForm> list) throws ApiException {
+        Errors errors = new Errors();
+        boolean checks1=false;
+        String brand = brandForm.getBrand();
+        String category = brandForm.getCategory();
+        if(brand==null||brand==""){
+            checks1=true;
+            errors.setMessage("brand field is empty");
+            errors.setErrorCount(1);
+        }
+        else if(category==null||category==""){
+            checks1=true;
+            errors.setMessage("category field is empty");
+            errors.setErrorCount(1);
+        }
+        else if(dao.checkerForDuplicate(brandForm.getBrand(), brandForm.getCategory())!=null) {
+            checks1=true;
+            errors.setMessage("this category already exists");
+            errors.setErrorCount(1);
+        }
+            for (BrandForm brandForm1 : list) {
+                if (brandForm1.getBrand().equals(brand) && brandForm1.getCategory().equals(category)) {
+                    errors.setMessage("this category already exists");
+                    errors.setErrorCount(1);
+                   checks1=true;
+                    //break;
+                }
+            }
+        if(checks1 == false) {
+            errors.setMessage("no error in this line");
+            errors.setErrorCount(0);
+        }
+        return errors;
+    }
+
+    @Transactional
+    public ArrayList<Errors> fileCheck(List<BrandForm> form) throws ApiException {
+        if(form.size()>5000) {
+            throw new ApiException("maximum rows can be 5000");
+        }
+        boolean checkError =false;
+        ArrayList<Errors> data = new ArrayList<Errors>();
+        ArrayList<BrandForm> brandPojoList = new ArrayList<>();
+        for(BrandForm BrandItem : form){
+            Errors error = checkError(BrandItem,brandPojoList);
+            if(checkError==true || error.getErrorCount()>0) {
+                error.setCheckError(true);
+            }
+            brandPojoList.add(BrandItem);
+            data.add(error);
+        }
+        return data;
+    }
 }

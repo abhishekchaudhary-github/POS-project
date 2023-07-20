@@ -3,6 +3,9 @@ package com.increff.employee.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.increff.employee.model.*;
+import com.increff.employee.pojo.OrderItemPojo;
+import com.increff.employee.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.increff.employee.model.BrandData;
-import com.increff.employee.model.BrandForm;
 import com.increff.employee.pojo.BrandPojo;
 import com.increff.employee.service.ApiException;
 import com.increff.employee.service.BrandService;
@@ -31,6 +32,22 @@ public class BrandApiController {
     public void add(@RequestBody BrandForm form) throws ApiException {
         BrandPojo p = convert(form);
         service.add(p);
+    }
+
+
+    @Autowired
+    private ReportService reportService;
+    @ApiOperation(value = "tsv upload")
+    @RequestMapping(path = "/api/brand/tsv", method = RequestMethod.POST)
+    public List<Errors> addBulk(@RequestBody List<BrandForm>  form) throws ApiException {
+        //List<OrderItemPojo> p = new ArrayList<OrderItemPojo>();
+        ArrayList<Errors> data = service.fileCheck(form);
+//        if(data.get(data.size()-1).isCheckError()==false) {
+//        for(BrandForm BrandItem : form) {
+//            service.add(convert(BrandItem));
+//        }
+//        }
+        return data;
     }
 
 
