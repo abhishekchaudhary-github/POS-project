@@ -43,4 +43,13 @@ public class pojoHelper {
         return orderPojo;
     }
 
+    public static DailyReportPojo makeDailyReportPojo(LocalDateTime time, Integer invoiced_orders_count,Integer invoiced_items_count,Double total_revenue) {
+        DailyReportPojo dailyReportPojo = new DailyReportPojo();
+        dailyReportPojo.setDate(time);
+        dailyReportPojo.setInvoiced_orders_count(invoiced_orders_count);
+        dailyReportPojo.setInvoiced_items_count(invoiced_items_count);
+        dailyReportPojo.setTotal_revenue(total_revenue);
+        return dailyReportPojo;
+    }
+
 }
