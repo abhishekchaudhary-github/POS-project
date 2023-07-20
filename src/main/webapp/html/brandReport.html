@@ -27,6 +27,11 @@ table.dataTable thead .sorting_desc::after {
 table.dataTable tbody tr:hover {
   background-color: #e6e6e6;
 }
+   /* Set a constant width for the Select2 dropdown container and search input */
+  .select2-container--default .select2-selection--single,
+  .select2-container--default .select2-selection--single .select2-search__field {
+    width: 20em;
+  }
 </style>
 <body>
 
@@ -51,22 +56,17 @@ table.dataTable tbody tr:hover {
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div >
+                        <div  class="col-12">
                             <form class="form-inline" id="brand-report-form">
-                                <div class="form-group col-sm-4">
-                                    <div>
-
+                                <div class="form-group col-sm-10">
                                         <select class="form-control" id="brand-dropper">
                                             <option value="">Brand</option>
                                         </select>
-
+                                </div>
+                                <div class="form-group col-sm-10">
                                         <select class="form-control" id="category-dropper">
                                             <option value="">Category</option>
                                         </select>
-
-
-
-                                    </div>
                                 </div>
                             </form>
                         </div>
