@@ -323,6 +323,14 @@ function displayBrand(data){
 	$('#edit-brand-modal').modal('toggle');
 }
 
+//// Function to show/hide the loader
+//function toggleLoader(show) {
+//  if (show) {
+//    $("#loader").show();
+//  } else {
+//    $("#loader").hide();
+//  }
+//}
 
 //INITIALIZATION CODE
 function init(){
@@ -341,6 +349,7 @@ function init(){
         $('#inputBrand').val('');
         $('#inputCategory').val('');
      });
+//      toggleLoader(true);
 }
 
 $(document).ready(init);

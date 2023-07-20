@@ -3,6 +3,8 @@ package com.increff.employee.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.increff.employee.model.CategoryDetailForm;
+import com.increff.employee.pojo.OrderItemPojo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,7 +35,28 @@ public class EmployeeApiController {
 		service.add(p);
 	}
 
-	
+
+//	@ApiOperation(value = "Adds a OrderItem")
+//	@RequestMapping(path = "/api/orderitem", method = RequestMethod.POST)
+//	public ArrayList<Errors> add(@RequestBody List<EmployeeForm> formlist) throws ApiException {
+//		boolean checkError =false;
+//		ArrayList<Errors> data = new ArrayList<Errors>();
+//		for(EmployeeForm form1 : formlist) {
+//			//			check(form1);
+//			Errors erros = new Errors();
+//			erros.setMessage("no error");
+//			data.add(erros);
+//		}
+//		if(checkError==false){
+//		for(EmployeeForm form : formlist) {
+//			EmployeePojo p1 = convert(form);
+//			service.add(p1);
+//		}
+//		}
+//		return data;
+//	}
+
+
 	@ApiOperation(value = "Deletes an employee")
 	@RequestMapping(path = "/api/employee/{id}", method = RequestMethod.DELETE)
 	public void delete(@PathVariable Integer id) {
@@ -80,5 +103,6 @@ public class EmployeeApiController {
 		p.setName(f.getName());
 		return p;
 	}
+
 
 }

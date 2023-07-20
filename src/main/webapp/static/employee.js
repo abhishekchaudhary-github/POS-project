@@ -94,17 +94,19 @@ function readFileDataCallback(results){
 	uploadRows();
 }
 
-function uploadRows(){
+function uploadRows(){\
+var row;
+     while(processCount!=fileData.length)){
 	//Update progress
-	updateUploadDialog();
+	//updateUploadDialog();
 	//If everything processed then return
-	if(processCount==fileData.length){
-		return;
-	}
-
+//	if(processCount==fileData.length){
+//		break;
+//	}
 	//Process next row
-	var row = fileData[processCount];
+	row.push(fileData[processCount]);
 	processCount++;
+	}
 
 	var json = JSON.stringify(row);
 	var url = getEmployeeUrl();
@@ -118,12 +120,17 @@ function uploadRows(){
        	'Content-Type': 'application/json'
        },
 	   success: function(response) {
-	   		uploadRows();
+	   //do nothing
+	   		//uploadRows();
 	   },
-	   error: function(response){
-	   		row.error=response.responseText
-	   		errorData.push(row);
-	   		uploadRows();
+	   error: function(data){
+	   for(int i=0;i<data.length;i++){
+	   console.log(data);
+//	   data.error=response.responseText
+//	   errorData.push(data[i].row)
+//	   	//	row.error=response.responseText
+//	   		errorData.push(row);
+//	   		//uploadRows();
 	   }
 	});
 
