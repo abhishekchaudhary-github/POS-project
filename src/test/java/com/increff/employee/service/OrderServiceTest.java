@@ -2,11 +2,18 @@ package com.increff.employee.service;
 
 import com.increff.employee.pojo.BrandPojo;
 import com.increff.employee.pojo.InventoryPojo;
+import com.increff.employee.pojo.OrderPojo;
 import com.increff.employee.pojo.ProductPojo;
 import helper.pojoHelper;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class OrderServiceTest extends AbstractUnitTest {
 //what test case for add time creation??
@@ -61,8 +68,30 @@ InventoryService inventoryService;
 
 
 
-//    @Test
-//    public void testDelete() throws ApiException {
-//
-//    }
+
+    //check delete function
+    @Test
+    public void testDelete() throws ApiException {
+        assertNotNull(orderService.getOrderById(orderId));
+        orderService.delete(orderId);
+        assertNull(orderService.getOrderById(orderId));
+    }
+
+    //check getAll function
+    @Test
+    public void testGetAll() throws ApiException {
+        List<OrderPojo> orderPojoList = orderService.getAll();
+        assertEquals(2,orderPojoList.size());
+        assertEquals(orderPojoList.get(0).getId(),orderId2);
+        assertEquals(orderPojoList.get(1).getId(),orderId);
+    }
+
+    //test timeOfOrderCreation
+    @Test
+    public void testTimeOfOrderCreation() {
+        orderService.timeOfOrderCreation();
+    }
+
+
+
 }
