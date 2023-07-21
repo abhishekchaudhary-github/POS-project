@@ -159,6 +159,11 @@ public class ProductService {
             errors.setMessage("barcode must only contain alphanumeric characters");
             errors.setErrorCount(1);
         }
+        else if(getBrandPojoFromForm2(brand,category) == null) {
+            checks1 = true;
+            errors.setMessage("no such brand category combination exists");
+            errors.setErrorCount(1);
+        }
         else if(dao.checkerForDuplicate(brandPojo2.getId(), name)!=null){
             checks1 = true;
             errors.setMessage("duplicate product");
@@ -247,9 +252,6 @@ public class ProductService {
     @Transactional
     public BrandPojo getBrandPojoFromForm2(String brand,String category) throws ApiException {
         BrandPojo brandPojo =  brandService.getId(brand,category);
-        if(brandPojo==null) {
-            throw new ApiException("this product does not exist");
-        }
         return brandPojo;
     }
 
