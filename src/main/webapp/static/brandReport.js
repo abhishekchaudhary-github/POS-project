@@ -161,13 +161,13 @@ function getBrandValues() {
 
 function changeBrand(id){
            var selectedBrand = $("#brand-dropper").val();
-              brand = selectedBrand;
+           brand = selectedBrand;
 //              $('#brandText').text(selectedBrand);
           }
 
 function changeCategory(id){
              var selectedCategory = $("#category-dropper").val();
-                category = selectedCategory;
+             category = selectedCategory;
 //                $('#categoryText').text(selectedBrand);
           }
 

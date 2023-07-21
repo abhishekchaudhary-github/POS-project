@@ -145,36 +145,41 @@ function getBrandValues() {
     	});
 
     	var $brandList = $("#brand-dropper");
-    	console.log(arrayOfBrand)
-    	for(var i=0;i<arrayOfBrand.length;i++) {
-    	    var row = '<button class="dropdown-item" type="button" onclick="changeBrand(' + i + ')">'+arrayOfBrand[i]+'</button>'
-    	    $brandList.append(row);
-    	}
+    	let setBrandDropper = [...new Set(arrayOfBrand)];
+                    	$("#brand-dropper").select2({
+                    	data:setBrandDropper});
+
+            let setBrandDropper2 = [...new Set(arrayOfCategory)];
+//    	console.log(arrayOfBrand)
+//    	for(var i=0;i<arrayOfBrand.length;i++) {
+//    	    var row = '<button class="dropdown-item" type="button" onclick="changeBrand(' + i + ')">'+arrayOfBrand[i]+'</button>'
+//    	    $brandList.append(row);
+//    	}
 
     	var $categoryList = $("#category-dropper");
-            	console.log(arrayOfCategory)
-            	for(var i=0;i<arrayOfCategory.length;i++) {
-            	    var row = '<button class="dropdown-item" type="button" onclick="changeCategory(' + i + ')">'+arrayOfCategory[i]+'</button>'
-            	    $categoryList.append(row);
-            	}
+                    	console.log(arrayOfCategory)
+                    	$("#category-dropper").select2({
+                    	data:setBrandDropper2});
 }
 
 
 function init(){
 $('#addButton').click(putValues)
+$("#brand-dropper").on("change", changeBrand);
+$("#category-dropper").on("change", changeCategory);
+$("#select2-brand-dropper-container").click(changeBrand);
+$("#select2-category-dropper-container").click(changeCategory);
 }
 
 
 function changeBrand(id){
-           var selectedBrand = arrayOfBrand[id];
+           var selectedBrand = $("#brand-dropper").val();
            brand = selectedBrand;
-            $('#brandText').text(selectedBrand);
           }
 
 function changeCategory(id){
-            var selectedCategory = arrayOfCategory[id];
+            var selectedCategory = $("#category-dropper").val();
             category = selectedCategory;
-              $('#categoryText').text(selectedCategory);
           }
 
 $(document).ready(init);

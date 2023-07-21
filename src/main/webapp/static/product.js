@@ -260,6 +260,7 @@ function uploadRows(){
     	   error: function(response){
     	   		row.error=response.responseText
     	   		errorData.push(row);
+    	   		console.log(row);
     	   		uploadRows();
     	   }
     	});
