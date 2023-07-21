@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd59bcda-ea0a-45cb-bbdf-b0788f0265bb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/ReportServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/helper/formHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/brand.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/brand.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,8 +83,8 @@
       <recent name="$PROJECT_DIR$/src/main/webapp/html" />
     </key>
   </component>
-  <component name="RunManager" selected="Maven.employee-spring-full [jetty:run]">
-    <configuration name="DailyReportServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.ReportServiceTest.testGetOrdersByTime">
+    <configuration name="ReportServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
         <pattern>
@@ -92,13 +93,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.increff.employee.service" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.DailyReportServiceTest" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.ReportServiceTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DailyReportServiceTest.testGetAllForm" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ReportServiceTest.testGetBrandReport" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
         <pattern>
@@ -107,14 +108,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.increff.employee.service" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.DailyReportServiceTest" />
-      <option name="METHOD_NAME" value="testGetAllForm" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.ReportServiceTest" />
+      <option name="METHOD_NAME" value="testGetBrandReport" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DailyReportServiceTest.testGetAllTime" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ReportServiceTest.testGetDailySalesReport" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
         <pattern>
@@ -123,14 +124,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.increff.employee.service" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.DailyReportServiceTest" />
-      <option name="METHOD_NAME" value="testGetAllTime" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.ReportServiceTest" />
+      <option name="METHOD_NAME" value="testGetDailySalesReport" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DailyReportServiceTest.testGetLastId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ReportServiceTest.testGetInventoryReport" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
         <pattern>
@@ -139,14 +140,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.increff.employee.service" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.DailyReportServiceTest" />
-      <option name="METHOD_NAME" value="testGetLastId" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.ReportServiceTest" />
+      <option name="METHOD_NAME" value="testGetInventoryReport" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProductServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ReportServiceTest.testGetOrdersByTime" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
         <pattern>
@@ -155,8 +156,9 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.increff.employee.service" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.ProductServiceTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.ReportServiceTest" />
+      <option name="METHOD_NAME" value="testGetOrdersByTime" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -200,20 +202,20 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="JUnit.DailyReportServiceTest" />
-      <item itemvalue="JUnit.DailyReportServiceTest.testGetAllForm" />
-      <item itemvalue="JUnit.DailyReportServiceTest.testGetAllTime" />
-      <item itemvalue="JUnit.DailyReportServiceTest.testGetLastId" />
-      <item itemvalue="JUnit.ProductServiceTest" />
+      <item itemvalue="JUnit.ReportServiceTest" />
+      <item itemvalue="JUnit.ReportServiceTest.testGetBrandReport" />
+      <item itemvalue="JUnit.ReportServiceTest.testGetDailySalesReport" />
+      <item itemvalue="JUnit.ReportServiceTest.testGetInventoryReport" />
+      <item itemvalue="JUnit.ReportServiceTest.testGetOrdersByTime" />
       <item itemvalue="Maven.employee-spring-full [jetty:run]" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.DailyReportServiceTest" />
-        <item itemvalue="JUnit.ProductServiceTest" />
-        <item itemvalue="JUnit.DailyReportServiceTest.testGetLastId" />
-        <item itemvalue="JUnit.DailyReportServiceTest.testGetAllForm" />
-        <item itemvalue="JUnit.DailyReportServiceTest.testGetAllTime" />
+        <item itemvalue="JUnit.ReportServiceTest.testGetOrdersByTime" />
+        <item itemvalue="JUnit.ReportServiceTest" />
+        <item itemvalue="JUnit.ReportServiceTest.testGetBrandReport" />
+        <item itemvalue="JUnit.ReportServiceTest.testGetInventoryReport" />
+        <item itemvalue="JUnit.ReportServiceTest.testGetDailySalesReport" />
       </list>
     </recent_temporary>
   </component>
