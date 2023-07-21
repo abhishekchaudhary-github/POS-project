@@ -1,8 +1,10 @@
 package com.increff.employee.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import com.increff.employee.model.*;
 import com.increff.employee.pojo.BrandPojo;
 import com.increff.employee.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.increff.employee.model.ProductData;
-import com.increff.employee.model.ProductForm;
 import com.increff.employee.pojo.ProductPojo;
 import com.increff.employee.service.ApiException;
 import com.increff.employee.service.ProductService;
@@ -33,6 +33,20 @@ public class ProductApiController {
         BrandPojo brandPojo = service.getBrandPojoFromForm(form);
         ProductPojo p = convert(form,brandPojo);
         service.add(p);
+    }
+
+    @ApiOperation(value = "tsv upload")
+    @RequestMapping(path = "/api/product/tsv", method = RequestMethod.POST)
+    public List<ErrorsProduct> addBulk(@RequestBody List<ProductFormString> form) throws ApiException {
+        ArrayList<ErrorsProduct> data = service.fileCheck(form);
+        if(data.get(data.size()-1).isCheckError()==false)
+            for(ProductFormString ProductItem : form) {
+                System.out.println("checks done");
+                BrandPojo brandPojo = service.getBrandPojoFromForm2(ProductItem.getBrand(),ProductItem.getCategory());
+                ProductForm productForm = convertToForm(ProductItem);
+                service.add(convert(productForm, brandPojo));
+            }
+        return data;
     }
 
     @ApiOperation(value = "Gets a Product by ID")
@@ -89,6 +103,16 @@ public class ProductApiController {
         p.setBrand_category(brandPojo.getId());
         p.setMrp(f.getMrp());
         return p;
+    }
+
+    private static ProductForm convertToForm(ProductFormString form) {
+        ProductForm productForm = new ProductForm();
+        productForm.setName(form.getName());
+        productForm.setMrp(Double.parseDouble(form.getMrp()));
+        productForm.setBarcode(form.getBarcode());
+        productForm.setCategory(form.getCategory());
+        productForm.setBrand(form.getBrand());
+        return productForm;
     }
 
 }

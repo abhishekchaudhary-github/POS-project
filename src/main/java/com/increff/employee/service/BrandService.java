@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import com.increff.employee.model.BrandForm;
 import com.increff.employee.model.Errors;
+import com.increff.employee.model.ErrorsBrand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -89,8 +90,8 @@ public class BrandService {
     }
 
     @Transactional
-    public Errors checkError(BrandForm brandForm, List<BrandForm> list) throws ApiException {
-        Errors errors = new Errors();
+    public ErrorsBrand checkError(BrandForm brandForm, List<BrandForm> list) throws ApiException {
+        ErrorsBrand errors = new ErrorsBrand();
         boolean checks1=false;
         String brand = brandForm.getBrand();
         String category = brandForm.getCategory();
@@ -121,19 +122,21 @@ public class BrandService {
             errors.setMessage("no error in this line");
             errors.setErrorCount(0);
         }
+        errors.setBrand(brand);
+        errors.setCategory(category);
         return errors;
     }
 
     @Transactional
-    public ArrayList<Errors> fileCheck(List<BrandForm> form) throws ApiException {
+    public ArrayList<ErrorsBrand> fileCheck(List<BrandForm> form) throws ApiException {
         if(form.size()>5000) {
             throw new ApiException("maximum rows can be 5000");
         }
         boolean checkError =false;
-        ArrayList<Errors> data = new ArrayList<Errors>();
+        ArrayList<ErrorsBrand> data = new ArrayList<ErrorsBrand>();
         ArrayList<BrandForm> brandPojoList = new ArrayList<>();
         for(BrandForm BrandItem : form){
-            Errors error = checkError(BrandItem,brandPojoList);
+            ErrorsBrand error = checkError(BrandItem,brandPojoList);
             if(checkError==true || error.getErrorCount()>0) {
                 error.setCheckError(true);
             }

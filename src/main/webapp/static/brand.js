@@ -240,8 +240,8 @@ function uploadRows(){
     	    console.log(data)
                            for(var i=0;i<data.length;i++){
                            let arr = {
-                               brand : "nike",
-                               category : "shoe",
+                               brand : data[i].brand,
+                               category : data[i].category,
                                error : data[i].message
                            }
                            console.log(data[i].message)

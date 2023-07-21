@@ -226,44 +226,38 @@ function readFileDataCallback(results){
 }
 
 function uploadRows(){
-	//Update progress
-    	updateUploadDialog();
-    	//If everything processed then return
-    	if(processCount==fileData.length){
-    	if(errorData.length==0){
-            $('#upload-product-modal').modal('hide');
-        	$.notify("uploaded successfully", {globalPosition: 'top center',className:"success"})
-        }
-        else
-    	    $.notify("error in uploading",{className:"warn", globalPosition: 'top center' })
-    	return;
-    	}
-
-    	//Process next row
-    	var row = fileData[processCount];
-    	processCount++;
-
-    	var json = JSON.stringify(row);
-    	var url = getProductUrl();
-
-    	//Make ajax call
-    	$.ajax({
-    	   url: url,
-    	   type: 'POST',
-    	   data: json,
-    	   headers: {
-           	'Content-Type': 'application/json'
-           },
-    	   success: function(response) {
-    	   		uploadRows();
-    	   },
-    	   error: function(response){
-    	   		row.error=response.responseText
-    	   		errorData.push(row);
-    	   		console.log(row);
-    	   		uploadRows();
-    	   }
-    	});
+	var row=[];
+             while(processCount!=fileData.length){
+                row.push(fileData[processCount]);
+                processCount++;
+             }
+        var json = JSON.stringify(row);
+       	var url = getProductUrl()+'/tsv';
+        //Make ajax call
+        	$.ajax({
+        	   url: url,
+        	   type: 'POST',
+        	   data: json,
+        	   headers: {
+               	'Content-Type': 'application/json'
+               },
+        	   success: function(data) {
+        	    $.notify("uploaded successfully",{className:"success", globalPosition: 'top center' })
+        	    console.log(data)
+                               for(var i=0;i<data.length;i++){
+                               let arr = {
+                                   barcode : data[i].barcode,
+                                   brand : data[i].brand,
+                                   category : data[i].category,
+                                   name: data[i].name,
+                                   error : data[i].message
+                               }
+                               console.log(data[i].message)
+                               errorData.push(arr)
+                    	   }
+        	   },
+        	    error: handleAjaxError
+        	});
 }
 
 function downloadErrors(){

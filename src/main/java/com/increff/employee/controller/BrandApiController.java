@@ -34,13 +34,10 @@ public class BrandApiController {
         service.add(p);
     }
 
-
-    @Autowired
-    private ReportService reportService;
     @ApiOperation(value = "tsv upload")
     @RequestMapping(path = "/api/brand/tsv", method = RequestMethod.POST)
-    public List<Errors> addBulk(@RequestBody List<BrandForm>  form) throws ApiException {
-        ArrayList<Errors> data = service.fileCheck(form);
+    public List<ErrorsBrand> addBulk(@RequestBody List<BrandForm>  form) throws ApiException {
+        ArrayList<ErrorsBrand> data = service.fileCheck(form);
         if(data.get(data.size()-1).isCheckError()==false)
             for(BrandForm BrandItem : form)
                 service.add(convert(BrandItem));

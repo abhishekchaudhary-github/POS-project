@@ -1,12 +1,19 @@
 package com.increff.employee.service;
 
 import com.increff.employee.dao.InventoryDao;
+import com.increff.employee.model.ErrorsInventory;
+import com.increff.employee.model.ErrorsProduct;
+import com.increff.employee.model.InventoryFormString;
+import com.increff.employee.model.ProductFormString;
+import com.increff.employee.pojo.BrandPojo;
 import com.increff.employee.pojo.InventoryPojo;
 import com.increff.employee.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -109,6 +116,99 @@ public class InventoryService {
         tempPojo.setQuantity(p.getQuantity());
 //        tempPojo.setProductId(p.getProductId());
             return 1;
+    }
+
+
+
+    @Transactional
+    public ErrorsInventory checkError(InventoryFormString inventoryForm, List<InventoryFormString> list,HashMap<String,Integer> hm) throws ApiException {
+        ErrorsInventory errors = new ErrorsInventory();
+        boolean checks1=false;
+        String quantity = inventoryForm.getQuantity();
+        String barcode = inventoryForm.getBarcode();
+        if(barcode==null||barcode==""){
+            checks1=true;
+            errors.setMessage("barcode field is empty");
+            errors.setErrorCount(1);
+        }
+        else if(quantity==null||quantity=="") {
+            checks1 = true;
+            errors.setMessage("quantity field is empty");
+            errors.setErrorCount(1);
+        }
+        else if(checkInteger(quantity)==false){
+            checks1 = true;
+            errors.setMessage("quantity format is invalid");
+            errors.setErrorCount(1);
+        }
+        else if(Integer.parseInt(quantity)<1) {
+            checks1 = true;
+            errors.setMessage("quantity is less than 1");
+            errors.setErrorCount(1);
+        }
+
+
+        else if(hm.containsKey(barcode)) {
+            checks1 = true;
+            errors.setMessage("duplicate barcode");
+            errors.setErrorCount(1);
+        }
+        else if(productService.getPojoFromBarcode(barcode)==null) {
+            checks1 = true;
+            errors.setMessage("barcode is invalid");
+            errors.setErrorCount(1);
+        }
+        if(checks1 == false) {
+            errors.setMessage("no error in this line");
+            errors.setErrorCount(0);
+        }
+        errors.setQuantity(quantity);
+        errors.setBarcode(barcode);
+        return errors;
+    }
+
+    private boolean checkDouble(String x){
+        try {
+            Double.parseDouble(x);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
+
+    @Transactional
+    public ArrayList<ErrorsInventory> fileCheck(List<InventoryFormString> form) throws ApiException {
+        if(form.size()>5000) {
+            throw new ApiException("maximum rows can be 5000");
+        }
+        boolean checkError =false;
+        ArrayList<ErrorsInventory> data = new ArrayList<ErrorsInventory>();
+        ArrayList<InventoryFormString> inventoryPojoList = new ArrayList<>();
+        HashMap<String,Integer> hm = new HashMap<>();
+        for(InventoryFormString inventoryItem : form){
+            ErrorsInventory error = checkError(inventoryItem,inventoryPojoList,hm);
+            if(checkError==true || error.getErrorCount()>0) {
+                error.setCheckError(true);
+            }
+            //logic
+            inventoryPojoList.add(inventoryItem);
+            data.add(error);
+            if(!hm.containsKey(inventoryItem.getBarcode())){
+                hm.put(inventoryItem.getBarcode(),1);
+            }
+        }
+        return data;
+    }
+
+    private boolean checkInteger(String x){
+        try {
+            Integer.parseInt(x);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
     }
 
     @Transactional

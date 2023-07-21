@@ -1,7 +1,7 @@
 package com.increff.employee.controller;
 
-import com.increff.employee.model.InventoryData;
-import com.increff.employee.model.InventoryForm;
+import com.increff.employee.model.*;
+import com.increff.employee.pojo.BrandPojo;
 import com.increff.employee.pojo.InventoryPojo;
 import com.increff.employee.service.ApiException;
 import com.increff.employee.service.InventoryService;
@@ -28,6 +28,19 @@ public class InventoryApiController {
         Integer productId = service.getIdOfProduct(form.getBarcode());
         InventoryPojo p = convert(form,productId);
         service.add(p);
+    }
+
+    @ApiOperation(value = "tsv upload")
+    @RequestMapping(path = "/api/inventory/tsv", method = RequestMethod.POST)
+    public List<ErrorsInventory> addBulk(@RequestBody List<InventoryFormString> form) throws ApiException {
+        ArrayList<ErrorsInventory> data = service.fileCheck(form);
+        if(data.get(data.size()-1).isCheckError()==false)
+            for(InventoryFormString InventoryItem : form) {
+                Integer productId = service.getIdOfProduct(InventoryItem.getBarcode());
+                InventoryForm inventoryForm = convertToForm(InventoryItem);
+                service.add(convert(inventoryForm, productId));
+            }
+        return data;
     }
 
 
@@ -81,6 +94,13 @@ public class InventoryApiController {
         //Integer productId = service.getIdOfProduct(f.getBarcode());
         p.setProductId(productId);
         return p;
+    }
+
+    private static InventoryForm convertToForm(InventoryFormString form){
+        InventoryForm inventoryForm = new InventoryForm();
+        inventoryForm.setQuantity(Integer.parseInt(form.getQuantity()));
+        inventoryForm.setBarcode(form.getBarcode());
+        return inventoryForm;
     }
 
 }
