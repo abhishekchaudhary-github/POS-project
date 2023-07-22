@@ -40,18 +40,18 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">ReportService</td>
 <td class="coverageStat">
   <span class="percent">
-    11.1%
+    100%
   </span>
   <span class="absValue">
-    (1/9)
+    (9/9)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    1.1%
+    92.5%
   </span>
   <span class="absValue">
-    (1/93)
+    (86/93)
   </span>
 </td>
 </tr>
@@ -61,22 +61,31 @@ Current scope:     <a href="../../index.html">all classes</a>
   <tr>
     <td class="name">ReportService$$EnhancerBySpringCGLIB$$7349d03c</td>
   </tr>
+  <tr>
+    <td class="name">ReportService$$EnhancerBySpringCGLIB$$b6b80e91</td>
+  </tr>
+  <tr>
+    <td class="name">ReportService$$EnhancerBySpringCGLIB$$b6b80e91$$FastClassBySpringCGLIB$$e8fb391e</td>
+  </tr>
+  <tr>
+    <td class="name">ReportService$$FastClassBySpringCGLIB$$334a392</td>
+  </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    11.1%
+    100%
   </span>
   <span class="absValue">
-    (1/9)
+    (9/9)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    1.1%
+    92.5%
   </span>
   <span class="absValue">
-    (1/93)
+    (86/93)
   </span>
 </td>
 </tr>
@@ -129,126 +138,126 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;    @Transactional
 &nbsp;    public List&lt;BrandData&gt; getBrandReport(BrandForm form) throws ApiException {
-<b class="nc">&nbsp;        String brand = form.getBrand();</b>
-<b class="nc">&nbsp;        if(brand==null) brand=&quot;&quot;;</b>
-<b class="nc">&nbsp;        String category = form.getCategory();</b>
-<b class="nc">&nbsp;        if(category==null) category=&quot;&quot;;</b>
-<b class="nc">&nbsp;        List&lt;BrandPojo&gt; brandPojoList = brandService.getAll();</b>
-<b class="nc">&nbsp;        List&lt;BrandData&gt; brandDataList = new ArrayList&lt;BrandData&gt;();</b>
-<b class="nc">&nbsp;        for (BrandPojo brandPojo : brandPojoList) {</b>
-<b class="nc">&nbsp;            if (brandPojo.getBrand().contains(brand) &amp;&amp; brandPojo.getCategory().contains(category)) {</b>
-<b class="nc">&nbsp;                BrandData brandData = new BrandData();</b>
-<b class="nc">&nbsp;                brandData.setCategory(brandPojo.getCategory());</b>
-<b class="nc">&nbsp;                brandData.setBrand(brandPojo.getBrand());</b>
-<b class="nc">&nbsp;                brandDataList.add(brandData);</b>
+<b class="fc">&nbsp;        String brand = form.getBrand();</b>
+<b class="fc">&nbsp;        if(brand==null) brand=&quot;&quot;;</b>
+<b class="fc">&nbsp;        String category = form.getCategory();</b>
+<b class="fc">&nbsp;        if(category==null) category=&quot;&quot;;</b>
+<b class="fc">&nbsp;        List&lt;BrandPojo&gt; brandPojoList = brandService.getAll();</b>
+<b class="fc">&nbsp;        List&lt;BrandData&gt; brandDataList = new ArrayList&lt;BrandData&gt;();</b>
+<b class="fc">&nbsp;        for (BrandPojo brandPojo : brandPojoList) {</b>
+<b class="fc">&nbsp;            if (brandPojo.getBrand().contains(brand) &amp;&amp; brandPojo.getCategory().contains(category)) {</b>
+<b class="fc">&nbsp;                BrandData brandData = new BrandData();</b>
+<b class="fc">&nbsp;                brandData.setCategory(brandPojo.getCategory());</b>
+<b class="fc">&nbsp;                brandData.setBrand(brandPojo.getBrand());</b>
+<b class="fc">&nbsp;                brandDataList.add(brandData);</b>
 &nbsp;            }
-<b class="nc">&nbsp;        }</b>
-<b class="nc">&nbsp;        return brandDataList;</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return brandDataList;</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    @Transactional
 &nbsp;    public List&lt;DailyReportPojo&gt; getDailySalesReport(postDailyform form) throws ApiException {
-<b class="nc">&nbsp;        LocalDateTime startTime1 = convertTime(form.getStartTime());</b>
-<b class="nc">&nbsp;        LocalDateTime endTime1 = convertTime(form.getEndTime());</b>
-<b class="nc">&nbsp;        List&lt;DailyReportPojo&gt; dailyReportPojoList = dailyReportService.getAll(startTime1, endTime1);</b>
-<b class="nc">&nbsp;        System.out.println(&quot;01-06-2025&quot;);</b>
-<b class="nc">&nbsp;        return dailyReportPojoList;</b>
+<b class="fc">&nbsp;        LocalDateTime startTime1 = convertTime(form.getStartTime());</b>
+<b class="fc">&nbsp;        LocalDateTime endTime1 = convertTime(form.getEndTime());</b>
+<b class="fc">&nbsp;        List&lt;DailyReportPojo&gt; dailyReportPojoList = dailyReportService.getAll(startTime1, endTime1);</b>
+<b class="fc">&nbsp;        System.out.println(&quot;01-06-2025&quot;);</b>
+<b class="fc">&nbsp;        return dailyReportPojoList;</b>
 &nbsp;    }
 &nbsp;    @Transactional
 &nbsp;    public List&lt;InventoryReportData&gt; getInventoryReport(BrandForm form) throws ApiException {
-<b class="nc">&nbsp;        String brand = form.getBrand();</b>
-<b class="nc">&nbsp;        if(brand==null) brand=&quot;&quot;;</b>
-<b class="nc">&nbsp;        String category = form.getCategory();</b>
-<b class="nc">&nbsp;        if(category==null) category=&quot;&quot;;</b>
-<b class="nc">&nbsp;        List&lt;ProductPojo&gt; productPojoList = productService.getAll();</b>
-<b class="nc">&nbsp;        List&lt;BrandPojo&gt; brandPojoList = brandService.getAll();</b>
-<b class="nc">&nbsp;        List&lt;InventoryReportData&gt; inventoryDataList = new ArrayList&lt;InventoryReportData&gt;();</b>
-<b class="nc">&nbsp;        for (BrandPojo brandPojo : brandPojoList) {</b>
-<b class="nc">&nbsp;            if (brandPojo.getBrand().contains(brand) &amp;&amp; brandPojo.getCategory().contains(category)) {</b>
-<b class="nc">&nbsp;                InventoryReportData inventoryReportData = new InventoryReportData();</b>
-<b class="nc">&nbsp;                inventoryReportData.setCategory(brandPojo.getCategory());</b>
-<b class="nc">&nbsp;                inventoryReportData.setBrand(brandPojo.getBrand());</b>
-<b class="nc">&nbsp;                Integer brandId = brandPojo.getId();</b>
+<b class="fc">&nbsp;        String brand = form.getBrand();</b>
+<b class="fc">&nbsp;        if(brand==null) brand=&quot;&quot;;</b>
+<b class="fc">&nbsp;        String category = form.getCategory();</b>
+<b class="fc">&nbsp;        if(category==null) category=&quot;&quot;;</b>
+<b class="fc">&nbsp;        List&lt;ProductPojo&gt; productPojoList = productService.getAll();</b>
+<b class="fc">&nbsp;        List&lt;BrandPojo&gt; brandPojoList = brandService.getAll();</b>
+<b class="fc">&nbsp;        List&lt;InventoryReportData&gt; inventoryDataList = new ArrayList&lt;InventoryReportData&gt;();</b>
+<b class="fc">&nbsp;        for (BrandPojo brandPojo : brandPojoList) {</b>
+<b class="fc">&nbsp;            if (brandPojo.getBrand().contains(brand) &amp;&amp; brandPojo.getCategory().contains(category)) {</b>
+<b class="fc">&nbsp;                InventoryReportData inventoryReportData = new InventoryReportData();</b>
+<b class="fc">&nbsp;                inventoryReportData.setCategory(brandPojo.getCategory());</b>
+<b class="fc">&nbsp;                inventoryReportData.setBrand(brandPojo.getBrand());</b>
+<b class="fc">&nbsp;                Integer brandId = brandPojo.getId();</b>
 &nbsp;                //call quantity
-<b class="nc">&nbsp;                Integer quantity = 0 ;</b>
-<b class="nc">&nbsp;                for(ProductPojo productPojo : productPojoList ) {</b>
-<b class="nc">&nbsp;                    if (productPojo.getBrand_category() == brandId) {</b>
-<b class="nc">&nbsp;                        InventoryPojo inventoryPojo = inventoryService.getFromProductId(productPojo.getId());</b>
-<b class="nc">&nbsp;                        if(inventoryPojo!=null)</b>
-<b class="nc">&nbsp;                        quantity += inventoryPojo.getQuantity();</b>
+<b class="fc">&nbsp;                Integer quantity = 0 ;</b>
+<b class="fc">&nbsp;                for(ProductPojo productPojo : productPojoList ) {</b>
+<b class="fc">&nbsp;                    if (productPojo.getBrand_category() == brandId) {</b>
+<b class="fc">&nbsp;                        InventoryPojo inventoryPojo = inventoryService.getFromProductId(productPojo.getId());</b>
+<b class="fc">&nbsp;                        if(inventoryPojo!=null)</b>
+<b class="fc">&nbsp;                        quantity += inventoryPojo.getQuantity();</b>
 &nbsp;                    }
-<b class="nc">&nbsp;                }</b>
+<b class="fc">&nbsp;                }</b>
 &nbsp;                //why productservice.brandCategory not working !!!!!
 &nbsp;//                System.out.println(productService.brandCategory(brandPojo.getId()));
 &nbsp;//                InventoryPojo inventoryPojo = inventoryService.getFromProductId(productPojo.getId());
-<b class="nc">&nbsp;                inventoryReportData.setQuantity(quantity);</b>
-<b class="nc">&nbsp;                inventoryDataList.add(inventoryReportData);</b>
+<b class="fc">&nbsp;                inventoryReportData.setQuantity(quantity);</b>
+<b class="fc">&nbsp;                inventoryDataList.add(inventoryReportData);</b>
 &nbsp;            }
-<b class="nc">&nbsp;        }</b>
-<b class="nc">&nbsp;        return inventoryDataList;</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return inventoryDataList;</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    @Transactional
 &nbsp;    public List&lt;OrderPojo&gt; getOrdersByTime(LocalDateTime startTime, LocalDateTime endTime) {
-<b class="nc">&nbsp;        return dao.selectAllOrder(startTime,endTime);</b>
+<b class="fc">&nbsp;        return dao.selectAllOrder(startTime,endTime);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    @Transactional
 &nbsp;    public List&lt;OrderItemPojo&gt; getOrderItemByOrderId(Integer id){
-<b class="nc">&nbsp;        return dao.selectOrderItem(id);</b>
+<b class="fc">&nbsp;        return dao.selectOrderItem(id);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    @Transactional
 &nbsp;    public List&lt;SalesReportData&gt; getAll(String startTime, String endTime, String brand, String category) throws ApiException {
-<b class="nc">&nbsp;        LocalDateTime startTime1 = convertTime(startTime);</b>
-<b class="nc">&nbsp;        LocalDateTime endTime1 = convertTime(endTime);</b>
-<b class="nc">&nbsp;        List&lt;OrderPojo&gt; orderPojoList = dao.selectAllOrder(startTime1, endTime1);</b>
-<b class="nc">&nbsp;        List&lt;OrderItemPojo&gt; orderItemPojo = new ArrayList&lt;OrderItemPojo&gt;();</b>
-<b class="nc">&nbsp;        for (int i = 0; i &lt; orderPojoList.size(); i++) {</b>
-<b class="nc">&nbsp;            List&lt;OrderItemPojo&gt; tempOrderItemList = dao.selectOrderItem(orderPojoList.get(i).getId());</b>
-<b class="nc">&nbsp;            for (OrderItemPojo tempOrderItem : tempOrderItemList) {</b>
-<b class="nc">&nbsp;                orderItemPojo.add(tempOrderItem);</b>
-<b class="nc">&nbsp;            }</b>
+<b class="fc">&nbsp;        LocalDateTime startTime1 = convertTime(startTime);</b>
+<b class="fc">&nbsp;        LocalDateTime endTime1 = convertTime(endTime);</b>
+<b class="fc">&nbsp;        List&lt;OrderPojo&gt; orderPojoList = dao.selectAllOrder(startTime1, endTime1);</b>
+<b class="fc">&nbsp;        List&lt;OrderItemPojo&gt; orderItemPojo = new ArrayList&lt;OrderItemPojo&gt;();</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; orderPojoList.size(); i++) {</b>
+<b class="fc">&nbsp;            List&lt;OrderItemPojo&gt; tempOrderItemList = dao.selectOrderItem(orderPojoList.get(i).getId());</b>
+<b class="fc">&nbsp;            for (OrderItemPojo tempOrderItem : tempOrderItemList) {</b>
+<b class="fc">&nbsp;                orderItemPojo.add(tempOrderItem);</b>
+<b class="fc">&nbsp;            }</b>
 &nbsp;        }
 &nbsp;
-<b class="nc">&nbsp;        List&lt;SalesReportData&gt; salesReportDataList = new ArrayList&lt;SalesReportData&gt;();</b>
-<b class="nc">&nbsp;        HashMap&lt;Integer, SalesReportData&gt; hm = new HashMap&lt;Integer, SalesReportData&gt;();</b>
+<b class="fc">&nbsp;        List&lt;SalesReportData&gt; salesReportDataList = new ArrayList&lt;SalesReportData&gt;();</b>
+<b class="fc">&nbsp;        HashMap&lt;Integer, SalesReportData&gt; hm = new HashMap&lt;Integer, SalesReportData&gt;();</b>
 &nbsp;
-<b class="nc">&nbsp;        for (OrderItemPojo orderItem : orderItemPojo) {</b>
-<b class="nc">&nbsp;            SalesReportData salesReportData = new SalesReportData();</b>
-<b class="nc">&nbsp;            ProductPojo productPojo = productService.get(orderItem.getProductId());</b>
-<b class="nc">&nbsp;            BrandPojo brandPojo = brandService.get(productPojo.getBrand_category());</b>
+<b class="fc">&nbsp;        for (OrderItemPojo orderItem : orderItemPojo) {</b>
+<b class="fc">&nbsp;            SalesReportData salesReportData = new SalesReportData();</b>
+<b class="fc">&nbsp;            ProductPojo productPojo = productService.get(orderItem.getProductId());</b>
+<b class="fc">&nbsp;            BrandPojo brandPojo = brandService.get(productPojo.getBrand_category());</b>
 &nbsp;
 &nbsp;            //&quot;&quot; not needed
-<b class="nc">&nbsp;            if(brand==null) brand=&quot;&quot;;</b>
-<b class="nc">&nbsp;            if(category==null) category=&quot;&quot;;</b>
+<b class="fc">&nbsp;            if(brand==null) brand=&quot;&quot;;</b>
+<b class="fc">&nbsp;            if(category==null) category=&quot;&quot;;</b>
 &nbsp;
-<b class="nc">&nbsp;            if (brandPojo.getBrand().contains(brand) &amp;&amp; brandPojo.getCategory().contains(category)) {</b>
-<b class="nc">&nbsp;                Integer key = brandPojo.getId();</b>
-<b class="nc">&nbsp;                AddInHashmap(hm, salesReportData, key, brand, category, orderItem, brandPojo);</b>
+<b class="fc">&nbsp;            if (brandPojo.getBrand().contains(brand) &amp;&amp; brandPojo.getCategory().contains(category)) {</b>
+<b class="fc">&nbsp;                Integer key = brandPojo.getId();</b>
+<b class="fc">&nbsp;                AddInHashmap(hm, salesReportData, key, brand, category, orderItem, brandPojo);</b>
 &nbsp;            }
 &nbsp;
 &nbsp;
-<b class="nc">&nbsp;        }</b>
+<b class="fc">&nbsp;        }</b>
 &nbsp;
 &nbsp;//        //loop on hashmap and setting values in list
-<b class="nc">&nbsp;        for (Integer id : hm.keySet()) {</b>
-<b class="nc">&nbsp;            hm.get(id).setRevenue(hm.get(id).getRevenue() * hm.get(id).getQuantity());</b>
-<b class="nc">&nbsp;            salesReportDataList.add(hm.get(id));</b>
-<b class="nc">&nbsp;        }</b>
-<b class="nc">&nbsp;            return salesReportDataList;</b>
+<b class="fc">&nbsp;        for (Integer id : hm.keySet()) {</b>
+<b class="fc">&nbsp;            hm.get(id).setRevenue(hm.get(id).getRevenue() * hm.get(id).getQuantity());</b>
+<b class="fc">&nbsp;            salesReportDataList.add(hm.get(id));</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;            return salesReportDataList;</b>
 &nbsp;
 &nbsp;    }
 &nbsp;
 &nbsp;    private void AddInHashmap(HashMap&lt;Integer,SalesReportData&gt; hm,SalesReportData salesReportData,Integer key,String brand,String category,OrderItemPojo orderItem,BrandPojo brandPojo) {
-<b class="nc">&nbsp;        if (!hm.containsKey(key)) {</b>
+<b class="fc">&nbsp;        if (!hm.containsKey(key)) {</b>
 &nbsp;
-<b class="nc">&nbsp;                        salesReportData.setBrand(brandPojo.getBrand());</b>
-<b class="nc">&nbsp;                        salesReportData.setCategory(brandPojo.getCategory());</b>
-<b class="nc">&nbsp;                        salesReportData.setCategory(brandPojo.getCategory());</b>
-<b class="nc">&nbsp;                        salesReportData.setRevenue(orderItem.getSellingPrice());</b>
-<b class="nc">&nbsp;                        salesReportData.setQuantity(orderItem.getQuantity());</b>
-<b class="nc">&nbsp;                        hm.put(key, salesReportData);</b>
+<b class="fc">&nbsp;                        salesReportData.setBrand(brandPojo.getBrand());</b>
+<b class="fc">&nbsp;                        salesReportData.setCategory(brandPojo.getCategory());</b>
+<b class="fc">&nbsp;                        salesReportData.setCategory(brandPojo.getCategory());</b>
+<b class="fc">&nbsp;                        salesReportData.setRevenue(orderItem.getSellingPrice());</b>
+<b class="fc">&nbsp;                        salesReportData.setQuantity(orderItem.getQuantity());</b>
+<b class="fc">&nbsp;                        hm.put(key, salesReportData);</b>
 &nbsp;                    } else {
 <b class="nc">&nbsp;                        salesReportData.setBrand(brandPojo.getBrand());</b>
 <b class="nc">&nbsp;                        salesReportData.setCategory(brandPojo.getCategory());</b>
@@ -261,19 +270,19 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    }
 &nbsp;    private LocalDateTime convertTime(String dateString){
 &nbsp;        //careful here
-<b class="nc">&nbsp;        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd&quot;);</b>
+<b class="fc">&nbsp;        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd&quot;);</b>
 &nbsp;
 &nbsp;        // Parse the string to obtain a LocalDate object
-<b class="nc">&nbsp;        LocalDate date = LocalDate.parse(dateString, formatter);</b>
+<b class="fc">&nbsp;        LocalDate date = LocalDate.parse(dateString, formatter);</b>
 &nbsp;
 &nbsp;        // Define the specific time
-<b class="nc">&nbsp;        int hour = 00;</b>
-<b class="nc">&nbsp;        int minute = 00;</b>
-<b class="nc">&nbsp;        int second = 00;</b>
+<b class="fc">&nbsp;        int hour = 00;</b>
+<b class="fc">&nbsp;        int minute = 00;</b>
+<b class="fc">&nbsp;        int second = 00;</b>
 &nbsp;
 &nbsp;        // Create a LocalDateTime object with the date and specific time
-<b class="nc">&nbsp;        LocalDateTime dateTime = LocalDateTime.of(date, LocalTime.of(hour, minute, second));</b>
-<b class="nc">&nbsp;        return dateTime;</b>
+<b class="fc">&nbsp;        LocalDateTime dateTime = LocalDateTime.of(date, LocalTime.of(hour, minute, second));</b>
+<b class="fc">&nbsp;        return dateTime;</b>
 &nbsp;    }
 &nbsp;}
 </code>
@@ -299,7 +308,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-22 14:47</div>
+    <div style="float:right;">generated on 2023-07-22 15:18</div>
 </div>
 </body>
 </html>

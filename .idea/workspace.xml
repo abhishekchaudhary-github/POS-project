@@ -36,9 +36,7 @@
       <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-8.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-8.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-9.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-9.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-a.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-a.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/InventoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/InventoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/InventoryServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/InventoryServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/helper/formHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/helper/formHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/ReportServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/ReportServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +112,7 @@
       <recent name="$PROJECT_DIR$/src/main/webapp/html" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.InventoryServiceTest">
+  <component name="RunManager" selected="JUnit.ReportServiceTest">
     <configuration name="InventoryServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
@@ -126,38 +124,6 @@
       <option name="PACKAGE_NAME" value="com.increff.employee.service" />
       <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.InventoryServiceTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="InventoryServiceTest.testAddAlreadyExistingNegative" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="employee-spring-full" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.increff.employee.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.increff.employee.service" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.InventoryServiceTest" />
-      <option name="METHOD_NAME" value="testAddAlreadyExistingNegative" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="InventoryServiceTest.testFileCheckBarcodeNotExisting" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="employee-spring-full" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.increff.employee.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.increff.employee.service" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.InventoryServiceTest" />
-      <option name="METHOD_NAME" value="testFileCheckBarcodeNotExisting" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -178,7 +144,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="InventoryServiceTest.testGetAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ReportServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
         <pattern>
@@ -187,8 +153,39 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.increff.employee.service" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.InventoryServiceTest" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.ReportServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReportServiceTest.testGetAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employee-spring-full" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.increff.employee.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.increff.employee.service" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.ReportServiceTest" />
       <option name="METHOD_NAME" value="testGetAll" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReportServiceTest.testGetAllMoreBrandCategoryProducts" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employee-spring-full" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.increff.employee.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.increff.employee.service" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.ReportServiceTest" />
+      <option name="METHOD_NAME" value="testGetAllMoreBrandCategoryProducts" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -234,19 +231,19 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.InventoryServiceTest" />
-      <item itemvalue="JUnit.InventoryServiceTest.testAddAlreadyExistingNegative" />
-      <item itemvalue="JUnit.InventoryServiceTest.testFileCheckBarcodeNotExisting" />
       <item itemvalue="JUnit.InventoryServiceTest.testFileCheckNoErrors" />
-      <item itemvalue="JUnit.InventoryServiceTest.testGetAll" />
+      <item itemvalue="JUnit.ReportServiceTest" />
+      <item itemvalue="JUnit.ReportServiceTest.testGetAll" />
+      <item itemvalue="JUnit.ReportServiceTest.testGetAllMoreBrandCategoryProducts" />
       <item itemvalue="Maven.employee-spring-full [jetty:run]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ReportServiceTest" />
+        <item itemvalue="JUnit.ReportServiceTest.testGetAllMoreBrandCategoryProducts" />
+        <item itemvalue="JUnit.ReportServiceTest.testGetAll" />
         <item itemvalue="JUnit.InventoryServiceTest" />
         <item itemvalue="JUnit.InventoryServiceTest.testFileCheckNoErrors" />
-        <item itemvalue="JUnit.InventoryServiceTest.testFileCheckBarcodeNotExisting" />
-        <item itemvalue="JUnit.InventoryServiceTest.testGetAll" />
-        <item itemvalue="JUnit.InventoryServiceTest.testAddAlreadyExistingNegative" />
       </list>
     </recent_temporary>
   </component>
@@ -286,16 +283,16 @@
     <SUITE FILE_PATH="coverage/employee_spring$BrandServiceTest.ic" NAME="BrandServiceTest Coverage Results" MODIFIED="1690002628544" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.increff.employee.service.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/employee_spring$ReportServiceTest.ic" NAME="ReportServiceTest Coverage Results" MODIFIED="1689956587905" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/employee_spring$UserServiceTest.ic" NAME="UserServiceTest Coverage Results" MODIFIED="1689967645365" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.increff.employee.service.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/employee_spring$UserServiceTest.ic" NAME="UserServiceTest Coverage Results" MODIFIED="1689967645365" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/employee_spring$ReportServiceTest.ic" NAME="ReportServiceTest Coverage Results" MODIFIED="1690019309043" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.increff.employee.service.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/employee_spring$DailyReportServiceTest.ic" NAME="DailyReportServiceTest Coverage Results" MODIFIED="1689956670108" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.increff.employee.service.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/employee_spring$InventoryServiceTest.ic" NAME="InventoryServiceTest Coverage Results" MODIFIED="1690017166686" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/employee_spring$InventoryServiceTest.ic" NAME="InventoryServiceTest Coverage Results" MODIFIED="1690017425764" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.increff.employee.service.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/employee_spring$AboutAppServiceTest.ic" NAME="AboutAppServiceTest Coverage Results" MODIFIED="1689956559866" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

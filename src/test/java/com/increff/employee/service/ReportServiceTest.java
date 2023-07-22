@@ -1,9 +1,6 @@
 package com.increff.employee.service;
 
-import com.increff.employee.model.BrandData;
-import com.increff.employee.model.BrandForm;
-import com.increff.employee.model.InventoryReportData;
-import com.increff.employee.model.postDailyform;
+import com.increff.employee.model.*;
 import com.increff.employee.pojo.*;
 import helper.formHelper;
 import helper.pojoHelper;
@@ -16,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 public class ReportServiceTest  extends AbstractUnitTest {
 
@@ -166,20 +164,43 @@ public class ReportServiceTest  extends AbstractUnitTest {
     }
 
     //test getall()
-//    @Test
-//    public void testGetAll() throws ApiException {
-//        LocalDateTime time = LocalDateTime.now();
-//
-//        Integer orderId3 = orderItemService.addInOrder();
-//        OrderItemPojo orderItemPojo = pojoHelper.makeOrderItemPojo(orderId3,productId2,500,0.9);
-//        List<OrderItemPojo> OrderItemPojoList = new ArrayList<>();
-//        OrderItemPojoList.add(orderItemPojo);
-//        orderItemService.add(OrderItemPojoList);
-//
-//
-//
-//        List<OrderItemPojo> orderItemPojoList1 = reportService.getOrderItemByOrderId(orderId);
-//
-//    }
+    @Test
+    public void testGetAll() throws ApiException {
+        String startTime = "2021-03-27";
+        String endTime = "2024-03-27";
+
+        Integer orderId3 = orderItemService.addInOrder();
+        OrderItemPojo orderItemPojo = pojoHelper.makeOrderItemPojo(orderId3,productId2,500,0.9);
+        List<OrderItemPojo> OrderItemPojoList = new ArrayList<>();
+        OrderItemPojoList.add(orderItemPojo);
+        orderItemService.add(OrderItemPojoList);
+
+        List<SalesReportData> salesReportDataList = reportService.getAll(startTime,endTime,"","");
+        assertEquals(1,salesReportDataList.size());
+        assertEquals(new Integer(500),salesReportDataList.get(0).getQuantity());
+        assertEquals("brand2",salesReportDataList.get(0).getBrand());
+        assertEquals("category2",salesReportDataList.get(0).getCategory());
+    }
+
+    //more than one product same brand category
+    @Test
+    public void testGetAllMoreBrandCategoryProducts() throws ApiException {
+        String startTime = "2021-03-27";
+        String endTime = "2024-03-27";
+
+        Integer orderId3 = orderItemService.addInOrder();
+        OrderItemPojo orderItemPojo1 = pojoHelper.makeOrderItemPojo(orderId2,productId2,500,0.9);
+        OrderItemPojo orderItemPojo = pojoHelper.makeOrderItemPojo(orderId3,productId2,500,0.9);
+        List<OrderItemPojo> OrderItemPojoList = new ArrayList<>();
+        OrderItemPojoList.add(orderItemPojo);
+        OrderItemPojoList.add(orderItemPojo1);
+        orderItemService.add(OrderItemPojoList);
+
+        List<SalesReportData> salesReportDataList = reportService.getAll(startTime,endTime,"","");
+        assertEquals(1,salesReportDataList.size());
+        assertEquals(new Integer(1000),salesReportDataList.get(0).getQuantity());
+        assertEquals("brand2",salesReportDataList.get(0).getBrand());
+        assertEquals("category2",salesReportDataList.get(0).getCategory());
+    }
 
 }
