@@ -1,8 +1,13 @@
 package com.increff.employee.service;
 
+import com.increff.employee.model.BrandForm;
+import com.increff.employee.model.ErrorsBrand;
+import com.increff.employee.model.ErrorsInventory;
+import com.increff.employee.model.InventoryFormString;
 import com.increff.employee.pojo.BrandPojo;
 import com.increff.employee.pojo.InventoryPojo;
 import com.increff.employee.pojo.ProductPojo;
+import helper.formHelper;
 import helper.pojoHelper;
 import io.swagger.annotations.Api;
 import org.junit.Before;
@@ -56,6 +61,21 @@ public class InventoryServiceTest extends AbstractUnitTest {
         }
         catch (ApiException err) {
             assertEquals("quantity can not be less than 1",err.getMessage());
+        }
+    }
+//negative in already existing
+    @Test
+    public void testAddAlreadyExistingNegative() throws ApiException {
+        try {
+                InventoryPojo inventoryPojo = pojoHelper.makeInventoryPojo(productId, 2);
+                inventoryService.add(inventoryPojo);
+
+
+                InventoryPojo inventoryPojo1 = pojoHelper.makeInventoryPojo(productId, -1);
+                Integer inventoryId = inventoryService.add(inventoryPojo1);
+        }
+        catch(ApiException err) {
+                assertEquals("quantity can not be less than 1",err.getMessage());
         }
     }
 
@@ -126,16 +146,18 @@ public class InventoryServiceTest extends AbstractUnitTest {
     @Test
     public void testGetAll() throws ApiException {
         ArrayList<InventoryPojo> inventoryPojoList = new ArrayList<InventoryPojo>();
-        for( int i = 1 ; i <= 3 ; i ++ ) {
-            InventoryPojo inventoryPojo = pojoHelper.makeInventoryPojo(productId,i);
+            InventoryPojo inventoryPojo = pojoHelper.makeInventoryPojo(productId,2);
             inventoryService.add(inventoryPojo);
             inventoryPojoList.add(inventoryPojo);
-            InventoryPojo inventoryPojo1 = pojoHelper.makeInventoryPojo(productId2,i);
+            InventoryPojo inventoryPojo1 = pojoHelper.makeInventoryPojo(productId2,3);
             inventoryService.add(inventoryPojo1);
             inventoryPojoList.add(inventoryPojo1);
-        }
         List<InventoryPojo> inventoryPojoList1 = inventoryService.getAll();
-        assertTrue(inventoryPojoList1.size() == inventoryPojoList.size() && inventoryPojoList1.containsAll(inventoryPojoList) && inventoryPojoList.containsAll(inventoryPojoList1));
+        assertEquals(2,inventoryPojoList1.size());
+        assertEquals(productId,inventoryPojoList1.get(0).getProductId());
+        assertEquals(productId2,inventoryPojoList1.get(1).getProductId());
+        assertEquals(new Integer(2),inventoryPojoList1.get(0).getQuantity());
+        assertEquals(new Integer(3),inventoryPojoList1.get(1).getQuantity());
     }
 
     //test getIdOfProduct function
@@ -269,6 +291,84 @@ public class InventoryServiceTest extends AbstractUnitTest {
         catch(ApiException err) {
             assertEquals("Inventory with given ID does not exit, id: 1",err.getMessage());
         }
+    }
+
+    //filecheck tests
+    //5000+ size
+    @Test
+    public void testSizeHigherThan5000() throws ApiException {
+        try {
+            List<InventoryFormString> formList =new ArrayList<>();
+            for(int i=0;i<5001;i++){
+                InventoryFormString tem = new InventoryFormString();
+                formList.add(tem);
+            }
+            inventoryService.fileCheck(formList);
+        }
+        catch(ApiException err) {
+            assertEquals("maximum number of rows can be only 5000",err.getMessage());
+        }
+    }
+
+    //empty barcode
+    @Test
+    public void testFileCheckBarcodeEmpty() throws ApiException {
+        List<InventoryFormString> formList =new ArrayList<>();
+        InventoryFormString inventoryFormString = formHelper.makeInventoryFormString("","1");
+        formList.add(inventoryFormString);
+        ArrayList<ErrorsInventory> errorList = inventoryService.fileCheck(formList);
+        assertEquals("barcode field is empty",errorList.get(0).getMessage());
+    }
+
+    //empty quantity
+    @Test
+    public void testFileCheckCategoryEmpty() throws ApiException {
+        List<InventoryFormString> formList =new ArrayList<>();
+        InventoryFormString inventoryFormString = formHelper.makeInventoryFormString("barcode","");
+        formList.add(inventoryFormString);
+        ArrayList<ErrorsInventory> errorList = inventoryService.fileCheck(formList);
+        assertEquals("quantity field is empty",errorList.get(0).getMessage());;
+    }
+
+    //quantity format invalid
+    @Test
+    public void testFileCheckQuantityInvalid() throws ApiException {
+        List<InventoryFormString> formList =new ArrayList<>();
+        InventoryFormString inventoryFormString = formHelper.makeInventoryFormString("barcode","fds");
+        formList.add(inventoryFormString);
+        ArrayList<ErrorsInventory> errorList = inventoryService.fileCheck(formList);
+        assertEquals("quantity format is invalid",errorList.get(0).getMessage());;
+    }
+
+
+    //quantity -ve
+    @Test
+    public void testFileCheckQuantityNegative() throws ApiException {
+        List<InventoryFormString> formList =new ArrayList<>();
+        InventoryFormString inventoryFormString = formHelper.makeInventoryFormString("barcode","0");
+        formList.add(inventoryFormString);
+        ArrayList<ErrorsInventory> errorList = inventoryService.fileCheck(formList);
+        assertEquals("quantity is less than 1",errorList.get(0).getMessage());
+    }
+
+    //barcode not present
+    @Test
+    public void testFileCheckBarcodeNotExisting() throws ApiException {
+        List<InventoryFormString> formList =new ArrayList<>();
+        InventoryFormString inventoryFormString1 = formHelper.makeInventoryFormString("xbarcodex","3");
+        formList.add(inventoryFormString1);
+        ArrayList<ErrorsInventory> errorList = inventoryService.fileCheck(formList);
+        assertEquals("barcode is invalid",errorList.get(0).getMessage());;
+    }
+
+    @Test
+    public void testFileCheckNoErrors() throws ApiException {
+        List<InventoryFormString> formList =new ArrayList<>();
+        InventoryFormString inventoryFormString1 = formHelper.makeInventoryFormString("barcode","3");
+        formList.add(inventoryFormString1);
+        ArrayList<ErrorsInventory> errorList = inventoryService.fileCheck(formList);
+        assertEquals("",errorList.get(0).getMessage());;
+        assertEquals(new Integer(0),errorList.get(0).getErrorCount());
     }
 
 }

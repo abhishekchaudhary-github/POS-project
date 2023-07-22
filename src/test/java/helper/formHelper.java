@@ -1,6 +1,7 @@
 package helper;
 
 import com.increff.employee.model.BrandForm;
+import com.increff.employee.model.InventoryFormString;
 import com.increff.employee.model.ProductFormString;
 
 public class formHelper {
@@ -19,5 +20,12 @@ public class formHelper {
         productFormString.setMrp(mrp);
         productFormString.setName(name);
         return productFormString;
+    }
+
+    public static InventoryFormString makeInventoryFormString(String barcode, String quantity) {
+        InventoryFormString inventoryFormString = new InventoryFormString();
+        inventoryFormString.setBarcode(barcode);
+        inventoryFormString.setQuantity(quantity);
+        return inventoryFormString;
     }
 }

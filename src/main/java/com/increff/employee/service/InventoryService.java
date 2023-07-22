@@ -29,7 +29,7 @@ public class InventoryService {
 
     @Transactional(rollbackOn = ApiException.class)
     public Integer add(InventoryPojo inventoryPojo) throws ApiException {
-        if(dao.select(inventoryPojo.getProductId())==null) {
+        if(dao.getFromProductId(inventoryPojo.getProductId())==null) {
             if(inventoryPojo.getQuantity()<1){
                 throw new ApiException("quantity can not be less than 1");
             }
@@ -39,9 +39,9 @@ public class InventoryService {
             if(inventoryPojo.getQuantity()<1){
                 throw new ApiException("quantity can not be less than 1");
             }
-            Integer previousQuantity = dao.select(inventoryPojo.getProductId()).getQuantity();
+            Integer previousQuantity = dao.getFromProductId(inventoryPojo.getProductId()).getQuantity();
             Integer newQuantity = inventoryPojo.getQuantity()+previousQuantity;
-            InventoryPojo inventoryPojo1 = dao.select(inventoryPojo.getProductId());
+            InventoryPojo inventoryPojo1 = dao.getFromProductId(inventoryPojo.getProductId());
             inventoryPojo1.setQuantity(newQuantity);
             return inventoryPojo1.getId();
         }
@@ -146,20 +146,13 @@ public class InventoryService {
             errors.setMessage("quantity is less than 1");
             errors.setErrorCount(1);
         }
-
-
-        else if(hm.containsKey(barcode)) {
-            checks1 = true;
-            errors.setMessage("duplicate barcode");
-            errors.setErrorCount(1);
-        }
         else if(productService.getPojoFromBarcode(barcode)==null) {
             checks1 = true;
             errors.setMessage("barcode is invalid");
             errors.setErrorCount(1);
         }
         if(checks1 == false) {
-            errors.setMessage("no error in this line");
+            errors.setMessage("");
             errors.setErrorCount(0);
         }
         errors.setQuantity(quantity);
@@ -167,20 +160,10 @@ public class InventoryService {
         return errors;
     }
 
-    private boolean checkDouble(String x){
-        try {
-            Double.parseDouble(x);
-            return true;
-        }
-        catch (Exception e){
-            return false;
-        }
-    }
-
     @Transactional
     public ArrayList<ErrorsInventory> fileCheck(List<InventoryFormString> form) throws ApiException {
         if(form.size()>5000) {
-            throw new ApiException("maximum rows can be 5000");
+            throw new ApiException("maximum number of rows can be only 5000");
         }
         boolean checkError =false;
         ArrayList<ErrorsInventory> data = new ArrayList<ErrorsInventory>();

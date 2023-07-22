@@ -48,13 +48,19 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    95.5%
+    87.2%
   </span>
   <span class="absValue">
-    (168/176)
+    (170/195)
   </span>
 </td>
 </tr>
+  <tr>
+    <td class="name">ProductService$$EnhancerBySpringCGLIB$$1e98b405</td>
+  </tr>
+  <tr>
+    <td class="name">ProductService$$EnhancerBySpringCGLIB$$1e98b405$$FastClassBySpringCGLIB$$1451672e</td>
+  </tr>
   <tr>
     <td class="name">ProductService$$EnhancerBySpringCGLIB$$dc8a77b8</td>
   </tr>
@@ -76,10 +82,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    95.5%
+    87.2%
   </span>
   <span class="absValue">
-    (168/176)
+    (170/195)
   </span>
 </td>
 </tr>
@@ -392,43 +398,43 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;//               throw new ApiException(&quot;same barcode already exists&quot;);
 &nbsp;//           }
 &nbsp;//        }
-<b class="fc">&nbsp;        if(productPojoList.size()&gt;1) {</b>
+<b class="nc">&nbsp;        if(productPojoList.size()&gt;1) {</b>
 <b class="nc">&nbsp;            throw new ApiException(&quot;same barcode already exists&quot;);</b>
-&nbsp;        }
+<b class="fc">&nbsp;        }</b>
 <b class="fc">&nbsp;        ProductPojo tempPojo = getCheck(id);</b>
-<b class="fc">&nbsp;        if(StringUtil.isEmpty(p.getBarcode())) {</b>
+<b class="nc">&nbsp;        if(StringUtil.isEmpty(p.getBarcode())) {</b>
 <b class="fc">&nbsp;            throw new ApiException(&quot;barcode cannot be empty&quot;);</b>
-&nbsp;        }
+<b class="fc">&nbsp;        }</b>
 <b class="fc">&nbsp;        if(p.getBrand_category()==null) {</b>
-<b class="fc">&nbsp;            throw new ApiException(&quot;brand_category cannot be empty&quot;);</b>
-&nbsp;        }
-<b class="fc">&nbsp;        if(p.getMrp()==null) {</b>
-<b class="fc">&nbsp;            throw new ApiException(&quot;MRP cannot be empty&quot;);</b>
-&nbsp;        }
-<b class="fc">&nbsp;        if(StringUtil.isEmpty(p.getName())) {</b>
-<b class="fc">&nbsp;            throw new ApiException(&quot;name cannot be empty&quot;);</b>
-&nbsp;        }
-<b class="fc">&nbsp;        if(p.getMrp()&lt;0) {</b>
-<b class="fc">&nbsp;            throw new ApiException(&quot;MRP can not be a negative value&quot;);</b>
-&nbsp;        }
-&nbsp;        //
-<b class="fc">&nbsp;        if (!p.getBarcode().matches(&quot;^[a-zA-Z0-9]*$&quot;)) {</b>
-<b class="fc">&nbsp;            throw new ApiException(&quot;barcode must only contain alphanumeric characters&quot;);</b>
-&nbsp;        }
-&nbsp;
+<b class="nc">&nbsp;            throw new ApiException(&quot;brand_category cannot be empty&quot;);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="nc">&nbsp;        if(p.getMrp()==null) {</b>
+<b class="nc">&nbsp;            throw new ApiException(&quot;MRP cannot be empty&quot;);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="nc">&nbsp;        if(StringUtil.isEmpty(p.getName())) {</b>
+<b class="nc">&nbsp;            throw new ApiException(&quot;name cannot be empty&quot;);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="nc">&nbsp;        if(p.getMrp()&lt;0) {</b>
+<b class="nc">&nbsp;            throw new ApiException(&quot;MRP can not be a negative value&quot;);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="nc">&nbsp;        //</b>
+<b class="nc">&nbsp;        if (!p.getBarcode().matches(&quot;^[a-zA-Z0-9]*$&quot;)) {</b>
+<b class="nc">&nbsp;            throw new ApiException(&quot;barcode must only contain alphanumeric characters&quot;);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
 &nbsp;
 &nbsp;        //NOTHING INSERTED
-<b class="fc">&nbsp;        if((dao.select(id).getBarcode()+&quot;&quot;).equals((p.getBarcode()+&quot;&quot;)) &amp;&amp; (dao.select(id).getName()+&quot;&quot;).equals((p.getName()+&quot;&quot;)) &amp;&amp; (dao.select(id).getMrp()+&quot;&quot;).equals(p.getMrp()+&quot;&quot;) &amp;&amp; (dao.select(id).getBrand_category()+&quot;&quot;).equals(p.getBrand_category()+&quot;&quot;)){</b>
-<b class="fc">&nbsp;            return 0;</b>
-&nbsp;        }
-&nbsp;
-<b class="fc">&nbsp;        tempPojo.setBarcode(p.getBarcode());</b>
-<b class="fc">&nbsp;        tempPojo.setBrand_category(p.getBrand_category());</b>
+<b class="nc">&nbsp;        if((dao.select(id).getBarcode()+&quot;&quot;).equals((p.getBarcode()+&quot;&quot;)) &amp;&amp; (dao.select(id).getName()+&quot;&quot;).equals((p.getName()+&quot;&quot;)) &amp;&amp; (dao.select(id).getMrp()+&quot;&quot;).equals(p.getMrp()+&quot;&quot;) &amp;&amp; (dao.select(id).getBrand_category()+&quot;&quot;).equals(p.getBrand_category()+&quot;&quot;)){</b>
+<b class="nc">&nbsp;            return 0;</b>
+<b class="fc">&nbsp;        }</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        tempPojo.setBarcode(p.getBarcode());</b>
+<b class="nc">&nbsp;        tempPojo.setBrand_category(p.getBrand_category());</b>
 <b class="fc">&nbsp;        tempPojo.setName(p.getName());</b>
 <b class="fc">&nbsp;        tempPojo.setMrp(p.getMrp());</b>
 <b class="fc">&nbsp;        return 1;</b>
-&nbsp;    }
-&nbsp;
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
 &nbsp;
 &nbsp;
 &nbsp;
@@ -438,20 +444,20 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        ProductPojo p = dao.select(id);</b>
 <b class="fc">&nbsp;        if (p == null) {</b>
 <b class="fc">&nbsp;            throw new ApiException(&quot;Product with given ID does not exit, id: &quot; + id);</b>
-&nbsp;        }
+<b class="fc">&nbsp;        }</b>
 <b class="fc">&nbsp;        return p;</b>
 &nbsp;    }
-&nbsp;
+<b class="fc">&nbsp;</b>
 &nbsp;    protected static void normalize(ProductPojo p) {
 <b class="fc">&nbsp;        p.setBarcode(StringUtil.toLowerCase(p.getBarcode()));</b>
 <b class="fc">&nbsp;        p.setName(StringUtil.toLowerCase(p.getName()));</b>
-&nbsp;    }
-&nbsp;
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
 &nbsp;    protected static String normalizeBarcode(String barcode) {
 <b class="fc">&nbsp;        String normalizedBarcode = StringUtil.toLowerCase(barcode);</b>
 <b class="fc">&nbsp;        return normalizedBarcode;</b>
-&nbsp;    }
-&nbsp;
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
 &nbsp;}
 </code>
 </pre>
@@ -476,7 +482,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-22 13:54</div>
+    <div style="float:right;">generated on 2023-07-22 14:47</div>
 </div>
 </body>
 </html>
