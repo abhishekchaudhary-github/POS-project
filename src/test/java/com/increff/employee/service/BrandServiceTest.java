@@ -1,11 +1,15 @@
 package com.increff.employee.service;
 
+import com.increff.employee.model.BrandForm;
+import com.increff.employee.model.ErrorsBrand;
 import com.increff.employee.pojo.BrandPojo;
+import helper.formHelper;
 import helper.pojoHelper;
 import io.swagger.annotations.Api;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -178,9 +182,23 @@ public class BrandServiceTest extends AbstractUnitTest {
                 brandService.update(brandPojo1.getId(),brandPojo);
             }
         catch(ApiException err){
-            assertEquals("category already exists",err.getMessage());
+            assertEquals("this category already exists",err.getMessage());
         }
     }
+
+    @Test
+    public void testUpdateCheckIfUpdatesNothing() throws ApiException {
+            for(int i = 1;i<=2;i++) {
+                BrandPojo brandPojo = pojoHelper.makeBrandPojo("brand"+i,"category"+i);
+                brandService.add(brandPojo);
+            }
+
+            BrandPojo brandPojo = pojoHelper.makeBrandPojo("brand"+1,"category"+1);
+            BrandPojo brandPojo1 = brandService.getId("brand1","category1");
+           Integer status = brandService.update(brandPojo1.getId(),brandPojo);
+           assertEquals(new Integer(0),status);
+    }
+
 
     @Test
     public void testUpdateValues() throws ApiException {
@@ -217,5 +235,77 @@ public class BrandServiceTest extends AbstractUnitTest {
         brandService.normalize(brandPojo);
         assertEquals("shoe",brandPojo.getCategory());
         assertEquals("nike",brandPojo.getBrand());
+    }
+
+    //filecheck tests
+    //5000+ size
+    @Test
+    public void testSizeHigherThan5000() throws ApiException {
+        try {
+            List<BrandForm> formList =new ArrayList<>();
+            for(int i=0;i<5001;i++){
+                BrandForm tem = new BrandForm();
+                formList.add(tem);
+            }
+            brandService.fileCheck(formList);
+        }
+        catch(ApiException err) {
+            assertEquals("maximum number of rows can be only 5000",err.getMessage());
+        }
+    }
+
+    //empty brand
+    @Test
+    public void testFileCheckBrandEmpty() throws ApiException {
+            List<BrandForm> formList =new ArrayList<>();
+                BrandForm brandForm = formHelper.makeBrandForm("","category");
+                formList.add(brandForm);
+            ArrayList<ErrorsBrand> errorList = brandService.fileCheck(formList);
+        assertEquals("brand field is empty",errorList.get(0).getMessage());
+    }
+
+    //empty category
+    @Test
+    public void testFileCheckCategoryEmpty() throws ApiException {
+        List<BrandForm> formList =new ArrayList<>();
+        BrandForm brandForm = formHelper.makeBrandForm("brand","");
+        formList.add(brandForm);
+        ArrayList<ErrorsBrand> errorList = brandService.fileCheck(formList);
+        assertEquals("category field is empty",errorList.get(0).getMessage());
+    }
+
+    //already exists category
+    @Test
+    public void testFileCheckCategoryExists() throws ApiException {
+        BrandPojo brandPojo = pojoHelper.makeBrandPojo("brand","category");
+        brandService.add(brandPojo);
+        List<BrandForm> formList =new ArrayList<>();
+        BrandForm brandForm = formHelper.makeBrandForm("brand","category");
+        formList.add(brandForm);
+        ArrayList<ErrorsBrand> errorList = brandService.fileCheck(formList);
+        assertEquals("this category already exists",errorList.get(0).getMessage());
+    }
+
+    //duplicate category in list
+    @Test
+    public void testFileCheckCategoryExistsInList() throws ApiException {
+        List<BrandForm> formList =new ArrayList<>();
+        BrandForm brandForm = formHelper.makeBrandForm("brand","category");
+        BrandForm brandForm1 = formHelper.makeBrandForm("brand","category");
+        formList.add(brandForm);
+        formList.add(brandForm1);
+        ArrayList<ErrorsBrand> errorList = brandService.fileCheck(formList);
+        assertEquals("this category already exists",errorList.get(1).getMessage());
+    }
+
+    @Test
+    public void testFileCheckNoErrors() throws ApiException {
+        List<BrandForm> formList =new ArrayList<>();
+        BrandForm brandForm = formHelper.makeBrandForm("brand","category");
+        BrandForm brandForm1 = formHelper.makeBrandForm("brand1","category1");
+        formList.add(brandForm);
+        formList.add(brandForm1);
+        ArrayList<ErrorsBrand> errorList = brandService.fileCheck(formList);
+        assertEquals("",errorList.get(1).getMessage());
     }
 }

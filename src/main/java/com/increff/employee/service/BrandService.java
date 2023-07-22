@@ -119,7 +119,7 @@ public class BrandService {
                 }
             }
         if(checks1 == false) {
-            errors.setMessage("no error in this line");
+            errors.setMessage("");
             errors.setErrorCount(0);
         }
         errors.setBrand(brand);
@@ -130,7 +130,7 @@ public class BrandService {
     @Transactional
     public ArrayList<ErrorsBrand> fileCheck(List<BrandForm> form) throws ApiException {
         if(form.size()>5000) {
-            throw new ApiException("maximum rows can be 5000");
+            throw new ApiException("maximum number of rows can be only 5000");
         }
         boolean checkError =false;
         ArrayList<ErrorsBrand> data = new ArrayList<ErrorsBrand>();

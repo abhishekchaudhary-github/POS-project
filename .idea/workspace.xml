@@ -5,49 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd59bcda-ea0a-45cb-bbdf-b0788f0265bb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/UserServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_BLOCK.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_BLOCK.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_BLOCK_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_BLOCK_DESC.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_CLASS.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_CLASS.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_CLASS_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_CLASS_DESC.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_LINE.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_LINE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_LINE_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_LINE_DESC.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_METHOD.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_METHOD.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_METHOD_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_METHOD_DESC.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_NAME_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_NAME_DESC.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_BLOCK.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_BLOCK.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_BLOCK_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_BLOCK_DESC.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_CLASS.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_CLASS.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_CLASS_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_CLASS_DESC.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_LINE.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_LINE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_LINE_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_LINE_DESC.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_METHOD.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_METHOD.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_METHOD_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_METHOD_DESC.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_NAME_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_NAME_DESC.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-2.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-3.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-3.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-4.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-4.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-5.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-5.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-6.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-6.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-7.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-7.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-8.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-8.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-9.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-9.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-a.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-a.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-b.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-b.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/EmployeeApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/controller/EmployeeApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/EmployeeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/brand.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/brand.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/brand.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/brand.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/EmployeeServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/EmployeeServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/InventoryServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/InventoryServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/OrderServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/OrderServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/helper/pojoHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/helper/pojoHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/BrandService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/BrandService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/BrandServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/BrandServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,8 +83,8 @@
       <recent name="$PROJECT_DIR$/src/main/webapp/html" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.OrderServiceTest">
-    <configuration name="OrderServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.BrandServiceTest">
+    <configuration name="BrandServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
         <pattern>
@@ -133,13 +93,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.increff.employee.service" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.OrderServiceTest" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.BrandServiceTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BrandServiceTest.fileSizeHigherThan5000" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
         <pattern>
@@ -148,29 +108,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.increff.employee.service" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.UserServiceTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UserServiceTest.normalize" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="employee-spring-full" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.increff.employee.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.increff.employee.service" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.UserServiceTest" />
-      <option name="METHOD_NAME" value="normalize" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.BrandServiceTest" />
+      <option name="METHOD_NAME" value="fileSizeHigherThan5000" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserServiceTest.testDelete" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BrandServiceTest.testFileCheckBrandEmpty" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
         <pattern>
@@ -179,14 +124,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.increff.employee.service" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.UserServiceTest" />
-      <option name="METHOD_NAME" value="testDelete" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.BrandServiceTest" />
+      <option name="METHOD_NAME" value="testFileCheckBrandEmpty" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserServiceTest.testGetAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BrandServiceTest.testFileCheckCategoryExists" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
         <pattern>
@@ -195,8 +140,24 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.increff.employee.service" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.UserServiceTest" />
-      <option name="METHOD_NAME" value="testGetAll" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.BrandServiceTest" />
+      <option name="METHOD_NAME" value="testFileCheckCategoryExists" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BrandServiceTest.testFileCheckCategoryExistsInList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employee-spring-full" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.increff.employee.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.increff.employee.service" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.BrandServiceTest" />
+      <option name="METHOD_NAME" value="testFileCheckCategoryExistsInList" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -241,20 +202,20 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="JUnit.OrderServiceTest" />
-      <item itemvalue="JUnit.UserServiceTest" />
-      <item itemvalue="JUnit.UserServiceTest.normalize" />
-      <item itemvalue="JUnit.UserServiceTest.testDelete" />
-      <item itemvalue="JUnit.UserServiceTest.testGetAll" />
+      <item itemvalue="JUnit.BrandServiceTest" />
+      <item itemvalue="JUnit.BrandServiceTest.fileSizeHigherThan5000" />
+      <item itemvalue="JUnit.BrandServiceTest.testFileCheckBrandEmpty" />
+      <item itemvalue="JUnit.BrandServiceTest.testFileCheckCategoryExists" />
+      <item itemvalue="JUnit.BrandServiceTest.testFileCheckCategoryExistsInList" />
       <item itemvalue="Maven.employee-spring-full [jetty:run]" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.OrderServiceTest" />
-        <item itemvalue="JUnit.UserServiceTest" />
-        <item itemvalue="JUnit.UserServiceTest.normalize" />
-        <item itemvalue="JUnit.UserServiceTest.testDelete" />
-        <item itemvalue="JUnit.UserServiceTest.testGetAll" />
+        <item itemvalue="JUnit.BrandServiceTest" />
+        <item itemvalue="JUnit.BrandServiceTest.testFileCheckCategoryExistsInList" />
+        <item itemvalue="JUnit.BrandServiceTest.testFileCheckCategoryExists" />
+        <item itemvalue="JUnit.BrandServiceTest.testFileCheckBrandEmpty" />
+        <item itemvalue="JUnit.BrandServiceTest.fileSizeHigherThan5000" />
       </list>
     </recent_temporary>
   </component>
