@@ -1,9 +1,10 @@
 package com.increff.employee.service;
 
-import com.increff.employee.model.ProductForm;
+import com.increff.employee.model.*;
 import com.increff.employee.pojo.BrandPojo;
 import com.increff.employee.pojo.InventoryPojo;
 import com.increff.employee.pojo.ProductPojo;
+import helper.formHelper;
 import helper.pojoHelper;
 import org.junit.Before;
 import org.junit.Test;
@@ -55,8 +56,10 @@ public class ProductServiceTest extends AbstractUnitTest {
     @Test
     public void testEmptyBarcode() {
         try {
-            ProductPojo productPojo = pojoHelper.makeProductPojo("",brandId,1.12,"name");
-            productService.add(productPojo);
+            ProductPojo productPojo = pojoHelper.makeProductPojo("barcode",brandId,1.12,"name");
+            Integer productId = productService.add(productPojo);
+            ProductPojo productPojo1 = pojoHelper.makeProductPojo("",brandId,1.12,"name");
+            productService.update(productId,productPojo1);
         } catch (ApiException err) {
             assertEquals("barcode cannot be empty",err.getMessage());
         }
@@ -70,6 +73,16 @@ public class ProductServiceTest extends AbstractUnitTest {
             productService.add(productPojo);
         } catch (ApiException err) {
             assertEquals("brand_category cannot be empty",err.getMessage());
+        }
+    }
+
+    @Test
+    public void testBrandCategoryNotExist() throws ApiException {
+        try {
+            ProductPojo productPojo = pojoHelper.makeProductPojo("barcode", brandId, 1.12, "name");
+            productService.add(productPojo);
+        } catch (ApiException err) {
+            assertEquals("product with this brand category combination does not exist",err.getMessage());
         }
     }
 
@@ -92,6 +105,16 @@ public class ProductServiceTest extends AbstractUnitTest {
             productService.add(productPojo);
         } catch (ApiException err) {
             assertEquals("name cannot be empty",err.getMessage());
+        }
+    }
+
+    @Test
+    public void testBrand_CategoryInvalid() {
+        try {
+            ProductPojo productPojo = pojoHelper.makeProductPojo("barcode",0,1.12,"name");
+            productService.add(productPojo);
+        } catch (ApiException err) {
+            assertEquals("product with this brand category combination does not exist",err.getMessage());
         }
     }
 
@@ -215,6 +238,11 @@ public class ProductServiceTest extends AbstractUnitTest {
             assertEquals(productPojo1,productPojo2);
     }
 
+    @Test(expected = ApiException.class)
+    public void testGetIdApiException() throws ApiException {
+        productService.get(9999);
+    }
+
     //getBrandPojoFromBrandCategory function
     @Test
     public void testGetBrandPojoFromBrandCategory() throws ApiException {
@@ -247,16 +275,16 @@ public class ProductServiceTest extends AbstractUnitTest {
             ProductPojo productPojo = pojoHelper.makeProductPojo("barcode",brandId,1.1,"name");
 
             ProductForm f = new ProductForm();
-            f.setBarcode("barcode1");
-            f.setBrand("brand");
-            f.setCategory("category");
+            f.setBarcode("barcode");
+            f.setBrand("brand1");
+            f.setCategory("category4");
             f.setMrp(1.1);
             f.setName("name");
 
             productService.getBrandPojoFromForm(f);
         }
         catch (ApiException err) {
-            assertEquals("this barcode does not exist",err.getMessage());
+            assertEquals("this product does not exist",err.getMessage());
         }
     }
 
@@ -272,6 +300,39 @@ public class ProductServiceTest extends AbstractUnitTest {
         }
         List<ProductPojo> productPojoList1 = productService.getAll();
         assertTrue(productPojoList1.size() == productPojoList.size() && productPojoList1.containsAll(productPojoList) && productPojoList.containsAll(productPojoList1));
+    }
+
+    //getProductId
+    @Test
+    public void testGetProductIdNoError() throws ApiException {
+        ProductPojo productPojo = pojoHelper.makeProductPojo("barcode"+1,brandId,1.13,"name"+1);
+        productService.add(productPojo);
+        Integer id = productService.getProductId("barcode1");
+        assertEquals("barcode"+1,productService.get(id).getBarcode());
+        assertEquals(brandId,productService.get(id).getBrand_category());
+        assertEquals("name"+1,productService.get(id).getName());
+    }
+
+    @Test
+    public void testGetProductIdError() throws ApiException {
+        try {
+            productService.getProductId("barcode1");
+        }
+        catch (ApiException err) {
+            assertEquals("this barcode does not exist",err.getMessage());
+        }
+    }
+
+    //getPojoFromBarcode
+    @Test
+    public void testGetPojoFromBarcode() throws ApiException {
+        ProductPojo productPojo = pojoHelper.makeProductPojo("barcode"+1,brandId,1.13,"name"+1);
+        productService.add(productPojo);
+        ProductPojo productPojo1 = productService.getPojoFromBarcode("barcode1");
+        assertEquals("barcode"+1,productPojo1.getBarcode());
+        assertEquals(brandId,productPojo1.getBrand_category());
+        assertEquals("name"+1,productPojo1.getName());
+        assertEquals(new Double(1.13),productPojo1.getMrp());
     }
 
     //*****test getProductId function*******
@@ -313,7 +374,7 @@ public class ProductServiceTest extends AbstractUnitTest {
             Integer productId = productService.add(productPojo);
 
 
-            ProductPojo productPojo2 = pojoHelper.makeProductPojo("barcode",brandId,1.13,"name2");
+            ProductPojo productPojo2 = pojoHelper.makeProductPojo("barcode",brandId,1.13,"name4");
             productService.update(productId,productPojo2);
         }
         catch(ApiException err) {
@@ -343,7 +404,7 @@ public class ProductServiceTest extends AbstractUnitTest {
 
             ProductPojo productPojo = pojoHelper.makeProductPojo("barcode",brandId,1.12,"name");
             Integer productId = productService.add(productPojo);
-            ProductPojo productPojo1 = pojoHelper.makeProductPojo("barcode",brandId,1.12,"name");
+            ProductPojo productPojo1 = pojoHelper.makeProductPojo("barcode",null,1.12,"name");
             productService.update(productId,productPojo1);
         } catch (ApiException err) {
             assertEquals("brand_category cannot be empty",err.getMessage());
@@ -501,4 +562,195 @@ public class ProductServiceTest extends AbstractUnitTest {
         String barcode1 = productService.normalizeBarcode(barcode);
         assertEquals("barcode",barcode1);
     }
+
+    //filecheck tests
+    //5000+ size
+    @Test
+    public void testSizeHigherThan5000() throws ApiException {
+        try {
+            List<ProductFormString> formList =new ArrayList<>();
+            for(int i=0;i<5001;i++){
+                ProductFormString tem = new ProductFormString();
+                formList.add(tem);
+            }
+            productService.fileCheck(formList);
+        }
+        catch(ApiException err) {
+            assertEquals("maximum number of rows can be only 5000",err.getMessage());
+        }
+    }
+
+    //empty brand
+    @Test
+    public void testFileCheckBrandEmpty() throws ApiException {
+        List<ProductFormString> formList =new ArrayList<>();
+        ProductFormString productFormString = formHelper.makeProductFormString("ksa","","category","1","name");
+        formList.add(productFormString);
+        ArrayList<ErrorsProduct> errorList = productService.fileCheck(formList);
+        assertEquals("brand field is empty",errorList.get(0).getMessage());
+    }
+
+    //empty category
+    @Test
+    public void testFileCheckCategoryEmpty() throws ApiException {
+        List<ProductFormString> formList =new ArrayList<>();
+        ProductFormString productFormString = formHelper.makeProductFormString("ksa","brand","","1","name");
+        formList.add(productFormString);
+        ArrayList<ErrorsProduct> errorList = productService.fileCheck(formList);
+        assertEquals("category field is empty",errorList.get(0).getMessage());
+    }
+
+    //empty barcode
+    @Test
+    public void testFileCheckBarcodeEmpty() throws ApiException {
+        List<ProductFormString> formList =new ArrayList<>();
+        ProductFormString productFormString = formHelper.makeProductFormString("","brand","category","1","name");
+        formList.add(productFormString);
+        ArrayList<ErrorsProduct> errorList = productService.fileCheck(formList);
+        assertEquals("barcode field is empty",errorList.get(0).getMessage());
+    }
+
+    //empty mrp
+    @Test
+    public void testFileCheckMrpEmpty() throws ApiException {
+        List<ProductFormString> formList =new ArrayList<>();
+        ProductFormString productFormString = formHelper.makeProductFormString("sdf","brand","category","","name");
+        formList.add(productFormString);
+        ArrayList<ErrorsProduct> errorList = productService.fileCheck(formList);
+        assertEquals("mrp field is empty",errorList.get(0).getMessage());
+    }
+
+    //empty name
+    @Test
+    public void testFileCheckNameEmpty() throws ApiException {
+        List<ProductFormString> formList =new ArrayList<>();
+        ProductFormString productFormString = formHelper.makeProductFormString("sdf","brand","category","8",null);
+        formList.add(productFormString);
+        ArrayList<ErrorsProduct> errorList = productService.fileCheck(formList);
+        assertEquals("name field is empty",errorList.get(0).getMessage());
+    }
+
+    //empty mrp negative
+    @Test
+    public void testFileCheckMrpNegative() throws ApiException {
+        List<ProductFormString> formList =new ArrayList<>();
+        ProductFormString productFormString = formHelper.makeProductFormString("sdf","brand","category","-1","name");
+        formList.add(productFormString);
+        ArrayList<ErrorsProduct> errorList = productService.fileCheck(formList);
+        assertEquals("mrp is negative",errorList.get(0).getMessage());
+    }
+
+    //mrp invalid
+    @Test
+    public void testFileCheckMrpInvalid() throws ApiException {
+        List<ProductFormString> formList =new ArrayList<>();
+        ProductFormString productFormString = formHelper.makeProductFormString("sdf","brand","category","nsmd","name");
+        formList.add(productFormString);
+        ArrayList<ErrorsProduct> errorList = productService.fileCheck(formList);
+        assertEquals("mrp format is invalid",errorList.get(0).getMessage());
+    }
+
+    //duplicate barcode
+    @Test
+    public void testFileCheckBarcodeDuplicate() throws ApiException {
+//        ProductPojo productPojo = pojoHelper.makeProductPojo("barcode",brandId,1.12,"name");
+//        productService.add(productPojo);
+
+        List<ProductFormString> formList =new ArrayList<>();
+        ProductFormString productFormString = formHelper.makeProductFormString("barcode","brand","category","1","name4");
+        formList.add(productFormString);
+        ProductFormString productFormString1 = formHelper.makeProductFormString("barcode","brand","category","1","name3");
+        formList.add(productFormString1);
+        ArrayList<ErrorsProduct> errorList = productService.fileCheck(formList);
+        assertEquals("duplicate barcode",errorList.get(1).getMessage());
+    }
+
+    //barcode must only contain alphanumeric characters
+    @Test
+    public void testFileCheckBarcodeAlphanumericOnly() throws ApiException {
+        List<ProductFormString> formList =new ArrayList<>();
+        ProductFormString productFormString = formHelper.makeProductFormString("ba$rcode","brand","category","1","name");
+        formList.add(productFormString);
+        ArrayList<ErrorsProduct> errorList = productService.fileCheck(formList);
+        assertEquals("barcode must only contain alphanumeric characters",errorList.get(0).getMessage());
+    }
+
+
+    //brand category combination not exists
+    @Test
+    public void testFileCheckBrandCategoryNotExist() throws ApiException {
+        List<ProductFormString> formList =new ArrayList<>();
+        ProductFormString productFormString = formHelper.makeProductFormString("barcode","brand","category2","1","name3");
+        formList.add(productFormString);
+        ArrayList<ErrorsProduct> errorList = productService.fileCheck(formList);
+        assertEquals("no such brand category combination exists",errorList.get(0).getMessage());
+    }
+
+    //duplicate product
+    @Test
+    public void testFileCheckDuplicateProduct2() throws ApiException {
+        List<ProductFormString> formList =new ArrayList<>();
+        ProductFormString productFormString = formHelper.makeProductFormString("barcode","brand","category","1","name");
+        ProductFormString productFormString1 = formHelper.makeProductFormString("barcdfode","brand","category","1.5","name");
+        formList.add(productFormString);
+        formList.add(productFormString1);
+        ArrayList<ErrorsProduct> errorList = productService.fileCheck(formList);
+        assertEquals("duplicate product",errorList.get(1).getMessage());
+    }
+
+
+    //duplicate product
+    @Test
+    public void testFileCheckDuplicateBarcode() throws ApiException {
+        List<ProductFormString> formList =new ArrayList<>();
+        ProductFormString productFormString = formHelper.makeProductFormString("barcode","brand","category","1","name");
+        ProductFormString productFormString1 = formHelper.makeProductFormString("barcode","brand","category","1.5","name11");
+        formList.add(productFormString);
+        formList.add(productFormString1);
+        ArrayList<ErrorsProduct> errorList = productService.fileCheck(formList);
+        assertEquals("duplicate barcode",errorList.get(1).getMessage());
+    }
+
+    //duplicate product
+    @Test
+    public void testFileCheckDuplicateProduct() throws ApiException {
+        ProductPojo productPojo = pojoHelper.makeProductPojo("barcode",brandId,1.12,"name");
+        productService.add(productPojo);
+
+        List<ProductFormString> formList =new ArrayList<>();
+        ProductFormString productFormString = formHelper.makeProductFormString("barcode","brand","category","1","name");
+        formList.add(productFormString);
+        ArrayList<ErrorsProduct> errorList = productService.fileCheck(formList);
+        assertEquals("duplicate product",errorList.get(0).getMessage());
+    }
+
+    //duplicate barcode
+    @Test
+    public void testFileCheckDuplicateBarcode2() throws ApiException {
+        ProductPojo productPojo = pojoHelper.makeProductPojo("barcode",brandId,1.12,"name");
+        productService.add(productPojo);
+
+        List<ProductFormString> formList =new ArrayList<>();
+        ProductFormString productFormString = formHelper.makeProductFormString("barcode","brand","category","1","name2");
+        formList.add(productFormString);
+        ArrayList<ErrorsProduct> errorList = productService.fileCheck(formList);
+        assertEquals("duplicate barcode",errorList.get(0).getMessage());
+    }
+
+
+
+    //no error in this line
+    @Test
+    public void testFileCheckNoError() throws ApiException {
+        ProductPojo productPojo = pojoHelper.makeProductPojo("barcode3",brandId,1.12,"name2");
+        productService.add(productPojo);
+
+        List<ProductFormString> formList =new ArrayList<>();
+        ProductFormString productFormString = formHelper.makeProductFormString("barcode","brand","category","1","name");
+        formList.add(productFormString);
+        ArrayList<ErrorsProduct> errorList = productService.fileCheck(formList);
+        assertEquals("no error in this line",errorList.get(0).getMessage());
+    }
+
+
 }

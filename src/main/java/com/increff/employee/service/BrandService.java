@@ -95,12 +95,12 @@ public class BrandService {
         boolean checks1=false;
         String brand = brandForm.getBrand();
         String category = brandForm.getCategory();
-        if(brand==null||brand==""){
+        if(brand==null||StringUtil.isEmpty(brand)){
             checks1=true;
             errors.setMessage("brand field is empty");
             errors.setErrorCount(1);
         }
-        else if(category==null||category==""){
+        else if(category==null||StringUtil.isEmpty(category)){
             checks1=true;
             errors.setMessage("category field is empty");
             errors.setErrorCount(1);

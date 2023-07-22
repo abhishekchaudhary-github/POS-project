@@ -40,70 +40,40 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">OrderService</td>
 <td class="coverageStat">
   <span class="percent">
-    75%
+    12.5%
   </span>
   <span class="absValue">
-    (6/8)
+    (1/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    18.3%
+    1.7%
   </span>
   <span class="absValue">
-    (11/60)
+    (1/60)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">OrderService$$EnhancerBySpringCGLIB$$153454c4</td>
-  </tr>
-  <tr>
-    <td class="name">OrderService$$EnhancerBySpringCGLIB$$153454c4$$FastClassBySpringCGLIB$$45318258</td>
-  </tr>
-  <tr>
-    <td class="name">OrderService$$EnhancerBySpringCGLIB$$21dc21ff</td>
-  </tr>
-  <tr>
-    <td class="name">OrderService$$EnhancerBySpringCGLIB$$3ddac59a</td>
-  </tr>
-  <tr>
-    <td class="name">OrderService$$EnhancerBySpringCGLIB$$8b76299a</td>
-  </tr>
-  <tr>
-    <td class="name">OrderService$$EnhancerBySpringCGLIB$$8b76299a$$FastClassBySpringCGLIB$$6fc0691b</td>
-  </tr>
-  <tr>
-    <td class="name">OrderService$$EnhancerBySpringCGLIB$$8c9377c7</td>
-  </tr>
-  <tr>
-    <td class="name">OrderService$$EnhancerBySpringCGLIB$$aae0cb08</td>
-  </tr>
-  <tr>
-    <td class="name">OrderService$$EnhancerBySpringCGLIB$$aae0cb08$$FastClassBySpringCGLIB$$2c2b9bf5</td>
-  </tr>
-  <tr>
-    <td class="name">OrderService$$EnhancerBySpringCGLIB$$e928f9e6</td>
-  </tr>
-  <tr>
-    <td class="name">OrderService$$FastClassBySpringCGLIB$$2d70acb6</td>
+    <td class="name">OrderService$$EnhancerBySpringCGLIB$$2f1c85db</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    75%
+    12.5%
   </span>
   <span class="absValue">
-    (6/8)
+    (1/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    18.3%
+    1.7%
   </span>
   <span class="absValue">
-    (11/60)
+    (1/60)
   </span>
 </td>
 </tr>
@@ -170,30 +140,30 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;    @Transactional(rollbackOn = ApiException.class)
 &nbsp;    public Integer add() throws ApiException {
-<b class="fc">&nbsp;        LocalDateTime timeOfOrder = timeOfOrderCreation();</b>
-<b class="fc">&nbsp;        OrderPojo orderPojo = new OrderPojo();</b>
-<b class="fc">&nbsp;        orderPojo.setTime(timeOfOrder);</b>
-<b class="fc">&nbsp;        Integer orderId = dao.insert(orderPojo);</b>
-<b class="fc">&nbsp;        return orderId;</b>
+<b class="nc">&nbsp;        LocalDateTime timeOfOrder = timeOfOrderCreation();</b>
+<b class="nc">&nbsp;        OrderPojo orderPojo = new OrderPojo();</b>
+<b class="nc">&nbsp;        orderPojo.setTime(timeOfOrder);</b>
+<b class="nc">&nbsp;        Integer orderId = dao.insert(orderPojo);</b>
+<b class="nc">&nbsp;        return orderId;</b>
 &nbsp;    }
 &nbsp;
 &nbsp;
 &nbsp;    @Transactional
 &nbsp;    public void delete(Integer id) {
-<b class="fc">&nbsp;        dao.delete(id);</b>
+<b class="nc">&nbsp;        dao.delete(id);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    @Transactional
 &nbsp;    public List&lt;OrderPojo&gt; getAll() {
-<b class="fc">&nbsp;        return dao.selectAll();</b>
+<b class="nc">&nbsp;        return dao.selectAll();</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    protected static LocalDateTime timeOfOrderCreation() {
-<b class="fc">&nbsp;        LocalDateTime dateTime = LocalDateTime.now();</b>
+<b class="nc">&nbsp;        LocalDateTime dateTime = LocalDateTime.now();</b>
 &nbsp;//        SimpleDateFormat createdTime = new SimpleDateFormat(&quot;dd-MM-yyyy HH:mm&quot;);
 &nbsp;//        Date currentDate = new Date();
 &nbsp;//        String formattedDateTime = createdTime.format(currentDate);
-<b class="fc">&nbsp;        return dateTime;</b>
+<b class="nc">&nbsp;        return dateTime;</b>
 &nbsp;    }
 &nbsp;
 &nbsp;//    public Integer getLastOrderId() {
@@ -211,7 +181,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;//    }
 &nbsp;
 &nbsp;    public OrderPojo getOrderById(Integer id) {
-<b class="fc">&nbsp;        return dao.orderById(id);</b>
+<b class="nc">&nbsp;        return dao.orderById(id);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    @Transactional(rollbackOn  = ApiException.class)
@@ -309,7 +279,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-22 00:57</div>
+    <div style="float:right;">generated on 2023-07-22 13:54</div>
 </div>
 </body>
 </html>

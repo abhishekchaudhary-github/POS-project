@@ -41,7 +41,7 @@ public class ProductService {
             throw new ApiException("brand_category cannot be empty");
         }
 
-        if(p.getBrand_category()==null||p.getBrand_category()==0){
+        if(p.getBrand_category()==0){
             throw new ApiException("product with this brand category combination does not exist");
         }
         if(p.getMrp()==null){
@@ -114,27 +114,27 @@ public class ProductService {
         String name = productForm.getName();
         String mrp = productForm.getMrp();
         BrandPojo brandPojo2 = brandService.getId(brand,category);
-        if(brand==null||brand==""){
+        if(brand==null||StringUtil.isEmpty(brand)){
             checks1=true;
             errors.setMessage("brand field is empty");
             errors.setErrorCount(1);
         }
-        else if(category==null||category==""){
+        else if(category==null||StringUtil.isEmpty(category)){
             checks1=true;
             errors.setMessage("category field is empty");
             errors.setErrorCount(1);
         }
-        else if(name==null||name==""){
+        else if(name==null||StringUtil.isEmpty(name)){
             checks1=true;
             errors.setMessage("name field is empty");
             errors.setErrorCount(1);
         }
-        else if(barcode==null||barcode==""){
+        else if(barcode==null||StringUtil.isEmpty(barcode)){
             checks1=true;
             errors.setMessage("barcode field is empty");
             errors.setErrorCount(1);
         }
-        else if(mrp==null||mrp=="") {
+        else if(mrp==null||StringUtil.isEmpty(mrp)) {
             checks1 = true;
             errors.setMessage("mrp field is empty");
             errors.setErrorCount(1);
@@ -142,6 +142,11 @@ public class ProductService {
         else if(checkDouble(mrp)==false){
             checks1 = true;
             errors.setMessage("mrp format is invalid");
+            errors.setErrorCount(1);
+        }
+        else if(name==null||StringUtil.isEmpty(name)){
+            checks1 = true;
+            errors.setMessage("name field is empty");
             errors.setErrorCount(1);
         }
         else if(Double.parseDouble(mrp)<0) {
@@ -169,7 +174,7 @@ public class ProductService {
             errors.setMessage("duplicate product");
             errors.setErrorCount(1);
         }
-        else if(brandPojo2==null){
+        else if(hm.containsKey(barcode)){
             checks1 = true;
             errors.setMessage("duplicate barcode");
             errors.setErrorCount(1);
@@ -183,6 +188,13 @@ public class ProductService {
                 errors.setErrorCount(1);
             }
 
+        }
+        if(checks1==false) {
+            if(dao.barcodeMustExist(barcode)!=null) {
+                checks1 = true;
+                errors.setMessage("duplicate barcode");
+                errors.setErrorCount(1);
+            }
         }
         if(checks1 == false) {
             errors.setMessage("no error in this line");
@@ -208,12 +220,12 @@ public class ProductService {
     @Transactional
     public ArrayList<ErrorsProduct> fileCheck(List<ProductFormString> form) throws ApiException {
         if(form.size()>5000) {
-            throw new ApiException("maximum rows can be 5000");
+            throw new ApiException("maximum number of rows can be only 5000");
         }
         boolean checkError =false;
         ArrayList<ErrorsProduct> data = new ArrayList<ErrorsProduct>();
         ArrayList<ProductFormString> productPojoList = new ArrayList<>();
-        HashMap<String,Integer> hm = new HashMap<>();
+        HashMap<String,Integer> hm = new HashMap<String,Integer>();
         for(ProductFormString productItem : form){
             ErrorsProduct error = checkError(productItem,productPojoList,hm);
             if(checkError==true || error.getErrorCount()>0) {
@@ -305,7 +317,7 @@ public class ProductService {
             throw new ApiException("name cannot be empty");
         }
         if(p.getMrp()<0) {
-            throw new ApiException("MRP can't be a negative value");
+            throw new ApiException("MRP can not be a negative value");
         }
         //
         if (!p.getBarcode().matches("^[a-zA-Z0-9]*$")) {

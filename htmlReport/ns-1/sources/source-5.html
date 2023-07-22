@@ -40,73 +40,40 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">InventoryService</td>
 <td class="coverageStat">
   <span class="percent">
-    71.4%
+    7.1%
   </span>
   <span class="absValue">
-    (10/14)
+    (1/14)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    33.3%
+    1%
   </span>
   <span class="absValue">
-    (33/99)
+    (1/99)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">InventoryService$$EnhancerBySpringCGLIB$$154cc0f0</td>
-  </tr>
-  <tr>
-    <td class="name">InventoryService$$EnhancerBySpringCGLIB$$154cc0f0$$FastClassBySpringCGLIB$$bd0ab19b</td>
-  </tr>
-  <tr>
-    <td class="name">InventoryService$$EnhancerBySpringCGLIB$$166a0f1d</td>
-  </tr>
-  <tr>
-    <td class="name">InventoryService$$EnhancerBySpringCGLIB$$34b7625e</td>
-  </tr>
-  <tr>
-    <td class="name">InventoryService$$EnhancerBySpringCGLIB$$34b7625e$$FastClassBySpringCGLIB$$a3e53f93</td>
-  </tr>
-  <tr>
-    <td class="name">InventoryService$$EnhancerBySpringCGLIB$$72ff913c</td>
-  </tr>
-  <tr>
-    <td class="name">InventoryService$$EnhancerBySpringCGLIB$$9f0aec1a</td>
-  </tr>
-  <tr>
-    <td class="name">InventoryService$$EnhancerBySpringCGLIB$$9f0aec1a$$FastClassBySpringCGLIB$$1537807d</td>
-  </tr>
-  <tr>
-    <td class="name">InventoryService$$EnhancerBySpringCGLIB$$abb2b955</td>
-  </tr>
-  <tr>
-    <td class="name">InventoryService$$EnhancerBySpringCGLIB$$c7b15cf0</td>
-  </tr>
-  <tr>
-    <td class="name">InventoryService$$EnhancerBySpringCGLIB$$c7b15cf0$$FastClassBySpringCGLIB$$bc7c176c</td>
-  </tr>
-  <tr>
-    <td class="name">InventoryService$$FastClassBySpringCGLIB$$f5c41f68</td>
+    <td class="name">InventoryService$$EnhancerBySpringCGLIB$$b8f31d31</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    71.4%
+    7.1%
   </span>
   <span class="absValue">
-    (10/14)
+    (1/14)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    33.3%
+    1%
   </span>
   <span class="absValue">
-    (33/99)
+    (1/99)
   </span>
 </td>
 </tr>
@@ -148,11 +115,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;    @Transactional(rollbackOn = ApiException.class)
 &nbsp;    public Integer add(InventoryPojo inventoryPojo) throws ApiException {
-<b class="fc">&nbsp;        if(dao.select(inventoryPojo.getProductId())==null) {</b>
-<b class="fc">&nbsp;            if(inventoryPojo.getQuantity()&lt;1){</b>
-<b class="fc">&nbsp;                throw new ApiException(&quot;quantity can not be less than 1&quot;);</b>
+<b class="nc">&nbsp;        if(dao.select(inventoryPojo.getProductId())==null) {</b>
+<b class="nc">&nbsp;            if(inventoryPojo.getQuantity()&lt;1){</b>
+<b class="nc">&nbsp;                throw new ApiException(&quot;quantity can not be less than 1&quot;);</b>
 &nbsp;            }
-<b class="fc">&nbsp;            return dao.insert(inventoryPojo);</b>
+<b class="nc">&nbsp;            return dao.insert(inventoryPojo);</b>
 &nbsp;        }
 &nbsp;        else {
 <b class="nc">&nbsp;            if(inventoryPojo.getQuantity()&lt;1){</b>
@@ -170,35 +137,35 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    @Transactional(rollbackOn = ApiException.class)
 &nbsp;    public void deductQuantity(Integer productId, Integer quantity) throws ApiException {
 &nbsp;        //MAJOR CHANGE HERE
-<b class="fc">&nbsp;        InventoryPojo productToBeChanged = dao.getFromProductId(productId);</b>
-<b class="fc">&nbsp;        Integer previousQuantity = productToBeChanged.getQuantity();</b>
-<b class="fc">&nbsp;        if(previousQuantity - quantity&lt;0){</b>
-<b class="fc">&nbsp;            throw new ApiException(&quot;quantity is more than what is present in the inventory&quot;);</b>
+<b class="nc">&nbsp;        InventoryPojo productToBeChanged = dao.getFromProductId(productId);</b>
+<b class="nc">&nbsp;        Integer previousQuantity = productToBeChanged.getQuantity();</b>
+<b class="nc">&nbsp;        if(previousQuantity - quantity&lt;0){</b>
+<b class="nc">&nbsp;            throw new ApiException(&quot;quantity is more than what is present in the inventory&quot;);</b>
 &nbsp;        }
-<b class="fc">&nbsp;        productToBeChanged.setQuantity(previousQuantity - quantity);</b>
+<b class="nc">&nbsp;        productToBeChanged.setQuantity(previousQuantity - quantity);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    @Transactional(rollbackOn = ApiException.class)
 &nbsp;    public InventoryPojo get(Integer id) throws ApiException {
-<b class="fc">&nbsp;        return dao.select(id);</b>
+<b class="nc">&nbsp;        return dao.select(id);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    @Transactional
 &nbsp;    public List&lt;InventoryPojo&gt; getAll() {
-<b class="fc">&nbsp;        return dao.selectAll();</b>
+<b class="nc">&nbsp;        return dao.selectAll();</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    @Transactional
 &nbsp;    public Integer getIdOfProduct(String barcode) throws ApiException {
-<b class="fc">&nbsp;        return productService.getProductId(barcode);</b>
+<b class="nc">&nbsp;        return productService.getProductId(barcode);</b>
 &nbsp;    }
 &nbsp;    public String getForBarcode(Integer productId) throws ApiException {
-<b class="fc">&nbsp;        return productService.get(productId).getBarcode();</b>
+<b class="nc">&nbsp;        return productService.get(productId).getBarcode();</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    @Transactional
 &nbsp;    public InventoryPojo getFromProductId(Integer productId) throws ApiException {
-<b class="fc">&nbsp;        return dao.getFromProductId(productId);</b>
+<b class="nc">&nbsp;        return dao.getFromProductId(productId);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;//    public Integer getIdFromBarcode(String barcode) throws ApiException {
@@ -211,30 +178,30 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;    @Transactional(rollbackOn  = ApiException.class)
 &nbsp;    public Integer update(Integer id, InventoryPojo p) throws ApiException {
-<b class="fc">&nbsp;        if(p.getQuantity()==null) {</b>
-<b class="fc">&nbsp;            throw new ApiException(&quot;quantity of given product cannot be empty&quot;);</b>
+<b class="nc">&nbsp;        if(p.getQuantity()==null) {</b>
+<b class="nc">&nbsp;            throw new ApiException(&quot;quantity of given product cannot be empty&quot;);</b>
 &nbsp;        }
-<b class="fc">&nbsp;        if(p.getQuantity()&lt;1){</b>
-<b class="fc">&nbsp;            throw new ApiException(&quot;quantity of given product cannot be less than 1&quot;);</b>
+<b class="nc">&nbsp;        if(p.getQuantity()&lt;1){</b>
+<b class="nc">&nbsp;            throw new ApiException(&quot;quantity of given product cannot be less than 1&quot;);</b>
 &nbsp;        }
 &nbsp;        //check if given product id exist in inventory
-<b class="fc">&nbsp;        if(dao.getFromProductId(p.getProductId())==null){</b>
-<b class="fc">&nbsp;            throw new ApiException(&quot;inventory of this productId does  not exist&quot;);</b>
+<b class="nc">&nbsp;        if(dao.getFromProductId(p.getProductId())==null){</b>
+<b class="nc">&nbsp;            throw new ApiException(&quot;inventory of this productId does  not exist&quot;);</b>
 &nbsp;        }
-<b class="fc">&nbsp;        else if(!dao.getFromProductId(p.getProductId()).equals(dao.select(id)) &amp;&amp; dao.getFromProductId(p.getProductId())!=null) {</b>
+<b class="nc">&nbsp;        else if(!dao.getFromProductId(p.getProductId()).equals(dao.select(id)) &amp;&amp; dao.getFromProductId(p.getProductId())!=null) {</b>
 <b class="nc">&nbsp;            throw new ApiException(&quot;inventory can not be updated because of alter in productId&quot;);</b>
 &nbsp;        }
-<b class="fc">&nbsp;        InventoryPojo tempPojo = getCheck(id);</b>
-<b class="fc">&nbsp;        String s1 = dao.select(id).getQuantity()+&quot;&quot;;</b>
-<b class="fc">&nbsp;        String s2 = p.getQuantity()+&quot;&quot;;</b>
+<b class="nc">&nbsp;        InventoryPojo tempPojo = getCheck(id);</b>
+<b class="nc">&nbsp;        String s1 = dao.select(id).getQuantity()+&quot;&quot;;</b>
+<b class="nc">&nbsp;        String s2 = p.getQuantity()+&quot;&quot;;</b>
 &nbsp;//        String s3 = dao.select(id).getQuantity()+&quot;&quot;;
 &nbsp;//        String s4 = p.getQuantity()+&quot;&quot;;
-<b class="fc">&nbsp;        if( s1.equals(s2) ) {</b>
-<b class="fc">&nbsp;            return 0;</b>
+<b class="nc">&nbsp;        if( s1.equals(s2) ) {</b>
+<b class="nc">&nbsp;            return 0;</b>
 &nbsp;        }
-<b class="fc">&nbsp;        tempPojo.setQuantity(p.getQuantity());</b>
+<b class="nc">&nbsp;        tempPojo.setQuantity(p.getQuantity());</b>
 &nbsp;//        tempPojo.setProductId(p.getProductId());
-<b class="fc">&nbsp;            return 1;</b>
+<b class="nc">&nbsp;            return 1;</b>
 &nbsp;    }
 &nbsp;
 &nbsp;
@@ -332,11 +299,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;    @Transactional
 &nbsp;    public InventoryPojo getCheck(Integer id) throws ApiException {
-<b class="fc">&nbsp;        InventoryPojo p = dao.select(id);</b>
-<b class="fc">&nbsp;        if (p == null) {</b>
-<b class="fc">&nbsp;            throw new ApiException(&quot;Inventory with given ID does not exit, id: &quot; + id);</b>
+<b class="nc">&nbsp;        InventoryPojo p = dao.select(id);</b>
+<b class="nc">&nbsp;        if (p == null) {</b>
+<b class="nc">&nbsp;            throw new ApiException(&quot;Inventory with given ID does not exit, id: &quot; + id);</b>
 &nbsp;        }
-<b class="fc">&nbsp;        return p;</b>
+<b class="nc">&nbsp;        return p;</b>
 &nbsp;    }
 &nbsp;
 &nbsp;
@@ -364,7 +331,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-22 00:57</div>
+    <div style="float:right;">generated on 2023-07-22 13:54</div>
 </div>
 </body>
 </html>
