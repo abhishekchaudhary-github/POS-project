@@ -21,7 +21,7 @@ public class UserService {
 		normalize(p);
 		UserPojo existing = dao.select(p.getEmail());
 		if (existing != null) {
-			throw new ApiException("User with given email already exists");
+			throw new ApiException("user with given email already exists");
 		}
 		dao.insert(p);
 	}

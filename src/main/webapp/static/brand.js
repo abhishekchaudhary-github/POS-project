@@ -109,20 +109,6 @@ function getBrandList(){
 	   error: handleAjaxError
 	});
 }
-
-//function deleteBrand(id){
-//	var url = getBrandUrl() + "/" + id;
-//
-//	$.ajax({
-//	   url: url,
-//	   type: 'DELETE',
-//	   success: function(data) {
-//	   		getBrandList();
-//	   },
-//	   error: handleAjaxError
-//	});
-//}
-
 // FILE UPLOAD METHODS
 var fileData = [];
 var errorData = [];
@@ -156,21 +142,6 @@ function readFileDataCallback(results){
     }
     console.log(fileData[0])
 	for(var i =0 ;i < fileData.length; i++) {
-//	console.log(fileData[i])
-//	    let keys = Object.keys(fileData[i]);
-//	    console.log(keys)
-//	    if(Object.getOwnPropertyNames(fileData[i]).length!=2) {
-//	        $.notify("file format not available",{globalPosition: 'top center', className:"error"})
-//	        return;
-//	    }
-//	    //replace data with a key
-//	    for(var j=0;j<keys.length;j++) {
-//	        var tempData = fileData[i].key[j];
-//	        delete thisIsObject[key[j]];
-//	        keys[j]=keys[j].trim();
-//	        fileData[i].keys[j] = tempData;
-//	    }
-
 	    console.log(fileData[i][0])
 	    fileData[i].brand = fileData[i].brand.trim();
 	    fileData[i].category = fileData[i].category.trim();
@@ -178,48 +149,11 @@ function readFileDataCallback(results){
 	uploadRows();
 }
 
-//function uploadRows(){
-//	//Update progress
-//	updateUploadDialog();
-//	//If everything processed then return
-////	if(processCount==fileData.length){
-////	if(errorData.length==0){
-////    	$.notify("uploaded successfully", {globalPosition: 'top center',className:"success"})
-////        $('#upload-brand-modal').modal('hide');
-////    }
-////    else
-////	    $.notify("error in uploading",{className:"warn", globalPosition: 'top center' })
-////	return;
-////	}
-//
-//	//Process next row
-//	var row = fileData[processCount];
-//	processCount++;
-//
-//	var json = JSON.stringify(row);
-//	var url = getBrandUrl();
-//
-//	//Make ajax call
-//	$.ajax({
-//	   url: url,
-//	   type: 'POST',
-//	   data: json,
-//	   headers: {
-//       	'Content-Type': 'application/json'
-//       },
-//	   success: function(response) {
-////	   		uploadRows();
-//	   },
-//	   error: function(response){
-////	   		row.error=response.responseText
-////	   		errorData.push(row);
-////	   		uploadRows();
-//	   }
-//	});
-//
-//}
+
 
 function uploadRows(){
+//// Disable elements with the "uploading-disabled" class
+//  $('.uploading-disabled').prop('disabled', true);
     var row=[];
          while(processCount!=fileData.length){
             row.push(fileData[processCount]);
@@ -236,8 +170,11 @@ function uploadRows(){
            	'Content-Type': 'application/json'
            },
     	   success: function(data) {
+    	   if(data[data.length-1].errorCount==1)
+    	    $.notify("error in uploading",{className:"warn", globalPosition: 'top center' })
+    	   else
     	    $.notify("uploaded successfully",{className:"success", globalPosition: 'top center' })
-    	    console.log(data)
+    	    updateUploadDialog(data,data.length);
                            for(var i=0;i<data.length;i++){
                            let arr = {
                                brand : data[i].brand,
@@ -248,9 +185,11 @@ function uploadRows(){
                            errorData.push(arr)
                 	   }
     	   },
-    	    error: handleAjaxError
+//    	    error: function() {
+//    	        $.notify("format of the file is invalid",{className:"warn", globalPosition: 'top center' });
+//    	    }
     	});
-
+// $('.uploading-disabled').prop('disabled', false);
 }
 
 function downloadErrors(){
@@ -330,7 +269,7 @@ function resetUploadDialog(){
 	fileData = [];
 	errorData = [];
 	//Update counts
-	updateUploadDialog();
+	updateUploadDialog2();
 }
 
 function updateUploadDialog(){
@@ -338,6 +277,28 @@ function updateUploadDialog(){
 	$('#processCount').html("" + processCount);
 	$('#errorCount').html("" + errorData.length);
 }
+
+function updateUploadDialog2(){
+	$('#rowCount').html("" + 0);
+	$('#processCount').html("" + 0);
+	$('#errorCount').html("" + 0);
+}
+
+
+    	    function updateUploadDialog(data,length){
+    	        $('#rowCount').html("" + length);
+    	        var count=0;
+    	        for(var i =0;i<length;i++) {
+    	            if(data[i].errorCount==1){
+    	                count ++;
+    	            }
+    	        }
+    	        if(count>0)
+                $('#processCount').html("" + 0);
+                else
+                $('#processCount').html("" + length);
+                $('#errorCount').html("" + count);
+    	    }
 
 function updateFileName(){
 	var $file = $('#brandFile');

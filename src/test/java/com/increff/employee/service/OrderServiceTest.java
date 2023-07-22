@@ -7,6 +7,8 @@ import com.increff.employee.pojo.ProductPojo;
 import helper.pojoHelper;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
@@ -14,7 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import org.mockito.Mock;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+import static org.mockito.Mockito.when;
 
+//@RunWith(MockitoJUnitRunner.class)
 public class OrderServiceTest extends AbstractUnitTest {
 //what test case for add time creation??
 @Autowired
@@ -66,6 +74,19 @@ InventoryService inventoryService;
         orderId = orderItemService.addInOrder();
     }
 
+
+//    @Test
+//    public void testAdd() throws ApiException {
+//        LocalDateTime fixedDateTime = LocalDateTime.of(2023, 7, 21, 12, 34, 56);
+//        // Mock LocalDateTime.now() to return the fixedDateTime
+//        PowerMockito.mockStatic(LocalDateTime.class);
+//        when(LocalDateTime.now()).thenReturn(fixedDateTime);
+//        // Call the function you want to test
+//        Integer orderId3  = orderService.add();
+//        orderService.getOrderById(orderId3);
+//
+//        assertEquals(fixedDateTime,orderService.getOrderById(orderId3).getTime());
+//    }
 
 
 

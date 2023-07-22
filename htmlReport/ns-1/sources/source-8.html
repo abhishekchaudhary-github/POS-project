@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > OrderService</title>
+  <title>Coverage Report > ProductService</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -21,7 +21,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.increff.employee.service</a>
 </div>
 
-<h1>Coverage Summary for Class: OrderService (com.increff.employee.service)</h1>
+<h1>Coverage Summary for Class: ProductService (com.increff.employee.service)</h1>
 
 <table class="coverageStats">
 
@@ -37,49 +37,79 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">OrderService</td>
+  <td class="name">ProductService</td>
 <td class="coverageStat">
   <span class="percent">
-    62.5%
+    72.2%
   </span>
   <span class="absValue">
-    (5/8)
+    (13/18)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    16.7%
+    39.5%
   </span>
   <span class="absValue">
-    (10/60)
+    (66/167)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">OrderService$$EnhancerBySpringCGLIB$$5ec7e533</td>
+    <td class="name">ProductService$$EnhancerBySpringCGLIB$$38e41b77</td>
   </tr>
   <tr>
-    <td class="name">OrderService$$EnhancerBySpringCGLIB$$5ec7e533$$FastClassBySpringCGLIB$$220a0617</td>
+    <td class="name">ProductService$$EnhancerBySpringCGLIB$$38e41b77$$FastClassBySpringCGLIB$$e2629b29</td>
   </tr>
   <tr>
-    <td class="name">OrderService$$FastClassBySpringCGLIB$$2d70acb6</td>
+    <td class="name">ProductService$$EnhancerBySpringCGLIB$$3a0169a4</td>
+  </tr>
+  <tr>
+    <td class="name">ProductService$$EnhancerBySpringCGLIB$$584ebce5</td>
+  </tr>
+  <tr>
+    <td class="name">ProductService$$EnhancerBySpringCGLIB$$584ebce5$$FastClassBySpringCGLIB$$61504da9</td>
+  </tr>
+  <tr>
+    <td class="name">ProductService$$EnhancerBySpringCGLIB$$9696ebc3</td>
+  </tr>
+  <tr>
+    <td class="name">ProductService$$EnhancerBySpringCGLIB$$9696ebc3$$FastClassBySpringCGLIB$$9cfbce2b</td>
+  </tr>
+  <tr>
+    <td class="name">ProductService$$EnhancerBySpringCGLIB$$c2a246a1</td>
+  </tr>
+  <tr>
+    <td class="name">ProductService$$EnhancerBySpringCGLIB$$c2a246a1$$FastClassBySpringCGLIB$$1846ccf6</td>
+  </tr>
+  <tr>
+    <td class="name">ProductService$$EnhancerBySpringCGLIB$$cf4a13dc</td>
+  </tr>
+  <tr>
+    <td class="name">ProductService$$EnhancerBySpringCGLIB$$eb48b777</td>
+  </tr>
+  <tr>
+    <td class="name">ProductService$$EnhancerBySpringCGLIB$$eb48b777$$FastClassBySpringCGLIB$$86d3a3ba</td>
+  </tr>
+  <tr>
+    <td class="name">ProductService$$FastClassBySpringCGLIB$$e88c7035</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    62.5%
+    72.2%
   </span>
   <span class="absValue">
-    (5/8)
+    (13/18)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    16.7%
+    39.5%
   </span>
   <span class="absValue">
-    (10/60)
+    (66/167)
   </span>
 </td>
 </tr>
@@ -90,177 +120,356 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;//77 100 101
-&nbsp;package com.increff.employee.service;
+<code class="sourceCode" id="sourceCode">&nbsp;package com.increff.employee.service;
 &nbsp;
-&nbsp;import com.increff.employee.dao.OrderDao;
-&nbsp;import com.increff.employee.dao.OrderItemDao;
-&nbsp;import com.increff.employee.model.InvoiceData;
-&nbsp;import com.increff.employee.model.OrderItem;
-&nbsp;import com.increff.employee.pojo.BrandPojo;
-&nbsp;import com.increff.employee.pojo.DailyReportPojo;
-&nbsp;import com.increff.employee.pojo.OrderItemPojo;
-&nbsp;import com.increff.employee.pojo.OrderPojo;
-&nbsp;import com.increff.employee.util.StringUtil;
-&nbsp;import org.springframework.beans.factory.annotation.Autowired;
-&nbsp;import org.springframework.beans.factory.annotation.Value;
-&nbsp;import org.springframework.http.HttpHeaders;
-&nbsp;import org.springframework.http.HttpStatus;
-&nbsp;import org.springframework.http.MediaType;
-&nbsp;import org.springframework.http.ResponseEntity;
-&nbsp;import org.springframework.stereotype.Service;
-&nbsp;import org.springframework.web.client.RestTemplate;
-&nbsp;
-&nbsp;import java.time.LocalDateTime;
+&nbsp;import java.text.DecimalFormat;
 &nbsp;import java.util.ArrayList;
-&nbsp;import java.util.Base64;
-&nbsp;import java.util.Date;
-&nbsp;import java.text.SimpleDateFormat;
+&nbsp;import java.util.HashMap;
 &nbsp;import java.util.List;
 &nbsp;
 &nbsp;import javax.transaction.Transactional;
 &nbsp;
+&nbsp;import com.increff.employee.dao.BrandDao;
+&nbsp;import com.increff.employee.model.*;
+&nbsp;import com.increff.employee.pojo.BrandPojo;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import com.increff.employee.dao.ProductDao;
+&nbsp;import com.increff.employee.pojo.ProductPojo;
+&nbsp;import com.increff.employee.util.StringUtil;
+&nbsp;
 &nbsp;@Service
-<b class="fc">&nbsp;public class OrderService {</b>
-&nbsp;
-&nbsp;    private int orderItemCount;
-&nbsp;
-&nbsp;    private Double initialRevenue;
-&nbsp;    @Value(&quot;${invoice.url}&quot;)
-&nbsp;    private String url;
+<b class="fc">&nbsp;public class ProductService {</b>
 &nbsp;
 &nbsp;    @Autowired
-&nbsp;    private OrderDao dao;
+&nbsp;    private BrandService brandService;
 &nbsp;
 &nbsp;    @Autowired
-&nbsp;    private OrderService orderService;
+&nbsp;    private ProductDao dao;
 &nbsp;
-&nbsp;    @Autowired
-&nbsp;    private OrderItemService orderItemDataList;
-&nbsp;
-&nbsp;    @Autowired
-&nbsp;    private ProductService productService;
-&nbsp;
-&nbsp;    @Autowired
-&nbsp;    private DailyReportService dailyReportService;
 &nbsp;
 &nbsp;    @Transactional(rollbackOn = ApiException.class)
-&nbsp;    public Integer add() throws ApiException {
-<b class="fc">&nbsp;        LocalDateTime timeOfOrder = timeOfOrderCreation();</b>
-<b class="fc">&nbsp;        OrderPojo orderPojo = new OrderPojo();</b>
-<b class="fc">&nbsp;        orderPojo.setTime(timeOfOrder);</b>
-<b class="fc">&nbsp;        Integer orderId = dao.insert(orderPojo);</b>
-<b class="fc">&nbsp;        return orderId;</b>
+&nbsp;    public Integer add(ProductPojo p) throws ApiException {
+<b class="fc">&nbsp;        normalize(p);</b>
+<b class="fc">&nbsp;        ProductPojo productPojo = dao.barcodeMustExist(p.getBarcode());</b>
+<b class="fc">&nbsp;        if(productPojo!=null) {</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;same barcode already exists&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if(StringUtil.isEmpty(p.getBarcode())) {</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;barcode cannot be empty&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if(p.getBrand_category()==null) {</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;brand_category cannot be empty&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if(p.getBrand_category()==null||p.getBrand_category()==0){</b>
+<b class="nc">&nbsp;            throw new ApiException(&quot;product with this brand category combination does not exist&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if(p.getMrp()==null){</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;MRP cannot be empty&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if(StringUtil.isEmpty(p.getName())) {</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;name cannot be empty&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if(p.getMrp()&lt;0) {</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;MRP can not be a negative value&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;
+&nbsp;//        if(dao.barcodeMustExist(p.getBarcode())!=null)
+&nbsp;//            throw new ApiException(&quot; put another barcode &quot;);
+&nbsp;
+<b class="fc">&nbsp;        if (!p.getBarcode().matches(&quot;^[a-zA-Z0-9]*$&quot;)) {</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;barcode must only contain alphanumeric characters&quot;);</b>
+&nbsp;        }
+&nbsp;        //barcode originality
+<b class="fc">&nbsp;        if(brandService.brandMustExist(p.getBrand_category())==null)</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;product with this brand category combination does not exist&quot;);</b>
+&nbsp;
+&nbsp;        //truncate to 2 decimal places
+<b class="fc">&nbsp;        DecimalFormat decimalFormat = new DecimalFormat(&quot;#.##&quot;);</b>
+<b class="fc">&nbsp;        p.setMrp(Double.parseDouble(decimalFormat.format(p.getMrp())));</b>
+&nbsp;
+<b class="fc">&nbsp;        if(dao.checkerForDuplicate(p.getBrand_category(), p.getName())==null)</b>
+<b class="fc">&nbsp;            return dao.insert(p);</b>
+<b class="fc">&nbsp;        else throw new ApiException(&quot;this product already exists&quot;);</b>
+&nbsp;
+&nbsp;
+&nbsp;  //      inventoryService.add(p.getId());
+&nbsp;
 &nbsp;    }
 &nbsp;
 &nbsp;
-&nbsp;    @Transactional
-&nbsp;    public void delete(Integer id) {
-<b class="fc">&nbsp;        dao.delete(id);</b>
+&nbsp;
+&nbsp;
+&nbsp;    ///////
+&nbsp;    @Transactional(rollbackOn = ApiException.class)
+&nbsp;    public ProductPojo barcodeMustExist(String barcode) {
+<b class="fc">&nbsp;        return dao.barcodeMustExist(barcode);</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    @Transactional
-&nbsp;    public List&lt;OrderPojo&gt; getAll() {
-<b class="nc">&nbsp;        return dao.selectAll();</b>
-&nbsp;    }
-&nbsp;
-&nbsp;    protected static LocalDateTime timeOfOrderCreation() {
-<b class="fc">&nbsp;        LocalDateTime dateTime = LocalDateTime.now();</b>
-&nbsp;//        SimpleDateFormat createdTime = new SimpleDateFormat(&quot;dd-MM-yyyy HH:mm&quot;);
-&nbsp;//        Date currentDate = new Date();
-&nbsp;//        String formattedDateTime = createdTime.format(currentDate);
-<b class="fc">&nbsp;        return dateTime;</b>
-&nbsp;    }
-&nbsp;
-&nbsp;//    public Integer getLastOrderId() {
-&nbsp;//         List&lt;OrderPojo&gt; orderPojoList = dao.selectAll();
-&nbsp;//         if(orderPojoList.size()==0) {
-&nbsp;//             return 0;
-&nbsp;//         }
-&nbsp;//         int k=1;
-&nbsp;//         for(int i=0;i&lt;orderPojoList.size();i++) {
-&nbsp;//             if(orderPojoList.get(i).getId()&gt;k) {
-&nbsp;//                 k = orderPojoList.get(i).getId();
-&nbsp;//             }
-&nbsp;//         }
-&nbsp;//         return k;
+&nbsp;//    @Transactional(rollbackOn = ApiException.class)
+&nbsp;//    public String checkBarcodeThrowErrorIfExists(String barcode) throws ApiException {
+&nbsp;//        ProductPojo productPojo = dao.barcodeMustExist(barcode);
+&nbsp;//        if(productPojo!=null) {
+&nbsp;//            throw new ApiException(&quot;Barcode Already exists&quot;);
+&nbsp;//        }
+&nbsp;//        return productPojo.getBarcode();
 &nbsp;//    }
 &nbsp;
-&nbsp;    public OrderPojo getOrderById(Integer id) {
-<b class="fc">&nbsp;        return dao.orderById(id);</b>
+&nbsp;    //////
+&nbsp;
+&nbsp;    @Transactional(rollbackOn = ApiException.class)
+&nbsp;    public List&lt;ProductPojo&gt; brandCategory(Integer brand_category) {
+<b class="fc">&nbsp;        return dao.brandCategory(brand_category);</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    @Transactional(rollbackOn  = ApiException.class)
-&nbsp;    public ResponseEntity&lt;byte[]&gt; getInvoicePDF(Integer id) throws Exception {
-<b class="nc">&nbsp;        orderItemCount=0;</b>
-<b class="nc">&nbsp;        initialRevenue=0.0;</b>
-<b class="nc">&nbsp;        InvoiceData invoiceData = generateInvoiceForOrder(id);</b>
-<b class="nc">&nbsp;        RestTemplate restTemplate = new RestTemplate();</b>
-<b class="nc">&nbsp;        System.out.println(&quot;before sending&quot;);</b>
-<b class="nc">&nbsp;        byte[] contents = Base64.getDecoder().decode(restTemplate.postForEntity(url, invoiceData, byte[].class).getBody());</b>
-<b class="nc">&nbsp;        System.out.println(&quot;after sending&quot;);</b>
-<b class="nc">&nbsp;        HttpHeaders headers = new HttpHeaders();</b>
-<b class="nc">&nbsp;        headers.setContentType(MediaType.APPLICATION_PDF);</b>
-<b class="nc">&nbsp;        String filename = &quot;invoice.pdf&quot;;</b>
-<b class="nc">&nbsp;        headers.setContentDispositionFormData(filename, filename);</b>
-<b class="nc">&nbsp;        headers.setCacheControl(&quot;must-revalidate, post-check=0, pre-check=0&quot;);</b>
-<b class="nc">&nbsp;        ResponseEntity&lt;byte[]&gt; response = new ResponseEntity&lt;&gt;(contents, headers, HttpStatus.OK);</b>
-&nbsp;//        Integer lastId = dailyReportService.getLastId();
-&nbsp;//        DailyReportPojo dailyReportFirstPojo = dailyReportService.get(1);
 &nbsp;
-&nbsp;        //dailyReportPojo.setTotal_invoice(dailyReportPojo.getTotal_invoice()+1);
-&nbsp;        //Integer initialTotalInvoicedItems = dailyReportPojo.getTotal_invoiced_items();
-&nbsp;        //dailyReportPojo.setTotal_invoiced_items(initialTotalInvoicedItems+orderItemCount);
-&nbsp;        //uneditable
-<b class="nc">&nbsp;        OrderPojo orderPojo = getOrderById(id);</b>
-&nbsp;        //
-<b class="nc">&nbsp;        if(orderPojo.isEditable()==true) {</b>
-<b class="nc">&nbsp;            DailyReportPojo dailyReportFirstPojo = dailyReportService.get(1);</b>
-<b class="nc">&nbsp;            if(dailyReportFirstPojo==null) {</b>
-<b class="nc">&nbsp;                throw new ApiException(&quot;database has been altered&quot;);</b>
+&nbsp;    @Transactional
+&nbsp;    public ErrorsProduct checkError(ProductFormString productForm, List&lt;ProductFormString&gt; list,HashMap&lt;String,Integer&gt; hm) throws ApiException {
+<b class="nc">&nbsp;        ErrorsProduct errors = new ErrorsProduct();</b>
+<b class="nc">&nbsp;        boolean checks1=false;</b>
+<b class="nc">&nbsp;        String brand = productForm.getBrand();</b>
+<b class="nc">&nbsp;        String category = productForm.getCategory();</b>
+<b class="nc">&nbsp;        String barcode = productForm.getBarcode();</b>
+<b class="nc">&nbsp;        String name = productForm.getName();</b>
+<b class="nc">&nbsp;        String mrp = productForm.getMrp();</b>
+<b class="nc">&nbsp;        BrandPojo brandPojo2 = brandService.getId(brand,category);</b>
+<b class="nc">&nbsp;        if(brand==null||brand==&quot;&quot;){</b>
+<b class="nc">&nbsp;            checks1=true;</b>
+<b class="nc">&nbsp;            errors.setMessage(&quot;brand field is empty&quot;);</b>
+<b class="nc">&nbsp;            errors.setErrorCount(1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        else if(category==null||category==&quot;&quot;){</b>
+<b class="nc">&nbsp;            checks1=true;</b>
+<b class="nc">&nbsp;            errors.setMessage(&quot;category field is empty&quot;);</b>
+<b class="nc">&nbsp;            errors.setErrorCount(1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        else if(name==null||name==&quot;&quot;){</b>
+<b class="nc">&nbsp;            checks1=true;</b>
+<b class="nc">&nbsp;            errors.setMessage(&quot;name field is empty&quot;);</b>
+<b class="nc">&nbsp;            errors.setErrorCount(1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        else if(barcode==null||barcode==&quot;&quot;){</b>
+<b class="nc">&nbsp;            checks1=true;</b>
+<b class="nc">&nbsp;            errors.setMessage(&quot;barcode field is empty&quot;);</b>
+<b class="nc">&nbsp;            errors.setErrorCount(1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        else if(mrp==null||mrp==&quot;&quot;) {</b>
+<b class="nc">&nbsp;            checks1 = true;</b>
+<b class="nc">&nbsp;            errors.setMessage(&quot;mrp field is empty&quot;);</b>
+<b class="nc">&nbsp;            errors.setErrorCount(1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        else if(checkDouble(mrp)==false){</b>
+<b class="nc">&nbsp;            checks1 = true;</b>
+<b class="nc">&nbsp;            errors.setMessage(&quot;mrp format is invalid&quot;);</b>
+<b class="nc">&nbsp;            errors.setErrorCount(1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        else if(Double.parseDouble(mrp)&lt;0) {</b>
+<b class="nc">&nbsp;            checks1 = true;</b>
+<b class="nc">&nbsp;            errors.setMessage(&quot;mrp is negative&quot;);</b>
+<b class="nc">&nbsp;            errors.setErrorCount(1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        else if(hm.containsKey(barcode)) {</b>
+<b class="nc">&nbsp;            checks1 = true;</b>
+<b class="nc">&nbsp;            errors.setMessage(&quot;duplicate barcode&quot;);</b>
+<b class="nc">&nbsp;            errors.setErrorCount(1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        else if (!barcode.matches(&quot;^[a-zA-Z0-9]*$&quot;)) {</b>
+<b class="nc">&nbsp;            checks1 = true;</b>
+<b class="nc">&nbsp;            errors.setMessage(&quot;barcode must only contain alphanumeric characters&quot;);</b>
+<b class="nc">&nbsp;            errors.setErrorCount(1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        else if(getBrandPojoFromForm2(brand,category) == null) {</b>
+<b class="nc">&nbsp;            checks1 = true;</b>
+<b class="nc">&nbsp;            errors.setMessage(&quot;no such brand category combination exists&quot;);</b>
+<b class="nc">&nbsp;            errors.setErrorCount(1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        else if(dao.checkerForDuplicate(brandPojo2.getId(), name)!=null){</b>
+<b class="nc">&nbsp;            checks1 = true;</b>
+<b class="nc">&nbsp;            errors.setMessage(&quot;duplicate product&quot;);</b>
+<b class="nc">&nbsp;            errors.setErrorCount(1);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        else if(brandPojo2==null){</b>
+<b class="nc">&nbsp;            checks1 = true;</b>
+<b class="nc">&nbsp;            errors.setMessage(&quot;duplicate barcode&quot;);</b>
+<b class="nc">&nbsp;            errors.setErrorCount(1);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if(checks1==false)</b>
+<b class="nc">&nbsp;        for(int i=0;i&lt;list.size();i++) {</b>
+<b class="nc">&nbsp;            if(brand.equals(list.get(i).getBrand())&amp;&amp;name.equals(list.get(i).getName())&amp;&amp;category.equals(list.get(i).getCategory())){</b>
+<b class="nc">&nbsp;                checks1 = true;</b>
+<b class="nc">&nbsp;                errors.setMessage(&quot;duplicate product&quot;);</b>
+<b class="nc">&nbsp;                errors.setErrorCount(1);</b>
 &nbsp;            }
-<b class="nc">&nbsp;            Integer countOfInvoices = dailyReportFirstPojo.getInvoiced_orders_count();</b>
-<b class="nc">&nbsp;            Integer countOfOrders = dailyReportFirstPojo.getInvoiced_items_count();</b>
-<b class="nc">&nbsp;            Double totalRevenue = dailyReportFirstPojo.getTotal_revenue();</b>
-<b class="nc">&nbsp;            System.out.println(countOfInvoices);</b>
-<b class="nc">&nbsp;            countOfInvoices+=1;</b>
-<b class="nc">&nbsp;            countOfOrders+=orderItemCount;</b>
-<b class="nc">&nbsp;            totalRevenue+=initialRevenue;</b>
-<b class="nc">&nbsp;            dailyReportFirstPojo.setInvoiced_orders_count(countOfInvoices);</b>
-<b class="nc">&nbsp;            dailyReportFirstPojo.setInvoiced_items_count(countOfOrders);</b>
-<b class="nc">&nbsp;            dailyReportFirstPojo.setTotal_revenue(totalRevenue);</b>
+&nbsp;
+&nbsp;        }
+<b class="nc">&nbsp;        if(checks1 == false) {</b>
+<b class="nc">&nbsp;            errors.setMessage(&quot;no error in this line&quot;);</b>
+<b class="nc">&nbsp;            errors.setErrorCount(0);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        errors.setCategory(category);</b>
+<b class="nc">&nbsp;        errors.setBrand(brand);</b>
+<b class="nc">&nbsp;        errors.setBarcode(barcode);</b>
+<b class="nc">&nbsp;        errors.setName(name);</b>
+<b class="nc">&nbsp;        return errors;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean checkDouble(String x){
+&nbsp;        try {
+<b class="nc">&nbsp;            Double.parseDouble(x);</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        catch (Exception e){</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public ArrayList&lt;ErrorsProduct&gt; fileCheck(List&lt;ProductFormString&gt; form) throws ApiException {
+<b class="nc">&nbsp;        if(form.size()&gt;5000) {</b>
+<b class="nc">&nbsp;            throw new ApiException(&quot;maximum rows can be 5000&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        boolean checkError =false;</b>
+<b class="nc">&nbsp;        ArrayList&lt;ErrorsProduct&gt; data = new ArrayList&lt;ErrorsProduct&gt;();</b>
+<b class="nc">&nbsp;        ArrayList&lt;ProductFormString&gt; productPojoList = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        HashMap&lt;String,Integer&gt; hm = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        for(ProductFormString productItem : form){</b>
+<b class="nc">&nbsp;            ErrorsProduct error = checkError(productItem,productPojoList,hm);</b>
+<b class="nc">&nbsp;            if(checkError==true || error.getErrorCount()&gt;0) {</b>
+<b class="nc">&nbsp;                error.setCheckError(true);</b>
+&nbsp;            }
+&nbsp;            //logic
+<b class="nc">&nbsp;            productPojoList.add(productItem);</b>
+<b class="nc">&nbsp;            data.add(error);</b>
+<b class="nc">&nbsp;            if(!hm.containsKey(productItem.getBarcode())){</b>
+<b class="nc">&nbsp;                hm.put(productItem.getBarcode(),1);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return data;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    @Transactional(rollbackOn = ApiException.class)
+&nbsp;    public ProductPojo get(Integer id) throws ApiException {
+<b class="fc">&nbsp;        return getCheck(id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public BrandPojo getBrandPojoFromBrandCategory(ProductPojo p) throws ApiException {
+<b class="fc">&nbsp;        return brandService.get(p.getBrand_category());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public BrandPojo getBrandPojoFromForm(ProductForm f) throws ApiException {
+<b class="fc">&nbsp;        BrandPojo brandPojo =  brandService.getId(f.getBrand(),f.getCategory());</b>
+<b class="fc">&nbsp;        if(brandPojo==null) {</b>
+<b class="nc">&nbsp;            throw new ApiException(&quot;this product does not exist&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return brandPojo;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public BrandPojo getBrandPojoFromForm2(String brand,String category) throws ApiException {
+<b class="nc">&nbsp;        BrandPojo brandPojo =  brandService.getId(brand,category);</b>
+<b class="nc">&nbsp;        return brandPojo;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public List&lt;ProductPojo&gt; getAll() {
+<b class="fc">&nbsp;        return dao.selectAll();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public Integer getProductId(String barcode) throws ApiException {
+<b class="fc">&nbsp;        normalizeBarcode(barcode);</b>
+<b class="fc">&nbsp;        ProductPojo productPojo = dao.selectBarcode(barcode);</b>
+<b class="fc">&nbsp;        if(productPojo==null) {</b>
+<b class="nc">&nbsp;            throw new ApiException(&quot;this barcode does not exist&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return productPojo.getId();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public ProductPojo getPojoFromBarcode(String barcode) throws ApiException {
+<b class="nc">&nbsp;        normalizeBarcode(barcode);</b>
+<b class="nc">&nbsp;        ProductPojo productPojo = dao.selectBarcode(barcode);</b>
+<b class="nc">&nbsp;        return productPojo;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    @Transactional(rollbackOn  = ApiException.class)
+&nbsp;    public Integer update(Integer id, ProductPojo p) throws ApiException {
+<b class="fc">&nbsp;        normalize(p);</b>
+<b class="fc">&nbsp;        List&lt;ProductPojo&gt; productPojoList = dao.barcodeMustExistList(p.getBarcode());</b>
+&nbsp;//        if(productPojoList.size()==1) {
+&nbsp;//           if(productPojoList.get(0).getId()!=id){
+&nbsp;//               throw new ApiException(&quot;same barcode already exists&quot;);
+&nbsp;//           }
+&nbsp;//        }
+<b class="fc">&nbsp;        if(productPojoList.size()&gt;1) {</b>
+<b class="nc">&nbsp;            throw new ApiException(&quot;same barcode already exists&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        ProductPojo tempPojo = getCheck(id);</b>
+<b class="fc">&nbsp;        if(StringUtil.isEmpty(p.getBarcode())) {</b>
+<b class="nc">&nbsp;            throw new ApiException(&quot;barcode cannot be empty&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if(p.getBrand_category()==null) {</b>
+<b class="nc">&nbsp;            throw new ApiException(&quot;brand_category cannot be empty&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if(p.getMrp()==null) {</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;MRP cannot be empty&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if(StringUtil.isEmpty(p.getName())) {</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;name cannot be empty&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if(p.getMrp()&lt;0) {</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;MRP can&#39;t be a negative value&quot;);</b>
 &nbsp;        }
 &nbsp;        //
-<b class="nc">&nbsp;        orderPojo.setEditable();</b>
-<b class="nc">&nbsp;        return response;</b>
+<b class="fc">&nbsp;        if (!p.getBarcode().matches(&quot;^[a-zA-Z0-9]*$&quot;)) {</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;barcode must only contain alphanumeric characters&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;
+&nbsp;        //NOTHING INSERTED
+<b class="fc">&nbsp;        if((dao.select(id).getBarcode()+&quot;&quot;).equals((p.getBarcode()+&quot;&quot;)) &amp;&amp; (dao.select(id).getName()+&quot;&quot;).equals((p.getName()+&quot;&quot;)) &amp;&amp; (dao.select(id).getMrp()+&quot;&quot;).equals(p.getMrp()+&quot;&quot;) &amp;&amp; (dao.select(id).getBrand_category()+&quot;&quot;).equals(p.getBrand_category()+&quot;&quot;)){</b>
+<b class="fc">&nbsp;            return 0;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        tempPojo.setBarcode(p.getBarcode());</b>
+<b class="fc">&nbsp;        tempPojo.setBrand_category(p.getBrand_category());</b>
+<b class="fc">&nbsp;        tempPojo.setName(p.getName());</b>
+<b class="fc">&nbsp;        tempPojo.setMrp(p.getMrp());</b>
+<b class="fc">&nbsp;        return 1;</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    @Transactional(rollbackOn  = ApiException.class)
-&nbsp;    public InvoiceData generateInvoiceForOrder(Integer orderId) throws ApiException
-&nbsp;    {
-<b class="nc">&nbsp;        InvoiceData invoiceData = new InvoiceData();</b>
-<b class="nc">&nbsp;        OrderPojo orderPojo = dao.orderById(orderId);</b>
-<b class="nc">&nbsp;        invoiceData.setOrderId(orderPojo.getId());</b>
-<b class="nc">&nbsp;        invoiceData.setPlacedDate(orderPojo.getTime().toString());</b>
-<b class="nc">&nbsp;        List&lt;OrderItemPojo&gt; orderItemPojoList = orderItemDataList.selectByOrderId(orderPojo.getId());</b>
 &nbsp;
-<b class="nc">&nbsp;        List&lt;OrderItem&gt; orderItemList = new ArrayList&lt;&gt;();</b>
-<b class="nc">&nbsp;        for(OrderItemPojo p: orderItemPojoList) {</b>
-<b class="nc">&nbsp;            orderItemCount ++;</b>
-<b class="nc">&nbsp;            OrderItem orderItem = new OrderItem();</b>
-<b class="nc">&nbsp;            orderItem.setOrderItemId(p.getId());</b>
-<b class="nc">&nbsp;            String productName = productService.getCheck(p.getProductId()).getName();</b>
-<b class="nc">&nbsp;            orderItem.setProductName(productName);</b>
-<b class="nc">&nbsp;            orderItem.setQuantity(p.getQuantity());</b>
-<b class="nc">&nbsp;            orderItem.setSellingPrice(p.getSellingPrice());</b>
-<b class="nc">&nbsp;            orderItemList.add(orderItem);</b>
-&nbsp;            //
-<b class="nc">&nbsp;            initialRevenue+=p.getSellingPrice()*p.getQuantity();</b>
-&nbsp;            //
-<b class="nc">&nbsp;        }</b>
-<b class="nc">&nbsp;        invoiceData.setOrderItemDataList(orderItemList);</b>
-<b class="nc">&nbsp;        return invoiceData;</b>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public ProductPojo getCheck(Integer id) throws ApiException {
+<b class="fc">&nbsp;        ProductPojo p = dao.select(id);</b>
+<b class="fc">&nbsp;        if (p == null) {</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;Product with given ID does not exit, id: &quot; + id);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return p;</b>
 &nbsp;    }
+&nbsp;
+&nbsp;    protected static void normalize(ProductPojo p) {
+<b class="fc">&nbsp;        p.setBarcode(StringUtil.toLowerCase(p.getBarcode()));</b>
+<b class="fc">&nbsp;        p.setName(StringUtil.toLowerCase(p.getName()));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static String normalizeBarcode(String barcode) {
+<b class="fc">&nbsp;        String normalizedBarcode = StringUtil.toLowerCase(barcode);</b>
+<b class="fc">&nbsp;        return normalizedBarcode;</b>
+&nbsp;    }
+&nbsp;
 &nbsp;}
 </code>
 </pre>
@@ -285,7 +494,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-19 16:56</div>
+    <div style="float:right;">generated on 2023-07-22 00:57</div>
 </div>
 </body>
 </html>

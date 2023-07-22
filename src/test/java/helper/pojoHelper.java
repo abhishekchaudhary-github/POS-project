@@ -52,4 +52,12 @@ public class pojoHelper {
         return dailyReportPojo;
     }
 
+    public static UserPojo makeUserPojo(String password, String role, String email) {
+        UserPojo userPojo = new UserPojo();
+        userPojo.setPassword(password);
+        userPojo.setRole(role);
+        userPojo.setEmail(email);
+        return userPojo;
+    }
+
 }

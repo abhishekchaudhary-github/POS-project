@@ -92,7 +92,7 @@ public class InventoryServiceTest extends AbstractUnitTest {
 
         InventoryPojo inventoryPojo = pojoHelper.makeInventoryPojo(productId,2);
         Integer inventoryId = inventoryService.add(inventoryPojo);
-        inventoryService.deductQuantity(inventoryId,1);
+        inventoryService.deductQuantity(productId,1);
         Integer quantity = inventoryService.get(inventoryId).getQuantity();
         assertEquals(new Integer(1),quantity);
     }
@@ -103,7 +103,7 @@ public class InventoryServiceTest extends AbstractUnitTest {
         try {
             InventoryPojo inventoryPojo = pojoHelper.makeInventoryPojo(productId, 2);
             Integer inventoryId = inventoryService.add(inventoryPojo);
-            inventoryService.deductQuantity(inventoryId, 100);
+            inventoryService.deductQuantity(productId, 100);
             Integer quantity = inventoryService.get(inventoryId).getQuantity();
             assertEquals(new Integer(1), quantity);
         }
