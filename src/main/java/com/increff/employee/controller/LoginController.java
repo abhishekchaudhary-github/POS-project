@@ -68,6 +68,13 @@ public class LoginController {
 		return new ModelAndView("redirect:/site/logout");
 	}
 
+	@ApiOperation(value = "removes message")
+	@RequestMapping(path = "/session/login/message", method = RequestMethod.GET)
+	public void messageEmpty(){
+		service.setMessage();
+	}
+
+
 	private static Authentication convert(UserPojo p) {
 		// Create principal
 		UserPrincipal principal = new UserPrincipal();

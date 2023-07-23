@@ -4,11 +4,13 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.increff.employee.model.InfoData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.increff.employee.dao.UserDao;
 import com.increff.employee.pojo.UserPojo;
+import org.springframework.web.servlet.ModelAndView;
 
 @Service
 public class UserService {
@@ -16,12 +18,16 @@ public class UserService {
 	@Autowired
 	private UserDao dao;
 
+	@Autowired
+	private InfoData info;
+
 	@Transactional
 	public void add(UserPojo p) throws ApiException {
 		normalize(p);
 		UserPojo existing = dao.select(p.getEmail());
 		if (existing != null) {
-			throw new ApiException("user with given email already exists");
+			info.setMessage("this email has already been registered");
+			return;
 		}
 		dao.insert(p);
 	}
@@ -44,6 +50,11 @@ public class UserService {
 	@Transactional
 	public void delete(Integer id) {
 		dao.delete(id);
+	}
+
+	@Transactional
+	public void setMessage() {
+		info.setMessage("");
 	}
 
 	protected static void normalize(UserPojo p) {

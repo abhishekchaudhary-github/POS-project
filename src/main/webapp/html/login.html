@@ -39,10 +39,12 @@
 								</div>
 
 								<!-- Submit button -->
-								<button type="submit" class="btn btn-primary btn-block mb-4" style="background-color: #45CFDD;border-color: #45CFDD;" id="login">
+								<button type="submit" class="btn btn-primary btn-block mb-4 login" style="background-color: #45CFDD;border-color: #45CFDD;" id="login">
 									Login
 								</button>
-
+								<p id="login-message" hidden>
+										[[${info.getMessage()}]]
+								</p>
 								<!-- Register buttons -->
 								<p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a th:href="@{/site/signup}" class="link-danger">Register</a></p>
 							</form>
@@ -95,6 +97,8 @@
 </div> <!-- Container-->
 
 <footer th:replace="snippets.html :: name_footer"></footer>
+
+<script th:src="@{/static/login.js}"/></script>
 
 </body>
 

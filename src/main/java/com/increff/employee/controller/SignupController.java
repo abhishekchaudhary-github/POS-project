@@ -26,6 +26,8 @@ public class SignupController {
     public ModelAndView signup(HttpServletRequest req, LoginForm f) throws ApiException {
         UserPojo userPojo = convert(f);
         service.add(userPojo);
+        if(info.getMessage().equals("this email has already been registered"))
+            return new ModelAndView("redirect:/site/signup");
         return new ModelAndView("redirect:/site/login");
     }
 
