@@ -31,8 +31,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/api/brand/**").hasAuthority("supervisor")//
 				.antMatchers(HttpMethod.GET,"/api/product/**").hasAnyAuthority("supervisor","operator")//
 				.antMatchers("/api/product/**").hasAuthority("supervisor")//
-				.antMatchers(HttpMethod.GET,"/api/ui/inventory/**").hasAnyAuthority("supervisor","operator")//
-				.antMatchers("/api/ui/inventory/**").hasAuthority("supervisor")//
+				.antMatchers(HttpMethod.GET,"/api/inventory/**").hasAnyAuthority("supervisor","operator")//
+				.antMatchers("/api/inventory/**").hasAuthority("supervisor")//
+				.antMatchers(HttpMethod.GET,"/api/orderitem/**").hasAnyAuthority("supervisor","operator")//
+				.antMatchers("/api/orderitem/**").hasAuthority("supervisor")//
+				.antMatchers(HttpMethod.GET,"/api/order/**").hasAnyAuthority("supervisor","operator")//
+				.antMatchers("/api/order/**").hasAuthority("supervisor")//
 
 				.antMatchers("/api/**").hasAnyAuthority("supervisor", "operator")//
 				.antMatchers("/ui/supervisor/**").hasAuthority("supervisor")//

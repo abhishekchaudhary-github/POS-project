@@ -188,7 +188,7 @@ public class OrderItemService {
         if(quantity>inventoryPojo.getQuantity()){
             throw new ApiException("quantity of item more than the quantity in inventory");
         }
-        if(quantity<=1) {
+        if(quantity<1) {
             throw new ApiException("quantity must be at least 1");
         }
         //check for it

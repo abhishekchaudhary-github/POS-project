@@ -6,17 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="dd59bcda-ea0a-45cb-bbdf-b0788f0265bb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/brand.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/brand.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/customerDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/customerDetail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/inventory.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/inventory.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/product.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/product.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/snippets.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/snippets.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/brand.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/brand.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/customerDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/customerDetail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/inventory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/inventory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/product.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/product.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/OrderServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/OrderServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/OrderItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/OrderItemService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/spring/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/spring/SecurityConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
