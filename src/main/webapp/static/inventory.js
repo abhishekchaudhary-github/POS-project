@@ -50,8 +50,8 @@ function addInventory(event){
        },
 	   success: function(response) {
 	   		getInventoryList();
-	   		('.modal').modal('hide')
-                $.notify("updated successfully",{ className:"success" , globalPosition: 'top center'})
+	   		$('#addInventoryDetail-modal').modal('hide')
+            $.notify("updated successfully",{ className:"success" , globalPosition: 'top center'})
 	   		$form.find('#inputBarcode').val('');
             $form.find('#inputQuantity').val('');
 	   },
