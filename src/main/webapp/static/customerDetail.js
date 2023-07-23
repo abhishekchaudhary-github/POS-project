@@ -150,8 +150,8 @@ if(!checker) error = true
 	}
 	for(var i in addedData){
     		var e = addedData[i];
-    		buttonHtml = ' <button onclick="displayEditCustomerDetail(' + i + ')" class="btn btn-primary"><i class="fa fa-pencil"></i></button>'
-    		buttonHtml = buttonHtml + ' <button onclick="deleteEditCustomerDetail(' + i + ')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
+    		buttonHtml = ' <button onclick="displayEditCustomerDetail(' + i + ')" class="btn btn-outline-primary admin-element"><i class="fa fa-pencil"></i></button>'
+    		buttonHtml = buttonHtml + ' <button onclick="deleteEditCustomerDetail(' + i + ')" class="btn btn-outline-danger admin-element"><i class="fa fa-trash"></i></button>'
     		var row = '<tr>'
     		+ '<td>' + e.barcode + '</td>' //barcode
     		+ '<td>'  + e.mrp + '</td>' //mrp
@@ -163,7 +163,7 @@ if(!checker) error = true
     	var confirmButton;
     	$confirm.empty();
     if(addedData.length>0){
-            confirmButton = '<td>' + ' <button onclick="submitCustomerDetail(' + e.id + ')" class="btn btn-success"><i class="fa fa-check"></i> Confirm</button>' + '</td>'
+            confirmButton = '<td>' + ' <button onclick="submitCustomerDetail(' + e.id + ')" class="btn btn-outline-success"><i class="fa fa-check"></i> Confirm</button>' + '</td>'
     	    $confirm.append(confirmButton)
     	}
     	$('#inputBarcode').val('');
@@ -185,8 +185,8 @@ function DisplayAddedData(){
     	$tbody.empty()
     	for(var i in addedData){
             		var e = addedData[i];
-            		buttonHtml = ' <button onclick="displayEditCustomerDetail(' + i + ')" class="btn btn-primary"><i class="fa fa-pencil"></i></button>'
-                        		buttonHtml = buttonHtml + ' <button onclick="deleteEditCustomerDetail(' + i + ')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
+            		buttonHtml = ' <button onclick="displayEditCustomerDetail(' + i + ')" class="btn btn-outline-primary admin-element"><i class="fa fa-pencil"></i></button>'
+                        		buttonHtml = buttonHtml + ' <button onclick="deleteEditCustomerDetail(' + i + ')" class="btn btn-outline-danger admin-element"><i class="fa fa-trash"></i></button>'
             		var row = '<tr>'
             		+ '<td>' + e.barcode + '</td>' //barcode
             		+ '<td>'  + e.mrp + '</td>' //mrp
@@ -199,7 +199,7 @@ function DisplayAddedData(){
             	$confirm.empty();
             if(addedData.length>0){
                 $confirm.empty();
-                confirmButton =  '<button onclick="submitCustomerDetail(' + e.id + ')" class="btn btn-success"><i class="fa fa-check"></i> Confirm</button>'
+                confirmButton =  '<button onclick="submitCustomerDetail(' + e.id + ')" class="btn btn-outline-success"><i class="fa fa-check"></i> Confirm</button>'
             	    $confirm.append(confirmButton)
             	}
             	$('#inputBarcode').val('');
@@ -364,8 +364,8 @@ else if(barcodeChange==true){
 	}
 	for(var i in addedData){
     		var e = addedData[i];
-    		buttonHtml = ' <button onclick="displayEditCustomerDetail(' + i + ')" class="btn btn-primary"><i class="fa fa-pencil"></i></button>'
-            buttonHtml = buttonHtml + ' <button onclick="deleteEditCustomerDetail(' + i + ')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
+    		buttonHtml = ' <button onclick="displayEditCustomerDetail(' + i + ')" class="btn btn-outline-primary admin-element"><i class="fa fa-pencil"></i></button>'
+            buttonHtml = buttonHtml + ' <button onclick="deleteEditCustomerDetail(' + i + ')" class="btn btn-outline-danger admin-element"><i class="fa fa-trash"></i></button>'
     		var row = '<tr>'
     		+ '<td>' + e.barcode + '</td>' //barcode
     		+ '<td>'  + e.mrp + '</td>' //mrp
@@ -378,7 +378,7 @@ else if(barcodeChange==true){
     var $confirm = $('#confirm');
     $confirm.empty();
     if(addedData.length>0){
-            confirmButton = '<td>' + ' <button onclick="submitCustomerDetail(' + e.id + ')" class="btn btn-success"><i class="fa fa-check"></i> Confirm</button>' + '</td>'
+            confirmButton = '<td>' + ' <button onclick="submitCustomerDetail(' + e.id + ')" class="btn btn-outline-success"><i class="fa fa-check"></i> Confirm</button>' + '</td>'
     	    $confirm.append(confirmButton)
     	}
 	return false;
@@ -482,9 +482,9 @@ function displayCustomerDetailList(data){
   // Populate the table with data
   for (var i in data) {
     var e = data[i];
-    var buttonHtml = '<button class="btn btn-info" onclick="orderDetail(' + e.id + ')"><i class="fa fa-eye"></i> Details</button>'
-      + ' <button class="btn btn-danger admin-element" onclick="generateInvoice(' + e.id + ')"><i class="fa fa-file-pdf-o"></i> Invoice</button>'
-      + '<button type="button" class="btn btn-secondary" onclick="deleteTheOrder(' + e.id + ')">Delete</button>'
+    var buttonHtml = '<button class="btn btn-outline-info" onclick="orderDetail(' + e.id + ')"><i class="fa fa-eye"></i> Details</button>'
+      + ' <button class="btn btn-outline-success admin-element" onclick="generateInvoice(' + e.id + ')"><i class="fa fa-file-pdf-o"></i> Invoice</button>'
+      + '<button style="margin-left:0.3em;" class="btn btn-outline-danger admin-element" onclick="deleteTheOrder(' + e.id + ')"><i class="fa fa-trash"></i> Delete</button>'
     var row = '<tr>'
       + '<td>' + e.id + '</td>'
       + '<td>' + e.time + '</td>'
@@ -537,8 +537,8 @@ function orderDetail(id) {
                             '<td>'  + e.quantity + '</td>' +
                             '<td>'  + e.sellingPrice + '</td>' +
                             '<td>'  + cost + '</td>' +
-                            '<td>'  + ' <button onclick="displayEditOrderDetail(' + e.id + ')" class="btn btn-primary"><i class="fa fa-pencil"></i></button>'
-                            + ' <button onclick="deleteEditOrderDetail(' + e.id + ')" class="btn btn-danger"><i class="fa fa-trash"></i></button>'
+                            '<td>'  + ' <button onclick="displayEditOrderDetail(' + e.id + ')" class="btn btn-outline-primary admin-element"><i class="fa fa-pencil"></i></button>'
+                            + ' <button onclick="deleteEditOrderDetail(' + e.id + ')" class="btn btn-outline-danger admin-element"><i class="fa fa-trash"></i></button>'
                              + '</td>' +
                             '</tr>';
                             $tbody.append(row);

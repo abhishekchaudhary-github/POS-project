@@ -8,6 +8,8 @@ import helper.pojoHelper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -78,14 +80,15 @@ InventoryService inventoryService;
 //    @Test
 //    public void testAdd() throws ApiException {
 //        LocalDateTime fixedDateTime = LocalDateTime.of(2023, 7, 21, 12, 34, 56);
-//        // Mock LocalDateTime.now() to return the fixedDateTime
-//        PowerMockito.mockStatic(LocalDateTime.class);
-//        when(LocalDateTime.now()).thenReturn(fixedDateTime);
-//        // Call the function you want to test
-//        Integer orderId3  = orderService.add();
-//        orderService.getOrderById(orderId3);
 //
-//        assertEquals(fixedDateTime,orderService.getOrderById(orderId3).getTime());
+//        try (MockedStatic<LocalDateTime> localDateTimeMock = Mockito.mockStatic(LocalDateTime.class)) {
+//            localDateTimeMock.when(LocalDateTime::now).thenReturn(fixedDateTime);
+//
+//            Integer orderId3 = orderService.add();
+//            //Integer order = orderService.getOrderById(orderId3);
+//
+//            assertEquals(fixedDateTime, orderService.getOrderById(1).getTime());
+//        }
 //    }
 
 

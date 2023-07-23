@@ -216,7 +216,7 @@ function displayBrandList(data){
       // Populate the table with data
       for (var i in data) {
         var e = data[i];
-        var buttonHtml = '<button class="btn btn-primary admin-element" onclick="displayEditBrand(' + e.id + ')"><i class="fa fa-pencil"></i></button>';
+        var buttonHtml = '<button class="btn btn-outline-primary admin-element" onclick="displayEditBrand(' + e.id + ')"><i class="fa fa-pencil"></i></button>';
         var row = '<tr>'
           + '<td>' + e.id + '</td>'
           + '<td>' + e.brand.slice(0, 14) + '</td>'

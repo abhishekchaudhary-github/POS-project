@@ -251,7 +251,7 @@ function displayInventoryList(data){
 		var e = data[i];
 		//var buttonHtml = '<button onclick="deleteinventory(' + e.id + ')">delete</button>'
 		var buttonHtml = ''
-		buttonHtml += ' <button class="btn btn-primary admin-element" onclick="displayEditInventory(' + e.id + ')"><i class="fa fa-pencil"></i></button>'
+		buttonHtml += ' <button class="btn btn-outline-primary admin-element" onclick="displayEditInventory(' + e.id + ')"><i class="fa fa-pencil"></i></button>'
 		var row = '<tr>'
 		+ '<td>' + e.barcode + '</td>'
 		+ '<td>'  + e.quantity + '</td>'
