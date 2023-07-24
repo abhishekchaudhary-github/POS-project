@@ -20,7 +20,7 @@ public class OrderDao extends AbstractDao {
     private static String select_id = "select p from OrderPojo p where id=:id";
     private static String select_all = "select p from OrderPojo p";
 
-    private static String last_id = "select count(*) from OrderPojo p";
+//    private static String last_id = "select count(*) from OrderPojo p";
 
     @PersistenceContext
     private EntityManager em;
@@ -37,11 +37,11 @@ public class OrderDao extends AbstractDao {
         return query.executeUpdate();
     }
 
-    public Integer getLastOrderId() {
-        Query query = em.createQuery(last_id);
-        Long count = (Long) query.getSingleResult(); // Execute the query and retrieve the count value
-        return count.intValue();
-    }
+//    public Integer getLastOrderId() {
+//        Query query = em.createQuery(last_id);
+//        Long count = (Long) query.getSingleResult(); // Execute the query and retrieve the count value
+//        return count.intValue();
+//    }
 
     public List<OrderPojo> selectAll() {
         TypedQuery<OrderPojo> query = getQuery(select_all, OrderPojo.class);

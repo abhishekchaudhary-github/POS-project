@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd59bcda-ea0a-45cb-bbdf-b0788f0265bb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/increff/employee/dao/InventoryDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/increff/employee/dao/InventoryDaoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/increff/employee/dao/OrderDaoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/increff/employee/dao/OrderItemDaoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/OrderDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/OrderDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,8 +85,8 @@
       <recent name="$PROJECT_DIR$/src/main/webapp/html" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.InventoryDaoTest">
-    <configuration name="BrandDaoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.OrderItemDaoTest">
+    <configuration name="OrderDaoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
         <pattern>
@@ -92,13 +95,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.increff.employee.dao" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.dao.BrandDaoTest" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.dao.OrderDaoTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BrandDaoTest.testBrandMustExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="OrderItemDaoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
         <pattern>
@@ -107,14 +110,29 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.increff.employee.dao" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.dao.BrandDaoTest" />
-      <option name="METHOD_NAME" value="testBrandMustExist" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.dao.OrderItemDaoTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OrderItemDaoTest.testInsert" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employee-spring-full" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.increff.employee.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.increff.employee.dao" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.dao.OrderItemDaoTest" />
+      <option name="METHOD_NAME" value="testInsert" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="InventoryDaoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="OrderItemDaoTest.testSelect" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
         <pattern>
@@ -123,13 +141,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.increff.employee.dao" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.dao.InventoryDaoTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.dao.OrderItemDaoTest" />
+      <option name="METHOD_NAME" value="testSelect" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProductDaoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="OrderItemDaoTest.testSelectAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
         <pattern>
@@ -138,23 +157,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.increff.employee.dao" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.dao.ProductDaoTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ProductServiceTest.testBrandCategoryNotExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="employee-spring-full" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.increff.employee.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.increff.employee.service" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.ProductServiceTest" />
-      <option name="METHOD_NAME" value="testBrandCategoryNotExist" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.dao.OrderItemDaoTest" />
+      <option name="METHOD_NAME" value="testSelectAll" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -199,20 +203,20 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="JUnit.BrandDaoTest" />
-      <item itemvalue="JUnit.BrandDaoTest.testBrandMustExist" />
-      <item itemvalue="JUnit.InventoryDaoTest" />
-      <item itemvalue="JUnit.ProductDaoTest" />
-      <item itemvalue="JUnit.ProductServiceTest.testBrandCategoryNotExist" />
+      <item itemvalue="JUnit.OrderDaoTest" />
+      <item itemvalue="JUnit.OrderItemDaoTest" />
+      <item itemvalue="JUnit.OrderItemDaoTest.testInsert" />
+      <item itemvalue="JUnit.OrderItemDaoTest.testSelect" />
+      <item itemvalue="JUnit.OrderItemDaoTest.testSelectAll" />
       <item itemvalue="Maven.employee-spring-full [jetty:run]" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.InventoryDaoTest" />
-        <item itemvalue="JUnit.ProductDaoTest" />
-        <item itemvalue="JUnit.BrandDaoTest" />
-        <item itemvalue="JUnit.ProductServiceTest.testBrandCategoryNotExist" />
-        <item itemvalue="JUnit.BrandDaoTest.testBrandMustExist" />
+        <item itemvalue="JUnit.OrderItemDaoTest" />
+        <item itemvalue="JUnit.OrderItemDaoTest.testSelectAll" />
+        <item itemvalue="JUnit.OrderItemDaoTest.testInsert" />
+        <item itemvalue="JUnit.OrderItemDaoTest.testSelect" />
+        <item itemvalue="JUnit.OrderDaoTest" />
       </list>
     </recent_temporary>
   </component>
