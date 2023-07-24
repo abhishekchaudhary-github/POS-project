@@ -481,13 +481,19 @@ function displayCustomerDetailList(data){
 
   // Populate the table with data
   for (var i in data) {
+  console.log(data[i])
     var e = data[i];
+    var status = '<p class="btn btn-secondary admin-element rounded-pill"> Invoiced </p>';
+    if(e.editable==true) {
+        status =  '<p class="btn btn-success admin-element rounded-pill"> Created </p>';
+    }
     var buttonHtml = '<button class="btn btn-outline-info" onclick="orderDetail(' + e.id + ')"><i class="fa fa-eye"></i> Details</button>'
       + ' <button class="btn btn-outline-success admin-element" onclick="generateInvoice(' + e.id + ')"><i class="fa fa-file-pdf-o"></i> Invoice</button>'
       + '<button style="margin-left:0.3em;" class="btn btn-outline-danger admin-element" onclick="deleteTheOrder(' + e.id + ')"><i class="fa fa-trash"></i> Delete</button>'
     var row = '<tr>'
       + '<td>' + e.id + '</td>'
       + '<td>' + e.time + '</td>'
+      + '<td>' + status + '</td>'
       + '<td>' + buttonHtml + '</td>'
       + '</tr>';
     $table.find('tbody').append(row);
@@ -517,6 +523,7 @@ function displayCustomerDetailList(data){
 function generateInvoice(id) {
       var invoiceUrl = getInvoiceUrl() + '/' + id;
       window.open(invoiceUrl, '_blank');
+      getCustomerDetailList();
 }
 
 function orderDetail(id) {
@@ -528,8 +535,12 @@ function orderDetail(id) {
     	        var $tbody = $('#order-detail-modal-body').find('tbody')
     	        $tbody.empty()
                 for(var i in data) {
+                console.log(e)
+                var variableHtml = ' <button onclick="deleteEditOrderDetail(' + e.id + ')" class="btn btn-outline-danger admin-element"><i class="fa fa-trash"></i></button>'
                         var e = data[i]
                         if(e.orderId==id) {
+                            if(e.editable==false)
+                                variableHtml = ' <button onclick="deleteEditOrderDetail(' + e.id + ')" class="btn btn-outline-danger admin-element" disabled><i class="fa fa-trash"></i></button>'
                             var cost = e.sellingPrice * e.quantity;
                             var row =
                             '<tr>'+
@@ -538,7 +549,7 @@ function orderDetail(id) {
                             '<td>'  + e.sellingPrice + '</td>' +
                             '<td>'  + cost + '</td>' +
                             '<td>'  + ' <button onclick="displayEditOrderDetail(' + e.id + ')" class="btn btn-outline-primary admin-element"><i class="fa fa-pencil"></i></button>'
-                            + ' <button onclick="deleteEditOrderDetail(' + e.id + ')" class="btn btn-outline-danger admin-element"><i class="fa fa-trash"></i></button>'
+                            + variableHtml
                              + '</td>' +
                             '</tr>';
                             $tbody.append(row);

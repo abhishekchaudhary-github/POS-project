@@ -85,6 +85,7 @@ public class OrderApiController {
         String formattedDateTime = p.getTime().format(formatter);
         d.setTime(formattedDateTime);
         d.setId(p.getId());
+        d.setEditable(p.isEditable());
         return d;
     }
 

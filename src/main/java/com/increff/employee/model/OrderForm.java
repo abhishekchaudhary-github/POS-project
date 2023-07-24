@@ -4,6 +4,16 @@ public class OrderForm {
     private Integer id;
     private String time;
 
+    private boolean editable;
+
+    public boolean isEditable() {
+        return editable;
+    }
+
+    public void setEditable(boolean editable) {
+        this.editable = editable;
+    }
+
     public Integer getId() {
         return id;
     }
