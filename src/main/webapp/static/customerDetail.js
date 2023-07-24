@@ -483,13 +483,16 @@ function displayCustomerDetailList(data){
   for (var i in data) {
   console.log(data[i])
     var e = data[i];
+    var variableHtml =
+        variableHtml = '<button style="margin-left:0.3em;" class="btn btn-outline-danger admin-element" onclick="deleteTheOrder(' + e.id + ')" disabled><i class="fa fa-trash"></i> Delete</button>'
     var status = '<p class="btn btn-secondary admin-element rounded-pill"> Invoiced </p>';
     if(e.editable==true) {
         status =  '<p class="btn btn-success admin-element rounded-pill"> Created </p>';
+        variableHtml = '<button style="margin-left:0.3em;" class="btn btn-outline-danger admin-element" onclick="deleteTheOrder(' + e.id + ')"><i class="fa fa-trash"></i> Delete</button>'
     }
-    var buttonHtml = '<button class="btn btn-outline-info" onclick="orderDetail(' + e.id + ')"><i class="fa fa-eye"></i> Details</button>'
+    var buttonHtml = '<button class="btn btn-outline-info" onclick="orderDetail(' + e.id + ',' + e.editable + ')"><i class="fa fa-eye"></i> Details</button>'
       + ' <button class="btn btn-outline-success admin-element" onclick="generateInvoice(' + e.id + ')"><i class="fa fa-file-pdf-o"></i> Invoice</button>'
-      + '<button style="margin-left:0.3em;" class="btn btn-outline-danger admin-element" onclick="deleteTheOrder(' + e.id + ')"><i class="fa fa-trash"></i> Delete</button>'
+      + variableHtml
     var row = '<tr>'
       + '<td>' + e.id + '</td>'
       + '<td>' + e.time + '</td>'
@@ -526,32 +529,34 @@ function generateInvoice(id) {
       getCustomerDetailList();
 }
 
-function orderDetail(id) {
+function orderDetail(id,status) {
     var url = getCustomerDetailUrl();
     $.ajax({
     	   url: url,
     	   type: 'GET',
     	   success: function(data) {
+    	   console.log(status)
+    	   console.log(status)
     	        var $tbody = $('#order-detail-modal-body').find('tbody')
     	        $tbody.empty()
                 for(var i in data) {
                 console.log(e)
-                var variableHtml = ' <button onclick="deleteEditOrderDetail(' + e.id + ')" class="btn btn-outline-danger admin-element"><i class="fa fa-trash"></i></button>'
                         var e = data[i]
                         if(e.orderId==id) {
-                            if(e.editable==false)
-                                variableHtml = ' <button onclick="deleteEditOrderDetail(' + e.id + ')" class="btn btn-outline-danger admin-element" disabled><i class="fa fa-trash"></i></button>'
+                        var variableHtml =' <button onclick="displayEditOrderDetail(' + e.id + ')" class="btn btn-outline-primary admin-element"><i class="fa fa-pencil"></i></button>'
+                                          +' <button onclick="deleteEditOrderDetail(' + e.id + ')" class="btn btn-outline-danger admin-element"><i class="fa fa-trash"></i></button>'
+                        if(status==false) {
+                            variableHtml =' <button onclick="displayEditOrderDetail(' + e.id + ')" class="btn btn-outline-primary admin-element" disabled><i class="fa fa-pencil"></i></button>'
+                                            +' <button onclick="deleteEditOrderDetail(' + e.id + ')" class="btn btn-outline-danger admin-element" disabled><i class="fa fa-trash"></i></button>'
+                        }
                             var cost = e.sellingPrice * e.quantity;
                             var row =
                             '<tr>'+
                             '<td>'  + e.name + '</td>' +
                             '<td>'  + e.quantity + '</td>' +
                             '<td>'  + e.sellingPrice + '</td>' +
-                            '<td>'  + cost + '</td>' +
-                            '<td>'  + ' <button onclick="displayEditOrderDetail(' + e.id + ')" class="btn btn-outline-primary admin-element"><i class="fa fa-pencil"></i></button>'
-                            + variableHtml
-                             + '</td>' +
-                            '</tr>';
+                            '<td>'  + cost + '</td>' + '<td>'  +
+                            variableHtml + '</td>' + '</tr>';
                             $tbody.append(row);
                         }
                 }
