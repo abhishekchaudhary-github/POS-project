@@ -27,6 +27,8 @@ public class ProductService {
     private ProductDao dao;
 
 
+    private boolean checks1 = false;
+
     @Transactional(rollbackOn = ApiException.class)
     public Integer add(ProductPojo p) throws ApiException {
         normalize(p);
@@ -107,7 +109,6 @@ public class ProductService {
     @Transactional
     public ErrorsProduct checkError(ProductFormString productForm, List<ProductFormString> list,HashMap<String,Integer> hm) throws ApiException {
         ErrorsProduct errors = new ErrorsProduct();
-        boolean checks1=false;
         String brand = productForm.getBrand();
         String category = productForm.getCategory();
         String barcode = productForm.getBarcode();
@@ -230,6 +231,7 @@ public class ProductService {
             ErrorsProduct error = checkError(productItem,productPojoList,hm);
             if(checkError==true || error.getErrorCount()>0) {
                 error.setCheckError(true);
+                checkError =true;
             }
             //logic
             productPojoList.add(productItem);

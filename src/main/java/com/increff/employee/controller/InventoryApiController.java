@@ -34,6 +34,7 @@ public class InventoryApiController {
     @RequestMapping(path = "/api/inventory/tsv", method = RequestMethod.POST)
     public List<ErrorsInventory> addBulk(@RequestBody List<InventoryFormString> form) throws ApiException {
         ArrayList<ErrorsInventory> data = service.fileCheck(form);
+        System.out.println(data.get(data.size()-1).isCheckError());
         if(data.get(data.size()-1).isCheckError()==false)
             for(InventoryFormString InventoryItem : form) {
                 Integer productId = service.getIdOfProduct(InventoryItem.getBarcode());

@@ -21,6 +21,8 @@ public class BrandService {
     @Autowired
     private BrandDao dao;
 
+    private boolean checkError = false;
+
     @Transactional(rollbackOn = ApiException.class)
     public void add(BrandPojo p) throws ApiException {
         normalize(p);
@@ -132,13 +134,13 @@ public class BrandService {
         if(form.size()>5000) {
             throw new ApiException("maximum number of rows can be only 5000");
         }
-        boolean checkError =false;
         ArrayList<ErrorsBrand> data = new ArrayList<ErrorsBrand>();
         ArrayList<BrandForm> brandPojoList = new ArrayList<>();
         for(BrandForm BrandItem : form){
             ErrorsBrand error = checkError(BrandItem,brandPojoList);
             if(checkError==true || error.getErrorCount()>0) {
                 error.setCheckError(true);
+                checkError =true;
             }
             brandPojoList.add(BrandItem);
             data.add(error);

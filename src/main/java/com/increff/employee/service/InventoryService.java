@@ -27,6 +27,8 @@ public class InventoryService {
     @Autowired
     private InventoryService inventoryService;
 
+    private boolean checkError = false;
+
     @Transactional(rollbackOn = ApiException.class)
     public Integer add(InventoryPojo inventoryPojo) throws ApiException {
         if(dao.getFromProductId(inventoryPojo.getProductId())==null) {
@@ -126,6 +128,7 @@ public class InventoryService {
         boolean checks1=false;
         String quantity = inventoryForm.getQuantity();
         String barcode = inventoryForm.getBarcode();
+        errors.setErrorCount(1);
         if(barcode==null||barcode==""){
             checks1=true;
             errors.setMessage("barcode field is empty");
@@ -165,7 +168,6 @@ public class InventoryService {
         if(form.size()>5000) {
             throw new ApiException("maximum number of rows can be only 5000");
         }
-        boolean checkError =false;
         ArrayList<ErrorsInventory> data = new ArrayList<ErrorsInventory>();
         ArrayList<InventoryFormString> inventoryPojoList = new ArrayList<>();
         HashMap<String,Integer> hm = new HashMap<>();
@@ -173,6 +175,7 @@ public class InventoryService {
             ErrorsInventory error = checkError(inventoryItem,inventoryPojoList,hm);
             if(checkError==true || error.getErrorCount()>0) {
                 error.setCheckError(true);
+                checkError =true;
             }
             //logic
             inventoryPojoList.add(inventoryItem);
