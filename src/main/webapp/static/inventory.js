@@ -19,6 +19,14 @@ function addInventory(event){
 	var $form = $("#inventory-form");
 	var barcodeField = $form.find('#inputBarcode').val().trim()
     var quantityField = $form.find('#inputQuantity').val().trim()
+    if (quantityField.includes('e')||quantityField.includes('E')||quantityField.includes('.')||quantityField.includes('-')) {
+                    $.notify("invalid input format for quantity",{ className:"error" , globalPosition: 'top center' });
+                        return;
+                     }
+    if(typeof quantityField != 'number' && isNaN(quantityField) && Number.isInteger(quantityField) && !Number.isInteger(quantityField)) {
+                $.notify("invalid quantity",{ className:"error" , globalPosition: 'top center' });
+                    return;
+                }
 	var json = toJson($form);
 	var url = getInventoryUrl();
 	if(barcodeField==""){
@@ -101,6 +109,14 @@ function updateInventory(event){
             );
         	    return
         	}
+        if (quantityField.includes('e')||quantityField.includes('E')||quantityField.includes('.')||quantityField.includes('-')) {
+                  $.notify("invalid input format for quantity",{ className:"error" , globalPosition: 'top center' });
+                  return;
+            }
+        if(typeof quantityField != 'number' && isNaN(quantityField) && Number.isInteger(quantityField) && !Number.isInteger(quantityField)) {
+                  $.notify("invalid quantity",{ className:"error" , globalPosition: 'top center' });
+                  return;
+            }
 
         var postingData = {
         	    barcode:barcodeField,

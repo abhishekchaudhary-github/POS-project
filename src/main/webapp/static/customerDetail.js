@@ -99,10 +99,27 @@ if(!checker) error = true
 
 
 
+	var mrpField = fileData[1].value.trim()
+	var quantityField = fileData[2].value.trim()
+	if(typeof mrpField != 'number' && isNaN(mrpField)) {
+                $.notify("invalid mrp",{ className:"error" , globalPosition: 'top center' });
+                    error = true;
+                }
+    else if (mrpField.includes('e')||mrpField.includes('E')||mrpField.includes('-')) {
+                $.notify("invalid input format for mrp",{ className:"error" , globalPosition: 'top center' });
+                    error = true;
+                 }
+    else if (quantityField.includes('e')||quantityField.includes('E')||quantityField.includes('.')||quantityField.includes('-')) {
+                            $.notify("invalid input format for quantity",{ className:"error" , globalPosition: 'top center' });
+                                error = true;
+                             }
+    else if(typeof quantityField != 'number' && isNaN(quantityField) && Number.isInteger(quantityField) && !Number.isInteger(quantityField)) {
+                        $.notify("invalid quantity",{ className:"error" , globalPosition: 'top center' });
+                            error = true;
+                        }
 
 
-
-	if(fileData[0].value.trim().localeCompare("")==0||fileData[1].value.localeCompare("")==0||fileData[2].value.localeCompare("")==0) {
+	else if(fileData[0].value.trim().localeCompare("")==0||fileData[1].value.localeCompare("")==0||fileData[2].value.localeCompare("")==0) {
 	    $("#customerDetail-form").notify("fields can not be empty",{className:"warn"})
 	    error = true;
 	}
@@ -315,7 +332,25 @@ if(!checker) error = true
     $tbody.empty();
 	fileData[0].value = fileData[0].value.trim().toLowerCase();
 	//checks
-	if(fileData[0].value.trim().localeCompare("")==0||fileData[1].value.localeCompare("")==0||fileData[2].value.localeCompare("")==0) {
+	var mrpField = fileData[1].value.trim()
+    	var quantityField = fileData[2].value.trim()
+    	if(typeof mrpField != 'number' && isNaN(mrpField)) {
+                    $.notify("invalid mrp",{ className:"error" , globalPosition: 'top center' });
+                        error = true;
+                    }
+        else if (mrpField.includes('e')||mrpField.includes('E')||mrpField.includes('-')) {
+                    $.notify("invalid input format for mrp",{ className:"error" , globalPosition: 'top center' });
+                        error = true;
+                     }
+        else if (quantityField.includes('e')||quantityField.includes('E')||quantityField.includes('.')||quantityField.includes('-')) {
+                                $.notify("invalid input format for quantity",{ className:"error" , globalPosition: 'top center' });
+                                    error = true;
+                                 }
+        else if(typeof quantityField != 'number' && isNaN(quantityField) && Number.isInteger(quantityField) && !Number.isInteger(quantityField)) {
+                            $.notify("invalid quantity",{ className:"error" , globalPosition: 'top center' });
+                                error = true;
+                            }
+	else if(fileData[0].value.trim().localeCompare("")==0||fileData[1].value.localeCompare("")==0||fileData[2].value.localeCompare("")==0) {
 	    $("#customerDetail-form").notify("fields can not be empty",{className:"warn"})
 	    error = true;
 	}
@@ -583,7 +618,7 @@ function displayOrderItemDetail(data){
 	    $("#edit-order-form input[name=quantity]").val(data.quantity);
     	$("#edit-order-form input[name=sellingPrice]").val(data.sellingPrice);
     	editOrderData = data;
-    	console.log(editOrderData)
+//    	console.log(editOrderData)
 //    	 //when modal opens
 //                        $('#edit-order-modal').on('shown.bs.modal', function (e) {
 //                          $("#pageContent").css({ opacity: 0.9 });
@@ -677,6 +712,25 @@ function updateEditedOrder() {
     var $form = $('#edit-order-form');
     var json = toJson($form);
     var fileData = $form.serializeArray();
+    console.log(fileData)
+    var mrpField = fileData[1].value.trim()
+    var quantityField = fileData[0].value.trim()
+    	if(typeof mrpField != 'number' && isNaN(mrpField)) {
+                    $.notify("invalid mrp",{ className:"error" , globalPosition: 'top center' });
+                        return;
+                    }
+        else if (mrpField.includes('e')||mrpField.includes('E')||mrpField.includes('-')) {
+                    $.notify("invalid input format for mrp",{ className:"error" , globalPosition: 'top center' });
+                        return;
+                     }
+        else if (quantityField.includes('e')||quantityField.includes('E')||quantityField.includes('.')||quantityField.includes('-')) {
+                                $.notify("invalid input format for quantity",{ className:"error" , globalPosition: 'top center' });
+                                    return;
+                                 }
+        else if(typeof quantityField != 'number' && isNaN(quantityField) && Number.isInteger(quantityField) && !Number.isInteger(quantityField)) {
+                            $.notify("invalid quantity",{ className:"error" , globalPosition: 'top center' });
+                                return;
+                            }
     var objectForm = {
         id : editOrderData.id,
         orderId : editOrderData.orderId,

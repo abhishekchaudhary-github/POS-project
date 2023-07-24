@@ -15,6 +15,15 @@ function addProduct(event){
     var mrpField = $form.find('#inputMrp').val().trim()
     var nameField = $form.find('#inputName').val().trim()
 
+    if(typeof mrpField != 'number' && isNaN(mrpField)) {
+    $.notify("invalid mrp",{ className:"warn" , globalPosition: 'top center' });
+        return;
+    }
+    if (mrpField.includes('e')||mrpField.includes('E')||mrpField.includes('-')) {
+    $.notify("invalid input format for mrp",{ className:"warn" , globalPosition: 'top center' });
+        return;
+     }
+
 //setting error class for error message and red field
     if(barcodeField==""){
     $("#inputBarcode").notify(
@@ -133,6 +142,14 @@ function updateProduct(event){
                     );
             	    return
             	}
+        if(typeof mrpField != 'number' && isNaN(mrpField)) {
+            $.notify("invalid mrp",{ className:"error" , globalPosition: 'top center' });
+                return;
+            }
+        if (mrpField.includes('e')||mrpField.includes('E')||mrpField.includes('-')) {
+            $.notify("invalid input format for mrp",{ className:"error" , globalPosition: 'top center' });
+                return;
+             }
      var postingData = {
             barcode:barcodeField,
             brand:brandField,
@@ -441,4 +458,3 @@ function init(){
 
 $(document).ready(init);
 $(document).ready(getProductList);
-
