@@ -201,6 +201,11 @@ function uploadRows(){
             var json = JSON.stringify(row);
            	var url = getInventoryUrl()+'/tsv';
             //Make ajax call
+             $('#cancel-modal1').prop("disabled",true);
+             $('#download-errors').prop("disabled",true);
+             $('#process-data').prop("disabled",true);
+             $('#download-sample').prop("disabled",true);
+             $('#cancel-modal').prop("disabled",true);
             	$.ajax({
             	   url: url,
             	   type: 'POST',
@@ -209,9 +214,17 @@ function uploadRows(){
                    	'Content-Type': 'application/json'
                    },
             	   success: function(data) {
-            	    $.notify("uploaded successfully",{className:"success", globalPosition: 'top center' })
-            	    console.log(data)
-                                   for(var i=0;i<data.length;i++){
+            	   $('#cancel-modal1').prop("disabled",false);
+                   $('#download-errors').prop("disabled",false);
+                   $('#process-data').prop("disabled",false);
+                   $('#download-sample').prop("disabled",false);
+                   $('#cancel-modal').prop("disabled",false);
+                   if(data[data.length-1].errorCount==1)
+                        $.notify("uploaded successfully",{className:"success", globalPosition: 'top center' })
+                   else
+                        $.notify("uploaded successfully",{className:"success", globalPosition: 'top center' })
+            	   console.log(data)
+                   for(var i=0;i<data.length;i++){
                                    let arr = {
                                        barcode : data[i].barcode,
                                        quantity : data[i].quantity,

@@ -142,7 +142,6 @@ function readFileDataCallback(results){
     }
     console.log(fileData[0])
 	for(var i =0 ;i < fileData.length; i++) {
-	    console.log(fileData[i][0])
 	    fileData[i].brand = fileData[i].brand.trim();
 	    fileData[i].category = fileData[i].category.trim();
 	}
@@ -162,6 +161,11 @@ function uploadRows(){
     var json = JSON.stringify(row);
    	var url = getBrandUrl()+'/tsv';
     //Make ajax call
+        $('#cancel-modal1').prop("disabled",true);
+        $('#download-errors').prop("disabled",true);
+        $('#process-data').prop("disabled",true);
+        $('#download-sample').prop("disabled",true);
+        $('#cancel-modal').prop("disabled",true);
     	$.ajax({
     	   url: url,
     	   type: 'POST',
@@ -170,7 +174,12 @@ function uploadRows(){
            	'Content-Type': 'application/json'
            },
     	   success: function(data) {
-    	   if(data[data.length-1].errorCount==1)
+            $('#cancel-modal1').prop("disabled",false);
+            $('#download-errors').prop("disabled",false);
+            $('#process-data').prop("disabled",false);
+            $('#download-sample').prop("disabled",false);
+            $('#cancel-modal').prop("disabled",false);
+    	   if(data[data.length-1].errorCount>=1)
     	    $.notify("error in uploading",{className:"warn", globalPosition: 'top center' })
     	   else
     	    $.notify("uploaded successfully",{className:"success", globalPosition: 'top center' })
@@ -185,6 +194,7 @@ function uploadRows(){
                            errorData.push(arr)
                 	   }
     	   },
+                    	    error: handleAjaxError
 //    	    error: function() {
 //    	        $.notify("format of the file is invalid",{className:"warn", globalPosition: 'top center' });
 //    	    }

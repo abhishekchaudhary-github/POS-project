@@ -41,7 +41,6 @@ public class ProductApiController {
         ArrayList<ErrorsProduct> data = service.fileCheck(form);
         if(data.get(data.size()-1).isCheckError()==false)
             for(ProductFormString ProductItem : form) {
-                System.out.println("checks done");
                 BrandPojo brandPojo = service.getBrandPojoFromForm2(ProductItem.getBrand(),ProductItem.getCategory());
                 ProductForm productForm = convertToForm(ProductItem);
                 service.add(convert(productForm, brandPojo));

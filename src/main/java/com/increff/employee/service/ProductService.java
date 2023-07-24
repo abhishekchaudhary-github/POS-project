@@ -174,7 +174,7 @@ public class ProductService {
             errors.setMessage("duplicate product");
             errors.setErrorCount(1);
         }
-        else if(hm.containsKey(barcode)){
+        else if(dao.barcodeMustExist(barcode)!=null){
             checks1 = true;
             errors.setMessage("duplicate barcode");
             errors.setErrorCount(1);
@@ -197,7 +197,7 @@ public class ProductService {
             }
         }
         if(checks1 == false) {
-            errors.setMessage("no error in this line");
+            errors.setMessage("");
             errors.setErrorCount(0);
         }
         errors.setCategory(category);

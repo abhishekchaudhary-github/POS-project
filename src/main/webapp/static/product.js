@@ -232,18 +232,31 @@ function uploadRows(){
                 processCount++;
              }
         var json = JSON.stringify(row);
-       	var url = getProductUrl()+'/tsv';
+       	var urltsv = getProductUrl()+'/tsv';
         //Make ajax call
+        $('#cancel-modal1').prop("disabled",true);
+        $('#download-errors').prop("disabled",true);
+        $('#process-data').prop("disabled",true);
+        $('#download-sample').prop("disabled",true);
+        $('#cancel-modal').prop("disabled",true);
         	$.ajax({
-        	   url: url,
+        	   url: urltsv,
         	   type: 'POST',
         	   data: json,
         	   headers: {
                	'Content-Type': 'application/json'
                },
         	   success: function(data) {
-        	    $.notify("uploaded successfully",{className:"success", globalPosition: 'top center' })
-        	    console.log(data)
+        	   $('#cancel-modal1').prop("disabled",false);
+               $('#download-errors').prop("disabled",false);
+               $('#process-data').prop("disabled",false);
+               $('#download-sample').prop("disabled",false);
+               $('#cancel-modal').prop("disabled",false);
+                if(data[data.length-1].errorCount>=1)
+        	        $.notify("uploaded successfully",{className:"success", globalPosition: 'top center' })
+        	    else
+                    $.notify("uploaded successfully",{className:"success", globalPosition: 'top center' })
+        	    updateUploadDialog(data,data.length);
                                for(var i=0;i<data.length;i++){
                                let arr = {
                                    barcode : data[i].barcode,
@@ -261,10 +274,10 @@ function uploadRows(){
 }
 
 function downloadErrors(){
-if(errorData.length==0) {
-     $.notify("no errors",{className:"warn", globalPosition: 'top center' })
-     return;
-}
+//if(errorData.length==0) {
+//     $.notify("no errors",{className:"warn", globalPosition: 'top center' })
+//     return;
+//}
 	writeFileData(errorData);
 }
 
@@ -333,14 +346,31 @@ function resetUploadDialog(){
 	fileData = [];
 	errorData = [];
 	//Update counts
-	updateUploadDialog();
+	updateUploadDialog2();
 }
 
-function updateUploadDialog(){
-	$('#rowCount').html("" + fileData.length);
-	$('#processCount').html("" + processCount);
-	$('#errorCount').html("" + errorData.length);
+function updateUploadDialog(data,length){
+	 $('#rowCount').html("" + length);
+        	        var count=0;
+        	        for(var i =0;i<length;i++) {
+        	            if(data[i].errorCount==1){
+        	                count ++;
+        	            }
+        	        }
+        	        if(count>0)
+                    $('#processCount').html("" + 0);
+                    else
+                    $('#processCount').html("" + length);
+                    $('#errorCount').html("" + count);
 }
+
+
+function updateUploadDialog2(){
+	$('#rowCount').html("" + 0);
+	$('#processCount').html("" + 0);
+	$('#errorCount').html("" + 0);
+}
+
 
 function updateFileName(){
 	var $file = $('#productFile');
@@ -353,20 +383,20 @@ function displayUploadData(){
 	$('#upload-product-modal').modal('toggle');
 }
 
-function validateInput(input) {
-  // Get the value entered by the user
-  const inputValue = input.value;
-
-  // Regular expression to match alphanumeric characters
-  const alphanumericPattern = /^[a-zA-Z0-9]*$/;
-
-  // Check if the input matches the alphanumeric pattern
-  if (!alphanumericPattern.test(inputValue)) {
-    // If it contains special characters, remove them from the input
-    const sanitizedValue = inputValue.replace(/[^a-zA-Z0-9]/g, '');
-    input.value = sanitizedValue;
-  }
-}
+//function validateInput(input) {
+//  // Get the value entered by the user
+//  const inputValue = input.value;
+//
+//  // Regular expression to match alphanumeric characters
+//  const alphanumericPattern = /^[a-zA-Z0-9]*$/;
+//
+//  // Check if the input matches the alphanumeric pattern
+//  if (!alphanumericPattern.test(inputValue)) {
+//    // If it contains special characters, remove them from the input
+//    const sanitizedValue = inputValue.replace(/[^a-zA-Z0-9]/g, '');
+//    input.value = sanitizedValue;
+//  }
+//}
 
 function displayProduct(data){
 	$("#product-edit-form input[name=barcode]").val(data.barcode);
