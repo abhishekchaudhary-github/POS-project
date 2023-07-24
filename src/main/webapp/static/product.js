@@ -314,7 +314,15 @@ function displayProductList(data){
             "ordering": false, // Disable sorting
             "info": false, // Hide information display
             "autoWidth": true, // Disable auto width calculation
-            "responsive": true // Enable responsive mode
+            "responsive": true, // Enable responsive mode
+             columnDefs:[
+                    {
+                        targets:'_all',
+                        render:function(data,type,row,meta){
+                            return '<div style="white-space:pre-wrap;">'+data+'</div>';
+                        }
+                    }
+                    ]
           });
 
           if ($("#get-role").text().localeCompare("operator") == 0) {
