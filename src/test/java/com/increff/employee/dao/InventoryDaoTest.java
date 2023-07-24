@@ -50,6 +50,7 @@ public class InventoryDaoTest extends AbstractUnitTest {
         InventoryPojo inventoryPojo = pojoHelper.makeInventoryPojo(1,2);
         Integer id = dao.insert(inventoryPojo);
         List<InventoryPojo> inventoryPojoList = dao.selectAll();
+        assertEquals(1,inventoryPojoList.size());
         assertEquals(new Integer(1),inventoryPojoList.get(0).getProductId());
         assertEquals(new Integer(2),inventoryPojoList.get(0).getQuantity());
     }

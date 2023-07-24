@@ -22,6 +22,7 @@ public class BrandDaoTest extends AbstractUnitTest {
         BrandPojo brandPojo = pojoHelper.makeBrandPojo("brand","category");
         dao.insert(brandPojo);
         List<BrandPojo> brandPojoList = dao.selectAll();
+        assertEquals(1,brandPojoList.size());
         assertEquals("brand",brandPojoList.get(0).getBrand());
         assertEquals("category",brandPojoList.get(0).getCategory());
     }

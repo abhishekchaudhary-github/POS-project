@@ -83,7 +83,7 @@ public class ProductDaoTest extends AbstractUnitTest {
         ProductPojo productPojo = pojoHelper.makeProductPojo("barcode",1,1.1,"name");
         dao.insert(productPojo);
         List<ProductPojo> productPojoList = dao.selectAll();
-
+        assertEquals(1,productPojoList.size());
         assertEquals("barcode",productPojoList.get(0).getBarcode());
         assertEquals(new Integer(1),productPojoList.get(0).getBrand_category());
         assertEquals(new Double(1.1),productPojoList.get(0).getMrp());

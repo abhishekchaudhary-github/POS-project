@@ -43,6 +43,7 @@ public class OrderDaoTest extends AbstractUnitTest {
         OrderPojo orderPojo = pojoHelper.makeOrderPojo(time);
         Integer id = dao.insert(orderPojo);
         List<OrderPojo> orderPojoList = dao.selectAll();
+        assertEquals(1,orderPojoList.size());
         assertEquals(time,orderPojoList.get(0).getTime());
     }
 

@@ -61,6 +61,9 @@ public class OrderItemDaoTest extends AbstractUnitTest {
         dao.insert(orderItemPojo1);
         List<OrderItemPojo> orderItemPojoList = dao.selectAll();
   //      if(orderItemPojoList.get(0).getOrderId()==1) {
+
+            assertEquals(2,orderItemPojoList.size());
+
             assertEquals(new Integer(1), orderItemPojoList.get(0).getOrderId());
             assertEquals(new Integer(2), orderItemPojoList.get(0).getProductId());
             assertEquals(new Integer(3), orderItemPojoList.get(0).getQuantity());

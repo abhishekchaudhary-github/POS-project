@@ -46,7 +46,6 @@ public class DailyReportDao extends AbstractDao{
     }
 
     public Integer selectLastId() {
-        //Caution!!!
         TypedQuery<Long> query = getQuery(count_of_table, Long.class);
         Long count = query.getSingleResult();
         return count.intValue();
