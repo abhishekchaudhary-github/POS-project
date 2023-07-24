@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd59bcda-ea0a-45cb-bbdf-b0788f0265bb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/increff/employee/dao/BrandDaoTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/BrandDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/BrandDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/ProductServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/ProductServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,18 +85,34 @@
       <recent name="$PROJECT_DIR$/src/main/webapp/html" />
     </key>
   </component>
-  <component name="RunManager" selected="Maven.employee-spring-full [jetty:run]">
-    <configuration name="InventoryServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.BrandDaoTest">
+    <configuration name="BrandDaoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.increff.employee.service.*" />
+          <option name="PATTERN" value="com.increff.employee.dao.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.increff.employee.service" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.InventoryServiceTest" />
+      <option name="PACKAGE_NAME" value="com.increff.employee.dao" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.dao.BrandDaoTest" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BrandDaoTest.testBrandMustExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employee-spring-full" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.increff.employee.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.increff.employee.dao" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.dao.BrandDaoTest" />
+      <option name="METHOD_NAME" value="testBrandMustExist" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -114,6 +133,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ProductServiceTest.testBrandCategoryNotExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employee-spring-full" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.increff.employee.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.increff.employee.service" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.ProductServiceTest" />
+      <option name="METHOD_NAME" value="testBrandCategoryNotExist" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ReportServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
@@ -125,38 +160,6 @@
       <option name="PACKAGE_NAME" value="com.increff.employee.service" />
       <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.ReportServiceTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ReportServiceTest.testGetAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="employee-spring-full" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.increff.employee.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.increff.employee.service" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.ReportServiceTest" />
-      <option name="METHOD_NAME" value="testGetAll" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ReportServiceTest.testGetAllMoreBrandCategoryProducts" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="employee-spring-full" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.increff.employee.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.increff.employee.service" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.ReportServiceTest" />
-      <option name="METHOD_NAME" value="testGetAllMoreBrandCategoryProducts" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -200,20 +203,20 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="JUnit.InventoryServiceTest" />
+      <item itemvalue="JUnit.BrandDaoTest" />
+      <item itemvalue="JUnit.BrandDaoTest.testBrandMustExist" />
+      <item itemvalue="JUnit.ProductServiceTest.testBrandCategoryNotExist" />
       <item itemvalue="JUnit.OrderServiceTest.testAdd" />
       <item itemvalue="JUnit.ReportServiceTest" />
-      <item itemvalue="JUnit.ReportServiceTest.testGetAll" />
-      <item itemvalue="JUnit.ReportServiceTest.testGetAllMoreBrandCategoryProducts" />
       <item itemvalue="Maven.employee-spring-full [jetty:run]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.BrandDaoTest" />
+        <item itemvalue="JUnit.ProductServiceTest.testBrandCategoryNotExist" />
+        <item itemvalue="JUnit.BrandDaoTest.testBrandMustExist" />
         <item itemvalue="JUnit.OrderServiceTest.testAdd" />
         <item itemvalue="JUnit.ReportServiceTest" />
-        <item itemvalue="JUnit.ReportServiceTest.testGetAllMoreBrandCategoryProducts" />
-        <item itemvalue="JUnit.ReportServiceTest.testGetAll" />
-        <item itemvalue="JUnit.InventoryServiceTest" />
       </list>
     </recent_temporary>
   </component>

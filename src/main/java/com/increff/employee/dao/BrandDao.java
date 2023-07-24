@@ -46,9 +46,9 @@ public class BrandDao extends AbstractDao {
         query.setParameter("category", category);
         return getSingle(query);
     }
-    public BrandPojo brandMustExist(Integer productId){
+    public BrandPojo brandMustExist(Integer id){
         TypedQuery<BrandPojo> query = getQuery(select_id, BrandPojo.class);
-        query.setParameter("id", productId);
+        query.setParameter("id", id);
         return getSingle(query);
     }
 

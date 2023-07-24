@@ -79,7 +79,7 @@ public class ProductServiceTest extends AbstractUnitTest {
     @Test
     public void testBrandCategoryNotExist() throws ApiException {
         try {
-            ProductPojo productPojo = pojoHelper.makeProductPojo("barcode", brandId, 1.12, "name");
+            ProductPojo productPojo = pojoHelper.makeProductPojo("barcode", brandId+brandIdSecondPojo+1, 1.12, "name");
             productService.add(productPojo);
         } catch (ApiException err) {
             assertEquals("product with this brand category combination does not exist",err.getMessage());
