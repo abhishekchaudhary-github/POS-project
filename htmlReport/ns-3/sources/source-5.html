@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > DailyReportData</title>
+  <title>Coverage Report > InventoryService</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -18,18 +18,15 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.increff.employee.model</a>
+    <a href="../index.html">com.increff.employee.service</a>
 </div>
 
-<h1>Coverage Summary for Class: DailyReportData (com.increff.employee.model)</h1>
+<h1>Coverage Summary for Class: InventoryService (com.increff.employee.service)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -40,33 +37,52 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">DailyReportData</td>
+  <td class="name">InventoryService</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (13/13)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    98.9%
   </span>
   <span class="absValue">
-    (0/3)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/3)
+    (92/93)
   </span>
 </td>
 </tr>
-
+  <tr>
+    <td class="name">InventoryService$$EnhancerBySpringCGLIB$$b2e8740</td>
+  </tr>
+  <tr>
+    <td class="name">InventoryService$$EnhancerBySpringCGLIB$$b2e8740$$FastClassBySpringCGLIB$$8f05119f</td>
+  </tr>
+  <tr>
+    <td class="name">InventoryService$$FastClassBySpringCGLIB$$f5c41f68</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    98.9%
+  </span>
+  <span class="absValue">
+    (92/93)
+  </span>
+</td>
+</tr>
 </table>
 
 <br/>
@@ -74,18 +90,215 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package com.increff.employee.model;
+<code class="sourceCode" id="sourceCode">&nbsp;package com.increff.employee.service;
 &nbsp;
-<b class="nc">&nbsp;public class DailyReportData extends DailyReportForm {</b>
-&nbsp;    private Integer id;
+&nbsp;import com.increff.employee.dao.InventoryDao;
+&nbsp;import com.increff.employee.model.ErrorsInventory;
+&nbsp;import com.increff.employee.model.ErrorsProduct;
+&nbsp;import com.increff.employee.model.InventoryFormString;
+&nbsp;import com.increff.employee.model.ProductFormString;
+&nbsp;import com.increff.employee.pojo.BrandPojo;
+&nbsp;import com.increff.employee.pojo.InventoryPojo;
+&nbsp;import com.increff.employee.util.StringUtil;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
 &nbsp;
-&nbsp;    public Integer getId() {
-<b class="nc">&nbsp;        return id;</b>
+&nbsp;import javax.transaction.Transactional;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;public class InventoryService {</b>
+&nbsp;    @Autowired
+&nbsp;    private InventoryDao dao;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private ProductService productService;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private InventoryService inventoryService;
+&nbsp;
+<b class="fc">&nbsp;    private boolean checkError = false;</b>
+&nbsp;
+&nbsp;    @Transactional(rollbackOn = ApiException.class)
+&nbsp;    public Integer add(InventoryPojo inventoryPojo) throws ApiException {
+<b class="fc">&nbsp;        if(dao.getFromProductId(inventoryPojo.getProductId())==null) {</b>
+<b class="fc">&nbsp;            if(inventoryPojo.getQuantity()&lt;1){</b>
+<b class="fc">&nbsp;                throw new ApiException(&quot;quantity can not be less than 1&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return dao.insert(inventoryPojo);</b>
+&nbsp;        }
+&nbsp;        else {
+<b class="fc">&nbsp;            if(inventoryPojo.getQuantity()&lt;1){</b>
+<b class="fc">&nbsp;                throw new ApiException(&quot;quantity can not be less than 1&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            Integer previousQuantity = dao.getFromProductId(inventoryPojo.getProductId()).getQuantity();</b>
+<b class="fc">&nbsp;            Integer newQuantity = inventoryPojo.getQuantity()+previousQuantity;</b>
+<b class="fc">&nbsp;            InventoryPojo inventoryPojo1 = dao.getFromProductId(inventoryPojo.getProductId());</b>
+<b class="fc">&nbsp;            inventoryPojo1.setQuantity(newQuantity);</b>
+<b class="fc">&nbsp;            return inventoryPojo1.getId();</b>
+&nbsp;        }
 &nbsp;    }
 &nbsp;
-&nbsp;    public void setId(Integer id) {
-<b class="nc">&nbsp;        this.id = id;</b>
+&nbsp;
+&nbsp;    @Transactional(rollbackOn = ApiException.class)
+&nbsp;    public void deductQuantity(Integer productId, Integer quantity) throws ApiException {
+&nbsp;        //MAJOR CHANGE HERE
+<b class="fc">&nbsp;        InventoryPojo productToBeChanged = dao.getFromProductId(productId);</b>
+<b class="fc">&nbsp;        Integer previousQuantity = productToBeChanged.getQuantity();</b>
+<b class="fc">&nbsp;        if(previousQuantity - quantity&lt;0){</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;quantity is more than what is present in the inventory&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        productToBeChanged.setQuantity(previousQuantity - quantity);</b>
 &nbsp;    }
+&nbsp;
+&nbsp;    @Transactional(rollbackOn = ApiException.class)
+&nbsp;    public InventoryPojo get(Integer id) throws ApiException {
+<b class="fc">&nbsp;        return dao.select(id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public List&lt;InventoryPojo&gt; getAll() {
+<b class="fc">&nbsp;        return dao.selectAll();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public Integer getIdOfProduct(String barcode) throws ApiException {
+<b class="fc">&nbsp;        return productService.getProductId(barcode);</b>
+&nbsp;    }
+&nbsp;    public String getForBarcode(Integer productId) throws ApiException {
+<b class="fc">&nbsp;        return productService.get(productId).getBarcode();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public InventoryPojo getFromProductId(Integer productId) throws ApiException {
+<b class="fc">&nbsp;        return dao.getFromProductId(productId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;//    public Integer getIdFromBarcode(String barcode) throws ApiException {
+&nbsp;//        Integer productId = productService.getProductId(barcode);
+&nbsp; //       InventoryPojo inventoryPojo = dao.getIdFromBarcode(productId);
+&nbsp;//        if(inventoryPojo==null) return -1;
+&nbsp;//        else return inventoryPojo.getId();
+&nbsp;//    }
+&nbsp;
+&nbsp;
+&nbsp;    @Transactional(rollbackOn  = ApiException.class)
+&nbsp;    public Integer update(Integer id, InventoryPojo p) throws ApiException {
+<b class="fc">&nbsp;        if(p.getQuantity()==null) {</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;quantity of given product cannot be empty&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if(p.getQuantity()&lt;1){</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;quantity of given product cannot be less than 1&quot;);</b>
+&nbsp;        }
+&nbsp;        //check if given product id exist in inventory
+<b class="fc">&nbsp;        if(dao.getFromProductId(p.getProductId())==null){</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;inventory of this productId does  not exist&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        else if(!dao.getFromProductId(p.getProductId()).equals(dao.select(id)) &amp;&amp; dao.getFromProductId(p.getProductId())!=null) {</b>
+<b class="nc">&nbsp;            throw new ApiException(&quot;inventory can not be updated because of alter in productId&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        InventoryPojo tempPojo = getCheck(id);</b>
+<b class="fc">&nbsp;        String s1 = dao.select(id).getQuantity()+&quot;&quot;;</b>
+<b class="fc">&nbsp;        String s2 = p.getQuantity()+&quot;&quot;;</b>
+&nbsp;//        String s3 = dao.select(id).getQuantity()+&quot;&quot;;
+&nbsp;//        String s4 = p.getQuantity()+&quot;&quot;;
+<b class="fc">&nbsp;        if( s1.equals(s2) ) {</b>
+<b class="fc">&nbsp;            return 0;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        tempPojo.setQuantity(p.getQuantity());</b>
+&nbsp;//        tempPojo.setProductId(p.getProductId());
+<b class="fc">&nbsp;            return 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public ErrorsInventory checkError(InventoryFormString inventoryForm, List&lt;InventoryFormString&gt; list,HashMap&lt;String,Integer&gt; hm) throws ApiException {
+<b class="fc">&nbsp;        ErrorsInventory errors = new ErrorsInventory();</b>
+<b class="fc">&nbsp;        boolean checks1=false;</b>
+<b class="fc">&nbsp;        String quantity = inventoryForm.getQuantity();</b>
+<b class="fc">&nbsp;        String barcode = inventoryForm.getBarcode();</b>
+<b class="fc">&nbsp;        errors.setErrorCount(1);</b>
+<b class="fc">&nbsp;        if(barcode==null||barcode==&quot;&quot;){</b>
+<b class="fc">&nbsp;            checks1=true;</b>
+<b class="fc">&nbsp;            errors.setMessage(&quot;barcode field is empty&quot;);</b>
+<b class="fc">&nbsp;            errors.setErrorCount(1);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        else if(quantity==null||quantity==&quot;&quot;) {</b>
+<b class="fc">&nbsp;            checks1 = true;</b>
+<b class="fc">&nbsp;            errors.setMessage(&quot;quantity field is empty&quot;);</b>
+<b class="fc">&nbsp;            errors.setErrorCount(1);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        else if(checkInteger(quantity)==false){</b>
+<b class="fc">&nbsp;            checks1 = true;</b>
+<b class="fc">&nbsp;            errors.setMessage(&quot;quantity format is invalid&quot;);</b>
+<b class="fc">&nbsp;            errors.setErrorCount(1);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        else if(Integer.parseInt(quantity)&lt;1) {</b>
+<b class="fc">&nbsp;            checks1 = true;</b>
+<b class="fc">&nbsp;            errors.setMessage(&quot;quantity is less than 1&quot;);</b>
+<b class="fc">&nbsp;            errors.setErrorCount(1);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        else if(productService.getPojoFromBarcode(barcode)==null) {</b>
+<b class="fc">&nbsp;            checks1 = true;</b>
+<b class="fc">&nbsp;            errors.setMessage(&quot;barcode is invalid&quot;);</b>
+<b class="fc">&nbsp;            errors.setErrorCount(1);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if(checks1 == false) {</b>
+<b class="fc">&nbsp;            errors.setMessage(&quot;&quot;);</b>
+<b class="fc">&nbsp;            errors.setErrorCount(0);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        errors.setQuantity(quantity);</b>
+<b class="fc">&nbsp;        errors.setBarcode(barcode);</b>
+<b class="fc">&nbsp;        return errors;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public ArrayList&lt;ErrorsInventory&gt; fileCheck(List&lt;InventoryFormString&gt; form) throws ApiException {
+<b class="fc">&nbsp;        if(form.size()&gt;5000) {</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;maximum number of rows can be only 5000&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        ArrayList&lt;ErrorsInventory&gt; data = new ArrayList&lt;ErrorsInventory&gt;();</b>
+<b class="fc">&nbsp;        ArrayList&lt;InventoryFormString&gt; inventoryPojoList = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        HashMap&lt;String,Integer&gt; hm = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;        for(InventoryFormString inventoryItem : form){</b>
+<b class="fc">&nbsp;            ErrorsInventory error = checkError(inventoryItem,inventoryPojoList,hm);</b>
+<b class="fc">&nbsp;            if(checkError==true || error.getErrorCount()&gt;0) {</b>
+<b class="fc">&nbsp;                error.setCheckError(true);</b>
+<b class="fc">&nbsp;                checkError =true;</b>
+&nbsp;            }
+&nbsp;            //logic
+<b class="fc">&nbsp;            inventoryPojoList.add(inventoryItem);</b>
+<b class="fc">&nbsp;            data.add(error);</b>
+<b class="fc">&nbsp;            if(!hm.containsKey(inventoryItem.getBarcode())){</b>
+<b class="fc">&nbsp;                hm.put(inventoryItem.getBarcode(),1);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return data;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean checkInteger(String x){
+&nbsp;        try {
+<b class="fc">&nbsp;            Integer.parseInt(x);</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        catch (Exception e){</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public InventoryPojo getCheck(Integer id) throws ApiException {
+<b class="fc">&nbsp;        InventoryPojo p = dao.select(id);</b>
+<b class="fc">&nbsp;        if (p == null) {</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;Inventory with given ID does not exit, id: &quot; + id);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return p;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
 &nbsp;}
 </code>
 </pre>
@@ -110,7 +323,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-24 21:34</div>
+    <div style="float:right;">generated on 2023-07-25 11:37</div>
 </div>
 </body>
 </html>

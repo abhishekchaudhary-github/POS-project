@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > ErrorsProduct</title>
+  <title>Coverage Report > UserService</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -18,18 +18,15 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.increff.employee.model</a>
+    <a href="../index.html">com.increff.employee.service</a>
 </div>
 
-<h1>Coverage Summary for Class: ErrorsProduct (com.increff.employee.model)</h1>
+<h1>Coverage Summary for Class: UserService (com.increff.employee.service)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -40,33 +37,52 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">ErrorsProduct</td>
+  <td class="name">UserService</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    87.5%
   </span>
   <span class="absValue">
-    (0/1)
+    (7/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    92.3%
   </span>
   <span class="absValue">
-    (0/9)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/9)
+    (12/13)
   </span>
 </td>
 </tr>
-
+  <tr>
+    <td class="name">UserService$$EnhancerBySpringCGLIB$$eee7b0f9</td>
+  </tr>
+  <tr>
+    <td class="name">UserService$$EnhancerBySpringCGLIB$$eee7b0f9$$FastClassBySpringCGLIB$$654e8f71</td>
+  </tr>
+  <tr>
+    <td class="name">UserService$$FastClassBySpringCGLIB$$68783d5b</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (7/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.3%
+  </span>
+  <span class="absValue">
+    (12/13)
+  </span>
+</td>
+</tr>
 </table>
 
 <br/>
@@ -74,45 +90,69 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package com.increff.employee.model;
+<code class="sourceCode" id="sourceCode">&nbsp;package com.increff.employee.service;
 &nbsp;
-<b class="nc">&nbsp;public class ErrorsProduct extends Errors{</b>
-&nbsp;    private String barcode;
-&nbsp;    private String brand;
-&nbsp;    private String category;
-&nbsp;    private String name;
+&nbsp;import java.util.List;
 &nbsp;
-&nbsp;    public String getBarcode() {
-<b class="nc">&nbsp;        return barcode;</b>
-&nbsp;    }
+&nbsp;import javax.transaction.Transactional;
 &nbsp;
-&nbsp;    public void setBarcode(String barcode) {
-<b class="nc">&nbsp;        this.barcode = barcode;</b>
-&nbsp;    }
+&nbsp;import com.increff.employee.model.InfoData;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
 &nbsp;
-&nbsp;    public String getBrand() {
-<b class="nc">&nbsp;        return brand;</b>
-&nbsp;    }
+&nbsp;import com.increff.employee.dao.UserDao;
+&nbsp;import com.increff.employee.pojo.UserPojo;
+&nbsp;import org.springframework.web.servlet.ModelAndView;
 &nbsp;
-&nbsp;    public void setBrand(String brand) {
-<b class="nc">&nbsp;        this.brand = brand;</b>
-&nbsp;    }
+&nbsp;@Service
+<b class="fc">&nbsp;public class UserService {</b>
 &nbsp;
-&nbsp;    public String getCategory() {
-<b class="nc">&nbsp;        return category;</b>
-&nbsp;    }
+&nbsp;	@Autowired
+&nbsp;	private UserDao dao;
 &nbsp;
-&nbsp;    public void setCategory(String category) {
-<b class="nc">&nbsp;        this.category = category;</b>
-&nbsp;    }
+&nbsp;	@Autowired
+&nbsp;	private InfoData info;
 &nbsp;
-&nbsp;    public String getName() {
-<b class="nc">&nbsp;        return name;</b>
-&nbsp;    }
+&nbsp;	@Transactional
+&nbsp;	public void add(UserPojo p) throws ApiException {
+<b class="fc">&nbsp;		normalize(p);</b>
+<b class="fc">&nbsp;		UserPojo existing = dao.select(p.getEmail());</b>
+<b class="fc">&nbsp;		if (existing != null) {</b>
+<b class="fc">&nbsp;			info.setMessage(&quot;this email has already been registered&quot;);</b>
+&nbsp;			return;
+&nbsp;		}
+<b class="fc">&nbsp;		dao.insert(p);</b>
+&nbsp;	}
 &nbsp;
-&nbsp;    public void setName(String name) {
-<b class="nc">&nbsp;        this.name = name;</b>
-&nbsp;    }
+&nbsp;	@Transactional(rollbackOn = ApiException.class)
+&nbsp;	public UserPojo get(String email) throws ApiException {
+<b class="fc">&nbsp;		return dao.select(email);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	@Transactional(rollbackOn = ApiException.class)
+&nbsp;	public UserPojo getById(Integer id) throws ApiException {
+<b class="fc">&nbsp;		return dao.select(id);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	@Transactional
+&nbsp;	public List&lt;UserPojo&gt; getAll() {
+<b class="fc">&nbsp;		return dao.selectAll();</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	@Transactional
+&nbsp;	public void delete(Integer id) {
+<b class="fc">&nbsp;		dao.delete(id);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	@Transactional
+&nbsp;	public void setMessage() {
+<b class="nc">&nbsp;		info.setMessage(&quot;&quot;);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	protected static void normalize(UserPojo p) {
+<b class="fc">&nbsp;		p.setEmail(p.getEmail().toLowerCase().trim());</b>
+<b class="fc">&nbsp;		p.setRole(p.getRole().toLowerCase().trim());</b>
+&nbsp;	}
 &nbsp;}
 </code>
 </pre>
@@ -137,7 +177,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-24 21:34</div>
+    <div style="float:right;">generated on 2023-07-25 11:37</div>
 </div>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > AppRestControllerAdvice</title>
+  <title>Coverage Report > InventoryDao</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -18,18 +18,15 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.increff.employee.controller</a>
+    <a href="../index.html">com.increff.employee.dao</a>
 </div>
 
-<h1>Coverage Summary for Class: AppRestControllerAdvice (com.increff.employee.controller)</h1>
+<h1>Coverage Summary for Class: InventoryDao (com.increff.employee.dao)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -40,33 +37,52 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">AppRestControllerAdvice</td>
+  <td class="name">InventoryDao</td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    85.7%
   </span>
   <span class="absValue">
-    (1/1)
+    (6/7)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    33.3%
+    93.3%
   </span>
   <span class="absValue">
-    (1/3)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    14.3%
-  </span>
-  <span class="absValue">
-    (1/7)
+    (14/15)
   </span>
 </td>
 </tr>
-
+  <tr>
+    <td class="name">InventoryDao$$EnhancerBySpringCGLIB$$7a6e6e20</td>
+  </tr>
+  <tr>
+    <td class="name">InventoryDao$$EnhancerBySpringCGLIB$$7a6e6e20$$FastClassBySpringCGLIB$$390f8297</td>
+  </tr>
+  <tr>
+    <td class="name">InventoryDao$$FastClassBySpringCGLIB$$1b22ab08</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (6/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.3%
+  </span>
+  <span class="absValue">
+    (14/15)
+  </span>
+</td>
+</tr>
 </table>
 
 <br/>
@@ -74,34 +90,59 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package com.increff.employee.controller;
+<code class="sourceCode" id="sourceCode">&nbsp;package com.increff.employee.dao;
 &nbsp;
-&nbsp;import org.springframework.http.HttpStatus;
-&nbsp;import org.springframework.web.bind.annotation.ExceptionHandler;
-&nbsp;import org.springframework.web.bind.annotation.ResponseStatus;
-&nbsp;import org.springframework.web.bind.annotation.RestControllerAdvice;
+&nbsp;import com.increff.employee.pojo.InventoryPojo;
+&nbsp;import org.springframework.stereotype.Repository;
 &nbsp;
-&nbsp;import com.increff.employee.model.MessageData;
-&nbsp;import com.increff.employee.service.ApiException;
+&nbsp;import javax.persistence.EntityManager;
+&nbsp;import javax.persistence.PersistenceContext;
+&nbsp;import javax.persistence.TypedQuery;
+&nbsp;import javax.transaction.Transactional;
+&nbsp;import java.util.List;
 &nbsp;
-&nbsp;@RestControllerAdvice
-<b class="fc">&nbsp;public class AppRestControllerAdvice {</b>
+&nbsp;@Repository
+<b class="fc">&nbsp;public class InventoryDao  extends AbstractDao {</b>
+<b class="fc">&nbsp;    private static String select_id = &quot;select p from InventoryPojo p where id=:id&quot;;</b>
+<b class="fc">&nbsp;    private static String select_all = &quot;select p from InventoryPojo p&quot;;</b>
 &nbsp;
-&nbsp;	@ExceptionHandler(ApiException.class)
-&nbsp;	@ResponseStatus(HttpStatus.BAD_REQUEST)
-&nbsp;	public MessageData handle(ApiException e) {
-<b class="nc">&nbsp;		MessageData data = new MessageData();</b>
-<b class="nc">&nbsp;		data.setMessage(e.getMessage());</b>
-<b class="nc">&nbsp;		return data;</b>
-&nbsp;	}
+<b class="fc">&nbsp;    private static String get_quantity_from_productId = &quot;select p from InventoryPojo p where productId=:productId&quot;;</b>
 &nbsp;
-&nbsp;	@ExceptionHandler(Throwable.class)
-&nbsp;	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-&nbsp;	public MessageData handle(Throwable e) {
-<b class="nc">&nbsp;		MessageData data = new MessageData();</b>
-<b class="nc">&nbsp;		data.setMessage(&quot;An unknown error has occurred - &quot; + e.getMessage());</b>
-<b class="nc">&nbsp;		return data;</b>
-&nbsp;	}
+&nbsp;
+&nbsp;    @PersistenceContext
+&nbsp;    private EntityManager em;
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public Integer insert(InventoryPojo p) {
+<b class="fc">&nbsp;        em.persist(p);</b>
+<b class="fc">&nbsp;        return p.getId();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public InventoryPojo getFromProductId(Integer productId) {
+<b class="fc">&nbsp;        TypedQuery&lt;InventoryPojo&gt; query = getQuery(get_quantity_from_productId, InventoryPojo.class);</b>
+<b class="fc">&nbsp;        query.setParameter(&quot;productId&quot;, productId);</b>
+<b class="fc">&nbsp;        return getSingle(query);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;//    public InventoryPojo getIdFromBarcode(Integer productId) {
+&nbsp;//        TypedQuery&lt;InventoryPojo&gt; query = getQuery(get_quantity_from_productId, InventoryPojo.class);
+&nbsp;//        query.setParameter(&quot;productId&quot;, productId);
+&nbsp;//        return getSingle(query);
+&nbsp;//    }
+&nbsp;
+&nbsp;    public InventoryPojo select(Integer id) {
+<b class="fc">&nbsp;        TypedQuery&lt;InventoryPojo&gt; query = getQuery(select_id, InventoryPojo.class);</b>
+<b class="fc">&nbsp;        query.setParameter(&quot;id&quot;, id);</b>
+<b class="fc">&nbsp;        return getSingle(query);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;InventoryPojo&gt; selectAll() {
+<b class="fc">&nbsp;        TypedQuery&lt;InventoryPojo&gt; query = getQuery(select_all, InventoryPojo.class);</b>
+<b class="fc">&nbsp;        return query.getResultList();</b>
+&nbsp;    }
+&nbsp;    public void update(InventoryPojo p) {
+<b class="nc">&nbsp;    }</b>
 &nbsp;}
 </code>
 </pre>
@@ -126,7 +167,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-24 21:34</div>
+    <div style="float:right;">generated on 2023-07-25 11:37</div>
 </div>
 </body>
 </html>

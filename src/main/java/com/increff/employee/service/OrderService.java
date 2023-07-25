@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
@@ -114,7 +115,6 @@ public class OrderService {
         headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
         ResponseEntity<byte[]> response = new ResponseEntity<>(contents, headers, HttpStatus.OK);
 //        Integer lastId = dailyReportService.getLastId();
-//        DailyReportPojo dailyReportFirstPojo = dailyReportService.get(1);
 
         //dailyReportPojo.setTotal_invoice(dailyReportPojo.getTotal_invoice()+1);
         //Integer initialTotalInvoicedItems = dailyReportPojo.getTotal_invoiced_items();
@@ -123,20 +123,33 @@ public class OrderService {
         OrderPojo orderPojo = getOrderById(id);
         //
         if(orderPojo.isEditable()==true) {
-            DailyReportPojo dailyReportFirstPojo = dailyReportService.get(1);
-            if(dailyReportFirstPojo==null) {
-                throw new ApiException("database has been altered");
+//8            DailyReportPojo dailyReportFirstPojo = dailyReportService.get(1);
+//8            if(dailyReportFirstPojo==null) {
+//8                throw new ApiException("database has been altered");
+//8            }
+
+
+            LocalDateTime timeChecker = LocalDateTime.now().with(LocalTime.MIDNIGHT);
+
+
+            Integer countOfInvoices1=0;
+            Integer countOfOrders1=0;
+            Double totalRevenue1=0.0;
+            DailyReportPojo dailyReportFirstPojo1 = dailyReportService.get(1);
+            if(!timeChecker.isEqual(dailyReportFirstPojo1.getDate())){
+                dailyReportFirstPojo1 = dailyReportService.get(2);
             }
-            Integer countOfInvoices = dailyReportFirstPojo.getInvoiced_orders_count();
-            Integer countOfOrders = dailyReportFirstPojo.getInvoiced_items_count();
-            Double totalRevenue = dailyReportFirstPojo.getTotal_revenue();
-            System.out.println(countOfInvoices);
-            countOfInvoices+=1;
-            countOfOrders+=orderItemCount;
-            totalRevenue+=initialRevenue;
-            dailyReportFirstPojo.setInvoiced_orders_count(countOfInvoices);
-            dailyReportFirstPojo.setInvoiced_items_count(countOfOrders);
-            dailyReportFirstPojo.setTotal_revenue(totalRevenue);
+
+            countOfInvoices1 = dailyReportFirstPojo1.getInvoiced_orders_count();
+            countOfOrders1 = dailyReportFirstPojo1.getInvoiced_items_count();
+            totalRevenue1 = dailyReportFirstPojo1.getTotal_revenue();
+//           System.out.println(countOfInvoices);
+            countOfInvoices1+=1;
+            countOfOrders1+=orderItemCount;
+            totalRevenue1+=initialRevenue;
+            dailyReportFirstPojo1.setInvoiced_orders_count(countOfInvoices1);
+            dailyReportFirstPojo1.setInvoiced_items_count(countOfOrders1);
+            dailyReportFirstPojo1.setTotal_revenue(totalRevenue1);
         }
         //
         orderPojo.setEditable();

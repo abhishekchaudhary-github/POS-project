@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > DailyReportApiController</title>
+  <title>Coverage Report > ProductDao</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -18,18 +18,15 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.increff.employee.controller</a>
+    <a href="../index.html">com.increff.employee.dao</a>
 </div>
 
-<h1>Coverage Summary for Class: DailyReportApiController (com.increff.employee.controller)</h1>
+<h1>Coverage Summary for Class: ProductDao (com.increff.employee.dao)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -40,33 +37,52 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">DailyReportApiController</td>
+  <td class="name">ProductDao</td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    90.9%
   </span>
   <span class="absValue">
-    (1/1)
+    (10/11)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    25%
+    96.7%
   </span>
   <span class="absValue">
-    (1/4)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    5%
-  </span>
-  <span class="absValue">
-    (1/20)
+    (29/30)
   </span>
 </td>
 </tr>
-
+  <tr>
+    <td class="name">ProductDao$$EnhancerBySpringCGLIB$$435a7a67</td>
+  </tr>
+  <tr>
+    <td class="name">ProductDao$$EnhancerBySpringCGLIB$$435a7a67$$FastClassBySpringCGLIB$$277cc71a</td>
+  </tr>
+  <tr>
+    <td class="name">ProductDao$$FastClassBySpringCGLIB$$1b19df15</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (10/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96.7%
+  </span>
+  <span class="absValue">
+    (29/30)
+  </span>
+</td>
+</tr>
 </table>
 
 <br/>
@@ -74,66 +90,96 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package com.increff.employee.controller;
+<code class="sourceCode" id="sourceCode">&nbsp;package com.increff.employee.dao;
 &nbsp;
-&nbsp;import com.increff.employee.model.BrandData;
-&nbsp;import com.increff.employee.model.BrandForm;
-&nbsp;import com.increff.employee.model.DailyReportData;
-&nbsp;import com.increff.employee.model.DailyReportForm;
-&nbsp;import com.increff.employee.pojo.BrandPojo;
-&nbsp;import com.increff.employee.pojo.DailyReportPojo;
-&nbsp;import com.increff.employee.service.ApiException;
-&nbsp;import com.increff.employee.service.DailyReportService;
-&nbsp;import io.swagger.annotations.ApiOperation;
-&nbsp;import org.springframework.beans.factory.annotation.Autowired;
-&nbsp;import org.springframework.stereotype.Controller;
-&nbsp;import org.springframework.web.bind.annotation.RequestBody;
-&nbsp;import org.springframework.web.bind.annotation.RequestMapping;
-&nbsp;import org.springframework.web.bind.annotation.RequestMethod;
-&nbsp;import org.springframework.web.bind.annotation.RestController;
-&nbsp;
-&nbsp;import java.time.format.DateTimeFormatter;
-&nbsp;import java.util.ArrayList;
 &nbsp;import java.util.List;
 &nbsp;
-&nbsp;@Controller
-&nbsp;@RestController
-<b class="fc">&nbsp;public class DailyReportApiController {</b>
-&nbsp;    @Autowired
-&nbsp;    DailyReportService service;
+&nbsp;import javax.persistence.EntityManager;
+&nbsp;import javax.persistence.PersistenceContext;
+&nbsp;import javax.persistence.Query;
+&nbsp;import javax.persistence.TypedQuery;
+&nbsp;import javax.transaction.Transactional;
 &nbsp;
-&nbsp;    @ApiOperation(value = &quot;Gets list of all schedules&quot;)
-&nbsp;    @RequestMapping(path = &quot;/api/scheduler&quot;, method = RequestMethod.GET)
-&nbsp;    public List&lt;DailyReportData&gt; getAll() {
-<b class="nc">&nbsp;        List&lt;DailyReportPojo&gt; list = service.getAll();</b>
-<b class="nc">&nbsp;        List&lt;DailyReportData&gt; list2 = new ArrayList&lt;DailyReportData&gt;();</b>
-<b class="nc">&nbsp;        for (DailyReportPojo p : list) {</b>
-<b class="nc">&nbsp;            list2.add(convert(p));</b>
-<b class="nc">&nbsp;        }</b>
-<b class="nc">&nbsp;        return list2;</b>
+&nbsp;import com.increff.employee.pojo.BrandPojo;
+&nbsp;import org.springframework.stereotype.Repository;
+&nbsp;
+&nbsp;import com.increff.employee.pojo.ProductPojo;
+&nbsp;
+&nbsp;
+&nbsp;@Repository
+<b class="fc">&nbsp;public class ProductDao extends AbstractDao{</b>
+<b class="fc">&nbsp;    private static String select_id = &quot;select p from ProductPojo p where id=:id&quot;;</b>
+<b class="fc">&nbsp;    private static String select_all = &quot;select p from ProductPojo p&quot;;</b>
+&nbsp;
+<b class="fc">&nbsp;    private static String select_barcode = &quot;select p from ProductPojo p where barcode=:barcode&quot;;</b>
+<b class="fc">&nbsp;    private static String nocommon_case = &quot;select p from ProductPojo p where brand_category=:brand_category and name=:name&quot;;</b>
+&nbsp;
+&nbsp;//    private static  String barcode_and_mrp = &quot;select p from ProductPojo p where brand_category=:brand_category and mrp=:mrp&quot;;
+<b class="fc">&nbsp;    private static String brand_category_select = &quot;select p from ProductPojo p where brand_category=:brand_category&quot;;</b>
+&nbsp;    @PersistenceContext
+&nbsp;    private EntityManager em;
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public Integer insert(ProductPojo p) {
+<b class="fc">&nbsp;        em.persist(p);</b>
+<b class="fc">&nbsp;        return p.getId();</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    @ApiOperation(value = &quot;gives daily report&quot;)
-&nbsp;    @RequestMapping(path = &quot;/api/schedular&quot;, method = RequestMethod.POST)
-&nbsp;    public List&lt;DailyReportData&gt; getBrandReport(@RequestBody DailyReportForm form) throws ApiException {
-<b class="nc">&nbsp;        List&lt;DailyReportPojo&gt; list = service.getAll(form);</b>
-<b class="nc">&nbsp;        List&lt;DailyReportData&gt; list2 = new ArrayList&lt;DailyReportData&gt;();</b>
-<b class="nc">&nbsp;        for (DailyReportPojo p : list) {</b>
-<b class="nc">&nbsp;            list2.add(convert(p));</b>
-<b class="nc">&nbsp;        }</b>
-<b class="nc">&nbsp;        return list2;</b>
+&nbsp;//    public ProductPojo barcodeAndMrp(String barcode, Double mrp) {
+&nbsp;//        TypedQuery&lt;ProductPojo&gt; query = getQuery(barcode_and_mrp, ProductPojo.class);
+&nbsp;//        query.setParameter(&quot;barcode&quot;, barcode);
+&nbsp;//        query.setParameter(&quot;mrp&quot;, mrp);
+&nbsp;//        return getSingle(query);
+&nbsp;//    }
+&nbsp;
+&nbsp;    public ProductPojo barcodeMustExist(String barcode) {
+<b class="fc">&nbsp;        TypedQuery&lt;ProductPojo&gt; query = getQuery(select_barcode, ProductPojo.class);</b>
+<b class="fc">&nbsp;        query.setParameter(&quot;barcode&quot;, barcode);</b>
+<b class="fc">&nbsp;        return getSingle(query);</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    private static DailyReportData convert(DailyReportPojo p) {
-<b class="nc">&nbsp;        DailyReportData d = new DailyReportData();</b>
-&nbsp;        //convert date to string
-<b class="nc">&nbsp;        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;dd-MM-yyyy HH:mm&quot;);</b>
-<b class="nc">&nbsp;        String formattedDateTime = p.getDate().format(formatter);</b>
-<b class="nc">&nbsp;        d.setDate(formattedDateTime);</b>
-<b class="nc">&nbsp;        d.setInvoiced_items_count(p.getInvoiced_items_count());</b>
-<b class="nc">&nbsp;        d.setInvoiced_orders_count(p.getInvoiced_orders_count());</b>
-<b class="nc">&nbsp;        return d;</b>
+&nbsp;    public List&lt;ProductPojo&gt; barcodeMustExistList(String barcode) {
+<b class="fc">&nbsp;        TypedQuery&lt;ProductPojo&gt; query = getQuery(select_barcode, ProductPojo.class);</b>
+<b class="fc">&nbsp;        query.setParameter(&quot;barcode&quot;, barcode);</b>
+<b class="fc">&nbsp;        return query.getResultList();</b>
 &nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    public List&lt;ProductPojo&gt; brandCategory(Integer brand_category) {
+<b class="fc">&nbsp;        TypedQuery&lt;ProductPojo&gt; query = getQuery(brand_category_select, ProductPojo.class);</b>
+<b class="fc">&nbsp;        query.setParameter(&quot;brand_category&quot;, brand_category);</b>
+<b class="fc">&nbsp;        return query.getResultList();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ProductPojo checkerForDuplicate(Integer brand_category, String name){
+<b class="fc">&nbsp;        TypedQuery&lt;ProductPojo&gt; query = getQuery(nocommon_case, ProductPojo.class);</b>
+&nbsp;
+<b class="fc">&nbsp;        query.setParameter(&quot;brand_category&quot;, brand_category);</b>
+<b class="fc">&nbsp;        query.setParameter(&quot;name&quot;, name);</b>
+<b class="fc">&nbsp;        return getSingle(query);</b>
+&nbsp;    }
+&nbsp;    public ProductPojo select(Integer id) {
+<b class="fc">&nbsp;        TypedQuery&lt;ProductPojo&gt; query = getQuery(select_id, ProductPojo.class);</b>
+<b class="fc">&nbsp;        query.setParameter(&quot;id&quot;, id);</b>
+<b class="fc">&nbsp;        return getSingle(query);</b>
+&nbsp;    }
+&nbsp;    public ProductPojo selectBarcode(String barcode) {
+<b class="fc">&nbsp;        TypedQuery&lt;ProductPojo&gt; query = getQuery(select_barcode, ProductPojo.class);</b>
+<b class="fc">&nbsp;        query.setParameter(&quot;barcode&quot;, barcode);</b>
+<b class="fc">&nbsp;        return getSingle(query);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public List&lt;ProductPojo&gt; selectAll() {
+<b class="fc">&nbsp;        TypedQuery&lt;ProductPojo&gt; query = getQuery(select_all, ProductPojo.class);</b>
+<b class="fc">&nbsp;        return query.getResultList();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    public void update(ProductPojo p) {
+<b class="nc">&nbsp;    }</b>
 &nbsp;
 &nbsp;}
 </code>
@@ -159,7 +205,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-24 21:34</div>
+    <div style="float:right;">generated on 2023-07-25 11:37</div>
 </div>
 </body>
 </html>

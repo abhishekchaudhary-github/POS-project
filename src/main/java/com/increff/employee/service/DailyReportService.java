@@ -24,7 +24,10 @@ public class DailyReportService {
     }
     @Transactional
     public List<DailyReportPojo> getAll() {
-        return dao.selectAll();
+        List<DailyReportPojo> dailyReportPojoList =  dao.selectAll();
+        dailyReportPojoList.remove(0);
+        dailyReportPojoList.remove(0);
+        return dailyReportPojoList;
     }
     @Transactional
     public List<DailyReportPojo> getAll(LocalDateTime startTime,LocalDateTime endTime) {
