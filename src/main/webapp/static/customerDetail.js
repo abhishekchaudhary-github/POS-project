@@ -40,12 +40,20 @@ var k =0;
 }
 
 
-function checkInventory(data, fileData){
-    if(data.quantity - fileData<0){
+function checkInventory(data,barcode,quantity){
+checker = false;
+for(var i = 0 ; i < data.length ;i++ ){
+    if(data[i].barcode.localeCompare(barcode)==0){
+    checker = true;
+    if(data[i].quantity - quantity < 0){
     $("#customerDetail-form").notify("given quantity exceeded the quantity present in the inventory",{className:"warn"})
         checker = false
+        return;
     }
-    else check = true;
+   }
+}
+   if(checker==false)
+    $("#customerDetail-form").notify("given product is not present in the inventory",{className:"warn"})
 }
 
 
@@ -62,7 +70,8 @@ function addCustomerDetail(event){
 	var fileData = $form.serializeArray();
 	var $tbody = $('#customerDetail-table').find('tbody');
 	$tbody.empty();
-	fileData[0].value = fileData[0].value.toLowerCase();
+	fileData[0].value = fileData[0].value.toLowerCase().trim();
+    fileData[2].value = fileData[2].value.trim();
 	//checks
 
 checker = true
@@ -81,14 +90,14 @@ var url = $("meta[name=baseUrl]").attr("content") + "/api/product";
 
 
 if(checker){
-var iurl = $("meta[name=baseUrl]").attr("content") + "/api/inventory" + "/" + prodId;
+var iurl = $("meta[name=baseUrl]").attr("content") + "/api/inventory";
 	$.ajax({
 	   url: iurl,
 	   type: 'GET',
 	   async: false,
 	   success: function(data) {
 	   console.log("hi")
-	   		checkInventory(data,fileData[2].value);
+	   		checkInventory(data,fileData[0].value,parseInt(fileData[2].value));
 	   },
 	   error: handleAjaxError
 	});
@@ -266,7 +275,8 @@ function updateCustomerDetail(event){
 
 	var $tbody = $('#customerDetail-table').find('tbody');
 	var barcodeChange = false;
-
+    fileData[0].value = fileData[0].value.toLowerCase().trim();
+    fileData[2].value = fileData[2].value.trim();
 
 
 
@@ -293,14 +303,14 @@ var url = $("meta[name=baseUrl]").attr("content") + "/api/product";
 
 
 if(checker){
-var iurl = $("meta[name=baseUrl]").attr("content") + "/api/inventory" + "/" + prodId;
+var iurl = $("meta[name=baseUrl]").attr("content") + "/api/inventory";
 	$.ajax({
 	   url: iurl,
 	   type: 'GET',
 	   async: false,
 	   success: function(data) {
 	   console.log("hi")
-	   		checkInventory(data,fileData[2].value);
+	   		checkInventory(data,fileData[0].value,parseInt(fileData[2].value));
 	   },
 	   error: handleAjaxError
 	});
@@ -590,7 +600,7 @@ function orderDetail(id,status) {
                             '<td>'  + e.name + '</td>' +
                             '<td>'  + e.quantity + '</td>' +
                             '<td>'  + e.sellingPrice + '</td>' +
-                            '<td>'  + cost + '</td>' + '<td>'  +
+                            '<td>'  + cost.toFixed(2) + '</td>' + '<td>'  +
                             variableHtml + '</td>' + '</tr>';
                             $tbody.append(row);
                         }
