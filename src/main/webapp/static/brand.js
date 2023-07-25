@@ -146,9 +146,16 @@ function readFileDataCallback(results){
 	    fileData[i].category = fileData[i].category.trim();
 	}
 	uploadRows();
+	resetUploadModal();
 }
 
-
+function resetUploadModal() {
+  resetUploadDialog(); // Reset the upload dialog data
+  $('#brandFile').val(''); // Clear the file input field
+  $('#brandFileName').html('Choose File'); // Reset the file name display
+  errorData = []; // Clear any previous error data
+  updateUploadDialog2(); // Reset the upload dialog counts
+}
 
 function uploadRows(){
 //// Disable elements with the "uploading-disabled" class

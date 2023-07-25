@@ -99,22 +99,22 @@ public class BrandService {
         String category = brandForm.getCategory();
         if(brand==null||StringUtil.isEmpty(brand)){
             checks1=true;
-            errors.setMessage("brand field is empty");
+            errors.setMessage(brand + " field is empty");
             errors.setErrorCount(1);
         }
         else if(category==null||StringUtil.isEmpty(category)){
             checks1=true;
-            errors.setMessage("category field is empty");
+            errors.setMessage( category + " field is empty");
             errors.setErrorCount(1);
         }
         else if(dao.checkerForDuplicate(brandForm.getBrand(), brandForm.getCategory())!=null) {
             checks1=true;
-            errors.setMessage("this category already exists");
+            errors.setMessage(  category + " category already exists");
             errors.setErrorCount(1);
         }
             for (BrandForm brandForm1 : list) {
                 if (brandForm1.getBrand().equals(brand) && brandForm1.getCategory().equals(category)) {
-                    errors.setMessage("this category already exists");
+                    errors.setMessage( category + " already exists");
                     errors.setErrorCount(1);
                    checks1=true;
                     //break;

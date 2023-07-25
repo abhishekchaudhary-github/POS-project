@@ -141,17 +141,17 @@ public class InventoryService {
         }
         else if(checkInteger(quantity)==false){
             checks1 = true;
-            errors.setMessage("quantity format is invalid");
+            errors.setMessage( quantity + " is invalid value ");
             errors.setErrorCount(1);
         }
         else if(Integer.parseInt(quantity)<1) {
             checks1 = true;
-            errors.setMessage("quantity is less than 1");
+            errors.setMessage( "quantity can not be than 1");
             errors.setErrorCount(1);
         }
         else if(productService.getPojoFromBarcode(barcode)==null) {
             checks1 = true;
-            errors.setMessage("barcode is invalid");
+            errors.setMessage( barcode + "is an invalid barcode");
             errors.setErrorCount(1);
         }
         if(checks1 == false) {

@@ -117,67 +117,67 @@ public class ProductService {
         BrandPojo brandPojo2 = brandService.getId(brand,category);
         if(brand==null||StringUtil.isEmpty(brand)){
             checks1=true;
-            errors.setMessage("brand field is empty");
+            errors.setMessage( brand + " field is empty");
             errors.setErrorCount(1);
         }
         else if(category==null||StringUtil.isEmpty(category)){
             checks1=true;
-            errors.setMessage("category field is empty");
+            errors.setMessage( category + " field is empty");
             errors.setErrorCount(1);
         }
         else if(name==null||StringUtil.isEmpty(name)){
             checks1=true;
-            errors.setMessage("name field is empty");
+            errors.setMessage( name + " field is empty");
             errors.setErrorCount(1);
         }
         else if(barcode==null||StringUtil.isEmpty(barcode)){
             checks1=true;
-            errors.setMessage("barcode field is empty");
+            errors.setMessage( barcode + " field is empty");
             errors.setErrorCount(1);
         }
         else if(mrp==null||StringUtil.isEmpty(mrp)) {
             checks1 = true;
-            errors.setMessage("mrp field is empty");
+            errors.setMessage( mrp + " field is empty");
             errors.setErrorCount(1);
         }
         else if(checkDouble(mrp)==false){
             checks1 = true;
-            errors.setMessage("mrp format is invalid");
+            errors.setMessage( mrp + " format is invalid");
             errors.setErrorCount(1);
         }
         else if(name==null||StringUtil.isEmpty(name)){
             checks1 = true;
-            errors.setMessage("name field is empty");
+            errors.setMessage( name + " field is empty");
             errors.setErrorCount(1);
         }
         else if(Double.parseDouble(mrp)<0) {
             checks1 = true;
-            errors.setMessage("mrp is negative");
+            errors.setMessage( mrp + " is negative");
             errors.setErrorCount(1);
         }
         else if(hm.containsKey(barcode)) {
             checks1 = true;
-            errors.setMessage("duplicate barcode");
+            errors.setMessage( barcode + " is a duplicate barcode");
             errors.setErrorCount(1);
         }
         else if (!barcode.matches("^[a-zA-Z0-9]*$")) {
             checks1 = true;
-            errors.setMessage("barcode must only contain alphanumeric characters");
+            errors.setMessage( barcode + " must only contain alphanumeric characters");
             errors.setErrorCount(1);
         }
         else if(getBrandPojoFromForm2(brand,category) == null) {
             checks1 = true;
-            errors.setMessage("no such brand category combination exists");
+            errors.setMessage( brand + " " + category +" combination exists");
             errors.setErrorCount(1);
         }
         else if(dao.checkerForDuplicate(brandPojo2.getId(), name)!=null){
             checks1 = true;
-            errors.setMessage("duplicate product");
+            errors.setMessage( barcode + " is a duplicate product");
             errors.setErrorCount(1);
         }
         else if(dao.barcodeMustExist(barcode)!=null){
             checks1 = true;
-            errors.setMessage("duplicate barcode");
+            errors.setMessage( barcode + " is a duplicate product");
             errors.setErrorCount(1);
         }
 
@@ -185,7 +185,7 @@ public class ProductService {
         for(int i=0;i<list.size();i++) {
             if(brand.equals(list.get(i).getBrand())&&name.equals(list.get(i).getName())&&category.equals(list.get(i).getCategory())){
                 checks1 = true;
-                errors.setMessage("duplicate product");
+                errors.setMessage("this is a duplicate product");
                 errors.setErrorCount(1);
             }
 
@@ -193,7 +193,7 @@ public class ProductService {
         if(checks1==false) {
             if(dao.barcodeMustExist(barcode)!=null) {
                 checks1 = true;
-                errors.setMessage("duplicate barcode");
+                errors.setMessage( barcode + " is a duplicate product");
                 errors.setErrorCount(1);
             }
         }
