@@ -277,16 +277,6 @@ function updateCustomerDetail(event){
 	var barcodeChange = false;
     fileData[0].value = fileData[0].value.toLowerCase().trim();
     fileData[2].value = fileData[2].value.trim();
-
-
-
-
-
-
-
-
-
-
 checker = true
 var url = $("meta[name=baseUrl]").attr("content") + "/api/product";
 
@@ -381,7 +371,6 @@ else if(barcodeChange==true){
             if(e.barcode.localeCompare(fileData[0].value.trim())==0){
                 $("#customerDetail-form").notify("same barcode has been entered already",{className:"warn"})
                 error = true;
-                break;
             }
         }
 	}
@@ -390,7 +379,7 @@ else if(barcodeChange==true){
         var iterationNumber = 0 ;
        	var tempData = addedData.map(item => {
            if(iterationNumber ++ == fileData[3].value) {
-           return { barcode: fileData[0].value.trim(),mrp: parseFloat(fileData[1]).value,quantity: fileData[2].value }
+           return { barcode: fileData[0].value.trim(),mrp: parseFloat(fileData[1].value),quantity: fileData[2].value }
             }
             else
             return item
