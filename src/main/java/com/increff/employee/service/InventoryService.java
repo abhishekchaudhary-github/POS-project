@@ -71,7 +71,7 @@ public class InventoryService {
         return dao.selectAll();
     }
 
-    @Transactional
+    @Transactional(rollbackOn  = ApiException.class)
     public Integer getIdOfProduct(String barcode) throws ApiException {
         return productService.getProductId(barcode);
     }
@@ -79,7 +79,7 @@ public class InventoryService {
         return productService.get(productId).getBarcode();
     }
 
-    @Transactional
+    @Transactional(rollbackOn  = ApiException.class)
     public InventoryPojo getFromProductId(Integer productId) throws ApiException {
         return dao.getFromProductId(productId);
     }
@@ -122,7 +122,7 @@ public class InventoryService {
 
 
 
-    @Transactional
+    @Transactional(rollbackOn  = ApiException.class)
     public ErrorsInventory checkError(InventoryFormString inventoryForm, List<InventoryFormString> list,HashMap<String,Integer> hm) throws ApiException {
         ErrorsInventory errors = new ErrorsInventory();
         boolean checks1=false;
@@ -163,7 +163,7 @@ public class InventoryService {
         return errors;
     }
 
-    @Transactional
+    @Transactional(rollbackOn  = ApiException.class)
     public ArrayList<ErrorsInventory> fileCheck(List<InventoryFormString> form) throws ApiException {
         if(form.size()>5000) {
             throw new ApiException("maximum number of rows can be only 5000");
@@ -197,7 +197,7 @@ public class InventoryService {
         }
     }
 
-    @Transactional
+    @Transactional(rollbackOn  = ApiException.class)
     public InventoryPojo getCheck(Integer id) throws ApiException {
         InventoryPojo p = dao.select(id);
         if (p == null) {

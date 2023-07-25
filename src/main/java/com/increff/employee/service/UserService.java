@@ -21,7 +21,7 @@ public class UserService {
 	@Autowired
 	private InfoData info;
 
-	@Transactional
+	@Transactional(rollbackOn = ApiException.class)
 	public void add(UserPojo p) throws ApiException {
 		normalize(p);
 		UserPojo existing = dao.select(p.getEmail());

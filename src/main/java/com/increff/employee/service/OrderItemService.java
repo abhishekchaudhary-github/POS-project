@@ -169,7 +169,7 @@ public class OrderItemService {
          }
         return orderItemPojoList2;
     }
-    @Transactional
+    @Transactional(rollbackOn  = ApiException.class)
     public void productBarcodeMustExist(CategoryDetailForm categoryDetailForm) throws ApiException {
         ProductPojo productPojo = productService.barcodeMustExist(categoryDetailForm.getBarcode());
         if(productPojo==null){
@@ -179,7 +179,7 @@ public class OrderItemService {
                 throw new ApiException("selling price cannot be greater than mrp");
     }
 
-    @Transactional
+    @Transactional(rollbackOn  = ApiException.class)
     public void getInventoryFromProductId(Integer productId,Integer quantity) throws ApiException {
         InventoryPojo inventoryPojo = inventoryService.getFromProductId(productId);
         if(inventoryPojo==null) {
@@ -215,19 +215,19 @@ public class OrderItemService {
         inventoryPojo.setQuantity((inventoryPojo.getQuantity()+orderItemPojo.getQuantity()-orderItemEditPojo.getQuantity()));
     }
 
-    @Transactional
+    @Transactional(rollbackOn  = ApiException.class)
     public Integer getInventoryIdOfProduct(String barcode) throws ApiException {
         String barcode1 = normalize(barcode);
         return inventoryService.getIdOfProduct(barcode1);
     }
 
-    @Transactional
+    @Transactional(rollbackOn  = ApiException.class)
     public String getFromProductBarcode(OrderItemPojo orderItemPojo) throws ApiException {
         ProductPojo productPojo = productService.get(orderItemPojo.getProductId());
         return productPojo.getBarcode();
     }
 
-    @Transactional
+    @Transactional(rollbackOn  = ApiException.class)
     public String getFromProductName(OrderItemPojo orderItemPojo) throws ApiException {
         ProductPojo productPojo = productService.get(orderItemPojo.getProductId());
         return productPojo.getName();
@@ -264,7 +264,7 @@ public class OrderItemService {
         return StringUtil.toLowerCase(barcode);
     }
 
-    @Transactional
+    @Transactional(rollbackOn  = ApiException.class)
     public OrderItemPojo getCheck(Integer id) throws ApiException {
         OrderItemPojo p = dao.select(id);
         if (p == null) {

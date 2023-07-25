@@ -77,7 +77,7 @@ public class BrandService {
     public BrandPojo getId(String productBrand,String productCategory){
         return dao.checkerForDuplicate(productBrand,productCategory);
     }
-    @Transactional
+    @Transactional(rollbackOn  = ApiException.class)
     public BrandPojo getCheck(Integer id) throws ApiException {
         BrandPojo p = dao.select(id);
         if (p == null) {
@@ -91,7 +91,7 @@ public class BrandService {
         p.setCategory(StringUtil.toLowerCase(p.getCategory()));
     }
 
-    @Transactional
+    @Transactional(rollbackOn  = ApiException.class)
     public ErrorsBrand checkError(BrandForm brandForm, List<BrandForm> list) throws ApiException {
         ErrorsBrand errors = new ErrorsBrand();
         boolean checks1=false;
@@ -129,7 +129,7 @@ public class BrandService {
         return errors;
     }
 
-    @Transactional
+    @Transactional(rollbackOn  = ApiException.class)
     public ArrayList<ErrorsBrand> fileCheck(List<BrandForm> form) throws ApiException {
         if(form.size()>5000) {
             throw new ApiException("maximum number of rows can be only 5000");

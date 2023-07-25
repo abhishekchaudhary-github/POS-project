@@ -38,7 +38,7 @@ public class ReportService {
     private DailyReportService dailyReportService;
 
 
-    @Transactional
+    @Transactional(rollbackOn = ApiException.class)
     public List<BrandData> getBrandReport(BrandForm form) throws ApiException {
         String brand = form.getBrand();
         if(brand==null) brand="";
@@ -57,7 +57,7 @@ public class ReportService {
         return brandDataList;
     }
 
-    @Transactional
+    @Transactional(rollbackOn = ApiException.class)
     public List<DailyReportPojo> getDailySalesReport(postDailyform form) throws ApiException {
         LocalDateTime startTime1 = convertTime(form.getStartTime());
         LocalDateTime endTime1 = convertTime(form.getEndTime());
@@ -65,7 +65,7 @@ public class ReportService {
         System.out.println("01-06-2025");
         return dailyReportPojoList;
     }
-    @Transactional
+    @Transactional(rollbackOn = ApiException.class)
     public List<InventoryReportData> getInventoryReport(BrandForm form) throws ApiException {
         String brand = form.getBrand();
         if(brand==null) brand="";
@@ -109,7 +109,7 @@ public class ReportService {
         return dao.selectOrderItem(id);
     }
 
-    @Transactional
+    @Transactional(rollbackOn = ApiException.class)
     public List<SalesReportData> getAll(String startTime, String endTime, String brand, String category) throws ApiException {
         LocalDateTime startTime1 = convertTime(startTime);
         LocalDateTime endTime1 = convertTime(endTime);

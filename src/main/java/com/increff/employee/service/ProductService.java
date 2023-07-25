@@ -218,7 +218,7 @@ public class ProductService {
         }
     }
 
-    @Transactional
+    @Transactional(rollbackOn = ApiException.class)
     public ArrayList<ErrorsProduct> fileCheck(List<ProductFormString> form) throws ApiException {
         if(form.size()>5000) {
             throw new ApiException("maximum number of rows can be only 5000");
@@ -249,12 +249,12 @@ public class ProductService {
         return getCheck(id);
     }
 
-    @Transactional
+    @Transactional(rollbackOn = ApiException.class)
     public BrandPojo getBrandPojoFromBrandCategory(ProductPojo p) throws ApiException {
         return brandService.get(p.getBrand_category());
     }
 
-    @Transactional
+    @Transactional(rollbackOn = ApiException.class)
     public BrandPojo getBrandPojoFromForm(ProductForm f) throws ApiException {
         BrandPojo brandPojo =  brandService.getId(f.getBrand(),f.getCategory());
         if(brandPojo==null) {
@@ -263,7 +263,7 @@ public class ProductService {
         return brandPojo;
     }
 
-    @Transactional
+    @Transactional(rollbackOn = ApiException.class)
     public BrandPojo getBrandPojoFromForm2(String brand,String category) throws ApiException {
         BrandPojo brandPojo =  brandService.getId(brand,category);
         return brandPojo;
@@ -275,7 +275,7 @@ public class ProductService {
         return dao.selectAll();
     }
 
-    @Transactional
+    @Transactional(rollbackOn = ApiException.class)
     public Integer getProductId(String barcode) throws ApiException {
         normalizeBarcode(barcode);
         ProductPojo productPojo = dao.selectBarcode(barcode);
@@ -285,7 +285,7 @@ public class ProductService {
         return productPojo.getId();
     }
 
-    @Transactional
+    @Transactional(rollbackOn = ApiException.class)
     public ProductPojo getPojoFromBarcode(String barcode) throws ApiException {
         normalizeBarcode(barcode);
         ProductPojo productPojo = dao.selectBarcode(barcode);
@@ -343,7 +343,7 @@ public class ProductService {
 
 
 
-    @Transactional
+    @Transactional(rollbackOn = ApiException.class)
     public ProductPojo getCheck(Integer id) throws ApiException {
         ProductPojo p = dao.select(id);
         if (p == null) {
