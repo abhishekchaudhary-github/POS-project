@@ -252,7 +252,7 @@ function submitCustomerDetail(){
            	'Content-Type': 'application/json'
            },
     	   success: function() {
-
+               $('#exampleModal').modal('hide');
     	       $.notify("ADDED SUCCESSFULLY", { className: "success", globalPosition: 'top center' });
                     setTimeout(function () {
                         location.reload();
