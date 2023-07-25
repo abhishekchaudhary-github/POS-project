@@ -1,0 +1,189 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > UserService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.increff.employee.service</a>
+</div>
+
+<h1>Coverage Summary for Class: UserService (com.increff.employee.service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UserService</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (7/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.3%
+  </span>
+  <span class="absValue">
+    (12/13)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">UserService$$EnhancerBySpringCGLIB$$31c8dc43</td>
+  </tr>
+  <tr>
+    <td class="name">UserService$$EnhancerBySpringCGLIB$$31c8dc43$$FastClassBySpringCGLIB$$5935cb0f</td>
+  </tr>
+  <tr>
+    <td class="name">UserService$$EnhancerBySpringCGLIB$$5ac66aba</td>
+  </tr>
+  <tr>
+    <td class="name">UserService$$EnhancerBySpringCGLIB$$6fb6cd2</td>
+  </tr>
+  <tr>
+    <td class="name">UserService$$FastClassBySpringCGLIB$$68783d5b</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (7/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.3%
+  </span>
+  <span class="absValue">
+    (12/13)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.increff.employee.service;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import javax.transaction.Transactional;
+&nbsp;
+&nbsp;import com.increff.employee.model.InfoData;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import com.increff.employee.dao.UserDao;
+&nbsp;import com.increff.employee.pojo.UserPojo;
+&nbsp;import org.springframework.web.servlet.ModelAndView;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;public class UserService {</b>
+&nbsp;
+&nbsp;	@Autowired
+&nbsp;	private UserDao dao;
+&nbsp;
+&nbsp;	@Autowired
+&nbsp;	private InfoData info;
+&nbsp;
+&nbsp;	@Transactional
+&nbsp;	public void add(UserPojo p) throws ApiException {
+<b class="fc">&nbsp;		normalize(p);</b>
+<b class="fc">&nbsp;		UserPojo existing = dao.select(p.getEmail());</b>
+<b class="fc">&nbsp;		if (existing != null) {</b>
+<b class="fc">&nbsp;			info.setMessage(&quot;this email has already been registered&quot;);</b>
+&nbsp;			return;
+&nbsp;		}
+<b class="fc">&nbsp;		dao.insert(p);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	@Transactional(rollbackOn = ApiException.class)
+&nbsp;	public UserPojo get(String email) throws ApiException {
+<b class="fc">&nbsp;		return dao.select(email);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	@Transactional(rollbackOn = ApiException.class)
+&nbsp;	public UserPojo getById(Integer id) throws ApiException {
+<b class="fc">&nbsp;		return dao.select(id);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	@Transactional
+&nbsp;	public List&lt;UserPojo&gt; getAll() {
+<b class="fc">&nbsp;		return dao.selectAll();</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	@Transactional
+&nbsp;	public void delete(Integer id) {
+<b class="fc">&nbsp;		dao.delete(id);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	@Transactional
+&nbsp;	public void setMessage() {
+<b class="nc">&nbsp;		info.setMessage(&quot;&quot;);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	protected static void normalize(UserPojo p) {
+<b class="fc">&nbsp;		p.setEmail(p.getEmail().toLowerCase().trim());</b>
+<b class="fc">&nbsp;		p.setRole(p.getRole().toLowerCase().trim());</b>
+&nbsp;	}
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-07-24 21:34</div>
+</div>
+</body>
+</html>

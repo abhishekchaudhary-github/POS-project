@@ -5,7 +5,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd59bcda-ea0a-45cb-bbdf-b0788f0265bb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/increff/employee/dao/ReportDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/increff/employee/dao/ReportDaoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_BLOCK.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_BLOCK.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_BLOCK_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_BLOCK_DESC.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_CLASS.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_CLASS.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_CLASS_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_CLASS_DESC.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_LINE.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_LINE.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_LINE_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_LINE_DESC.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_METHOD.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_METHOD.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_METHOD_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_METHOD_DESC.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/index_SORT_BY_NAME_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index_SORT_BY_NAME_DESC.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_BLOCK.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_BLOCK.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_BLOCK_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_BLOCK_DESC.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_CLASS.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_CLASS.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_CLASS_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_CLASS_DESC.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_LINE.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_LINE.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_LINE_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_LINE_DESC.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_METHOD.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_METHOD.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_METHOD_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_METHOD_DESC.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_NAME_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_NAME_DESC.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-2.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-3.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-4.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-4.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-5.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-5.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-6.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-6.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-7.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-7.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-8.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-8.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-9.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-9.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-a.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-a.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-b.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-b.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/salesReport.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/salesReport.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/salesReport.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/salesReport.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +115,55 @@
       <recent name="$PROJECT_DIR$/src/main/webapp/html" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ReportDaoTest">
+  <component name="RunManager" selected="Maven.employee-spring-full [jetty:run]">
+    <configuration name="AboutAppServiceTest and 15 more" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employee-spring-full" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.increff.employee.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.increff.employee.service" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.AbstractUnitTest" />
+      <option name="TEST_OBJECT" value="pattern" />
+      <patterns>
+        <pattern testClass="com.increff.employee.service.AboutAppServiceTest" />
+        <pattern testClass="com.increff.employee.dao.BrandDaoTest" />
+        <pattern testClass="com.increff.employee.service.BrandServiceTest" />
+        <pattern testClass="com.increff.employee.dao.DailyReportDaoTest" />
+        <pattern testClass="com.increff.employee.service.DailyReportServiceTest" />
+        <pattern testClass="com.increff.employee.dao.InventoryDaoTest" />
+        <pattern testClass="com.increff.employee.service.InventoryServiceTest" />
+        <pattern testClass="com.increff.employee.dao.OrderDaoTest" />
+        <pattern testClass="com.increff.employee.dao.OrderItemDaoTest" />
+        <pattern testClass="com.increff.employee.service.OrderItemServiceTest" />
+        <pattern testClass="com.increff.employee.service.OrderServiceTest" />
+        <pattern testClass="com.increff.employee.dao.ProductDaoTest" />
+        <pattern testClass="com.increff.employee.service.ProductServiceTest" />
+        <pattern testClass="com.increff.employee.dao.ReportDaoTest" />
+        <pattern testClass="com.increff.employee.service.ReportServiceTest" />
+        <pattern testClass="com.increff.employee.service.UserServiceTest" />
+      </patterns>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AboutAppServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employee-spring-full" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.increff.employee.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.increff.employee.service" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.AboutAppServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DailyReportDaoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
@@ -93,53 +174,6 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.increff.employee.dao" />
       <option name="MAIN_CLASS_NAME" value="com.increff.employee.dao.DailyReportDaoTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DailyReportDaoTest.testSelect2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="employee-spring-full" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.increff.employee.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.increff.employee.dao" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.dao.DailyReportDaoTest" />
-      <option name="METHOD_NAME" value="testSelect2" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DailyReportDaoTest.testSelectAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="employee-spring-full" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.increff.employee.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.increff.employee.dao" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.dao.DailyReportDaoTest" />
-      <option name="METHOD_NAME" value="testSelectAll" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="OrderItemDaoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="employee-spring-full" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.increff.employee.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.increff.employee.dao" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.dao.OrderItemDaoTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -156,6 +190,14 @@
       <option name="PACKAGE_NAME" value="com.increff.employee.dao" />
       <option name="MAIN_CLASS_NAME" value="com.increff.employee.dao.ReportDaoTest" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="dao in employee-spring-full" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employee-spring-full" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test/java/com/increff/employee/dao" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -199,20 +241,20 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="JUnit.AboutAppServiceTest" />
+      <item itemvalue="JUnit.AboutAppServiceTest and 15 more" />
       <item itemvalue="JUnit.DailyReportDaoTest" />
-      <item itemvalue="JUnit.DailyReportDaoTest.testSelect2" />
-      <item itemvalue="JUnit.DailyReportDaoTest.testSelectAll" />
-      <item itemvalue="JUnit.OrderItemDaoTest" />
       <item itemvalue="JUnit.ReportDaoTest" />
+      <item itemvalue="JUnit.dao in employee-spring-full" />
       <item itemvalue="Maven.employee-spring-full [jetty:run]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.AboutAppServiceTest and 15 more" />
+        <item itemvalue="JUnit.AboutAppServiceTest" />
+        <item itemvalue="JUnit.dao in employee-spring-full" />
         <item itemvalue="JUnit.ReportDaoTest" />
         <item itemvalue="JUnit.DailyReportDaoTest" />
-        <item itemvalue="JUnit.DailyReportDaoTest.testSelect2" />
-        <item itemvalue="JUnit.DailyReportDaoTest.testSelectAll" />
-        <item itemvalue="JUnit.OrderItemDaoTest" />
       </list>
     </recent_temporary>
   </component>
@@ -264,13 +306,17 @@
     <SUITE FILE_PATH="coverage/employee_spring$InventoryServiceTest.ic" NAME="InventoryServiceTest Coverage Results" MODIFIED="1690017425764" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.increff.employee.service.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/employee_spring$AboutAppServiceTest.ic" NAME="AboutAppServiceTest Coverage Results" MODIFIED="1689956559866" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/employee_spring$AboutAppServiceTest.ic" NAME="AboutAppServiceTest Coverage Results" MODIFIED="1690214620572" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.increff.employee.service.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/employee_spring$OrderItemServiceTest.ic" NAME="OrderItemServiceTest Coverage Results" MODIFIED="1689956651754" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.increff.employee.service.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/employee_spring$ProductServiceTest.ic" NAME="ProductServiceTest Coverage Results" MODIFIED="1690014392239" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.increff.employee.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/employee_spring$dao_in_employee_spring_full.ic" NAME="dao in employee-spring-full Coverage Results" MODIFIED="1690214592436" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/employee_spring$AboutAppServiceTest_and_15_more.ic" NAME="AboutAppServiceTest and 15 more Coverage Results" MODIFIED="1690214639050" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.increff.employee.service.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/employee_spring$BrandServiceTest_testGetId.ic" NAME="BrandServiceTest.testGetId Coverage Results" MODIFIED="1689138313159" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

@@ -1,0 +1,275 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > BrandService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.increff.employee.service</a>
+</div>
+
+<h1>Coverage Summary for Class: BrandService (com.increff.employee.service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BrandService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (74/74)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BrandService$$EnhancerBySpringCGLIB$$485e9918</td>
+  </tr>
+  <tr>
+    <td class="name">BrandService$$EnhancerBySpringCGLIB$$732c0889</td>
+  </tr>
+  <tr>
+    <td class="name">BrandService$$EnhancerBySpringCGLIB$$732c0889$$FastClassBySpringCGLIB$$5369ac52</td>
+  </tr>
+  <tr>
+    <td class="name">BrandService$$EnhancerBySpringCGLIB$$9c299700</td>
+  </tr>
+  <tr>
+    <td class="name">BrandService$$FastClassBySpringCGLIB$$74a6665d</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (74/74)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.increff.employee.service;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import javax.transaction.Transactional;
+&nbsp;
+&nbsp;import com.increff.employee.model.BrandForm;
+&nbsp;import com.increff.employee.model.Errors;
+&nbsp;import com.increff.employee.model.ErrorsBrand;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import com.increff.employee.dao.BrandDao;
+&nbsp;import com.increff.employee.pojo.BrandPojo;
+&nbsp;import com.increff.employee.util.StringUtil;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;public class BrandService {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private BrandDao dao;
+&nbsp;
+<b class="fc">&nbsp;    private boolean checkError = false;</b>
+&nbsp;
+&nbsp;    @Transactional(rollbackOn = ApiException.class)
+&nbsp;    public void add(BrandPojo p) throws ApiException {
+<b class="fc">&nbsp;        normalize(p);</b>
+<b class="fc">&nbsp;        if(StringUtil.isEmpty(p.getBrand())) {</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;brand cannot be empty&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if(StringUtil.isEmpty(p.getCategory())) {</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;category cannot be empty&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if(dao.checkerForDuplicate(p.getBrand(), p.getCategory())==null)</b>
+<b class="fc">&nbsp;        dao.insert(p);</b>
+<b class="fc">&nbsp;        else throw new ApiException(&quot;category already exists&quot;);</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public BrandPojo brandMustExist (Integer brand_category) {
+<b class="fc">&nbsp;        return dao.brandMustExist(brand_category);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional(rollbackOn = ApiException.class)
+&nbsp;    public BrandPojo get(Integer id) throws ApiException {
+<b class="fc">&nbsp;        return getCheck(id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public List&lt;BrandPojo&gt; getAll() {
+<b class="fc">&nbsp;        return dao.selectAll();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional(rollbackOn  = ApiException.class)
+&nbsp;    public Integer update(Integer id, BrandPojo p) throws ApiException {
+<b class="fc">&nbsp;        if(StringUtil.isEmpty(p.getBrand())) {</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;brand cannot be empty&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if(StringUtil.isEmpty(p.getCategory())) {</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;category cannot be empty&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        normalize(p);</b>
+<b class="fc">&nbsp;        BrandPojo tempPojo = getCheck(id);</b>
+<b class="fc">&nbsp;        if(dao.select(id).getBrand().equals(p.getBrand()) &amp;&amp; dao.select(id).getCategory().equals(p.getCategory())){</b>
+<b class="fc">&nbsp;            return 0;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if(dao.checkerForDuplicate(p.getBrand(), p.getCategory())==null){</b>
+<b class="fc">&nbsp;        tempPojo.setBrand(p.getBrand());</b>
+<b class="fc">&nbsp;        tempPojo.setCategory(p.getCategory());</b>
+<b class="fc">&nbsp;        return 1;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        else throw new ApiException(&quot;this category already exists&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public BrandPojo getId(String productBrand,String productCategory){
+<b class="fc">&nbsp;        return dao.checkerForDuplicate(productBrand,productCategory);</b>
+&nbsp;    }
+&nbsp;    @Transactional
+&nbsp;    public BrandPojo getCheck(Integer id) throws ApiException {
+<b class="fc">&nbsp;        BrandPojo p = dao.select(id);</b>
+<b class="fc">&nbsp;        if (p == null) {</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;Brand with given ID does not exit, id: &quot; + id);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return p;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static void normalize(BrandPojo p) {
+<b class="fc">&nbsp;        p.setBrand(StringUtil.toLowerCase(p.getBrand()));</b>
+<b class="fc">&nbsp;        p.setCategory(StringUtil.toLowerCase(p.getCategory()));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public ErrorsBrand checkError(BrandForm brandForm, List&lt;BrandForm&gt; list) throws ApiException {
+<b class="fc">&nbsp;        ErrorsBrand errors = new ErrorsBrand();</b>
+<b class="fc">&nbsp;        boolean checks1=false;</b>
+<b class="fc">&nbsp;        String brand = brandForm.getBrand();</b>
+<b class="fc">&nbsp;        String category = brandForm.getCategory();</b>
+<b class="fc">&nbsp;        if(brand==null||StringUtil.isEmpty(brand)){</b>
+<b class="fc">&nbsp;            checks1=true;</b>
+<b class="fc">&nbsp;            errors.setMessage(&quot;brand field is empty&quot;);</b>
+<b class="fc">&nbsp;            errors.setErrorCount(1);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        else if(category==null||StringUtil.isEmpty(category)){</b>
+<b class="fc">&nbsp;            checks1=true;</b>
+<b class="fc">&nbsp;            errors.setMessage(&quot;category field is empty&quot;);</b>
+<b class="fc">&nbsp;            errors.setErrorCount(1);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        else if(dao.checkerForDuplicate(brandForm.getBrand(), brandForm.getCategory())!=null) {</b>
+<b class="fc">&nbsp;            checks1=true;</b>
+<b class="fc">&nbsp;            errors.setMessage(&quot;this category already exists&quot;);</b>
+<b class="fc">&nbsp;            errors.setErrorCount(1);</b>
+&nbsp;        }
+<b class="fc">&nbsp;            for (BrandForm brandForm1 : list) {</b>
+<b class="fc">&nbsp;                if (brandForm1.getBrand().equals(brand) &amp;&amp; brandForm1.getCategory().equals(category)) {</b>
+<b class="fc">&nbsp;                    errors.setMessage(&quot;this category already exists&quot;);</b>
+<b class="fc">&nbsp;                    errors.setErrorCount(1);</b>
+<b class="fc">&nbsp;                   checks1=true;</b>
+&nbsp;                    //break;
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        if(checks1 == false) {</b>
+<b class="fc">&nbsp;            errors.setMessage(&quot;&quot;);</b>
+<b class="fc">&nbsp;            errors.setErrorCount(0);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        errors.setBrand(brand);</b>
+<b class="fc">&nbsp;        errors.setCategory(category);</b>
+<b class="fc">&nbsp;        return errors;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public ArrayList&lt;ErrorsBrand&gt; fileCheck(List&lt;BrandForm&gt; form) throws ApiException {
+<b class="fc">&nbsp;        if(form.size()&gt;5000) {</b>
+<b class="fc">&nbsp;            throw new ApiException(&quot;maximum number of rows can be only 5000&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        ArrayList&lt;ErrorsBrand&gt; data = new ArrayList&lt;ErrorsBrand&gt;();</b>
+<b class="fc">&nbsp;        ArrayList&lt;BrandForm&gt; brandPojoList = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        for(BrandForm BrandItem : form){</b>
+<b class="fc">&nbsp;            ErrorsBrand error = checkError(BrandItem,brandPojoList);</b>
+<b class="fc">&nbsp;            if(checkError==true || error.getErrorCount()&gt;0) {</b>
+<b class="fc">&nbsp;                error.setCheckError(true);</b>
+<b class="fc">&nbsp;                checkError =true;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            brandPojoList.add(BrandItem);</b>
+<b class="fc">&nbsp;            data.add(error);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return data;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-07-24 21:34</div>
+</div>
+</body>
+</html>

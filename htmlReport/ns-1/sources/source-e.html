@@ -1,0 +1,172 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ReportController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.increff.employee.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: ReportController (com.increff.employee.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ReportController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    16.7%
+  </span>
+  <span class="absValue">
+    (1/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    6.7%
+  </span>
+  <span class="absValue">
+    (1/15)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.increff.employee.controller;
+&nbsp;
+&nbsp;import com.increff.employee.model.*;
+&nbsp;import com.increff.employee.pojo.BrandPojo;
+&nbsp;import com.increff.employee.pojo.DailyReportPojo;
+&nbsp;import com.increff.employee.service.ApiException;
+&nbsp;//import com.increff.employee.service.BrandReportService;
+&nbsp;import com.increff.employee.service.ReportService;
+&nbsp;import io.swagger.annotations.Api;
+&nbsp;import io.swagger.annotations.ApiOperation;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.web.bind.annotation.RequestBody;
+&nbsp;import org.springframework.web.bind.annotation.RequestMapping;
+&nbsp;import org.springframework.web.bind.annotation.RequestMethod;
+&nbsp;import org.springframework.web.bind.annotation.RestController;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Api
+&nbsp;@RestController
+<b class="fc">&nbsp;public class ReportController {</b>
+&nbsp;    //@Autowired
+&nbsp;    //BrandReportService brandReportService;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private ReportService reportService;
+&nbsp;    @ApiOperation(value = &quot;gives sales report&quot;)
+&nbsp;    @RequestMapping(path = &quot;/api/salesreport&quot;, method = RequestMethod.POST)
+&nbsp;    public List&lt;SalesReportData&gt; filterSalesReport(@RequestBody SalesReportForm form) throws ApiException {
+<b class="nc">&nbsp;        return reportService.getAll(form.getStartTime(),form.getEndTime(),form.getBrand(),form.getCategory());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    @ApiOperation(value = &quot;gives brand report&quot;)
+&nbsp;    @RequestMapping(path = &quot;/api/brandreport&quot;, method = RequestMethod.POST)
+&nbsp;    public List&lt;BrandData&gt; getBrandReport(@RequestBody BrandForm form) throws ApiException {
+<b class="nc">&nbsp;        return reportService.getBrandReport(form);</b>
+&nbsp;    }
+&nbsp;    @ApiOperation(value = &quot;gives daily sales report&quot;)
+&nbsp;    @RequestMapping(path = &quot;/api/dailyreport&quot;, method = RequestMethod.POST)
+&nbsp;    public List&lt;DailyReportData&gt; getBrandReport(@RequestBody postDailyform form) throws ApiException {
+<b class="nc">&nbsp;        List&lt;DailyReportPojo&gt; list = reportService.getDailySalesReport(form);</b>
+<b class="nc">&nbsp;        List&lt;DailyReportData&gt; list2 = new ArrayList&lt;DailyReportData&gt;();</b>
+<b class="nc">&nbsp;        for (DailyReportPojo p : list) {</b>
+<b class="nc">&nbsp;            list2.add(convertDailySalesReport(p));</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return list2;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    @ApiOperation(value = &quot;gives inventory report&quot;)
+&nbsp;    @RequestMapping(path = &quot;/api/inventoryreport&quot;, method = RequestMethod.POST)
+&nbsp;    public List&lt;InventoryReportData&gt; getInventoryReport(@RequestBody BrandForm form) throws ApiException {
+<b class="nc">&nbsp;        return reportService.getInventoryReport(form);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static DailyReportData convertDailySalesReport(DailyReportPojo f) {
+<b class="nc">&nbsp;        DailyReportData p = new DailyReportData();</b>
+<b class="nc">&nbsp;        p.setDate(f.getDate().toString());</b>
+<b class="nc">&nbsp;        p.setInvoiced_items_count(f.getInvoiced_items_count());</b>
+<b class="nc">&nbsp;        p.setInvoiced_orders_count(f.getInvoiced_orders_count());</b>
+<b class="nc">&nbsp;        return p;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-07-24 21:34</div>
+</div>
+</body>
+</html>

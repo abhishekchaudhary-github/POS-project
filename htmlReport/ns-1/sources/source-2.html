@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > ApiException</title>
+  <title>Coverage Report > AbstractUiController</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -18,10 +18,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.increff.employee.service</a>
+    <a href="../index.html">com.increff.employee.controller</a>
 </div>
 
-<h1>Coverage Summary for Class: ApiException (com.increff.employee.service)</h1>
+<h1>Coverage Summary for Class: AbstractUiController (com.increff.employee.controller)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -40,7 +40,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">ApiException</td>
+  <td class="name">AbstractUiController</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -51,18 +51,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    50%
   </span>
   <span class="absValue">
-    (1/1)
+    (1/2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    14.3%
   </span>
   <span class="absValue">
-    (1/1)
+    (1/7)
   </span>
 </td>
 </tr>
@@ -74,14 +74,37 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package com.increff.employee.service;
+<code class="sourceCode" id="sourceCode">&nbsp;package com.increff.employee.controller;
 &nbsp;
-&nbsp;public class ApiException extends Exception {
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.beans.factory.annotation.Value;
+&nbsp;import org.springframework.stereotype.Controller;
+&nbsp;import org.springframework.web.servlet.ModelAndView;
 &nbsp;
-&nbsp;	private static final long serialVersionUID = 1L;
-&nbsp;	
-&nbsp;	public ApiException(String string) {
-<b class="fc">&nbsp;		super(string);</b>
+&nbsp;import com.increff.employee.model.InfoData;
+&nbsp;import com.increff.employee.util.SecurityUtil;
+&nbsp;import com.increff.employee.util.UserPrincipal;
+&nbsp;
+&nbsp;@Controller
+<b class="fc">&nbsp;public abstract class AbstractUiController {</b>
+&nbsp;
+&nbsp;	@Autowired
+&nbsp;	private InfoData info;
+&nbsp;
+&nbsp;	@Value(&quot;${app.baseUrl}&quot;)
+&nbsp;	private String baseUrl;
+&nbsp;
+&nbsp;	protected ModelAndView mav(String page) {
+&nbsp;		// Get current user
+<b class="nc">&nbsp;		UserPrincipal principal = SecurityUtil.getPrincipal();</b>
+&nbsp;
+<b class="nc">&nbsp;		info.setEmail(principal == null ? &quot;&quot; : principal.getEmail());</b>
+&nbsp;
+&nbsp;		// Set info
+<b class="nc">&nbsp;		ModelAndView mav = new ModelAndView(page);</b>
+<b class="nc">&nbsp;		mav.addObject(&quot;info&quot;, info);</b>
+<b class="nc">&nbsp;		mav.addObject(&quot;baseUrl&quot;, baseUrl);</b>
+<b class="nc">&nbsp;		return mav;</b>
 &nbsp;	}
 &nbsp;
 &nbsp;}
@@ -108,7 +131,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-22 15:18</div>
+    <div style="float:right;">generated on 2023-07-24 21:34</div>
 </div>
 </body>
 </html>

@@ -1,0 +1,195 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > OrderItemDao</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.increff.employee.dao</a>
+</div>
+
+<h1>Coverage Summary for Class: OrderItemDao (com.increff.employee.dao)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">OrderItemDao</td>
+<td class="coverageStat">
+  <span class="percent">
+    71.4%
+  </span>
+  <span class="absValue">
+    (5/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (9/18)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">OrderItemDao$$EnhancerBySpringCGLIB$$2dcdf7f2</td>
+  </tr>
+  <tr>
+    <td class="name">OrderItemDao$$EnhancerBySpringCGLIB$$2dcdf7f2$$FastClassBySpringCGLIB$$4a781386</td>
+  </tr>
+  <tr>
+    <td class="name">OrderItemDao$$FastClassBySpringCGLIB$$3459b6c3</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    71.4%
+  </span>
+  <span class="absValue">
+    (5/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (9/18)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.increff.employee.dao;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import javax.persistence.EntityManager;
+&nbsp;import javax.persistence.PersistenceContext;
+&nbsp;import javax.persistence.Query;
+&nbsp;import javax.persistence.TypedQuery;
+&nbsp;import javax.transaction.Transactional;
+&nbsp;
+&nbsp;import com.increff.employee.pojo.ProductPojo;
+&nbsp;import org.springframework.stereotype.Repository;
+&nbsp;
+&nbsp;import com.increff.employee.pojo.OrderItemPojo;
+&nbsp;
+&nbsp;@Repository
+<b class="fc">&nbsp;public class OrderItemDao extends AbstractDao {</b>
+&nbsp;
+<b class="fc">&nbsp;    private static String select_id = &quot;select p from OrderItemPojo p where id=:id&quot;;</b>
+<b class="fc">&nbsp;    private static String select_all = &quot;select p from OrderItemPojo p&quot;;</b>
+<b class="fc">&nbsp;    private static String nocommon_case = &quot;select p from OrderItemPojo p where orderItem=:orderItem and category=:category&quot;;</b>
+<b class="fc">&nbsp;    private static String delete_id = &quot;delete from OrderItemPojo p where id=:id&quot;;</b>
+&nbsp;
+<b class="fc">&nbsp;    private static String select_order_id = &quot;select p from OrderItemPojo p where orderId=:orderId&quot;;</b>
+&nbsp;
+&nbsp;    @PersistenceContext
+&nbsp;    private EntityManager em;
+&nbsp;
+&nbsp;
+&nbsp;    public Integer delete(Integer id) {
+<b class="nc">&nbsp;        Query query = em.createQuery(delete_id);</b>
+<b class="nc">&nbsp;        query.setParameter(&quot;id&quot;, id);</b>
+<b class="nc">&nbsp;        return query.executeUpdate();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public void insert(OrderItemPojo p) {
+<b class="fc">&nbsp;        em.persist(p);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public OrderItemPojo select(Integer id) {
+<b class="nc">&nbsp;        TypedQuery&lt;OrderItemPojo&gt; query = getQuery(select_id, OrderItemPojo.class);</b>
+<b class="nc">&nbsp;        query.setParameter(&quot;id&quot;, id);</b>
+<b class="nc">&nbsp;        return getSingle(query);</b>
+&nbsp;    }
+&nbsp;//
+&nbsp;    @Transactional
+&nbsp;    public List&lt;OrderItemPojo&gt; selectFromId(Integer id) {
+<b class="fc">&nbsp;        TypedQuery&lt;OrderItemPojo&gt; query = getQuery(select_id, OrderItemPojo.class);</b>
+<b class="nc">&nbsp;        query.setParameter(&quot;id&quot;, id);</b>
+<b class="nc">&nbsp;        return query.getResultList();</b>
+&nbsp;    }
+&nbsp;    public List&lt;OrderItemPojo&gt; selectAll() {
+<b class="fc">&nbsp;        TypedQuery&lt;OrderItemPojo&gt; query = getQuery(select_all, OrderItemPojo.class);</b>
+<b class="nc">&nbsp;        return query.getResultList();</b>
+&nbsp;    }
+&nbsp;//
+&nbsp;//    public OrderItemPojo checkerForDuplicate(String orderItem, String category){
+&nbsp;//        TypedQuery&lt;OrderItemPojo&gt; query = getQuery(nocommon_case, OrderItemPojo.class);
+&nbsp;//
+&nbsp;//        query.setParameter(&quot;orderItem&quot;, orderItem);
+&nbsp;//        query.setParameter(&quot;category&quot;, category);
+&nbsp;//        return getSingle(query);
+&nbsp;//    }
+&nbsp;//    public OrderItemPojo orderItemMustExist(Integer productId){
+&nbsp;//        TypedQuery&lt;OrderItemPojo&gt; query = getQuery(select_id, OrderItemPojo.class);
+&nbsp;//        query.setParameter(&quot;id&quot;, productId);
+&nbsp;//        return getSingle(query);
+&nbsp;//    }
+&nbsp;//
+&nbsp;//    public void update(OrderItemPojo p) {
+&nbsp;//    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-07-24 21:34</div>
+</div>
+</body>
+</html>
