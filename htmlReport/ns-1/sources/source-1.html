@@ -48,24 +48,24 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    90.3%
+    91.4%
   </span>
   <span class="absValue">
-    (65/72)
+    (64/70)
   </span>
 </td>
 </tr>
-  <tr>
-    <td class="name">DailySalesScheduler$$EnhancerBySpringCGLIB$$37dd3529</td>
-  </tr>
-  <tr>
-    <td class="name">DailySalesScheduler$$EnhancerBySpringCGLIB$$37dd3529$$FastClassBySpringCGLIB$$193c6c27</td>
-  </tr>
   <tr>
     <td class="name">DailySalesScheduler$$EnhancerBySpringCGLIB$$adf54587</td>
   </tr>
   <tr>
     <td class="name">DailySalesScheduler$$EnhancerBySpringCGLIB$$adf54587$$FastClassBySpringCGLIB$$10febc4c</td>
+  </tr>
+  <tr>
+    <td class="name">DailySalesScheduler$$EnhancerBySpringCGLIB$$f6869aa2</td>
+  </tr>
+  <tr>
+    <td class="name">DailySalesScheduler$$EnhancerBySpringCGLIB$$f6869aa2$$FastClassBySpringCGLIB$$489811e1</td>
   </tr>
   <tr>
     <td class="name">DailySalesScheduler$$FastClassBySpringCGLIB$$88b553ff</td>
@@ -82,10 +82,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    90.3%
+    91.4%
   </span>
   <span class="absValue">
-    (65/72)
+    (64/70)
   </span>
 </td>
 </tr>
@@ -143,55 +143,54 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;            dailyReportPojo2.setInvoiced_orders_count(0);</b>
 <b class="fc">&nbsp;            dailyReportPojo2.setInvoiced_items_count(0);</b>
 <b class="fc">&nbsp;            dailyReportPojo2.setTotal_revenue(0.0);</b>
+<b class="fc">&nbsp;            dailyReportService.add(dailyReportPojo2);}</b>
+<b class="nc">&nbsp;        else {  addInDb(dailyReportService.get(dailyReportService.getLastId()),time,1);</b>
+<b class="fc">&nbsp;                createFieldInDb(dailyReportService.get(1).getDate(),time,1,2);}}</b>
+&nbsp;
+&nbsp;    @Transactional(rollbackOn  = ApiException.class)
+<b class="fc">&nbsp;    public void addInDb(DailyReportPojo dailyReportPojo1, LocalDateTime time,Integer id1){</b>
+<b class="fc">&nbsp;        if(dailyReportPojo1.getDate().isEqual(time)){</b>
+<b class="fc">&nbsp;            DailyReportPojo baseItem = dailyReportService.get(id1);</b>
+<b class="fc">&nbsp;            Integer initialItems = dailyReportPojo1.getInvoiced_items_count();</b>
+<b class="fc">&nbsp;            Integer initialOrders = dailyReportPojo1.getInvoiced_orders_count();</b>
+<b class="fc">&nbsp;            Double initialRevenue = dailyReportPojo1.getTotal_revenue();</b>
+<b class="fc">&nbsp;            dailyReportPojo1.setInvoiced_items_count(initialItems + baseItem.getInvoiced_items_count());</b>
+<b class="fc">&nbsp;            dailyReportPojo1.setInvoiced_orders_count(initialOrders + baseItem.getInvoiced_orders_count());</b>
+<b class="fc">&nbsp;            dailyReportPojo1.setTotal_revenue(initialRevenue + baseItem.getTotal_revenue());</b>
+<b class="fc">&nbsp;            baseItem.setInvoiced_items_count(0);</b>
+<b class="fc">&nbsp;            baseItem.setInvoiced_orders_count(0);</b>
+<b class="fc">&nbsp;            baseItem.setTotal_revenue(0.0);}</b>
+<b class="fc">&nbsp;        else { DailyReportPojo baseItem = dailyReportService.get(id1);</b>
+<b class="fc">&nbsp;            DailyReportPojo dailyReportPojo = dailyReportService.get(dailyReportService.getLastId());</b>
+<b class="fc">&nbsp;            Double lastRevenue = dailyReportPojo.getTotal_revenue();</b>
+<b class="nc">&nbsp;            Integer lastOrders = dailyReportPojo.getInvoiced_orders_count();</b>
+<b class="fc">&nbsp;            Integer lastItems = dailyReportPojo.getInvoiced_items_count();</b>
+<b class="fc">&nbsp;            dailyReportPojo.setInvoiced_orders_count(baseItem.getInvoiced_orders_count() + lastOrders);</b>
+<b class="fc">&nbsp;            dailyReportPojo.setInvoiced_items_count(baseItem.getInvoiced_items_count() + lastItems);</b>
+<b class="fc">&nbsp;            dailyReportPojo.setTotal_revenue(baseItem.getTotal_revenue() + lastRevenue);</b>
+<b class="fc">&nbsp;            baseItem.setInvoiced_items_count(0);</b>
+<b class="fc">&nbsp;            baseItem.setInvoiced_orders_count(0);</b>
+<b class="fc">&nbsp;            baseItem.setTotal_revenue(0.0);}</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    @Transactional(rollbackOn  = ApiException.class)</b>
+<b class="fc">&nbsp;    public void createFieldInDb(LocalDateTime date1, LocalDateTime time,Integer id1,Integer id2) throws ApiException {</b>
+<b class="fc">&nbsp;        if(!date1.isEqual(time)) {</b>
+<b class="fc">&nbsp;            DailyReportPojo baseItem2 = dailyReportService.get(id2);</b>
+<b class="fc">&nbsp;            DailyReportPojo dailyReportPojo2 = new DailyReportPojo();</b>
+<b class="fc">&nbsp;            dailyReportPojo2.setDate(time);</b>
+<b class="fc">&nbsp;            dailyReportPojo2.setInvoiced_orders_count(baseItem2.getInvoiced_orders_count());</b>
+<b class="fc">&nbsp;            dailyReportPojo2.setInvoiced_items_count(baseItem2.getInvoiced_items_count());</b>
+<b class="fc">&nbsp;            dailyReportPojo2.setTotal_revenue(baseItem2.getTotal_revenue());</b>
 <b class="fc">&nbsp;            dailyReportService.add(dailyReportPojo2);</b>
-&nbsp;
-<b class="fc">&nbsp;        }</b>
-&nbsp;
-&nbsp;        else {
-<b class="fc">&nbsp;                DailyReportPojo dailyReportPojo1 = dailyReportService.get(dailyReportService.getLastId());</b>
-<b class="fc">&nbsp;                if(dailyReportPojo1.getDate().isEqual(time)){</b>
-<b class="fc">&nbsp;                    DailyReportPojo baseItem = dailyReportService.get(1);</b>
-<b class="fc">&nbsp;</b>
-<b class="fc">&nbsp;                    Integer initialItems = dailyReportPojo1.getInvoiced_items_count();</b>
-<b class="fc">&nbsp;                    Integer initialOrders = dailyReportPojo1.getInvoiced_orders_count();</b>
-<b class="fc">&nbsp;                    Double initialRevenue = dailyReportPojo1.getTotal_revenue();</b>
-<b class="fc">&nbsp;                    dailyReportPojo1.setInvoiced_items_count(initialItems + baseItem.getInvoiced_items_count());</b>
-<b class="fc">&nbsp;                    dailyReportPojo1.setInvoiced_orders_count(initialOrders + baseItem.getInvoiced_orders_count());</b>
-<b class="fc">&nbsp;                    dailyReportPojo1.setTotal_revenue(initialRevenue + baseItem.getTotal_revenue());</b>
-<b class="fc">&nbsp;</b>
-<b class="fc">&nbsp;                    baseItem.setInvoiced_items_count(0);</b>
-<b class="fc">&nbsp;                    baseItem.setInvoiced_orders_count(0);</b>
-<b class="fc">&nbsp;                    baseItem.setTotal_revenue(0.0);</b>
-<b class="fc">&nbsp;                }</b>
-<b class="fc">&nbsp;                else {</b>
-<b class="fc">&nbsp;                    DailyReportPojo baseItem = dailyReportService.get(1);</b>
-<b class="fc">&nbsp;                    DailyReportPojo dailyReportPojo = dailyReportService.get(dailyReportService.getLastId());</b>
-<b class="fc">&nbsp;                    Double lastRevenue = dailyReportPojo.getTotal_revenue();</b>
-<b class="fc">&nbsp;                    Integer lastOrders = dailyReportPojo.getInvoiced_orders_count();</b>
-<b class="fc">&nbsp;                    Integer lastItems = dailyReportPojo.getInvoiced_items_count();</b>
-<b class="fc">&nbsp;                    dailyReportPojo.setInvoiced_orders_count(baseItem.getInvoiced_orders_count() + lastOrders);</b>
-<b class="fc">&nbsp;                    dailyReportPojo.setInvoiced_items_count(baseItem.getInvoiced_items_count() + lastItems);</b>
-<b class="fc">&nbsp;                    dailyReportPojo.setTotal_revenue(baseItem.getTotal_revenue() + lastRevenue);</b>
-<b class="fc">&nbsp;                    baseItem.setInvoiced_items_count(0);</b>
-<b class="fc">&nbsp;                    baseItem.setInvoiced_orders_count(0);</b>
-<b class="fc">&nbsp;                    baseItem.setTotal_revenue(0.0);}</b>
-<b class="fc">&nbsp;            if(!dailyReportService.get(1).getDate().isEqual(time)) {</b>
-<b class="fc">&nbsp;                DailyReportPojo baseItem2 = dailyReportService.get(2);</b>
-<b class="fc">&nbsp;                DailyReportPojo dailyReportPojo2 = new DailyReportPojo();</b>
-<b class="fc">&nbsp;                dailyReportPojo2.setDate(time);</b>
-<b class="fc">&nbsp;                dailyReportPojo2.setInvoiced_orders_count(baseItem2.getInvoiced_orders_count());</b>
-<b class="fc">&nbsp;                dailyReportPojo2.setInvoiced_items_count(baseItem2.getInvoiced_items_count());</b>
-<b class="fc">&nbsp;                dailyReportPojo2.setTotal_revenue(baseItem2.getTotal_revenue());</b>
-<b class="fc">&nbsp;                dailyReportService.add(dailyReportPojo2);</b>
-<b class="fc">&nbsp;                baseItem2.setInvoiced_items_count(0);</b>
-<b class="fc">&nbsp;                baseItem2.setInvoiced_orders_count(0);</b>
-<b class="fc">&nbsp;                baseItem2.setTotal_revenue(0.0);</b>
-<b class="fc">&nbsp;                DailyReportPojo baseItem3 = dailyReportService.get(1);</b>
-<b class="fc">&nbsp;                baseItem3.setDate(time);</b>
-<b class="fc">&nbsp;                LocalDateTime nextDayDateTime = time.plusDays(1);</b>
-<b class="fc">&nbsp;                baseItem2.setDate(nextDayDateTime);</b>
-<b class="nc">&nbsp;            }}</b>
-<b class="nc">&nbsp;</b>
+<b class="fc">&nbsp;            baseItem2.setInvoiced_items_count(0);</b>
+<b class="fc">&nbsp;            baseItem2.setInvoiced_orders_count(0);</b>
+<b class="fc">&nbsp;            baseItem2.setTotal_revenue(0.0);</b>
+<b class="fc">&nbsp;            DailyReportPojo baseItem3 = dailyReportService.get(id1);</b>
+<b class="fc">&nbsp;            baseItem3.setDate(time);</b>
+<b class="fc">&nbsp;            LocalDateTime nextDayDateTime = time.plusDays(id1);</b>
+<b class="fc">&nbsp;            baseItem2.setDate(nextDayDateTime);</b>
+<b class="nc">&nbsp;        }</b>
 <b class="nc">&nbsp;    }</b>
 <b class="nc">&nbsp;}</b>
 </code>
@@ -217,7 +216,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-26 13:36</div>
+    <div style="float:right;">generated on 2023-07-26 15:05</div>
 </div>
 </body>
 </html>

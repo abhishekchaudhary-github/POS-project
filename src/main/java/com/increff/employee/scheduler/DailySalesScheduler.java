@@ -46,26 +46,23 @@ public class DailySalesScheduler {
             dailyReportPojo2.setInvoiced_items_count(0);
             dailyReportPojo2.setTotal_revenue(0.0);
             dailyReportService.add(dailyReportPojo2);}
-        else {  addInDb(dailyReportService.get(dailyReportService.getLastId()),time);
-                createFieldInDb(dailyReportService.get(1).getDate(),time);}}
+        else {  addInDb(dailyReportService.get(dailyReportService.getLastId()),time,1);
+                createFieldInDb(dailyReportService.get(1).getDate(),time,1,2);}}
 
-    public void addInDb(DailyReportPojo dailyReportPojo1, LocalDateTime time){
+    @Transactional(rollbackOn  = ApiException.class)
+    public void addInDb(DailyReportPojo dailyReportPojo1, LocalDateTime time,Integer id1){
         if(dailyReportPojo1.getDate().isEqual(time)){
-            DailyReportPojo baseItem = dailyReportService.get(1);
-
+            DailyReportPojo baseItem = dailyReportService.get(id1);
             Integer initialItems = dailyReportPojo1.getInvoiced_items_count();
             Integer initialOrders = dailyReportPojo1.getInvoiced_orders_count();
             Double initialRevenue = dailyReportPojo1.getTotal_revenue();
             dailyReportPojo1.setInvoiced_items_count(initialItems + baseItem.getInvoiced_items_count());
             dailyReportPojo1.setInvoiced_orders_count(initialOrders + baseItem.getInvoiced_orders_count());
             dailyReportPojo1.setTotal_revenue(initialRevenue + baseItem.getTotal_revenue());
-
             baseItem.setInvoiced_items_count(0);
             baseItem.setInvoiced_orders_count(0);
-            baseItem.setTotal_revenue(0.0);
-        }
-        else {
-            DailyReportPojo baseItem = dailyReportService.get(1);
+            baseItem.setTotal_revenue(0.0);}
+        else { DailyReportPojo baseItem = dailyReportService.get(id1);
             DailyReportPojo dailyReportPojo = dailyReportService.get(dailyReportService.getLastId());
             Double lastRevenue = dailyReportPojo.getTotal_revenue();
             Integer lastOrders = dailyReportPojo.getInvoiced_orders_count();
@@ -78,9 +75,10 @@ public class DailySalesScheduler {
             baseItem.setTotal_revenue(0.0);}
     }
 
-    public void createFieldInDb(LocalDateTime date1, LocalDateTime time) throws ApiException {
+    @Transactional(rollbackOn  = ApiException.class)
+    public void createFieldInDb(LocalDateTime date1, LocalDateTime time,Integer id1,Integer id2) throws ApiException {
         if(!date1.isEqual(time)) {
-            DailyReportPojo baseItem2 = dailyReportService.get(2);
+            DailyReportPojo baseItem2 = dailyReportService.get(id2);
             DailyReportPojo dailyReportPojo2 = new DailyReportPojo();
             dailyReportPojo2.setDate(time);
             dailyReportPojo2.setInvoiced_orders_count(baseItem2.getInvoiced_orders_count());
@@ -90,9 +88,9 @@ public class DailySalesScheduler {
             baseItem2.setInvoiced_items_count(0);
             baseItem2.setInvoiced_orders_count(0);
             baseItem2.setTotal_revenue(0.0);
-            DailyReportPojo baseItem3 = dailyReportService.get(1);
+            DailyReportPojo baseItem3 = dailyReportService.get(id1);
             baseItem3.setDate(time);
-            LocalDateTime nextDayDateTime = time.plusDays(1);
+            LocalDateTime nextDayDateTime = time.plusDays(id1);
             baseItem2.setDate(nextDayDateTime);
         }
     }
