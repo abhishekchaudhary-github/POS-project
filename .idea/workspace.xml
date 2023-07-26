@@ -27,9 +27,7 @@
       <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_METHOD_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_METHOD_DESC.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_NAME_DESC.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/index_SORT_BY_NAME_DESC.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-1/sources/source-1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/DailyReportDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/DailyReportDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/DailyReportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/DailyReportService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/increff/employee/scheduler/DailySalesSchedulerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/increff/employee/scheduler/DailySalesSchedulerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/scheduler/DailySalesScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/scheduler/DailySalesScheduler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +108,7 @@
       <recent name="com.increff.employee.service" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.DailySalesSchedulerTest">
+  <component name="RunManager" selected="Maven.employee-spring-full [jetty:run]">
     <configuration name="DailySalesSchedulerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
@@ -263,9 +261,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.DailySalesSchedulerTest" />
         <item itemvalue="JUnit.DailySalesSchedulerTest.testAddForDifferentDate" />
         <item itemvalue="JUnit.DailySalesSchedulerTest.testAddForSameDate" />
+        <item itemvalue="JUnit.DailySalesSchedulerTest" />
         <item itemvalue="JUnit.DailySalesSchedulerTest.testEmptyDb" />
         <item itemvalue="JUnit.InventoryServiceTest.testAddQuantityLess" />
       </list>
@@ -293,17 +291,10 @@
       </map>
     </option>
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="java.lang.NullPointerException" package="java.lang" />
-          <option name="timeStamp" value="1" />
-        </breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/employee_spring$DailySalesSchedulerTest_testAddForDifferentDate.ic" NAME="DailySalesSchedulerTest.testAddForDifferentDate Coverage Results" MODIFIED="1690358758253" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.increff.employee.scheduler.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/employee_spring$UserServiceTest.ic" NAME="UserServiceTest Coverage Results" MODIFIED="1689967645365" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.increff.employee.service.*</FILTER>
     </SUITE>
@@ -312,6 +303,9 @@
     </SUITE>
     <SUITE FILE_PATH="coverage/employee_spring$InventoryServiceTest.ic" NAME="InventoryServiceTest Coverage Results" MODIFIED="1690017425764" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.increff.employee.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/employee_spring$DailySalesSchedulerTest_testAddForSameDate.ic" NAME="DailySalesSchedulerTest.testAddForSameDate Coverage Results" MODIFIED="1690358745250" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.increff.employee.scheduler.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/employee_spring$OrderItemServiceTest.ic" NAME="OrderItemServiceTest Coverage Results" MODIFIED="1689956651754" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.increff.employee.service.*</FILTER>
@@ -334,6 +328,9 @@
     </SUITE>
     <SUITE FILE_PATH="coverage/employee_spring$DailyReportServiceTest.ic" NAME="DailyReportServiceTest Coverage Results" MODIFIED="1689956670108" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.increff.employee.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/employee_spring$DailySalesSchedulerTest_testEmptyDb.ic" NAME="DailySalesSchedulerTest.testEmptyDb Coverage Results" MODIFIED="1690357854361" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.increff.employee.scheduler.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/employee_spring$AboutAppServiceTest.ic" NAME="AboutAppServiceTest Coverage Results" MODIFIED="1690214620572" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.increff.employee.service.*</FILTER>

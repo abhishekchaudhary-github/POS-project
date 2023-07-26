@@ -50,7 +50,6 @@ public class DailySalesScheduler {
         }
 
         else {
-           // if(dailyReportService.get(1).getDate().isEqual(time)){
                 DailyReportPojo dailyReportPojo1 = dailyReportService.get(dailyReportService.getLastId());
                 if(dailyReportPojo1.getDate().isEqual(time)){
                     DailyReportPojo baseItem = dailyReportService.get(1);
@@ -75,12 +74,9 @@ public class DailySalesScheduler {
                     dailyReportPojo.setInvoiced_orders_count(baseItem.getInvoiced_orders_count() + lastOrders);
                     dailyReportPojo.setInvoiced_items_count(baseItem.getInvoiced_items_count() + lastItems);
                     dailyReportPojo.setTotal_revenue(baseItem.getTotal_revenue() + lastRevenue);
-
                     baseItem.setInvoiced_items_count(0);
                     baseItem.setInvoiced_orders_count(0);
-                    baseItem.setTotal_revenue(0.0);
-                }
-           // }
+                    baseItem.setTotal_revenue(0.0);}
             if(!dailyReportService.get(1).getDate().isEqual(time)) {
                 DailyReportPojo baseItem2 = dailyReportService.get(2);
                 DailyReportPojo dailyReportPojo2 = new DailyReportPojo();
@@ -96,36 +92,7 @@ public class DailySalesScheduler {
                 baseItem3.setDate(time);
                 LocalDateTime nextDayDateTime = time.plusDays(1);
                 baseItem2.setDate(nextDayDateTime);
-            }
-        }
-            //8        LocalDateTime time = LocalDateTime.now();
-            //8       DailyReportPojo dailyReportPojo = new DailyReportPojo();
-            //8        dailyReportPojo.setDate(time);
-            //8        Integer lastId = dailyReportService.getLastId();
-            //8        //
-            //8        DailyReportPojo baseItem = dailyReportService.get(1);
-            //8        DailyReportPojo lastItem = dailyReportService.get(lastId);
-            //8        if(baseItem==null) {
-            //8            throw new ApiException("database altered");
-            //8        }
-                                                                                                        //88        if(lastItem.==1){
-                                                                                                        //88            dailyReportPojo.setInvoiced_items_count(baseItem.getInvoiced_items_count());
-                                                                                                        //88            dailyReportPojo.setInvoiced_orders_count(baseItem.getInvoiced_orders_count());
-                                                                                                        //88        }
-                                                                                                        //88
-                                                                                                        //88        else {
-                                                                                                        ////88            DailyReportPojo dailyReportPojo1 = dailyReportService.get(max-1);
-                                                                                                        ////88            DailyReportPojo dailyReportPojo2 = dailyReportService.get(max);
-                                                                                                        //88            dailyReportPojo.setInvoiced_items_count(baseItem.getInvoiced_items_count()-lastItem.getInvoiced_items_count());
-                                                                                                        //88            dailyReportPojo.setInvoiced_orders_count(baseItem.getInvoiced_orders_count()-lastItem.getInvoiced_orders_count());
-                                                                                                        //88        }
-        ////8       dailyReportPojo.setInvoiced_items_count(baseItem.getInvoiced_items_count());
-        ////8      dailyReportPojo.setInvoiced_orders_count(baseItem.getInvoiced_orders_count());
-        ////8      baseItem.setInvoiced_items_count(0);
-        ////8     baseItem.setInvoiced_orders_count(0);
-        ////8         baseItem.setTotal_revenue(0.0);
-
-        ////8 dailyReportService.add(dailyReportPojo);
+            }}
 
     }
 }
