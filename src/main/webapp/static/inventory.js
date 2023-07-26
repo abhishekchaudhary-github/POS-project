@@ -198,14 +198,17 @@ function readFileDataCallback(results){
 	fileData = results.data;
 	 if(fileData.length>5000){
             $("#upload-brand-modal").notify("try a smaller file size",{className:"warn"})
+            resetUploadModal();
             return;
         }
       if(fileData.length==0){
              $.notify("no data in the file",{globalPosition: 'top center',className:"warn"})
+             resetUploadModal();
              return;
          }
-         if( !(fileData[0].hasOwnProperty('barcode') || fileData[0].hasOwnProperty('quantity')) ) {
+         if( !fileData[0].hasOwnProperty('barcode') || !fileData[0].hasOwnProperty('quantity') || fileData[0].length>2 ) {
              $.notify("name of fields are not as per requirement",{globalPosition: 'top center',className:"error"})
+             resetUploadModal();
              return;
          }
 	for(var i =0 ;i < fileData.length; i++) {
@@ -215,6 +218,15 @@ function readFileDataCallback(results){
 	    fileData[i].quantity = parseInt(fileData[i].quantity)
 	}
 	uploadRows();
+	resetUploadModal();
+}
+
+function resetUploadModal() {
+  resetUploadDialog(); // Reset the upload dialog data
+  $('#inventoryFile').val(''); // Clear the file input field
+  $('#inventoryFileName').html('Choose File'); // Reset the file name display
+  errorData = []; // Clear any previous error data
+  updateUploadDialog2(); // Reset the upload dialog counts
 }
 
 function uploadRows(){
@@ -245,10 +257,11 @@ function uploadRows(){
                    $('#process-data').prop("disabled",false);
                    $('#download-sample').prop("disabled",false);
                    $('#cancel-modal').prop("disabled",false);
-                   if(data[data.length-1].errorCount==1)
-                        $.notify("uploaded successfully",{className:"success", globalPosition: 'top center' })
+                   if(data[data.length-1].errorCount>=1)
+                        $.notify("error in uploading",{className:"warn", globalPosition: 'top center' })
                    else
                         $.notify("uploaded successfully",{className:"success", globalPosition: 'top center' })
+                         updateUploadDialog(data,data.length);
             	   console.log(data)
                    for(var i=0;i<data.length;i++){
                                    let arr = {
@@ -348,7 +361,7 @@ function resetUploadDialog(){
 	fileData = [];
 	errorData = [];
 	//Update counts
-	updateUploadDialog();
+	updateUploadDialog2();
 }
 
 function updateUploadDialog(){
@@ -357,10 +370,31 @@ function updateUploadDialog(){
 	$('#errorCount').html("" + errorData.length);
 }
 
+ function updateUploadDialog(data,length){
+    	        $('#rowCount').html("" + length);
+    	        var count=0;
+    	        for(var i =0;i<length;i++) {
+    	            if(data[i].errorCount==1){
+    	                count ++;
+    	            }
+    	        }
+    	        if(count>0)
+                $('#processCount').html("" + 0);
+                else
+                $('#processCount').html("" + length);
+                $('#errorCount').html("" + count);
+    	    }
+
 function updateFileName(){
 	var $file = $('#inventoryFile');
 	var fileName = $file.val();
 	$('#inventoryFileName').html(fileName);
+}
+
+function updateUploadDialog2(){
+	$('#rowCount').html("" + 0);
+	$('#processCount').html("" + 0);
+	$('#errorCount').html("" + 0);
 }
 
 function displayUploadData(){

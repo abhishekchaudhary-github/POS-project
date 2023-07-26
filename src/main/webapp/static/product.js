@@ -223,13 +223,16 @@ function readFileDataCallback(results){
 	if(fileData.length>5000){
             $.notify("try a smaller file size",{globalPosition: 'top center',className:"warn"})
             return;
+            resetUploadModal();
         }
     if(fileData.length==0){
             $.notify("no data in the file",{globalPosition: 'top center',className:"warn"})
             return;
+            resetUploadModal();
         }
-     if( !(fileData[0].hasOwnProperty('barcode') || fileData[0].hasOwnProperty('brand') || fileData[0].hasOwnProperty('category') || fileData[0].hasOwnProperty('mrp') || fileData[0].hasOwnProperty('name')) ){
+     if( !fileData[0].hasOwnProperty('barcode') || !fileData[0].hasOwnProperty('brand') || !fileData[0].hasOwnProperty('category') || !fileData[0].hasOwnProperty('mrp') || !fileData[0].hasOwnProperty('name') || fileData[0].length > 5 ){
             $.notify("name of fields are not as per requirement",{globalPosition: 'top center',className:"error"})
+            resetUploadModal();
             return;
         }
         for(var i =0 ;i < fileData.length; i++) {
@@ -240,7 +243,17 @@ function readFileDataCallback(results){
             	    fileData[i].name = fileData[i].name.trim();
         }
 	uploadRows();
+	resetUploadModal();
 }
+
+function resetUploadModal() {
+  resetUploadDialog(); // Reset the upload dialog data
+  $('#productFile').val(''); // Clear the file input field
+  $('#productFileName').html('Choose File'); // Reset the file name display
+  errorData = []; // Clear any previous error data
+  updateUploadDialog2(); // Reset the upload dialog counts
+}
+
 
 function uploadRows(){
 	var row=[];
@@ -270,7 +283,7 @@ function uploadRows(){
                $('#download-sample').prop("disabled",false);
                $('#cancel-modal').prop("disabled",false);
                 if(data[data.length-1].errorCount>=1)
-        	        $.notify("uploaded successfully",{className:"success", globalPosition: 'top center' })
+        	        $.notify("error in uploading",{className:"warn", globalPosition: 'top center' })
         	    else
                     $.notify("uploaded successfully",{className:"success", globalPosition: 'top center' })
         	    updateUploadDialog(data,data.length);
@@ -395,6 +408,13 @@ function updateUploadDialog2(){
 	$('#processCount').html("" + 0);
 	$('#errorCount').html("" + 0);
 }
+
+function updateUploadDialog(){
+	$('#rowCount').html("" + fileData.length);
+	$('#processCount').html("" + processCount);
+	$('#errorCount').html("" + errorData.length);
+}
+
 
 
 function updateFileName(){

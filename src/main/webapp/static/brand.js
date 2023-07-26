@@ -129,14 +129,17 @@ function readFileDataCallback(results){
 	console.log(fileData)
     if(fileData.length>5000){
         $.notify("try a smaller file size",{globalPosition: 'top center',className:"warn"})
+        resetUploadModal();
         return;
     }
     if(fileData.length==0){
         $.notify("no data in the file",{globalPosition: 'top center',className:"warn"})
+        resetUploadModal();
         return;
     }
-    if( !(fileData[0].hasOwnProperty('brand') || fileData[0].hasOwnProperty('category')) ) {
+    if( !fileData[0].hasOwnProperty('brand') || !fileData[0].hasOwnProperty('category') || fileData[0].length>2  ) {
         $.notify("name of fields are not as per requirement",{globalPosition: 'top center',className:"error"})
+        resetUploadModal();
         return;
     }
     console.log(fileData[0])
