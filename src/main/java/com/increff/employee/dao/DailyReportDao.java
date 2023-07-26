@@ -17,7 +17,7 @@ public class DailyReportDao extends AbstractDao{
 
     private static String select_time = "select p from DailyReportPojo p where date>:startTime and date<:endTime";
 
-    private static String count_of_table = "select count(p.id) from DailyReportPojo p";
+    private static String count_of_table = "select count(*) from DailyReportPojo p";
 
     private static String select_id = "select p from DailyReportPojo p where id=:id";
     @PersistenceContext

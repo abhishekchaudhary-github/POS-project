@@ -1,9 +1,6 @@
 package com.increff.employee.service;
 
-import com.increff.employee.pojo.BrandPojo;
-import com.increff.employee.pojo.InventoryPojo;
-import com.increff.employee.pojo.OrderPojo;
-import com.increff.employee.pojo.ProductPojo;
+import com.increff.employee.pojo.*;
 import helper.pojoHelper;
 import org.junit.Before;
 import org.junit.Test;
@@ -116,6 +113,14 @@ InventoryService inventoryService;
         orderService.timeOfOrderCreation();
     }
 
+    @Test
+    public void ResponseStatusTest() throws Exception {
+        OrderItemPojo orderItemPojo = pojoHelper.makeOrderItemPojo(orderId,productId,1,0.9);
+        List<OrderItemPojo> orderItemPojoList = new ArrayList<>();
+        orderItemPojoList.add(orderItemPojo);
+        orderItemService.add(orderItemPojoList);
+        assertNotNull(orderService.getInvoicePDF(orderId));
+    }
 
 
 }

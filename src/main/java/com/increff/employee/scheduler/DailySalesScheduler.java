@@ -1,29 +1,23 @@
 package com.increff.employee.scheduler;
 import com.increff.employee.pojo.DailyReportPojo;
-import com.increff.employee.pojo.OrderItemPojo;
-import com.increff.employee.pojo.OrderPojo;
 import com.increff.employee.service.ApiException;
 import com.increff.employee.service.DailyReportService;
-import com.increff.employee.service.OrderService;
 import com.increff.employee.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import javax.transaction.Transactional;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
 
-
-public class Scheduler {
+@Service
+public class DailySalesScheduler {
     @Autowired
-    DailyReportService dailyReportService;
+    private DailyReportService dailyReportService;
 
     @Autowired
-    ReportService reportService;
+    private ReportService reportService;
 
     @Scheduled(cron = "*/2 * * * * *")
     @Transactional(rollbackOn  = ApiException.class)
@@ -34,7 +28,7 @@ public class Scheduler {
             DailyReportPojo dailyReportPojo = new DailyReportPojo();
             dailyReportPojo.setDate(time);
             dailyReportPojo.setInvoiced_orders_count(0);
-            dailyReportPojo.setInvoiced_orders_count(0);
+            dailyReportPojo.setInvoiced_items_count(0);
             dailyReportPojo.setTotal_revenue(0.0);
             dailyReportService.add(dailyReportPojo);
 
@@ -42,9 +36,17 @@ public class Scheduler {
             DailyReportPojo dailyReportPojo1 = new DailyReportPojo();
             dailyReportPojo1.setDate(nextDayDateTime);
             dailyReportPojo1.setInvoiced_orders_count(0);
-            dailyReportPojo1.setInvoiced_orders_count(0);
+            dailyReportPojo1.setInvoiced_items_count(0);
             dailyReportPojo1.setTotal_revenue(0.0);
             dailyReportService.add(dailyReportPojo1);
+
+            DailyReportPojo dailyReportPojo2 = new DailyReportPojo();
+            dailyReportPojo2.setDate(time);
+            dailyReportPojo2.setInvoiced_orders_count(0);
+            dailyReportPojo2.setInvoiced_items_count(0);
+            dailyReportPojo2.setTotal_revenue(0.0);
+            dailyReportService.add(dailyReportPojo2);
+
         }
 
         else {

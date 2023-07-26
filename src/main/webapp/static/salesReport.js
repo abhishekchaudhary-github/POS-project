@@ -187,16 +187,3 @@ $("#select2-category-dropper-container").click(changeCategory);
 
 $(document).ready(init);
 $(document).ready(getBrandValues);
-//
-//var picker = $('#button-picker').mobiscroll().datepicker({
-//    controls: ['calendar'],
-//    select:'range',
-//    touchUi: true,
-//    showOnClick: false,
-//    showOnFocus: false
-//}).mobiscroll('getInst');
-//
-//$('#show-picker').click(function () {
-//    picker.open();
-//    return false;
-//});

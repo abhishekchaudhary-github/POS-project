@@ -105,9 +105,9 @@ public class OrderService {
         initialRevenue=0.0;
         InvoiceData invoiceData = generateInvoiceForOrder(id);
         RestTemplate restTemplate = new RestTemplate();
-        System.out.println("before sending");
+        //System.out.println("before sending");
         byte[] contents = Base64.getDecoder().decode(restTemplate.postForEntity(url, invoiceData, byte[].class).getBody());
-        System.out.println("after sending");
+        //System.out.println("after sending");
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
         String filename = "invoice.pdf";
