@@ -38,7 +38,7 @@ public class DailyReportApiController {
     }
 
     @ApiOperation(value = "gives daily report")
-    @RequestMapping(path = "/api/schedular", method = RequestMethod.POST)
+    @RequestMapping(path = "/api/daytodaysales", method = RequestMethod.POST)
     public List<DailyReportData> getBrandReport(@RequestBody DailyReportForm form) throws ApiException {
         List<DailyReportPojo> list = service.getAll(form);
         List<DailyReportData> list2 = new ArrayList<DailyReportData>();
@@ -56,6 +56,7 @@ public class DailyReportApiController {
         d.setDate(formattedDateTime);
         d.setInvoiced_items_count(p.getInvoiced_items_count());
         d.setInvoiced_orders_count(p.getInvoiced_orders_count());
+        d.setTotal_revenue(p.getTotal_revenue());
         return d;
     }
 

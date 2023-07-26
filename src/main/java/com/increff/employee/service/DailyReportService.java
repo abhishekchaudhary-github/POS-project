@@ -31,14 +31,29 @@ public class DailyReportService {
     }
     @Transactional
     public List<DailyReportPojo> getAll(LocalDateTime startTime,LocalDateTime endTime) {
-        return dao.select(startTime,endTime);
+        List<DailyReportPojo> dailyReportPojoList =  dao.select(startTime,endTime);
+        System.out.println(dailyReportPojoList);
+        for(int i=0;i<dailyReportPojoList.size();i++) {
+            if(dailyReportPojoList.get(i).getId()==1 || dailyReportPojoList.get(i).getId()==2) {
+                dailyReportPojoList.remove(0);
+                --i;
+            }
+        }
+        return dailyReportPojoList;
     }
 
     @Transactional
     public List<DailyReportPojo> getAll(DailyReportForm form) {
         LocalDateTime startTime = convertTime(form.getStartTime());
         LocalDateTime endTime = convertTime(form.getEndTime());
-        return dao.select(startTime,endTime);
+        List<DailyReportPojo> dailyReportPojoList = dao.select(startTime,endTime);
+        for(int i=0;i<dailyReportPojoList.size();i++) {
+            if(dailyReportPojoList.get(i).getId()==1 || dailyReportPojoList.get(i).getId()==2) {
+                dailyReportPojoList.remove(0);
+                --i;
+            }
+        }
+        return dailyReportPojoList;
     }
     @Transactional
     public DailyReportPojo get(Integer id) {

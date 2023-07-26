@@ -13,7 +13,7 @@ public class DailyReportPojo {
     private LocalDateTime date;
     private Integer invoiced_orders_count;
     private Integer invoiced_items_count;
-    private Double total_revenue = 0.0;
+    private Double total_revenue;
 
     public Integer getId() {
         return id;

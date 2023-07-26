@@ -1,6 +1,6 @@
 function getDailyReportUrl(){
 	var baseUrl = $("meta[name=baseUrl]").attr("content")
-	return baseUrl + "/api/dailyreport";
+	return baseUrl + "/api/daytodaysales";
 }
 
 function displayDailyReportList(data){
@@ -14,11 +14,12 @@ function displayDailyReportList(data){
                       $table.find('tbody').empty();
     	for(var i in data){
     		var e = data[i];
+    		console.log(e)
     		var row = '<tr>'
-    		+ '<td>' + e.date   + '</td>'
+    		+ '<td>' + e.date.substring(0, 10)   + '</td>'
     		+ '<td>' + e.invoiced_orders_count + '</td>'
     		+ '<td>' + e.invoiced_items_count  + '</td>'
-    		+ '<td>' + e.total_revenue  + '</td>'
+    		+ '<td>' + '₹ '+e.total_revenue  + '</td>'
     		+ '</tr>';
              $table.find('tbody').append(row);
     	}
