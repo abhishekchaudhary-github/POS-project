@@ -23,7 +23,7 @@ function displayDailyReportList(data){
     		+ '</tr>';
              $table.find('tbody').append(row);
     	}
-    	   	var download = '<button onclick="listDownload()">' + 'Download' + '</button>'
+    	   	var download = '<button onclick="listDownload()" class="btn btn-info" style="margin-top:1em;><i class="fa fa-download""></i> Download</button>'
             	$download.empty();
             	if(data.length!=0)
             	$download.append(download);
