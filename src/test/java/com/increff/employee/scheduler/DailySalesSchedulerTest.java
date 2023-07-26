@@ -1,14 +1,17 @@
 package com.increff.employee.scheduler;
 
+import com.increff.employee.model.DailyReportData;
 import com.increff.employee.pojo.DailyReportPojo;
 import com.increff.employee.service.AbstractUnitTest;
 import com.increff.employee.service.ApiException;
 import com.increff.employee.service.DailyReportService;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 import static org.junit.Assert.*;
 public class DailySalesSchedulerTest extends AbstractUnitTest {
@@ -17,6 +20,7 @@ public class DailySalesSchedulerTest extends AbstractUnitTest {
 
     @Autowired
     private DailySalesScheduler dailySalesScheduler;
+
 
     @Test
     public void testEmptyDb() throws ApiException {
@@ -51,10 +55,10 @@ public class DailySalesSchedulerTest extends AbstractUnitTest {
         dailyReportPojo2.setInvoiced_orders_count(3);
         dailyReportPojo2.setInvoiced_items_count(4);
         dailyReportPojo2.setTotal_revenue(100.0);
-        dailyReportService.add(dailyReportPojo2);
+        Integer id = dailyReportService.add(dailyReportPojo2);
 
         dailySalesScheduler.Scheduler();
-        DailyReportPojo dailyReportPojo3 = dailyReportService.get(3);
+        DailyReportPojo dailyReportPojo3 = dailyReportService.get(id);
         assertEquals(new Integer(5),dailyReportPojo3.getInvoiced_orders_count());
         assertEquals(new Integer(9),dailyReportPojo3.getInvoiced_items_count());
         assertEquals(new Double(201.0),dailyReportPojo3.getTotal_revenue());
@@ -86,14 +90,24 @@ public class DailySalesSchedulerTest extends AbstractUnitTest {
         dailyReportPojo2.setInvoiced_orders_count(3);
         dailyReportPojo2.setInvoiced_items_count(4);
         dailyReportPojo2.setTotal_revenue(100.0);
-        dailyReportService.add(dailyReportPojo2);
+        Integer id = dailyReportService.add(dailyReportPojo2);
 
         dailySalesScheduler.Scheduler();
-        DailyReportPojo dailyReportPojo4 = dailyReportService.get(4);
+        List<DailyReportPojo> dailyReportList = dailyReportService.getAll();
+        Integer id2 = 900;
+        for(int i=0;i<dailyReportList.size();i++){
+            if(dailyReportList.get(i).getDate().isEqual(time)){
+                id2 = dailyReportList.get(i).getId();
+            }
+        }
+
+        assertEquals(2,dailyReportList.size());
+
+        DailyReportPojo dailyReportPojo4 = dailyReportService.get(id2);
         assertEquals(new Integer(2),dailyReportPojo4.getInvoiced_orders_count());
         assertEquals(new Integer(10),dailyReportPojo4.getInvoiced_items_count());
         assertEquals(new Double(305.7),dailyReportPojo4.getTotal_revenue());
-        DailyReportPojo dailyReportPojo3 = dailyReportService.get(3);
+        DailyReportPojo dailyReportPojo3 = dailyReportService.get(id);
         assertEquals(new Integer(5),dailyReportPojo3.getInvoiced_orders_count());
         assertEquals(new Integer(9),dailyReportPojo3.getInvoiced_items_count());
         assertEquals(new Double(201.0),dailyReportPojo3.getTotal_revenue());

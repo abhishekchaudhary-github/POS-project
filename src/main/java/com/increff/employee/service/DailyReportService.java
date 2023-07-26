@@ -19,8 +19,8 @@ public class DailyReportService {
     @Autowired
     private DailyReportDao dao;
     @Transactional(rollbackOn = ApiException.class)
-    public void add(DailyReportPojo p) throws ApiException {
-        dao.insert(p);
+    public Integer add(DailyReportPojo p) throws ApiException {
+        return dao.insert(p);
     }
     @Transactional
     public List<DailyReportPojo> getAll() {

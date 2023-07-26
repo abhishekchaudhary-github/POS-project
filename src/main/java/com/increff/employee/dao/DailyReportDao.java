@@ -24,8 +24,9 @@ public class DailyReportDao extends AbstractDao{
     private EntityManager em;
 
     @Transactional
-    public void insert(DailyReportPojo p) {
+    public Integer insert(DailyReportPojo p) {
         em.persist(p);
+        return p.getId();
     }
 
     public List<DailyReportPojo> selectAll() {
