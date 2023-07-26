@@ -116,7 +116,6 @@ var processCount = 0;
 
 
 function processData(){
-
 	var file = $('#brandFile')[0].files[0];
 	console.log(file)
 	if(file==null){
