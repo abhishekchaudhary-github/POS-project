@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd59bcda-ea0a-45cb-bbdf-b0788f0265bb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/increff/employee/scheduler/DailySalesSchedulerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/DailyReportDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/dao/DailyReportDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/scheduler/Scheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/scheduler/DailySalesScheduler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/salesReport.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/salesReport.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/salesReport.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/salesReport.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/OrderServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/increff/employee/service/OrderServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/increff/employee/scheduler/DailySalesScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/increff/employee/scheduler/DailySalesScheduler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/increff/employee/scheduler/DailySalesSchedulerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/increff/employee/scheduler/DailySalesSchedulerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,8 +88,24 @@
       <recent name="com.increff.employee.service" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.DailySalesSchedulerTest.testAddForSameDate">
-    <configuration name="DailySalesSchedulerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.DailySalesSchedulerTest.testAddForDifferentDate">
+    <configuration name="BrandServiceTest.testAdd" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="employee-spring-full" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.increff.employee.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.increff.employee.service" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.BrandServiceTest" />
+      <option name="METHOD_NAME" value="testAdd" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DailySalesSchedulerTest.testAddForDifferentDate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
         <pattern>
@@ -104,7 +115,8 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.increff.employee.scheduler" />
       <option name="MAIN_CLASS_NAME" value="com.increff.employee.scheduler.DailySalesSchedulerTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="testAddForDifferentDate" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -141,33 +153,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OrderItemServiceTest.testAddNew" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="InventoryServiceTest.testAddQuantityLess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="employee-spring-full" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.increff.employee.scheduler.*" />
+          <option name="PATTERN" value="com.increff.employee.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.increff.employee.service" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.OrderItemServiceTest" />
-      <option name="METHOD_NAME" value="testAddNew" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="OrderServiceTest.ResponseStatusTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="employee-spring-full" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.increff.employee.scheduler.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.increff.employee.service" />
-      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.OrderServiceTest" />
-      <option name="METHOD_NAME" value="ResponseStatusTest" />
+      <option name="MAIN_CLASS_NAME" value="com.increff.employee.service.InventoryServiceTest" />
+      <option name="METHOD_NAME" value="testAddQuantityLess" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -237,20 +233,20 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.java in employee-spring-full" />
-      <item itemvalue="JUnit.DailySalesSchedulerTest" />
+      <item itemvalue="JUnit.InventoryServiceTest.testAddQuantityLess" />
+      <item itemvalue="JUnit.BrandServiceTest.testAdd" />
+      <item itemvalue="JUnit.DailySalesSchedulerTest.testAddForDifferentDate" />
       <item itemvalue="JUnit.DailySalesSchedulerTest.testAddForSameDate" />
       <item itemvalue="JUnit.DailySalesSchedulerTest.testEmptyDb" />
-      <item itemvalue="JUnit.OrderItemServiceTest.testAddNew" />
-      <item itemvalue="JUnit.OrderServiceTest.ResponseStatusTest" />
       <item itemvalue="Maven.employee-spring-full [jetty:run]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.DailySalesSchedulerTest.testAddForDifferentDate" />
         <item itemvalue="JUnit.DailySalesSchedulerTest.testAddForSameDate" />
-        <item itemvalue="JUnit.DailySalesSchedulerTest" />
         <item itemvalue="JUnit.DailySalesSchedulerTest.testEmptyDb" />
-        <item itemvalue="JUnit.OrderItemServiceTest.testAddNew" />
-        <item itemvalue="JUnit.OrderServiceTest.ResponseStatusTest" />
+        <item itemvalue="JUnit.InventoryServiceTest.testAddQuantityLess" />
+        <item itemvalue="JUnit.BrandServiceTest.testAdd" />
       </list>
     </recent_temporary>
   </component>
