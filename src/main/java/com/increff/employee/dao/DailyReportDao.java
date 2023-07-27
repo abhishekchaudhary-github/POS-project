@@ -15,7 +15,7 @@ import java.util.List;
 public class DailyReportDao extends AbstractDao{
     private static String select_all = "select p from DailyReportPojo p";
 
-    private static String select_time = "select p from DailyReportPojo p where date>:startTime and date<:endTime";
+    private static String select_time = "select p from DailyReportPojo p where date>=:startTime and date<=:endTime";
 
     private static String count_of_table = "select count(*) from DailyReportPojo p";
 
